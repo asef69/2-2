@@ -1,0 +1,3 @@
+
+javac <folder_name>/*.java
+java -cp . <folder_name>.Main

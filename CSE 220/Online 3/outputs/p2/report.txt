@@ -1,0 +1,5 @@
+Practice P2 -- ring band-pass filter
+image  : images/sunset512.png
+r_low  : 8.0
+r_high : 40.0
+engine : dft

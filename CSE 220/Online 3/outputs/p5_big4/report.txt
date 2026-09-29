@@ -1,0 +1,5 @@
+Practice P5 -- divide-and-conquer radix conversion to base 65536
+input        : inputs/4.txt
+engine       : fft
+base-65536 digit count: 4153
+verification : MATCH

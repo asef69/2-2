@@ -1,0 +1,801 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Filename,Latency,Encoding,SampleCount,ErrorCount,Hostname,IdleTime,Connect
+1789401738203,28,/-28,200,OK,High_Load_100 1-1,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,28,utf-8,1,0,DESKTOP-MM2TTJV,0,14
+1789401738233,351,/notices-43,200,OK,High_Load_100 1-1,text,false,"The operation lasted too long: It took 351 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,351,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401738584,229,/courses-48,200,OK,High_Load_100 1-1,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,208,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401738813,158,/login-59,200,OK,High_Load_100 1-1,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401738813,67,/login-59-0,303,See Other,High_Load_100 1-1,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401738880,61,/login-59-1,302,Found,High_Load_100 1-1,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401738941,30,/login-59-2,200,OK,High_Load_100 1-1,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401738971,105,/api/download/256-71,200,OK,High_Load_100 1-1,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,44,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739201,38,/-28,200,OK,High_Load_100 1-2,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,38,utf-8,1,0,DESKTOP-MM2TTJV,0,12
+1789401739240,110,/notices-43,200,OK,High_Load_100 1-2,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,109,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739351,234,/courses-48,200,OK,High_Load_100 1-2,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,216,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739586,79,/login-59,200,OK,High_Load_100 1-2,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,70,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739586,70,/login-59-0,303,See Other,High_Load_100 1-2,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,70,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739656,5,/login-59-1,302,Found,High_Load_100 1-2,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739661,4,/login-59-2,200,OK,High_Load_100 1-2,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401739665,15,/api/download/256-71,200,OK,High_Load_100 1-2,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401740202,21,/-28,200,OK,High_Load_100 1-3,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,21,utf-8,1,0,DESKTOP-MM2TTJV,0,9
+1789401740223,153,/notices-43,200,OK,High_Load_100 1-3,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,153,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401740377,288,/courses-48,200,OK,High_Load_100 1-3,text,false,"The operation lasted too long: It took 288 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,260,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401740665,46,/login-59,200,OK,High_Load_100 1-3,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,32,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401740665,32,/login-59-0,303,See Other,High_Load_100 1-3,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,32,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401740697,8,/login-59-1,302,Found,High_Load_100 1-3,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401740705,6,/login-59-2,200,OK,High_Load_100 1-3,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401740711,23,/api/download/256-71,200,OK,High_Load_100 1-3,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401741203,31,/-28,200,OK,High_Load_100 1-4,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401741234,174,/notices-43,200,OK,High_Load_100 1-4,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,174,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401741408,226,/courses-48,200,OK,High_Load_100 1-4,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,218,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401741634,262,/login-59,200,OK,High_Load_100 1-4,text,false,"The operation lasted too long: It took 262 milliseconds, but should not have lasted longer than 200 milliseconds.",2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,25,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401741634,25,/login-59-0,303,See Other,High_Load_100 1-4,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401741659,6,/login-59-1,302,Found,High_Load_100 1-4,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401741665,231,/login-59-2,200,OK,High_Load_100 1-4,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,231,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401741897,18,/api/download/256-71,200,OK,High_Load_100 1-4,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401742201,18,/-28,200,OK,High_Load_100 1-5,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,18,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401742220,369,/notices-43,200,OK,High_Load_100 1-5,text,false,"The operation lasted too long: It took 369 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,369,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401742589,224,/courses-48,200,OK,High_Load_100 1-5,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,210,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401742813,80,/login-59,200,OK,High_Load_100 1-5,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401742813,67,/login-59-0,303,See Other,High_Load_100 1-5,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401742880,8,/login-59-1,302,Found,High_Load_100 1-5,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401742888,5,/login-59-2,200,OK,High_Load_100 1-5,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401742894,27,/api/download/256-71,200,OK,High_Load_100 1-5,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401743203,24,/-28,200,OK,High_Load_100 1-6,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,24,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401743228,368,/notices-43,200,OK,High_Load_100 1-6,text,false,"The operation lasted too long: It took 368 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,368,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401743597,300,/courses-48,200,OK,High_Load_100 1-6,text,false,"The operation lasted too long: It took 300 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,260,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401743898,81,/login-59,200,OK,High_Load_100 1-6,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,71,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401743898,71,/login-59-0,303,See Other,High_Load_100 1-6,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,71,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401743969,6,/login-59-1,302,Found,High_Load_100 1-6,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401743975,4,/login-59-2,200,OK,High_Load_100 1-6,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401743979,19,/api/download/256-71,200,OK,High_Load_100 1-6,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744201,23,/-28,200,OK,High_Load_100 1-7,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,23,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401744225,186,/notices-43,200,OK,High_Load_100 1-7,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,186,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744411,186,/courses-48,200,OK,High_Load_100 1-7,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,179,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744597,111,/login-59,200,OK,High_Load_100 1-7,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,85,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744597,86,/login-59-0,303,See Other,High_Load_100 1-7,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,85,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744683,11,/login-59-1,302,Found,High_Load_100 1-7,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744694,14,/login-59-2,200,OK,High_Load_100 1-7,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,14,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401744708,39,/api/download/256-71,200,OK,High_Load_100 1-7,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,14,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745205,13,/-28,200,OK,High_Load_100 1-8,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401745218,229,/notices-43,200,OK,High_Load_100 1-8,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,229,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745447,227,/courses-48,200,OK,High_Load_100 1-8,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,214,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745674,47,/login-59,200,OK,High_Load_100 1-8,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745674,34,/login-59-0,303,See Other,High_Load_100 1-8,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745708,6,/login-59-1,302,Found,High_Load_100 1-8,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745715,6,/login-59-2,200,OK,High_Load_100 1-8,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401745722,22,/api/download/256-71,200,OK,High_Load_100 1-8,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746203,40,/-28,200,OK,High_Load_100 1-9,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,40,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401746243,248,/notices-43,200,OK,High_Load_100 1-9,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,248,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746492,227,/courses-48,200,OK,High_Load_100 1-9,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,219,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746721,50,/login-59,200,OK,High_Load_100 1-9,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,41,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746721,41,/login-59-0,303,See Other,High_Load_100 1-9,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,41,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746762,4,/login-59-1,302,Found,High_Load_100 1-9,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746766,5,/login-59-2,200,OK,High_Load_100 1-9,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401746771,15,/api/download/256-71,200,OK,High_Load_100 1-9,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401747201,19,/-28,200,OK,High_Load_100 1-10,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,9
+1789401747220,383,/notices-43,200,OK,High_Load_100 1-10,text,false,"The operation lasted too long: It took 383 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,383,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401747604,230,/courses-48,200,OK,High_Load_100 1-10,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,220,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401747835,70,/login-59,200,OK,High_Load_100 1-10,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401747835,49,/login-59-0,303,See Other,High_Load_100 1-10,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401747884,15,/login-59-1,302,Found,High_Load_100 1-10,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,15,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401747900,5,/login-59-2,200,OK,High_Load_100 1-10,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401747905,45,/api/download/256-71,200,OK,High_Load_100 1-10,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,12,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401748200,39,/-28,200,OK,High_Load_100 1-11,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,39,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401748240,343,/notices-43,200,OK,High_Load_100 1-11,text,false,"The operation lasted too long: It took 343 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,343,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401748583,230,/courses-48,200,OK,High_Load_100 1-11,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,222,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401748813,44,/login-59,200,OK,High_Load_100 1-11,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401748813,33,/login-59-0,303,See Other,High_Load_100 1-11,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401748846,6,/login-59-1,302,Found,High_Load_100 1-11,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401748852,5,/login-59-2,200,OK,High_Load_100 1-11,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401748857,15,/api/download/256-71,200,OK,High_Load_100 1-11,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401749201,19,/-28,200,OK,High_Load_100 1-12,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401749220,340,/notices-43,200,OK,High_Load_100 1-12,text,false,"The operation lasted too long: It took 340 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,337,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401749560,202,/courses-48,200,OK,High_Load_100 1-12,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,194,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401749763,92,/login-59,200,OK,High_Load_100 1-12,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,82,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401749763,82,/login-59-0,303,See Other,High_Load_100 1-12,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,82,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401749846,5,/login-59-1,302,Found,High_Load_100 1-12,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401749851,4,/login-59-2,200,OK,High_Load_100 1-12,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401749858,14,/api/download/256-71,200,OK,High_Load_100 1-12,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401750202,34,/-28,200,OK,High_Load_100 1-13,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,4
+1789401750236,372,/notices-43,200,OK,High_Load_100 1-13,text,false,"The operation lasted too long: It took 372 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,372,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401750609,273,/courses-48,200,OK,High_Load_100 1-13,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,263,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401750882,52,/login-59,200,OK,High_Load_100 1-13,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,41,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401750882,41,/login-59-0,303,See Other,High_Load_100 1-13,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,41,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401750923,7,/login-59-1,302,Found,High_Load_100 1-13,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401750930,4,/login-59-2,200,OK,High_Load_100 1-13,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401750934,10,/api/download/256-71,200,OK,High_Load_100 1-13,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751201,18,/-28,200,OK,High_Load_100 1-14,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,18,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401751219,207,/notices-43,200,OK,High_Load_100 1-14,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,207,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751426,252,/courses-48,200,OK,High_Load_100 1-14,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,241,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751677,87,/login-59,200,OK,High_Load_100 1-14,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,60,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751677,60,/login-59-0,303,See Other,High_Load_100 1-14,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,60,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751737,16,/login-59-1,302,Found,High_Load_100 1-14,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,16,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751753,11,/login-59-2,200,OK,High_Load_100 1-14,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401751764,31,/api/download/256-71,200,OK,High_Load_100 1-14,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752200,19,/-28,200,OK,High_Load_100 1-15,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401752219,166,/notices-43,200,OK,High_Load_100 1-15,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,166,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752388,194,/courses-48,200,OK,High_Load_100 1-15,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,188,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752582,58,/login-59,200,OK,High_Load_100 1-15,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752582,50,/login-59-0,303,See Other,High_Load_100 1-15,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752632,5,/login-59-1,302,Found,High_Load_100 1-15,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752637,3,/login-59-2,200,OK,High_Load_100 1-15,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401752641,14,/api/download/256-71,200,OK,High_Load_100 1-15,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753203,36,/-28,200,OK,High_Load_100 1-16,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,36,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401753240,237,/notices-43,200,OK,High_Load_100 1-16,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,237,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753477,241,/courses-48,200,OK,High_Load_100 1-16,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,237,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753718,67,/login-59,200,OK,High_Load_100 1-16,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,54,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753718,54,/login-59-0,303,See Other,High_Load_100 1-16,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,54,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753772,8,/login-59-1,302,Found,High_Load_100 1-16,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753780,5,/login-59-2,200,OK,High_Load_100 1-16,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401753785,26,/api/download/256-71,200,OK,High_Load_100 1-16,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754205,51,/-28,200,OK,High_Load_100 1-17,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,51,utf-8,1,0,DESKTOP-MM2TTJV,0,15
+1789401754257,197,/notices-43,200,OK,High_Load_100 1-17,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,197,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754454,252,/courses-48,200,OK,High_Load_100 1-17,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,244,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754706,101,/login-59,200,OK,High_Load_100 1-17,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,79,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754706,79,/login-59-0,303,See Other,High_Load_100 1-17,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,79,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754785,14,/login-59-1,302,Found,High_Load_100 1-17,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,14,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754800,7,/login-59-2,200,OK,High_Load_100 1-17,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401754808,17,/api/download/256-71,200,OK,High_Load_100 1-17,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755201,32,/-28,200,OK,High_Load_100 1-18,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,32,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401755234,119,/notices-43,200,OK,High_Load_100 1-18,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,119,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755354,221,/courses-48,200,OK,High_Load_100 1-18,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,213,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755575,72,/login-59,200,OK,High_Load_100 1-18,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755575,62,/login-59-0,303,See Other,High_Load_100 1-18,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755637,6,/login-59-1,302,Found,High_Load_100 1-18,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755643,4,/login-59-2,200,OK,High_Load_100 1-18,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401755648,15,/api/download/256-71,200,OK,High_Load_100 1-18,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401756200,109,/-28,200,OK,High_Load_100 1-19,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,109,utf-8,1,0,DESKTOP-MM2TTJV,0,41
+1789401756310,435,/notices-43,200,OK,High_Load_100 1-19,text,false,"The operation lasted too long: It took 435 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,435,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401756747,247,/courses-48,200,OK,High_Load_100 1-19,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,239,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401756994,60,/login-59,200,OK,High_Load_100 1-19,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,52,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401756994,52,/login-59-0,303,See Other,High_Load_100 1-19,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,52,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757046,5,/login-59-1,302,Found,High_Load_100 1-19,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757051,3,/login-59-2,200,OK,High_Load_100 1-19,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757055,15,/api/download/256-71,200,OK,High_Load_100 1-19,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757202,20,/-28,200,OK,High_Load_100 1-20,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,20,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401757223,138,/notices-43,200,OK,High_Load_100 1-20,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,138,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757362,234,/courses-48,200,OK,High_Load_100 1-20,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,222,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757596,101,/login-59,200,OK,High_Load_100 1-20,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,88,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757596,88,/login-59-0,303,See Other,High_Load_100 1-20,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,88,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757684,8,/login-59-1,302,Found,High_Load_100 1-20,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757692,5,/login-59-2,200,OK,High_Load_100 1-20,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401757697,22,/api/download/256-71,200,OK,High_Load_100 1-20,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758201,82,/-28,200,OK,High_Load_100 1-21,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,82,utf-8,1,0,DESKTOP-MM2TTJV,0,31
+1789401758284,155,/notices-43,200,OK,High_Load_100 1-21,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,155,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758439,199,/courses-48,200,OK,High_Load_100 1-21,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,187,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758639,115,/login-59,200,OK,High_Load_100 1-21,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,98,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758639,98,/login-59-0,303,See Other,High_Load_100 1-21,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,98,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758737,7,/login-59-1,302,Found,High_Load_100 1-21,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758744,10,/login-59-2,200,OK,High_Load_100 1-21,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401758754,49,/api/download/256-71,200,OK,High_Load_100 1-21,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401759201,36,/-28,200,OK,High_Load_100 1-22,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,36,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401759238,305,/notices-43,200,OK,High_Load_100 1-22,text,false,"The operation lasted too long: It took 305 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,305,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401759543,237,/courses-48,200,OK,High_Load_100 1-22,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,228,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401759780,80,/login-59,200,OK,High_Load_100 1-22,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,70,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401759780,70,/login-59-0,303,See Other,High_Load_100 1-22,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,70,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401759850,5,/login-59-1,302,Found,High_Load_100 1-22,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401759855,5,/login-59-2,200,OK,High_Load_100 1-22,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401759860,15,/api/download/256-71,200,OK,High_Load_100 1-22,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760201,16,/-28,200,OK,High_Load_100 1-23,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,16,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401760217,268,/notices-43,200,OK,High_Load_100 1-23,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,268,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760485,251,/courses-48,200,OK,High_Load_100 1-23,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,241,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760737,38,/login-59,200,OK,High_Load_100 1-23,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,27,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760737,27,/login-59-0,303,See Other,High_Load_100 1-23,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,27,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760764,7,/login-59-1,302,Found,High_Load_100 1-23,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760771,4,/login-59-2,200,OK,High_Load_100 1-23,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401760776,14,/api/download/256-71,200,OK,High_Load_100 1-23,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401761203,22,/-28,200,OK,High_Load_100 1-24,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,22,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401761225,338,/notices-43,200,OK,High_Load_100 1-24,text,false,"The operation lasted too long: It took 338 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,338,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401761563,289,/courses-48,200,OK,High_Load_100 1-24,text,false,"The operation lasted too long: It took 289 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,230,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401761853,200,/login-59,200,OK,High_Load_100 1-24,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,125,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401761853,125,/login-59-0,303,See Other,High_Load_100 1-24,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,125,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401761978,59,/login-59-1,302,Found,High_Load_100 1-24,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,59,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762037,16,/login-59-2,200,OK,High_Load_100 1-24,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,16,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762053,20,/api/download/256-71,200,OK,High_Load_100 1-24,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,12,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762203,70,/-28,200,OK,High_Load_100 1-25,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,70,utf-8,1,0,DESKTOP-MM2TTJV,0,43
+1789401762274,336,/notices-43,200,OK,High_Load_100 1-25,text,false,"The operation lasted too long: It took 336 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,333,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401762611,279,/courses-48,200,OK,High_Load_100 1-25,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,259,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762891,97,/login-59,200,OK,High_Load_100 1-25,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,65,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762891,65,/login-59-0,303,See Other,High_Load_100 1-25,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,65,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762956,15,/login-59-1,302,Found,High_Load_100 1-25,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,15,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762971,17,/login-59-2,200,OK,High_Load_100 1-25,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,17,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401762988,58,/api/download/256-71,200,OK,High_Load_100 1-25,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401763204,28,/-28,200,OK,High_Load_100 1-26,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,28,utf-8,1,0,DESKTOP-MM2TTJV,0,9
+1789401763233,324,/notices-43,200,OK,High_Load_100 1-26,text,false,"The operation lasted too long: It took 324 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,323,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401763557,307,/courses-48,200,OK,High_Load_100 1-26,text,false,"The operation lasted too long: It took 307 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,252,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401763865,159,/login-59,200,OK,High_Load_100 1-26,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,102,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401763865,102,/login-59-0,303,See Other,High_Load_100 1-26,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,102,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401763967,26,/login-59-1,302,Found,High_Load_100 1-26,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,26,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401763993,31,/login-59-2,200,OK,High_Load_100 1-26,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764024,35,/api/download/256-71,200,OK,High_Load_100 1-26,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,18,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764203,47,/-28,200,OK,High_Load_100 1-27,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,16
+1789401764251,122,/notices-43,200,OK,High_Load_100 1-27,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,122,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764373,232,/courses-48,200,OK,High_Load_100 1-27,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,216,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764605,88,/login-59,200,OK,High_Load_100 1-27,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764605,50,/login-59-0,303,See Other,High_Load_100 1-27,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764655,25,/login-59-1,302,Found,High_Load_100 1-27,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764680,13,/login-59-2,200,OK,High_Load_100 1-27,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401764693,35,/api/download/256-71,200,OK,High_Load_100 1-27,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,9,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765202,107,/-28,200,OK,High_Load_100 1-28,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,107,utf-8,1,0,DESKTOP-MM2TTJV,0,65
+1789401765309,192,/notices-43,200,OK,High_Load_100 1-28,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,192,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765501,271,/courses-48,200,OK,High_Load_100 1-28,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,227,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765772,105,/login-59,200,OK,High_Load_100 1-28,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,57,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765772,57,/login-59-0,303,See Other,High_Load_100 1-28,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,57,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765829,25,/login-59-1,302,Found,High_Load_100 1-28,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765854,23,/login-59-2,200,OK,High_Load_100 1-28,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,23,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401765878,91,/api/download/256-71,200,OK,High_Load_100 1-28,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,23,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401766201,46,/-28,200,OK,High_Load_100 1-29,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,46,utf-8,1,0,DESKTOP-MM2TTJV,0,18
+1789401766247,215,/notices-43,200,OK,High_Load_100 1-29,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,215,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401766484,386,/courses-48,200,OK,High_Load_100 1-29,text,false,"The operation lasted too long: It took 386 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,283,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401766871,127,/login-59,200,OK,High_Load_100 1-29,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401766871,61,/login-59-0,303,See Other,High_Load_100 1-29,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401766932,47,/login-59-1,302,Found,High_Load_100 1-29,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,46,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401766979,19,/login-59-2,200,OK,High_Load_100 1-29,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401766999,31,/api/download/256-71,200,OK,High_Load_100 1-29,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401767201,13,/-28,200,OK,High_Load_100 1-30,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401767214,348,/notices-43,200,OK,High_Load_100 1-30,text,false,"The operation lasted too long: It took 348 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,348,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401767562,229,/courses-48,200,OK,High_Load_100 1-30,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,222,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401767791,71,/login-59,200,OK,High_Load_100 1-30,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,60,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401767791,60,/login-59-0,303,See Other,High_Load_100 1-30,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,60,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401767851,7,/login-59-1,302,Found,High_Load_100 1-30,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401767858,4,/login-59-2,200,OK,High_Load_100 1-30,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401767863,16,/api/download/256-71,200,OK,High_Load_100 1-30,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768204,48,/-28,200,OK,High_Load_100 1-31,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,48,utf-8,1,0,DESKTOP-MM2TTJV,0,21
+1789401768252,190,/notices-43,200,OK,High_Load_100 1-31,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,190,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768442,268,/courses-48,200,OK,High_Load_100 1-31,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,250,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768710,97,/login-59,200,OK,High_Load_100 1-31,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,87,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768710,87,/login-59-0,303,See Other,High_Load_100 1-31,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,87,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768797,5,/login-59-1,302,Found,High_Load_100 1-31,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768802,5,/login-59-2,200,OK,High_Load_100 1-31,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401768807,15,/api/download/256-71,200,OK,High_Load_100 1-31,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401769203,19,/-28,200,OK,High_Load_100 1-32,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,11
+1789401769222,284,/notices-43,200,OK,High_Load_100 1-32,text,false,"The operation lasted too long: It took 284 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,284,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401769506,249,/courses-48,200,OK,High_Load_100 1-32,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,240,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401769756,232,/login-59,200,OK,High_Load_100 1-32,text,false,"The operation lasted too long: It took 232 milliseconds, but should not have lasted longer than 200 milliseconds.",2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,135,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401769756,135,/login-59-0,303,See Other,High_Load_100 1-32,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,135,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401769891,63,/login-59-1,302,Found,High_Load_100 1-32,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401769954,34,/login-59-2,200,OK,High_Load_100 1-32,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401770201,150,/-28,200,OK,High_Load_100 1-33,text,true,,2434,348,2,2,http://103.94.135.91:8080/,,150,utf-8,1,0,DESKTOP-MM2TTJV,0,113
+1789401769999,367,/api/download/256-71,200,OK,High_Load_100 1-32,text,false,"The operation lasted too long: It took 367 milliseconds, but should not have lasted longer than 200 milliseconds.",262423,364,2,2,http://103.94.135.91:8080/api/download/256,,25,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401770351,370,/notices-43,200,OK,High_Load_100 1-33,text,false,"The operation lasted too long: It took 370 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,370,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401770722,200,/courses-48,200,OK,High_Load_100 1-33,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,195,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401770923,34,/login-59,200,OK,High_Load_100 1-33,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401770923,25,/login-59-0,303,See Other,High_Load_100 1-33,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401770948,4,/login-59-1,302,Found,High_Load_100 1-33,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401770953,4,/login-59-2,200,OK,High_Load_100 1-33,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401770957,21,/api/download/256-71,200,OK,High_Load_100 1-33,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401771203,15,/-28,200,OK,High_Load_100 1-34,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,15,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401771219,401,/notices-43,200,OK,High_Load_100 1-34,text,false,"The operation lasted too long: It took 401 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,401,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401771621,263,/courses-48,200,OK,High_Load_100 1-34,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,255,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401771884,85,/login-59,200,OK,High_Load_100 1-34,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,75,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401771884,75,/login-59-0,303,See Other,High_Load_100 1-34,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,75,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401771959,5,/login-59-1,302,Found,High_Load_100 1-34,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401771964,5,/login-59-2,200,OK,High_Load_100 1-34,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401771969,19,/api/download/256-71,200,OK,High_Load_100 1-34,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772203,30,/-28,200,OK,High_Load_100 1-35,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,10
+1789401772234,208,/notices-43,200,OK,High_Load_100 1-35,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,208,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772443,272,/courses-48,200,OK,High_Load_100 1-35,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,263,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772715,76,/login-59,200,OK,High_Load_100 1-35,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772715,67,/login-59-0,303,See Other,High_Load_100 1-35,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772782,4,/login-59-1,302,Found,High_Load_100 1-35,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772786,5,/login-59-2,200,OK,High_Load_100 1-35,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401772792,24,/api/download/256-71,200,OK,High_Load_100 1-35,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773203,30,/-28,200,OK,High_Load_100 1-36,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401773233,209,/notices-43,200,OK,High_Load_100 1-36,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,209,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773442,253,/courses-48,200,OK,High_Load_100 1-36,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,244,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773695,81,/login-59,200,OK,High_Load_100 1-36,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,69,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773695,69,/login-59-0,303,See Other,High_Load_100 1-36,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,69,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773764,7,/login-59-1,302,Found,High_Load_100 1-36,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773771,5,/login-59-2,200,OK,High_Load_100 1-36,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401773776,15,/api/download/256-71,200,OK,High_Load_100 1-36,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401774204,26,/-28,200,OK,High_Load_100 1-37,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,26,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401774231,348,/notices-43,200,OK,High_Load_100 1-37,text,false,"The operation lasted too long: It took 348 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,348,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401774579,215,/courses-48,200,OK,High_Load_100 1-37,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,206,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401774794,61,/login-59,200,OK,High_Load_100 1-37,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401774794,50,/login-59-0,303,See Other,High_Load_100 1-37,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401774844,5,/login-59-1,302,Found,High_Load_100 1-37,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401774849,6,/login-59-2,200,OK,High_Load_100 1-37,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401774855,16,/api/download/256-71,200,OK,High_Load_100 1-37,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401775204,29,/-28,200,OK,High_Load_100 1-38,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,29,utf-8,1,0,DESKTOP-MM2TTJV,0,4
+1789401775233,318,/notices-43,200,OK,High_Load_100 1-38,text,false,"The operation lasted too long: It took 318 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,317,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401775551,274,/courses-48,200,OK,High_Load_100 1-38,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,253,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401775826,49,/login-59,200,OK,High_Load_100 1-38,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,35,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401775826,35,/login-59-0,303,See Other,High_Load_100 1-38,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,35,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401775861,7,/login-59-1,302,Found,High_Load_100 1-38,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401775869,6,/login-59-2,200,OK,High_Load_100 1-38,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401775875,23,/api/download/256-71,200,OK,High_Load_100 1-38,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401776203,34,/-28,200,OK,High_Load_100 1-39,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,14
+1789401776238,139,/notices-43,200,OK,High_Load_100 1-39,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,139,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401776378,334,/courses-48,200,OK,High_Load_100 1-39,text,false,"The operation lasted too long: It took 334 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,270,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401776712,48,/login-59,200,OK,High_Load_100 1-39,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401776712,33,/login-59-0,303,See Other,High_Load_100 1-39,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401776745,7,/login-59-1,302,Found,High_Load_100 1-39,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401776752,8,/login-59-2,200,OK,High_Load_100 1-39,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401776761,30,/api/download/256-71,200,OK,High_Load_100 1-39,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,16,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401777202,47,/-28,200,OK,High_Load_100 1-40,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,14
+1789401777249,202,/notices-43,200,OK,High_Load_100 1-40,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,202,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401777451,290,/courses-48,200,OK,High_Load_100 1-40,text,false,"The operation lasted too long: It took 290 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,255,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401777742,76,/login-59,200,OK,High_Load_100 1-40,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,55,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401777742,55,/login-59-0,303,See Other,High_Load_100 1-40,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,55,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401777797,10,/login-59-1,302,Found,High_Load_100 1-40,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401777808,10,/login-59-2,200,OK,High_Load_100 1-40,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401777818,35,/api/download/256-71,200,OK,High_Load_100 1-40,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401778203,79,/-28,200,OK,High_Load_100 1-41,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,79,utf-8,1,0,DESKTOP-MM2TTJV,0,13
+1789401778282,406,/notices-43,200,OK,High_Load_100 1-41,text,false,"The operation lasted too long: It took 406 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,406,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401778688,259,/courses-48,200,OK,High_Load_100 1-41,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,253,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401778948,85,/login-59,200,OK,High_Load_100 1-41,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,76,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401778948,76,/login-59-0,303,See Other,High_Load_100 1-41,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,76,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779024,5,/login-59-1,302,Found,High_Load_100 1-41,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779029,4,/login-59-2,200,OK,High_Load_100 1-41,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779033,14,/api/download/256-71,200,OK,High_Load_100 1-41,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779210,26,/-28,200,OK,High_Load_100 1-42,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,26,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401779236,140,/notices-43,200,OK,High_Load_100 1-42,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,140,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779377,291,/courses-48,200,OK,High_Load_100 1-42,text,false,"The operation lasted too long: It took 291 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,246,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401779669,91,/login-59,200,OK,High_Load_100 1-42,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,76,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779669,76,/login-59-0,303,See Other,High_Load_100 1-42,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,76,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779745,7,/login-59-1,302,Found,High_Load_100 1-42,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779753,7,/login-59-2,200,OK,High_Load_100 1-42,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401779760,27,/api/download/256-71,200,OK,High_Load_100 1-42,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780201,48,/-28,200,OK,High_Load_100 1-43,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,48,utf-8,1,0,DESKTOP-MM2TTJV,0,10
+1789401780250,269,/notices-43,200,OK,High_Load_100 1-43,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,269,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780520,234,/courses-48,200,OK,High_Load_100 1-43,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,225,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780754,58,/login-59,200,OK,High_Load_100 1-43,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780754,47,/login-59-0,303,See Other,High_Load_100 1-43,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780801,6,/login-59-1,302,Found,High_Load_100 1-43,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780807,5,/login-59-2,200,OK,High_Load_100 1-43,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401780812,16,/api/download/256-71,200,OK,High_Load_100 1-43,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401781202,31,/-28,200,OK,High_Load_100 1-44,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401781234,281,/notices-43,200,OK,High_Load_100 1-44,text,false,"The operation lasted too long: It took 281 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,281,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401781516,217,/courses-48,200,OK,High_Load_100 1-44,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,208,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401781733,45,/login-59,200,OK,High_Load_100 1-44,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401781733,30,/login-59-0,303,See Other,High_Load_100 1-44,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401781763,6,/login-59-1,302,Found,High_Load_100 1-44,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401781769,9,/login-59-2,200,OK,High_Load_100 1-44,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401781778,30,/api/download/256-71,200,OK,High_Load_100 1-44,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401782201,24,/-28,200,OK,High_Load_100 1-45,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,24,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401782225,329,/notices-43,200,OK,High_Load_100 1-45,text,false,"The operation lasted too long: It took 329 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,329,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401782554,243,/courses-48,200,OK,High_Load_100 1-45,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,233,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401782798,80,/login-59,200,OK,High_Load_100 1-45,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,68,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401782798,68,/login-59-0,303,See Other,High_Load_100 1-45,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,68,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401782866,7,/login-59-1,302,Found,High_Load_100 1-45,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401782873,5,/login-59-2,200,OK,High_Load_100 1-45,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401782878,13,/api/download/256-71,200,OK,High_Load_100 1-45,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401783200,38,/-28,200,OK,High_Load_100 1-46,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,38,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401783238,118,/notices-43,200,OK,High_Load_100 1-46,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,118,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401783357,175,/courses-48,200,OK,High_Load_100 1-46,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,170,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401783532,263,/login-59,200,OK,High_Load_100 1-46,text,false,"The operation lasted too long: It took 263 milliseconds, but should not have lasted longer than 200 milliseconds.",2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,31,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401783532,31,/login-59-0,303,See Other,High_Load_100 1-46,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401783564,226,/login-59-1,302,Found,High_Load_100 1-46,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,226,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401783790,5,/login-59-2,200,OK,High_Load_100 1-46,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401783795,13,/api/download/256-71,200,OK,High_Load_100 1-46,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784199,31,/-28,200,OK,High_Load_100 1-47,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,4
+1789401784230,146,/notices-43,200,OK,High_Load_100 1-47,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,146,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784377,273,/courses-48,200,OK,High_Load_100 1-47,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,259,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784650,82,/login-59,200,OK,High_Load_100 1-47,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,65,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784650,66,/login-59-0,303,See Other,High_Load_100 1-47,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,65,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784716,7,/login-59-1,302,Found,High_Load_100 1-47,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784723,9,/login-59-2,200,OK,High_Load_100 1-47,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,9,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401784732,15,/api/download/256-71,200,OK,High_Load_100 1-47,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401785210,36,/-28,200,OK,High_Load_100 1-48,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,36,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401785246,387,/notices-43,200,OK,High_Load_100 1-48,text,false,"The operation lasted too long: It took 387 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,387,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401785634,217,/courses-48,200,OK,High_Load_100 1-48,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,211,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401785852,76,/login-59,200,OK,High_Load_100 1-48,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,68,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401785852,68,/login-59-0,303,See Other,High_Load_100 1-48,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,68,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401785920,5,/login-59-1,302,Found,High_Load_100 1-48,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401785925,3,/login-59-2,200,OK,High_Load_100 1-48,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401785928,15,/api/download/256-71,200,OK,High_Load_100 1-48,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401786200,33,/-28,200,OK,High_Load_100 1-49,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401786233,405,/notices-43,200,OK,High_Load_100 1-49,text,false,"The operation lasted too long: It took 405 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,405,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401786639,231,/courses-48,200,OK,High_Load_100 1-49,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,223,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401786870,61,/login-59,200,OK,High_Load_100 1-49,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401786870,49,/login-59-0,303,See Other,High_Load_100 1-49,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401786919,7,/login-59-1,302,Found,High_Load_100 1-49,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401786926,5,/login-59-2,200,OK,High_Load_100 1-49,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401786931,17,/api/download/256-71,200,OK,High_Load_100 1-49,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787201,42,/-28,200,OK,High_Load_100 1-50,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,9
+1789401787243,211,/notices-43,200,OK,High_Load_100 1-50,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,211,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787455,197,/courses-48,200,OK,High_Load_100 1-50,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,192,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787653,87,/login-59,200,OK,High_Load_100 1-50,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,80,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787653,80,/login-59-0,303,See Other,High_Load_100 1-50,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,80,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787733,3,/login-59-1,302,Found,High_Load_100 1-50,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787736,4,/login-59-2,200,OK,High_Load_100 1-50,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401787740,18,/api/download/256-71,200,OK,High_Load_100 1-50,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788201,35,/-28,200,OK,High_Load_100 1-51,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,35,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401788236,157,/notices-43,200,OK,High_Load_100 1-51,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,157,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788394,232,/courses-48,200,OK,High_Load_100 1-51,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,224,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788627,89,/login-59,200,OK,High_Load_100 1-51,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788627,67,/login-59-0,303,See Other,High_Load_100 1-51,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,67,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788694,15,/login-59-1,302,Found,High_Load_100 1-51,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,15,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788709,7,/login-59-2,200,OK,High_Load_100 1-51,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401788722,16,/api/download/256-71,200,OK,High_Load_100 1-51,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401789200,21,/-28,200,OK,High_Load_100 1-52,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,21,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401789227,297,/notices-43,200,OK,High_Load_100 1-52,text,false,"The operation lasted too long: It took 297 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,297,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401789524,240,/courses-48,200,OK,High_Load_100 1-52,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,233,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401789764,71,/login-59,200,OK,High_Load_100 1-52,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401789764,63,/login-59-0,303,See Other,High_Load_100 1-52,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401789827,5,/login-59-1,302,Found,High_Load_100 1-52,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401789832,3,/login-59-2,200,OK,High_Load_100 1-52,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401789836,15,/api/download/256-71,200,OK,High_Load_100 1-52,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790201,42,/-28,200,OK,High_Load_100 1-53,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,11
+1789401790244,204,/notices-43,200,OK,High_Load_100 1-53,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,204,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790449,175,/courses-48,200,OK,High_Load_100 1-53,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,170,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790625,69,/login-59,200,OK,High_Load_100 1-53,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,56,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790625,56,/login-59-0,303,See Other,High_Load_100 1-53,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,56,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790681,8,/login-59-1,302,Found,High_Load_100 1-53,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790689,5,/login-59-2,200,OK,High_Load_100 1-53,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401790694,18,/api/download/256-71,200,OK,High_Load_100 1-53,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791202,47,/-28,200,OK,High_Load_100 1-54,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,13
+1789401791250,229,/notices-43,200,OK,High_Load_100 1-54,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,228,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791479,188,/courses-48,200,OK,High_Load_100 1-54,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,185,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791668,93,/login-59,200,OK,High_Load_100 1-54,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,83,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791668,83,/login-59-0,303,See Other,High_Load_100 1-54,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,83,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791751,6,/login-59-1,302,Found,High_Load_100 1-54,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791758,3,/login-59-2,200,OK,High_Load_100 1-54,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401791762,15,/api/download/256-71,200,OK,High_Load_100 1-54,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792203,24,/-28,200,OK,High_Load_100 1-55,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,24,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401792254,249,/notices-43,200,OK,High_Load_100 1-55,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,249,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792503,177,/courses-48,200,OK,High_Load_100 1-55,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,173,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792680,72,/login-59,200,OK,High_Load_100 1-55,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792680,50,/login-59-0,303,See Other,High_Load_100 1-55,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792730,16,/login-59-1,302,Found,High_Load_100 1-55,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,16,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792746,6,/login-59-2,200,OK,High_Load_100 1-55,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401792762,15,/api/download/256-71,200,OK,High_Load_100 1-55,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401793202,46,/-28,200,OK,High_Load_100 1-56,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,46,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401793278,289,/notices-43,200,OK,High_Load_100 1-56,text,false,"The operation lasted too long: It took 289 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,289,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401793567,229,/courses-48,200,OK,High_Load_100 1-56,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,216,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401793796,70,/login-59,200,OK,High_Load_100 1-56,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,56,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401793796,56,/login-59-0,303,See Other,High_Load_100 1-56,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,56,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401793853,8,/login-59-1,302,Found,High_Load_100 1-56,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401793862,4,/login-59-2,200,OK,High_Load_100 1-56,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401793867,20,/api/download/256-71,200,OK,High_Load_100 1-56,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794203,16,/-28,200,OK,High_Load_100 1-57,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,16,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401794219,217,/notices-43,200,OK,High_Load_100 1-57,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,217,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794437,191,/courses-48,200,OK,High_Load_100 1-57,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,185,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794629,88,/login-59,200,OK,High_Load_100 1-57,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,77,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794629,77,/login-59-0,303,See Other,High_Load_100 1-57,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,77,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794706,6,/login-59-1,302,Found,High_Load_100 1-57,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794712,5,/login-59-2,200,OK,High_Load_100 1-57,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401794718,15,/api/download/256-71,200,OK,High_Load_100 1-57,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401795202,13,/-28,200,OK,High_Load_100 1-58,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401795215,398,/notices-43,200,OK,High_Load_100 1-58,text,false,"The operation lasted too long: It took 398 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,398,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401795614,209,/courses-48,200,OK,High_Load_100 1-58,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,194,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401795826,40,/login-59,200,OK,High_Load_100 1-58,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,32,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401795826,32,/login-59-0,303,See Other,High_Load_100 1-58,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,32,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401795858,4,/login-59-1,302,Found,High_Load_100 1-58,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401795862,4,/login-59-2,200,OK,High_Load_100 1-58,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401795866,15,/api/download/256-71,200,OK,High_Load_100 1-58,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401796203,34,/-28,200,OK,High_Load_100 1-59,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401796237,334,/notices-43,200,OK,High_Load_100 1-59,text,false,"The operation lasted too long: It took 334 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,334,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401796571,212,/courses-48,200,OK,High_Load_100 1-59,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,205,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401796784,60,/login-59,200,OK,High_Load_100 1-59,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401796784,42,/login-59-0,303,See Other,High_Load_100 1-59,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401796826,11,/login-59-1,302,Found,High_Load_100 1-59,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401796837,7,/login-59-2,200,OK,High_Load_100 1-59,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401796844,14,/api/download/256-71,200,OK,High_Load_100 1-59,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401797201,20,/-28,200,OK,High_Load_100 1-60,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,20,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401797221,360,/notices-43,200,OK,High_Load_100 1-60,text,false,"The operation lasted too long: It took 360 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,360,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401797582,193,/courses-48,200,OK,High_Load_100 1-60,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,189,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401797776,59,/login-59,200,OK,High_Load_100 1-60,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401797776,50,/login-59-0,303,See Other,High_Load_100 1-60,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401797826,6,/login-59-1,302,Found,High_Load_100 1-60,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401797832,3,/login-59-2,200,OK,High_Load_100 1-60,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401797855,14,/api/download/256-71,200,OK,High_Load_100 1-60,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401798202,26,/-28,200,OK,High_Load_100 1-61,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,26,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401798228,215,/notices-43,200,OK,High_Load_100 1-61,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,215,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401798443,301,/courses-48,200,OK,High_Load_100 1-61,text,false,"The operation lasted too long: It took 301 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,295,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401798745,57,/login-59,200,OK,High_Load_100 1-61,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,46,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401798745,46,/login-59-0,303,See Other,High_Load_100 1-61,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,46,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401798791,6,/login-59-1,302,Found,High_Load_100 1-61,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401798798,4,/login-59-2,200,OK,High_Load_100 1-61,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401798803,33,/api/download/256-71,200,OK,High_Load_100 1-61,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401799204,30,/-28,200,OK,High_Load_100 1-62,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401799234,411,/notices-43,200,OK,High_Load_100 1-62,text,false,"The operation lasted too long: It took 411 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,411,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401799645,236,/courses-48,200,OK,High_Load_100 1-62,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,229,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401799882,72,/login-59,200,OK,High_Load_100 1-62,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401799882,63,/login-59-0,303,See Other,High_Load_100 1-62,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401799945,4,/login-59-1,302,Found,High_Load_100 1-62,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401799949,5,/login-59-2,200,OK,High_Load_100 1-62,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401799954,16,/api/download/256-71,200,OK,High_Load_100 1-62,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401800212,26,/-28,200,OK,High_Load_100 1-63,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,26,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401800239,296,/notices-43,200,OK,High_Load_100 1-63,text,false,"The operation lasted too long: It took 296 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,296,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401800536,239,/courses-48,200,OK,High_Load_100 1-63,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,221,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401800775,62,/login-59,200,OK,High_Load_100 1-63,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,35,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401800775,35,/login-59-0,303,See Other,High_Load_100 1-63,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,35,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401800810,9,/login-59-1,302,Found,High_Load_100 1-63,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,9,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401800819,18,/login-59-2,200,OK,High_Load_100 1-63,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,17,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401800837,58,/api/download/256-71,200,OK,High_Load_100 1-63,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,23,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401801209,32,/-28,200,OK,High_Load_100 1-64,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,32,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401801241,307,/notices-43,200,OK,High_Load_100 1-64,text,false,"The operation lasted too long: It took 307 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,307,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401801549,216,/courses-48,200,OK,High_Load_100 1-64,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,209,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401801766,58,/login-59,200,OK,High_Load_100 1-64,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,44,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401801766,44,/login-59-0,303,See Other,High_Load_100 1-64,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,44,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401801810,5,/login-59-1,302,Found,High_Load_100 1-64,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401801815,9,/login-59-2,200,OK,High_Load_100 1-64,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,9,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401801824,16,/api/download/256-71,200,OK,High_Load_100 1-64,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401802205,34,/-28,200,OK,High_Load_100 1-65,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401802240,371,/notices-43,200,OK,High_Load_100 1-65,text,false,"The operation lasted too long: It took 371 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,371,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401802612,259,/courses-48,200,OK,High_Load_100 1-65,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,249,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401802871,57,/login-59,200,OK,High_Load_100 1-65,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401802871,31,/login-59-0,303,See Other,High_Load_100 1-65,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,31,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401802902,7,/login-59-1,302,Found,High_Load_100 1-65,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401802909,19,/login-59-2,200,OK,High_Load_100 1-65,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401802946,62,/api/download/256-71,200,OK,High_Load_100 1-65,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803203,38,/-28,200,OK,High_Load_100 1-66,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,38,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401803241,229,/notices-43,200,OK,High_Load_100 1-66,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,229,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803470,235,/courses-48,200,OK,High_Load_100 1-66,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,227,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803705,50,/login-59,200,OK,High_Load_100 1-66,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,39,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803705,40,/login-59-0,303,See Other,High_Load_100 1-66,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,39,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803745,6,/login-59-1,302,Found,High_Load_100 1-66,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803751,4,/login-59-2,200,OK,High_Load_100 1-66,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401803756,15,/api/download/256-71,200,OK,High_Load_100 1-66,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804205,33,/-28,200,OK,High_Load_100 1-67,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401804238,157,/notices-43,200,OK,High_Load_100 1-67,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,157,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804395,192,/courses-48,200,OK,High_Load_100 1-67,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,188,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804587,71,/login-59,200,OK,High_Load_100 1-67,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804587,63,/login-59-0,303,See Other,High_Load_100 1-67,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804650,4,/login-59-1,302,Found,High_Load_100 1-67,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804654,4,/login-59-2,200,OK,High_Load_100 1-67,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401804658,15,/api/download/256-71,200,OK,High_Load_100 1-67,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401805201,13,/-28,200,OK,High_Load_100 1-68,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,4
+1789401805214,406,/notices-43,200,OK,High_Load_100 1-68,text,false,"The operation lasted too long: It took 406 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,406,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401805620,214,/courses-48,200,OK,High_Load_100 1-68,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,206,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401805834,58,/login-59,200,OK,High_Load_100 1-68,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,39,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401805834,39,/login-59-0,303,See Other,High_Load_100 1-68,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,39,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401805873,9,/login-59-1,302,Found,High_Load_100 1-68,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,9,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401805882,10,/login-59-2,200,OK,High_Load_100 1-68,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401805893,26,/api/download/256-71,200,OK,High_Load_100 1-68,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806201,36,/-28,200,OK,High_Load_100 1-69,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,36,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401806237,178,/notices-43,200,OK,High_Load_100 1-69,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,178,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806415,239,/courses-48,200,OK,High_Load_100 1-69,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,183,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806655,92,/login-59,200,OK,High_Load_100 1-69,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,81,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806655,81,/login-59-0,303,See Other,High_Load_100 1-69,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,81,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806736,6,/login-59-1,302,Found,High_Load_100 1-69,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806742,5,/login-59-2,200,OK,High_Load_100 1-69,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401806747,13,/api/download/256-71,200,OK,High_Load_100 1-69,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401807200,14,/-28,200,OK,High_Load_100 1-70,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,14,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401807214,305,/notices-43,200,OK,High_Load_100 1-70,text,false,"The operation lasted too long: It took 305 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,305,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401807548,231,/courses-48,200,OK,High_Load_100 1-70,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,222,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401807779,80,/login-59,200,OK,High_Load_100 1-70,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,66,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401807779,66,/login-59-0,303,See Other,High_Load_100 1-70,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,66,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401807845,8,/login-59-1,302,Found,High_Load_100 1-70,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401807853,6,/login-59-2,200,OK,High_Load_100 1-70,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401807859,12,/api/download/256-71,200,OK,High_Load_100 1-70,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401808204,40,/-28,200,OK,High_Load_100 1-71,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,40,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401808245,294,/notices-43,200,OK,High_Load_100 1-71,text,false,"The operation lasted too long: It took 294 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,294,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401808571,171,/courses-48,200,OK,High_Load_100 1-71,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,167,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401808742,82,/login-59,200,OK,High_Load_100 1-71,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,72,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401808742,72,/login-59-0,303,See Other,High_Load_100 1-71,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,72,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401808814,5,/login-59-1,302,Found,High_Load_100 1-71,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401808819,5,/login-59-2,200,OK,High_Load_100 1-71,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401808825,11,/api/download/256-71,200,OK,High_Load_100 1-71,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809204,50,/-28,200,OK,High_Load_100 1-72,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,50,utf-8,1,0,DESKTOP-MM2TTJV,0,18
+1789401809255,162,/notices-43,200,OK,High_Load_100 1-72,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,162,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809417,269,/courses-48,200,OK,High_Load_100 1-72,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,263,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809686,40,/login-59,200,OK,High_Load_100 1-72,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809686,30,/login-59-0,303,See Other,High_Load_100 1-72,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809716,5,/login-59-1,302,Found,High_Load_100 1-72,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809721,5,/login-59-2,200,OK,High_Load_100 1-72,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401809727,14,/api/download/256-71,200,OK,High_Load_100 1-72,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401810201,25,/-28,200,OK,High_Load_100 1-73,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,5
+1789401810226,392,/notices-43,200,OK,High_Load_100 1-73,text,false,"The operation lasted too long: It took 392 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,392,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401810632,191,/courses-48,200,OK,High_Load_100 1-73,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,184,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401810823,70,/login-59,200,OK,High_Load_100 1-73,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,58,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401810823,58,/login-59-0,303,See Other,High_Load_100 1-73,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,58,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401810881,5,/login-59-1,302,Found,High_Load_100 1-73,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401810886,7,/login-59-2,200,OK,High_Load_100 1-73,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401810893,42,/api/download/256-71,200,OK,High_Load_100 1-73,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401811210,27,/-28,200,OK,High_Load_100 1-74,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,27,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401811237,368,/notices-43,200,OK,High_Load_100 1-74,text,false,"The operation lasted too long: It took 368 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,368,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401811605,255,/courses-48,200,OK,High_Load_100 1-74,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,246,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401811860,61,/login-59,200,OK,High_Load_100 1-74,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,51,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401811860,51,/login-59-0,303,See Other,High_Load_100 1-74,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,51,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401811911,6,/login-59-1,302,Found,High_Load_100 1-74,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401811917,4,/login-59-2,200,OK,High_Load_100 1-74,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401811922,17,/api/download/256-71,200,OK,High_Load_100 1-74,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401812202,21,/-28,200,OK,High_Load_100 1-75,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,21,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401812224,292,/notices-43,200,OK,High_Load_100 1-75,text,false,"The operation lasted too long: It took 292 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,292,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401812516,283,/courses-48,200,OK,High_Load_100 1-75,text,false,"The operation lasted too long: It took 283 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,274,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401812799,50,/login-59,200,OK,High_Load_100 1-75,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401812799,42,/login-59-0,303,See Other,High_Load_100 1-75,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401812841,4,/login-59-1,302,Found,High_Load_100 1-75,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401812845,4,/login-59-2,200,OK,High_Load_100 1-75,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401812850,15,/api/download/256-71,200,OK,High_Load_100 1-75,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813201,21,/-28,200,OK,High_Load_100 1-76,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,21,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401813222,161,/notices-43,200,OK,High_Load_100 1-76,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,161,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813384,197,/courses-48,200,OK,High_Load_100 1-76,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,192,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813582,37,/login-59,200,OK,High_Load_100 1-76,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,24,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813582,24,/login-59-0,303,See Other,High_Load_100 1-76,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,24,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813607,7,/login-59-1,302,Found,High_Load_100 1-76,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813614,5,/login-59-2,200,OK,High_Load_100 1-76,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401813619,16,/api/download/256-71,200,OK,High_Load_100 1-76,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814203,38,/-28,200,OK,High_Load_100 1-77,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,38,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401814241,177,/notices-43,200,OK,High_Load_100 1-77,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,177,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814418,271,/courses-48,200,OK,High_Load_100 1-77,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,248,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814736,93,/login-59,200,OK,High_Load_100 1-77,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,75,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814736,75,/login-59-0,303,See Other,High_Load_100 1-77,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,75,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814811,8,/login-59-1,302,Found,High_Load_100 1-77,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,8,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814819,10,/login-59-2,200,OK,High_Load_100 1-77,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401814830,27,/api/download/256-71,200,OK,High_Load_100 1-77,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815200,112,/-28,200,OK,High_Load_100 1-78,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,112,utf-8,1,0,DESKTOP-MM2TTJV,0,63
+1789401815312,241,/notices-43,200,OK,High_Load_100 1-78,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,229,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815554,272,/courses-48,200,OK,High_Load_100 1-78,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,239,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815826,152,/login-59,200,OK,High_Load_100 1-78,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,113,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815826,113,/login-59-0,303,See Other,High_Load_100 1-78,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,113,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815939,24,/login-59-1,302,Found,High_Load_100 1-78,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,24,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815963,15,/login-59-2,200,OK,High_Load_100 1-78,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,15,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401815978,54,/api/download/256-71,200,OK,High_Load_100 1-78,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816202,72,/-28,200,OK,High_Load_100 1-79,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,72,utf-8,1,0,DESKTOP-MM2TTJV,0,31
+1789401816274,121,/notices-43,200,OK,High_Load_100 1-79,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,121,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816395,195,/courses-48,200,OK,High_Load_100 1-79,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,189,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816591,43,/login-59,200,OK,High_Load_100 1-79,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816591,33,/login-59-0,303,See Other,High_Load_100 1-79,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816624,5,/login-59-1,302,Found,High_Load_100 1-79,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816629,5,/login-59-2,200,OK,High_Load_100 1-79,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401816635,15,/api/download/256-71,200,OK,High_Load_100 1-79,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401817200,36,/-28,200,OK,High_Load_100 1-80,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,36,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401817236,310,/notices-43,200,OK,High_Load_100 1-80,text,false,"The operation lasted too long: It took 310 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,310,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401817546,220,/courses-48,200,OK,High_Load_100 1-80,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,215,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401817766,91,/login-59,200,OK,High_Load_100 1-80,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,81,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401817766,81,/login-59-0,303,See Other,High_Load_100 1-80,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,81,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401817847,5,/login-59-1,302,Found,High_Load_100 1-80,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401817852,5,/login-59-2,200,OK,High_Load_100 1-80,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401817857,15,/api/download/256-71,200,OK,High_Load_100 1-80,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818200,46,/-28,200,OK,High_Load_100 1-81,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,46,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401818272,201,/notices-43,200,OK,High_Load_100 1-81,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,201,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818473,203,/courses-48,200,OK,High_Load_100 1-81,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,192,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818676,103,/login-59,200,OK,High_Load_100 1-81,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,82,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818676,82,/login-59-0,303,See Other,High_Load_100 1-81,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,82,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818759,15,/login-59-1,302,Found,High_Load_100 1-81,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,15,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818774,5,/login-59-2,200,OK,High_Load_100 1-81,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401818780,14,/api/download/256-71,200,OK,High_Load_100 1-81,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819200,34,/-28,200,OK,High_Load_100 1-82,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401819234,185,/notices-43,200,OK,High_Load_100 1-82,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,185,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819419,196,/courses-48,200,OK,High_Load_100 1-82,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,187,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819615,82,/login-59,200,OK,High_Load_100 1-82,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,71,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819615,71,/login-59-0,303,See Other,High_Load_100 1-82,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,71,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819687,5,/login-59-1,302,Found,High_Load_100 1-82,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819692,5,/login-59-2,200,OK,High_Load_100 1-82,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401819697,38,/api/download/256-71,200,OK,High_Load_100 1-82,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820201,20,/-28,200,OK,High_Load_100 1-83,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,20,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401820221,113,/notices-43,200,OK,High_Load_100 1-83,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,113,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820334,185,/courses-48,200,OK,High_Load_100 1-83,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,179,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820519,41,/login-59,200,OK,High_Load_100 1-83,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820519,30,/login-59-0,303,See Other,High_Load_100 1-83,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,30,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820549,6,/login-59-1,302,Found,High_Load_100 1-83,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820555,5,/login-59-2,200,OK,High_Load_100 1-83,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401820560,14,/api/download/256-71,200,OK,High_Load_100 1-83,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401821202,33,/-28,200,OK,High_Load_100 1-84,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,33,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401821236,406,/notices-43,200,OK,High_Load_100 1-84,text,false,"The operation lasted too long: It took 406 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,406,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401821643,310,/courses-48,200,OK,High_Load_100 1-84,text,false,"The operation lasted too long: It took 310 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,275,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401821954,75,/login-59,200,OK,High_Load_100 1-84,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401821954,62,/login-59-0,303,See Other,High_Load_100 1-84,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401822016,6,/login-59-1,302,Found,High_Load_100 1-84,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401822022,7,/login-59-2,200,OK,High_Load_100 1-84,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401822030,23,/api/download/256-71,200,OK,High_Load_100 1-84,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401822203,74,/-28,200,OK,High_Load_100 1-85,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,74,utf-8,1,0,DESKTOP-MM2TTJV,0,31
+1789401822277,293,/notices-43,200,OK,High_Load_100 1-85,text,false,"The operation lasted too long: It took 293 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,289,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401822571,366,/courses-48,200,OK,High_Load_100 1-85,text,false,"The operation lasted too long: It took 366 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,354,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401822938,117,/login-59,200,OK,High_Load_100 1-85,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,89,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401822938,89,/login-59-0,303,See Other,High_Load_100 1-85,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,89,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823027,17,/login-59-1,302,Found,High_Load_100 1-85,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,17,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823044,11,/login-59-2,200,OK,High_Load_100 1-85,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,11,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823056,36,/api/download/256-71,200,OK,High_Load_100 1-85,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,10,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823206,135,/-28,200,OK,High_Load_100 1-86,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,135,utf-8,1,0,DESKTOP-MM2TTJV,0,82
+1789401823389,280,/notices-43,200,OK,High_Load_100 1-86,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,280,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823670,190,/courses-48,200,OK,High_Load_100 1-86,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,175,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823889,84,/login-59,200,OK,High_Load_100 1-86,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,57,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823889,57,/login-59-0,303,See Other,High_Load_100 1-86,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,57,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823946,18,/login-59-1,302,Found,High_Load_100 1-86,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,18,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823964,9,/login-59-2,200,OK,High_Load_100 1-86,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,9,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401823973,17,/api/download/256-71,200,OK,High_Load_100 1-86,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824206,36,/-28,200,OK,High_Load_100 1-87,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,36,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401824242,225,/notices-43,200,OK,High_Load_100 1-87,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,225,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824467,236,/courses-48,200,OK,High_Load_100 1-87,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,230,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824704,41,/login-59,200,OK,High_Load_100 1-87,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,29,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824704,29,/login-59-0,303,See Other,High_Load_100 1-87,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,29,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824734,6,/login-59-1,302,Found,High_Load_100 1-87,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824740,5,/login-59-2,200,OK,High_Load_100 1-87,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401824746,15,/api/download/256-71,200,OK,High_Load_100 1-87,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401825206,27,/-28,200,OK,High_Load_100 1-88,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,27,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401825233,281,/notices-43,200,OK,High_Load_100 1-88,text,false,"The operation lasted too long: It took 281 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,281,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401825514,243,/courses-48,200,OK,High_Load_100 1-88,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,235,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401825758,89,/login-59,200,OK,High_Load_100 1-88,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,81,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401825758,81,/login-59-0,303,See Other,High_Load_100 1-88,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,81,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401825839,3,/login-59-1,302,Found,High_Load_100 1-88,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401825843,4,/login-59-2,200,OK,High_Load_100 1-88,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401825848,16,/api/download/256-71,200,OK,High_Load_100 1-88,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826203,19,/-28,200,OK,High_Load_100 1-89,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,12
+1789401826222,186,/notices-43,200,OK,High_Load_100 1-89,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,186,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826450,237,/courses-48,200,OK,High_Load_100 1-89,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,221,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826688,73,/login-59,200,OK,High_Load_100 1-89,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826688,63,/login-59-0,303,See Other,High_Load_100 1-89,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,63,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826751,5,/login-59-1,302,Found,High_Load_100 1-89,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826756,5,/login-59-2,200,OK,High_Load_100 1-89,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401826761,16,/api/download/256-71,200,OK,High_Load_100 1-89,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827203,42,/-28,200,OK,High_Load_100 1-90,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,8
+1789401827245,233,/notices-43,200,OK,High_Load_100 1-90,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,233,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827506,248,/courses-48,200,OK,High_Load_100 1-90,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,238,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827754,76,/login-59,200,OK,High_Load_100 1-90,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,64,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827754,64,/login-59-0,303,See Other,High_Load_100 1-90,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,64,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827818,6,/login-59-1,302,Found,High_Load_100 1-90,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827825,5,/login-59-2,200,OK,High_Load_100 1-90,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401827830,15,/api/download/256-71,200,OK,High_Load_100 1-90,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401828202,21,/-28,200,OK,High_Load_100 1-91,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,21,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401828223,313,/notices-43,200,OK,High_Load_100 1-91,text,false,"The operation lasted too long: It took 313 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,313,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401828537,212,/courses-48,200,OK,High_Load_100 1-91,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,207,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401828749,72,/login-59,200,OK,High_Load_100 1-91,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401828749,62,/login-59-0,303,See Other,High_Load_100 1-91,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,62,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401828811,5,/login-59-1,302,Found,High_Load_100 1-91,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401828816,5,/login-59-2,200,OK,High_Load_100 1-91,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401828821,13,/api/download/256-71,200,OK,High_Load_100 1-91,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829202,25,/-28,200,OK,High_Load_100 1-92,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,25,utf-8,1,0,DESKTOP-MM2TTJV,0,11
+1789401829227,148,/notices-43,200,OK,High_Load_100 1-92,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,148,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829375,193,/courses-48,200,OK,High_Load_100 1-92,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,178,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829595,84,/login-59,200,OK,High_Load_100 1-92,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,74,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829595,74,/login-59-0,303,See Other,High_Load_100 1-92,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,74,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829669,6,/login-59-1,302,Found,High_Load_100 1-92,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829675,4,/login-59-2,200,OK,High_Load_100 1-92,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401829679,14,/api/download/256-71,200,OK,High_Load_100 1-92,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401830202,19,/-28,200,OK,High_Load_100 1-93,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,19,utf-8,1,0,DESKTOP-MM2TTJV,0,7
+1789401830221,402,/notices-43,200,OK,High_Load_100 1-93,text,false,"The operation lasted too long: It took 402 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,402,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401830633,176,/courses-48,200,OK,High_Load_100 1-93,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,173,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401830809,71,/login-59,200,OK,High_Load_100 1-93,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401830809,61,/login-59-0,303,See Other,High_Load_100 1-93,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401830870,5,/login-59-1,302,Found,High_Load_100 1-93,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401830875,5,/login-59-2,200,OK,High_Load_100 1-93,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401830880,16,/api/download/256-71,200,OK,High_Load_100 1-93,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401831203,34,/-28,200,OK,High_Load_100 1-94,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,34,utf-8,1,0,DESKTOP-MM2TTJV,0,4
+1789401831237,281,/notices-43,200,OK,High_Load_100 1-94,text,false,"The operation lasted too long: It took 281 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,281,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401831518,207,/courses-48,200,OK,High_Load_100 1-94,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,198,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401831724,52,/login-59,200,OK,High_Load_100 1-94,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401831724,42,/login-59-0,303,See Other,High_Load_100 1-94,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,42,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401831766,6,/login-59-1,302,Found,High_Load_100 1-94,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401831772,4,/login-59-2,200,OK,High_Load_100 1-94,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401831777,15,/api/download/256-71,200,OK,High_Load_100 1-94,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401832204,23,/-28,200,OK,High_Load_100 1-95,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,23,utf-8,1,0,DESKTOP-MM2TTJV,0,12
+1789401832227,378,/notices-43,200,OK,High_Load_100 1-95,text,false,"The operation lasted too long: It took 378 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,378,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401832606,291,/courses-48,200,OK,High_Load_100 1-95,text,false,"The operation lasted too long: It took 291 milliseconds, but should not have lasted longer than 280 milliseconds.",44407,355,1,1,http://103.94.135.91:8080/courses,,254,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401832898,146,/login-59,200,OK,High_Load_100 1-95,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401832898,47,/login-59-0,303,See Other,High_Load_100 1-95,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401832946,28,/login-59-1,302,Found,High_Load_100 1-95,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,28,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401832974,70,/login-59-2,200,OK,High_Load_100 1-95,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,70,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833044,191,/api/download/256-71,200,OK,High_Load_100 1-95,text,true,,262423,364,2,2,http://103.94.135.91:8080/api/download/256,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833200,57,/-28,200,OK,High_Load_100 1-96,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,57,utf-8,1,0,DESKTOP-MM2TTJV,0,35
+1789401833257,195,/notices-43,200,OK,High_Load_100 1-96,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,195,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833452,202,/courses-48,200,OK,High_Load_100 1-96,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,188,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833654,89,/login-59,200,OK,High_Load_100 1-96,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,76,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833654,76,/login-59-0,303,See Other,High_Load_100 1-96,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,76,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833730,7,/login-59-1,302,Found,High_Load_100 1-96,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833737,6,/login-59-2,200,OK,High_Load_100 1-96,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401833743,16,/api/download/256-71,200,OK,High_Load_100 1-96,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834200,37,/-28,200,OK,High_Load_100 1-97,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,37,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401834238,190,/notices-43,200,OK,High_Load_100 1-97,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,190,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834429,239,/courses-48,200,OK,High_Load_100 1-97,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,230,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834669,69,/login-59,200,OK,High_Load_100 1-97,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834669,61,/login-59-0,303,See Other,High_Load_100 1-97,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,61,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834730,5,/login-59-1,302,Found,High_Load_100 1-97,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834735,3,/login-59-2,200,OK,High_Load_100 1-97,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,3,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401834766,20,/api/download/256-71,200,OK,High_Load_100 1-97,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401835200,47,/-28,200,OK,High_Load_100 1-98,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,47,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401835260,393,/notices-43,200,OK,High_Load_100 1-98,text,false,"The operation lasted too long: It took 393 milliseconds, but should not have lasted longer than 280 milliseconds.",7518,355,1,1,http://103.94.135.91:8080/notices,,393,utf-8,1,1,DESKTOP-MM2TTJV,0,0
+1789401835653,248,/courses-48,200,OK,High_Load_100 1-98,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,212,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401835902,111,/login-59,200,OK,High_Load_100 1-98,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401835902,49,/login-59-0,303,See Other,High_Load_100 1-98,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401835951,13,/login-59-1,302,Found,High_Load_100 1-98,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,13,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401835964,49,/login-59-2,200,OK,High_Load_100 1-98,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,49,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836013,40,/api/download/256-71,200,OK,High_Load_100 1-98,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,18,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836201,39,/-28,200,OK,High_Load_100 1-99,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,39,utf-8,1,0,DESKTOP-MM2TTJV,0,6
+1789401836249,260,/notices-43,200,OK,High_Load_100 1-99,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,260,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836509,265,/courses-48,200,OK,High_Load_100 1-99,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,242,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836777,65,/login-59,200,OK,High_Load_100 1-99,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,53,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836777,53,/login-59-0,303,See Other,High_Load_100 1-99,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,53,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836830,6,/login-59-1,302,Found,High_Load_100 1-99,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836836,6,/login-59-2,200,OK,High_Load_100 1-99,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,6,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401836843,20,/api/download/256-71,200,OK,High_Load_100 1-99,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,4,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837200,26,/-28,200,OK,High_Load_100 1-100,text,true,,2434,348,1,1,http://103.94.135.91:8080/,,26,utf-8,1,0,DESKTOP-MM2TTJV,0,16
+1789401837227,147,/notices-43,200,OK,High_Load_100 1-100,text,true,,7518,355,1,1,http://103.94.135.91:8080/notices,,147,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837375,221,/courses-48,200,OK,High_Load_100 1-100,text,true,,44407,355,1,1,http://103.94.135.91:8080/courses,,213,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837596,39,/login-59,200,OK,High_Load_100 1-100,text,true,,2355,1534,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,27,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837596,27,/login-59-0,303,See Other,High_Load_100 1-100,text,true,,514,554,1,1,http://103.94.135.91:8080/login,,27,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837623,7,/login-59-1,302,Found,High_Load_100 1-100,text,true,,296,483,1,1,http://103.94.135.91:8080/dashboard,,7,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837630,5,/login-59-2,200,OK,High_Load_100 1-100,text,true,,1545,497,1,1,http://103.94.135.91:8080/login?next=%2Fdashboard,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0
+1789401837636,17,/api/download/256-71,200,OK,High_Load_100 1-100,text,true,,262423,364,1,1,http://103.94.135.91:8080/api/download/256,,5,utf-8,1,0,DESKTOP-MM2TTJV,0,0

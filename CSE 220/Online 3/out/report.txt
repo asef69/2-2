@@ -1,0 +1,7 @@
+Practice P1 -- high-boost sharpening
+image     : images/skyline512.png
+kernel    : gaussian 15 x 15
+boost     : 2.500
+engine    : fft
+max error : 1.088e-14
+verification: MATCH

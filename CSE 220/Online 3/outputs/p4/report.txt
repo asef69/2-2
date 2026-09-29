@@ -1,0 +1,5 @@
+Practice P4 -- FFT template matching
+image    : images/skyline512.png
+template : images/skyline256.png
+engine   : fft
+best match (row, col): (0, 0)
