@@ -1,5 +1,0 @@
-Practice P3 -- modular exponentiation by repeated spectral squaring
-input        : inputs/3.txt
-modulus      : 998244353
-engine       : fft
-verification : MATCH

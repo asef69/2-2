@@ -1,3 +1,0 @@
-Practice P5 -- three-way multi-focus fusion
-max error : 4.441e-15
-verification: MATCH

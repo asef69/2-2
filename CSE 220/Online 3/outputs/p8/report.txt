@@ -1,3 +1,0 @@
-Practice P8 -- Bluestein-only hybrid image
-max error : 1.509e-13
-verification: MATCH

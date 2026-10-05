@@ -1,4 +1,0 @@
-Practice P2 -- Newton-Raphson big-integer division
-input        : inputs/3.txt
-engine       : fft
-verification : MATCH

@@ -1,2 +1,0 @@
-python3 practice_template.py p1 --image images/skyline512.png --kernel-size 15 --boost 2.5 --engine fft --out-dir outputs/p1
-

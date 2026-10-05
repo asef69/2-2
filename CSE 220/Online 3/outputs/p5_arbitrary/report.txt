@@ -1,5 +1,0 @@
-Practice P5 -- divide-and-conquer radix conversion to base 65536
-input        : inputs/2.txt
-engine       : arbitrary
-base-65536 digit count: 42
-verification : MATCH
