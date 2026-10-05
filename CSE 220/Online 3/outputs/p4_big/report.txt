@@ -1,0 +1,5 @@
+Practice P4 -- circular (wraparound) big-integer multiplication
+input               : inputs/4.txt
+circular length N   : 8192
+engine              : fft
+first divergent digit (from LSB, -1 = no divergence): 0
