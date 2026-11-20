@@ -1,0 +1,278 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 5--6}
+\chapter{Orthogonality and Fourier Series Coefficients}
+
+\noindent{\sffamily\small\color{slate}Reminder:\ $x(t)=\sum a_ke^{jk\omega_0t}$, \ $a_k=\frac1T\int_Tx(t)e^{-jk\omega_0t}\dd t$, \ $\omega_0=2\pi/T$, \ $a_0=$ average value.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q4(a)--(d)}{CSE 219 \textbullet\ 22 batch p.2}{30}
+Let $x(t)$ be the odd square wave $x(t)=A$ for $0<t<\frac{T_0}2$ and $x(t)=-A$ for $-\frac{T_0}2<t<0$, with $x(t+T_0)=x(t)$. Define $y(t)=x\big(t-\frac{T_0}6\big)$.
+(a) Show that $y(t)$ still has half-wave symmetry. (b) Find the complex Fourier series coefficients $Y_k$ from those of $x(t)$. (c) Draw the magnitude and phase spectra of $Y_k$ (up to $k=5$ is sufficient). (d) Compare the trigonometric Fourier series of $x(t)$ and $y(t)$.
+\end{qcard}
+\begin{solution}
+Here $\omega_0=2\pi/T_0$.
+
+\step{Coefficients of $x$.}
+\[
+X_k=\frac1{T_0}\Big[\int_0^{T_0/2}Ae^{-jk\omega_0t}\dd t-\int_{-T_0/2}^{0}Ae^{-jk\omega_0t}\dd t\Big]=\frac{A\,(1-(-1)^k)}{jk\pi}
+=\begin{cases}\dfrac{2A}{jk\pi},&k\text{ odd},\\0,&k\text{ even}.\end{cases}
+\]
+\step{(a)} Half-wave symmetry means $f(t+\frac{T_0}2)=-f(t)$. For $y$: $y(t+\frac{T_0}2)=x\big(t+\frac{T_0}2-\frac{T_0}6\big)=-x\big(t-\frac{T_0}6\big)=-y(t)$, because $x$ itself has this property. A time shift never destroys half-wave symmetry. Equivalently $Y_k=0$ for even $k$.
+
+\step{(b)} Time-shift property: $Y_k=X_ke^{-jk\omega_0T_0/6}=X_ke^{-jk\pi/3}$,
+\[Y_k=\frac{2A}{jk\pi}e^{-jk\pi/3}\quad(k\text{ odd}),\qquad Y_k=0\quad(k\text{ even}).\]
+\step{(c)} $|Y_k|=\dfrac{2A}{\pi|k|}$ and, for $k>0$ odd, $\angle Y_k=-\dfrac\pi2-\dfrac{k\pi}3$ (the phase is odd in $k$: $Y_{-k}=Y_k^*$):
+\begin{center}\small\begin{tabular}{@{}c|cccccc@{}}$k$&$\pm1$&$\pm2$&$\pm3$&$\pm4$&$\pm5$&$0$\\\hline$|Y_k|/A$&$0.637$&$0$&$0.212$&$0$&$0.127$&$0$\\$\angle Y_k$ ($k>0$)&$-\frac{5\pi}{6}$&--&$\frac\pi2$&--&$-\frac\pi6$&--\end{tabular}\end{center}
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=7.2cm,height=3.6cm,axis lines=middle,xlabel={$k$},title={$|Y_k|/A$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-5,-3,-1,1,3,5},ymin=0,ymax=0.8]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(-5,0.1273)(-3,0.2122)(-1,0.6366)(1,0.6366)(3,0.2122)(5,0.1273)};\end{axis}\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}\begin{axis}[width=7.2cm,height=3.6cm,axis lines=middle,xlabel={$k$},title={$\angle Y_k$ (rad)},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-5,-3,-1,1,3,5},ymin=-3,ymax=3]
+\addplot+[ycomb,crimson,mark=*,mark size=1.4pt]coordinates{(-5,0.5236)(-3,-1.5708)(-1,2.618)(1,-2.618)(3,1.5708)(5,-0.5236)};\end{axis}\end{tikzpicture}
+\end{center}
+\step{(d)} Real form: $x(t)=\sum_{k\text{ odd}>0}\dfrac{4A}{\pi k}\sin(k\omega_0t)$ and, with the shift,
+\[y(t)=\sum_{k\text{ odd}>0}\frac{4A}{\pi k}\sin\!\Big(k\omega_0t-\frac{k\pi}{3}\Big).\]
+Both contain only odd harmonics with identical amplitudes $\frac{4A}{\pi k}$; the shift changes only the phase, by $-k\pi/3$ for harmonic $k$ (linear in $k$: every harmonic is delayed by the same $T_0/6$).
+\ans{$Y_k=\dfrac{2A}{jk\pi}e^{-jk\pi/3}$ for odd $k$ ($0$ for even $k$); $|Y_k|=\frac{2A}{\pi|k|}$; amplitudes unchanged, phases shifted by $-k\pi/3$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q7(a)}{EEE 211 \textbullet\ EEE p.4--5}{10}
+Show that the three functions in the figure are pair-wise orthogonal over the interval $(-1,2)$, and calculate the value of $A$ that makes these signals orthonormal to each other. ($\phi_1=-A$ on $(-1,0)$, $+A$ on $(0,1)$; $\phi_2=A$ on $(-1,1)$; $\phi_3=1$ on $(1,2)$.)
+\end{qcard}
+\begin{solution}
+\[\int\phi_1\phi_2\dd t=\int_{-1}^{0}(-A)(A)\dd t+\int_0^1(A)(A)\dd t=-A^2+A^2=0.\]
+$\phi_3$ is nonzero only on $(1,2)$ where $\phi_1=\phi_2=0$, so $\int\phi_1\phi_3=\int\phi_2\phi_3=0$: the set is pairwise orthogonal.
+
+Energies: $E_1=\int\phi_1^2=2A^2$, $E_2=2A^2$, $E_3=1$. Orthonormal requires $E_i=1$:
+\[2A^2=1\ \Rightarrow\ A=\frac1{\sqrt2}\quad(\phi_3\text{ already has unit energy}).\]
+\ans{Pairwise orthogonal; orthonormal for $A=1/\sqrt2$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q5(a)}{EEE 211 \textbullet\ EEE p.9}{10}
+A periodic signal $x(t)$ is represented by the trigonometric Fourier series $x(t)=2+3\cos2t+4\sin2t+2\sin(3t+30^\circ)-\cos(7t+150^\circ)$. Express this series as a compact trigonometric Fourier series $x(t)=A_0+\sum A_n\cos\big(\frac{2\pi nt}{T}+\phi_n\big)$. Sketch the amplitude spectrum with proper axis labels.
+\end{qcard}
+\begin{solution}
+Convert each term to a cosine with phase:
+\begin{align*}
+3\cos2t+4\sin2t&=5\cos(2t-53.13^\circ),\qquad(\sqrt{3^2+4^2}=5,\ \tan^{-1}\tfrac43=53.13^\circ)\\
+2\sin(3t+30^\circ)&=2\cos(3t+30^\circ-90^\circ)=2\cos(3t-60^\circ),\\
+-\cos(7t+150^\circ)&=\cos(7t+150^\circ-180^\circ)=\cos(7t-30^\circ).
+\end{align*}
+\[x(t)=2+5\cos(2t-53.13^\circ)+2\cos(3t-60^\circ)+\cos(7t-30^\circ).\]
+Fundamental: $\gcd(2,3,7)=1$ rad/s, so $T=2\pi$ and $2\pi n/T=n$: the nonzero harmonics are $n=2,3,7$.
+\begin{center}\small\begin{tabular}{@{}c|cccc@{}}$n$&0&2&3&7\\\hline$A_n$&2&5&2&1\\$\phi_n$&--&$-53.13^\circ$&$-60^\circ$&$-30^\circ$\end{tabular}\end{center}
+\begin{center}\begin{tikzpicture}\begin{axis}[width=8cm,height=3.6cm,axis lines=middle,xlabel={$n\ (\omega=n\ \text{rad/s})$},title={amplitude spectrum $A_n$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={0,2,3,7},ytick={1,2,5},xmin=-0.5,xmax=8.5,ymin=0,ymax=5.8]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(0,2)(2,5)(3,2)(7,1)};\end{axis}\end{tikzpicture}\end{center}
+\ans{$x=2+5\cos(2t-53.13^\circ)+2\cos(3t-60^\circ)+\cos(7t-30^\circ)$; $A_0=2,A_2=5,A_3=2,A_7=1$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q7(a)}{EEE 211 \textbullet\ EEE p.11}{20}
+For the signal $x(t)$ shown in the figure, find the expression of the exponential Fourier series. (The figure shows a periodic signal of period 2 with cusp-shaped peaks of height 1 at the odd integers and smooth zeros at the even integers.)
+\end{qcard}
+\begin{notebox}The scanned figure is small. It is read as $x(t)=(1-|t-1|)^2$ on $0\le t\le2$ repeated with period $T=2$ (peak 1 at $t=1$, value $0$ with zero slope at $t=0,2$). The method is unchanged for another arc shape.\end{notebox}
+\begin{solution}
+$T=2$, $\omega_0=\pi$. Put $s=t-1$: one period is the even function $g(s)=(1-|s|)^2$ on $|s|\le1$, and $x(t)=g(t-1)$, so $a_k=(-1)^ka_k^{g}$.
+\[
+a_0=\int_0^1(1-s)^2\dd s=\frac13,\qquad a_k^{g}=\frac12\int_{-1}^{1}g(s)\cos k\pi s\dd s=\int_0^1(1-s)^2\cos(k\pi s)\dd s .
+\]
+Integrate by parts twice (with $\sin k\pi=0$): $\displaystyle\int_0^1(1-s)^2\cos(\kappa s)\dd s=\frac2{\kappa^2}$, $\kappa=k\pi$. Hence
+\[
+a_k=(-1)^k\,\frac{2}{\pi^2k^2}\ (k\ne0),\qquad x(t)=\frac13+\sum_{k\ne0}\frac{2(-1)^k}{\pi^2k^2}\,e^{jk\pi t}.
+\]
+(Check $a_1=-2/\pi^2=-0.203$ against numerical integration.)
+\ans{$a_0=\frac13$, $a_k=\dfrac{2(-1)^k}{\pi^2k^2}$ ($k\neq0$), i.e.\ $x(t)=\frac13+\sum_{k\ne0}\frac{2(-1)^k}{\pi^2k^2}e^{jk\pi t}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q5(d)}{CSE 219 \textbullet\ TF p.3}{5}
+Determine whether the signal $x(t)$ is real-valued and even. Here $x(t)$ is a continuous-time periodic signal presented in its Fourier series representation: $x(t)=\displaystyle\sum_{k=0}^{100}\Big(\frac12\Big)^ke^{jk\frac{2\pi}{50}t}$.
+\end{qcard}
+\begin{solution}
+The Fourier coefficients are $a_k=(\frac12)^k$ for $0\le k\le100$ and $a_k=0$ otherwise (with $\omega_0=2\pi/50$).
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Real $x(t)$ requires $a_{-k}=a_k^*$. For $k\ge1$: $a_{-k}=0$ but $a_k^*=(\frac12)^k\ne0$. \emph{Not real.}
+\item Even $x(t)$ requires $a_{-k}=a_k$. Again $a_{-k}=0\ne a_k$. \emph{Not even.}
+\end{itemize}
+(The signal contains only positive-frequency exponentials, so $x(t)$ is complex.)
+\ans{$x(t)$ is neither real-valued nor even.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q8(a)}{EEE 211 \textbullet\ EEE p.11}{20}
+Find the analytical expression of the trigonometric Fourier series (in the form $\delta_{T_0}(t)=A_0+\sum A_n\cos\big(\frac{2\pi nt}{T}+\phi\big)$) for the impulse train $\delta_{T_0}(t)=\sum_{m}\delta(t-mT_0)$ depicted in the figure. Sketch the amplitude spectrum with proper $x$- and $y$-axis labels.
+\end{qcard}
+\begin{solution}
+Take the period $(-\frac{T_0}2,\frac{T_0}2)$, which contains one impulse at $t=0$. By sifting,
+\[a_k=\frac1{T_0}\int_{-T_0/2}^{T_0/2}\delta(t)e^{-jk\omega_0t}\dd t=\frac1{T_0}\quad\text{for every }k,\qquad\omega_0=\frac{2\pi}{T_0}.\]
+Real coefficients pair up ($a_{-n}=a_n$): $\delta_{T_0}(t)=\dfrac1{T_0}+\dfrac2{T_0}\displaystyle\sum_{n=1}^{\infty}\cos\!\Big(\frac{2\pi nt}{T_0}\Big)$, so $A_0=\frac1{T_0}$, $A_n=\frac2{T_0}$, $\phi=0$.
+\begin{center}\begin{tikzpicture}\begin{axis}[width=9cm,height=3.6cm,axis lines=middle,xlabel={frequency $f=n/T_0$},title={amplitude spectrum},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={0,1,2,3,4,5},xticklabels={0,$\frac1{T_0}$,$\frac2{T_0}$,$\frac3{T_0}$,$\frac4{T_0}$,$\frac5{T_0}$},ytick={0.5,1},yticklabels={$\frac1{T_0}$,$\frac2{T_0}$},xmin=-0.3,xmax=5.8,ymin=0,ymax=1.3]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(0,0.5)(1,1)(2,1)(3,1)(4,1)(5,1)};\end{axis}\end{tikzpicture}\end{center}
+\ans{$\delta_{T_0}(t)=\frac1{T_0}+\frac2{T_0}\sum_{n\ge1}\cos\frac{2\pi nt}{T_0}$; $A_0=\frac1{T_0}$, $A_n=\frac2{T_0}$ (flat, equal-height lines).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q3(b)}{EEE 211 \textbullet\ EEE p.13}{15}
+Show that the three functions $\psi_1,\psi_2,\psi_3$ shown in the figure are pairwise orthogonal over $(-2,2)$. How can you make these functions an orthonormal set? Express $x(t)=1$ for $0\le t\le2$ ($0$ otherwise) in terms of the orthonormal set. Validate Parseval's relation in this case. ($\psi_1=-A$ on $(-2,-1)$, $A$ on $(-1,1)$, $-A$ on $(1,2)$; $\psi_2=-A$ on $(-2,0)$, $A$ on $(0,2)$; $\psi_3=-A$ on $(-2,2)$.)
+\end{qcard}
+\begin{solution}
+\step{Orthogonality.}
+\begin{align*}
+\int\psi_1\psi_2&=A^2\big[(+1)\cdot1+(-1)\cdot1+(+1)\cdot1+(-1)\cdot1\big]=0\quad(\text{intervals }(-2,-1),(-1,0),(0,1),(1,2)),\\
+\int\psi_1\psi_3&=-A\int\psi_1=-A\,(-A+2A-A)=0,\qquad
+\int\psi_2\psi_3=-A\int\psi_2=-A(-2A+2A)=0 .
+\end{align*}
+\step{Orthonormalisation.} Each $\psi_i$ has energy $E_i=4A^2$, so $\phi_i=\psi_i/\sqrt{E_i}=\psi_i/(2A)$; with $A=\frac12$ the $\psi_i$ themselves are orthonormal.
+
+\step{Expansion of $x$.} With $A=\frac12$: $c_i=\int_0^2x\,\phi_i\dd t$:
+\[c_1=\int_0^2\phi_1=\tfrac12(1)+(-\tfrac12)(1)=0,\qquad c_2=\int_0^2\tfrac12=1,\qquad c_3=\int_0^2(-\tfrac12)=-1 .\]
+\[x(t)=\phi_2(t)-\phi_3(t)\ \ (\text{check on }(0,2):\ \tfrac12+\tfrac12=1;\ \text{on }(-2,0):\ -\tfrac12+\tfrac12=0).\]
+\step{Parseval.} $\int x^2\dd t=2$ and $\sum c_i^2=0+1+1=2$: equal, so Parseval's relation holds.
+\ans{Orthogonal; orthonormal for $A=\frac12$; $x=\phi_2-\phi_3$ ($c_1=0$, $c_2=1$, $c_3=-1$); $\int x^2=2=\sum c_i^2$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q2(b) --- CSE 311}{CSE 311 \textbullet\ TF p.12}{17}
+Find the exponential Fourier series coefficients of $\sin2\pi t$ and $\cos2\pi t$. Do you need to integrate over a full cycle to obtain them? Explain.
+\end{qcard}
+\begin{solution}
+Use Euler's formula; no integration is needed ($\omega_0=2\pi$, $T=1$).
+\[\cos2\pi t=\tfrac12e^{j2\pi t}+\tfrac12e^{-j2\pi t}\ \Rightarrow\ a_{\pm1}=\tfrac12\ (\text{real}),\]
+\[\sin2\pi t=\tfrac1{2j}e^{j2\pi t}-\tfrac1{2j}e^{-j2\pi t}\ \Rightarrow\ a_{1}=\tfrac1{2j}=-\tfrac j2,\ \ a_{-1}=\tfrac j2\ (\text{imaginary}).\]
+All other coefficients are zero. The defining integral $a_k=\int_0^1x(t)e^{-j2\pi kt}\dd t$ needs a full cycle in general. But for symmetric signals the cosine part (even $x$, real $a_k$) or the sine part (odd $x$, imaginary $a_k$) can be computed from half a cycle: $a_k=2\int_0^{1/2}x\cos k\omega_0t\dd t$ (even) and $a_k=-2j\int_0^{1/2}x\sin k\omega_0t\dd t$ (odd).
+\ans{$\cos2\pi t$: $a_{\pm1}=\frac12$; $\sin2\pi t$: $a_{\pm1}=\mp\frac j2$. By inspection no integral is needed; with symmetry, half a cycle suffices.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q3(b) --- CSE 311}{CSE 311 \textbullet\ TF p.12}{11}
+State the Dirichlet conditions. Are they necessary for the existence of a Fourier series? Give an example.
+\end{qcard}
+\begin{solution}
+A periodic $x(t)$ has a Fourier series converging to $x(t)$ at every point of continuity (and to the mid-value at jumps) if, over one period: (1) $\int_T|x(t)|\dd t<\infty$ (absolutely integrable); (2) $x$ has a finite number of maxima and minima; (3) $x$ has a finite number of finite discontinuities.
+
+These conditions are \emph{sufficient, not necessary}. Violating them does not forbid a useful representation: $\cos\omega_0t$ is fine, and an impulse train violates condition 1 yet has $a_k=1/T$ in the generalised sense. Examples that genuinely fail: $\tan(2\pi t)$ (not absolutely integrable) and $\sin(2\pi/t)$ (infinitely many extrema near $t=0$).
+\ans{Dirichlet conditions: absolutely integrable, finitely many extrema and finite jumps per period --- sufficient but not necessary.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q7(a)}{EEE 211 \textbullet\ EEE p.20}{20}
+For the periodic signals in the figure ($x(t)$ a triangle wave with peak 1 at $t=0,\pm4,\dots$ and valley $-1$ at $t=\pm2,\dots$; $y(t)$ a rectangular wave equal to 4 on $(0,2)$, $(4,6),\dots$ and 0 elsewhere), first compute the exponential Fourier series coefficients of $x(t)$. Then, using the properties of Fourier series, determine the Fourier series coefficients of $y(t)$. Also draw the amplitude spectra of $x(t)$ and $y(t)$.
+\end{qcard}
+\begin{solution}
+$T=4$, $\omega_0=\pi/2$. One period of $x$: $x=1-t$ on $(0,2)$... equivalently $x=-1\cdot$ slope: $x'=-1$ on $(0,2)$, $x'=+1$ on $(2,4)$.
+
+\step{Second derivative.} The slope changes by $-2$ at $t=0$ and by $+2$ at $t=2$ (period $(0,4)$ counting $t=0$): $x''=-2\delta(t)+2\delta(t-2)$ per period. Its coefficients: $\frac14\big[-2+2e^{-jk\pi}\big]=\frac{(-1)^k-1}{2}$. With $(jk\omega_0)^2a_k=-\frac{k^2\pi^2}{4}a_k$:
+\[
+a_0=0,\qquad a_k=\frac{4}{\pi^2k^2}\ (k\text{ odd}),\qquad a_k=0\ (k\text{ even}).
+\]
+\step{Coefficients of $y$.} Compare: $y=4$ on $(0,2)$, $0$ on $(2,4)$, and $x'=-1$ on $(0,2)$, $+1$ on $(2,4)$. Hence
+\[y(t)=2-2\,x'(t).\]
+Differentiation property: $x'\leftrightarrow jk\omega_0a_k$. So $b_0=2$ and
+\[b_k=-2jk\frac\pi2\cdot\frac{4}{\pi^2k^2}=-\frac{4j}{\pi k}\quad(k\text{ odd}),\qquad b_k=0\ (k\text{ even},\ k\ne0).\]
+Direct check: $b_k=\frac14\int_0^24e^{-jk\pi t/2}\dd t=\frac{2(1-(-1)^k)}{jk\pi}=-\frac{4j}{k\pi}$ for odd $k$ (checked).
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=7.2cm,height=3.6cm,axis lines=middle,xlabel={$k$},title={$|a_k|$ of $x(t)$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-5,-3,-1,1,3,5},ymin=0,ymax=0.5]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(-5,0.0162)(-3,0.0450)(-1,0.4053)(1,0.4053)(3,0.0450)(5,0.0162)};\end{axis}\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}\begin{axis}[width=7.2cm,height=3.6cm,axis lines=middle,xlabel={$k$},title={$|b_k|$ of $y(t)$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-5,-3,-1,0,1,3,5},ymin=0,ymax=2.4]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(-5,0.2546)(-3,0.4244)(-1,1.2732)(0,2)(1,1.2732)(3,0.4244)(5,0.2546)};\end{axis}\end{tikzpicture}
+\end{center}
+\ans{$x$: $a_0=0$, $a_k=\frac{4}{\pi^2k^2}$ (odd $k$). $\;y=2-2x'$: $b_0=2$, $b_k=-\frac{4j}{\pi k}$ (odd $k$), $0$ for even $k\ne0$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q7(a)}{EEE 211 \textbullet\ EEE p.25}{15}
+Find the exponential Fourier series for the two impulse trains shown in the figure: (a) unit impulses at every integer $t=n$; (b) impulses of strength $+1$ at odd integers and $-1$ at even integers.
+\end{qcard}
+\begin{solution}
+\step{(a)} $T=1$, $\omega_0=2\pi$. One impulse per period: $a_k=\frac11\int_{-1/2}^{1/2}\delta(t)e^{-jk2\pi t}\dd t=1$ for all $k$:
+\[x_1(t)=\sum_{k=-\infty}^{\infty}e^{j2\pi kt}.\]
+\step{(b)} The pattern $-1,+1$ repeats with period $T=2$ ($\omega_0=\pi$). Over one period $(-\frac12,\frac32)$: $-\delta(t)+\delta(t-1)$:
+\[a_k=\tfrac12\big[-1+e^{-jk\pi}\big]=\tfrac12\big[(-1)^k-1\big]=\begin{cases}-1,&k\text{ odd},\\0,&k\text{ even},\end{cases}
+\qquad x_2(t)=-\sum_{k\text{ odd}}e^{jk\pi t}=-2\sum_{k=1,3,\dots}\cos k\pi t .\]
+\ans{(a) $a_k=1$ for all $k$ ($T=1$). \quad (b) $T=2$: $a_k=-1$ for odd $k$, $0$ for even $k$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q1(a) --- CSE 311}{CSE 311 \textbullet\ TF p.15}{17}
+Justify why the signal $\cos2\pi f_0t$ (odd roll) / $\sin2\pi f_0t$ (even roll) can be represented using a Fourier series. Show whether the coefficients of the exponential Fourier series of your assigned signal are real or imaginary.
+\end{qcard}
+\begin{solution}
+\step{Why a Fourier series exists.} The signal is periodic with $T_0=1/f_0$, bounded, absolutely integrable over a period ($\int_{T_0}|x|<\infty$), has a finite number of extrema (one maximum and one minimum per period) and no discontinuities --- the Dirichlet conditions hold. It is even simpler: it is already a sum of harmonic exponentials.
+
+\step{Coefficients.}
+\[\cos2\pi f_0t=\tfrac12e^{j2\pi f_0t}+\tfrac12e^{-j2\pi f_0t}\Rightarrow a_{\pm1}=\tfrac12\ \text{(real; the signal is even)},\]
+\[\sin2\pi f_0t=\tfrac1{2j}e^{j2\pi f_0t}-\tfrac1{2j}e^{-j2\pi f_0t}\Rightarrow a_{\pm1}=\mp\tfrac j2\ \text{(purely imaginary; the signal is odd)}.\]
+In general $a_k=\frac1T\int x\cos k\omega_0t\,\dd t-\frac jT\int x\sin k\omega_0t\,\dd t$: even signals have only the real part, odd signals only the imaginary part.
+\ans{Cosine: $a_{\pm1}=\frac12$ (real). Sine: $a_{\pm1}=\mp\frac j2$ (imaginary). Both satisfy the Dirichlet conditions.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q8(b)}{EEE 211 \textbullet\ EEE p.26}{20}
+The trigonometric Fourier series of the periodic signal $x(t)$ with period $T$ can be written as $x(t)=a_0+\sum_{n=1}^\infty\big(a_n\cos\frac{2n\pi t}{T}+b_n\sin\frac{2n\pi t}{T}\big)$. For the triangular signal shown in the figure, calculate $a_0$, $a_n$ and $b_n$.
+\end{qcard}
+\begin{notebox}The figure is read as a triangular wave of period $T=2$ and amplitude $\pm A$: zero crossings at the integers, peak $+A$ at $t=\frac12$, valley $-A$ at $t=-\frac12$ (an odd function). The same method applies to other placements of the peaks.\end{notebox}
+\begin{solution}
+$T=2$, $\omega_0=\pi$. The waveform is odd: $x=2At$ for $|t|\le\frac12$ and $x=2A(1-t)$ for $\frac12\le t\le\frac32$. Hence $a_0=0$ (zero average) and $a_n=0$ (odd symmetry).
+\[
+b_n=\frac2T\int_{-1}^{1}x\sin n\pi t\dd t=2\Big[\int_0^{1/2}2At\sin n\pi t\dd t+\int_{1/2}^{1}2A(1-t)\sin n\pi t\dd t\Big].
+\]
+Using $\int_0^{1/2}t\sin n\pi t\dd t=\dfrac{\sin(n\pi/2)}{n^2\pi^2}-\dfrac{\cos(n\pi/2)}{2n\pi}$ and the symmetric second integral, the cosine terms cancel and
+\[
+b_n=\frac{8A}{n^2\pi^2}\sin\frac{n\pi}{2}=\begin{cases}\dfrac{8A(-1)^{(n-1)/2}}{\pi^2n^2},&n\text{ odd},\\0,&n\text{ even}.\end{cases}
+\]
+\[x(t)=\frac{8A}{\pi^2}\Big[\sin\pi t-\tfrac19\sin3\pi t+\tfrac1{25}\sin5\pi t-\cdots\Big].\]
+(Numerical check: $b_1=8A/\pi^2$.)
+\ans{$a_0=0$, $a_n=0$, $b_n=\dfrac{8A}{\pi^2n^2}\sin\dfrac{n\pi}2$ (nonzero for odd $n$ only).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q1(a)}{EEE 211 \textbullet\ EEE p.27}{10}
+What is the condition for two signals to be orthogonal? Are $e^{j2t}$ and $e^{j4t}$ orthogonal over the interval $[0,\pi]$?
+\end{qcard}
+\begin{solution}
+Two (complex) signals $\phi_1,\phi_2$ are orthogonal over $(t_1,t_2)$ if $\displaystyle\int_{t_1}^{t_2}\phi_1(t)\,\phi_2^*(t)\dd t=0$ (for real signals $\int\phi_1\phi_2=0$).
+\[
+\int_0^\pi e^{j2t}\big(e^{j4t}\big)^*\dd t=\int_0^\pi e^{-j2t}\dd t=\frac{1-e^{-j2\pi}}{2j}=0 .
+\]
+Each has energy $\int_0^\pi1\dd t=\pi$, so $\frac1{\sqrt\pi}e^{j2t},\frac1{\sqrt\pi}e^{j4t}$ is an orthonormal pair.
+\ans{Orthogonality: $\int\phi_1\phi_2^*\dd t=0$. Yes, $e^{j2t}$ and $e^{j4t}$ are orthogonal on $[0,\pi]$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q1(b)}{EEE 211 \textbullet\ EEE p.27}{10}
+Consider the signal $x(t)=2+\tfrac12\cos(t+45^\circ)+2\cos3t-\sin(4t+30^\circ)$. Find its exponential Fourier series and draw the magnitude and phase spectra.
+\end{qcard}
+\begin{solution}
+Fundamental: $\omega_0=\gcd(1,3,4)=1$. Write $-\sin(4t+30^\circ)=\cos(4t+120^\circ)$ and $A\cos(\omega t+\theta)=\frac A2e^{j\theta}e^{j\omega t}+\frac A2e^{-j\theta}e^{-j\omega t}$:
+\[
+c_0=2,\quad c_{\pm1}=\tfrac14e^{\pm j45^\circ},\quad c_{\pm3}=1,\quad c_{\pm4}=\tfrac12e^{\pm j120^\circ},\quad c_{\pm2}=0 .
+\]
+\[x(t)=2+\tfrac14e^{j45^\circ}e^{jt}+\tfrac14e^{-j45^\circ}e^{-jt}+e^{j3t}+e^{-j3t}+\tfrac12e^{j120^\circ}e^{j4t}+\tfrac12e^{-j120^\circ}e^{-j4t}.\]
+\begin{center}\small\begin{tabular}{@{}c|ccccc@{}}$k$&0&$\pm1$&$\pm3$&$\pm4$&others\\\hline$|c_k|$&2&$\frac14$&1&$\frac12$&0\\$\angle c_k$&0&$\pm45^\circ$&0&$\pm120^\circ$&--\end{tabular}\end{center}
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=7.2cm,height=3.4cm,axis lines=middle,xlabel={$k$},title={magnitude $|c_k|$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-4,-3,-1,0,1,3,4},ymin=0,ymax=2.4]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(-4,0.5)(-3,1)(-1,0.25)(0,2)(1,0.25)(3,1)(4,0.5)};\end{axis}\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}\begin{axis}[width=7.2cm,height=3.4cm,axis lines=middle,xlabel={$k$},title={phase $\angle c_k$ (degrees)},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-4,-3,-1,1,3,4},ymin=-140,ymax=140]
+\addplot+[ycomb,crimson,mark=*,mark size=1.4pt]coordinates{(-4,-120)(-3,0)(-1,-45)(1,45)(3,0)(4,120)};\end{axis}\end{tikzpicture}
+\end{center}
+\ans{$c_0=2$, $c_{\pm1}=\frac14e^{\pm j45^\circ}$, $c_{\pm3}=1$, $c_{\pm4}=\frac12e^{\pm j120^\circ}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\repeated{2}
+\begin{qcard}{2022--2023 \textbullet\ Q1(a) --- CSE 311}{CSE 311 \textbullet\ TF p.6}{17}
+Show that the coefficients of the exponential Fourier series of an even-symmetric periodic signal are real and those of an odd-symmetric periodic signal are imaginary (illustrate with $\cos2\pi f_0t$ and $\sin2\pi f_0t$). Also show that the coefficients can be computed by integrating the signal over the half cycle only.
+\end{qcard}
+\begin{qcard}{2018--2019 \textbullet\ Q2(b) --- CSE 311}{CSE 311 \textbullet\ TF p.18}{15}
+Show that the coefficients of the exponential Fourier series of an even symmetric and an odd symmetric periodic signal are real and imaginary, respectively. Also show that the coefficients can be calculated by integrating the signal over the half cycle only.
+\end{qcard}
+\begin{solution}
+Split the defining integral over a symmetric period $(-\frac T2,\frac T2)$ using $e^{-jk\omega_0t}=\cos k\omega_0t-j\sin k\omega_0t$:
+\[a_k=\frac1T\int_{-T/2}^{T/2}x(t)\cos k\omega_0t\dd t-\frac jT\int_{-T/2}^{T/2}x(t)\sin k\omega_0t\dd t .\]
+\step{Even signal} ($x(-t)=x(t)$): $x\sin k\omega_0t$ is odd, so its integral over the symmetric interval vanishes; $x\cos k\omega_0t$ is even:
+\[a_k=\frac2T\int_0^{T/2}x(t)\cos k\omega_0t\dd t\quad\text{(real, and }a_{-k}=a_k).\]
+\step{Odd signal} ($x(-t)=-x(t)$): $x\cos k\omega_0t$ is odd and vanishes; $x\sin k\omega_0t$ is even:
+\[a_k=-\frac{2j}T\int_0^{T/2}x(t)\sin k\omega_0t\dd t\quad\text{(imaginary, }a_{-k}=-a_k,\ a_0=0).\]
+In both cases only the half cycle $(0,T/2)$ is integrated. Examples: $\cos2\pi f_0t$ gives $a_{\pm1}=\frac12$ (real); $\sin2\pi f_0t$ gives $a_{\pm1}=\mp\frac j2$ (imaginary).
+\ans{Even $\Rightarrow$ $a_k=\frac2T\int_0^{T/2}x\cos k\omega_0t\dd t$ (real); odd $\Rightarrow$ $a_k=-\frac{2j}T\int_0^{T/2}x\sin k\omega_0t\dd t$ (imaginary).}
+\end{solution}

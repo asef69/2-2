@@ -1,0 +1,86 @@
+\renewcommand{\teacherTag}{QUESTION 3 \textbullet\ 35 MARKS}
+\chapter{The Bank Loan as a Discrete-time System}
+
+\begin{scenario}
+A bank lends $L$ taka, to be repaid in $N$ equal monthly instalments (EMI) of $P$ taka each, at a monthly interest rate $r$. At the end of every month the bank adds interest at rate $r$ to the amount still owed, and the borrower then pays the instalment $P$. If $y[n]$ is the amount owed just after the $n$-th payment, then $y[0]=L$ and
+\[y[n]=(1+r)\,y[n-1]-P,\qquad n\ge1 .\]
+Treating the money as a signal: the input is $x[n]=L\delta[n]-Pu[n-1]$ (loan received once at $n=0$, payment every month $n\ge1$), and the amount owed obeys the causal first-order system
+\[y[n]=a\,y[n-1]+x[n],\qquad a=1+r .\]
+\end{scenario}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,blk/.style={draw=navy,thick,fill=scenbg,minimum size=8mm,font=\small}]
+\node[draw=navy,thick,circle,inner sep=1pt,fill=white](s){$+$};
+\draw[->,thick](s.west)++(-22mm,0)node[left,font=\small,align=right]{$x[n]$\\[-2pt]{\scriptsize$L\delta[n]-Pu[n-1]$}}--(s.west);
+\draw[->,thick](s.east)--++(32mm,0)coordinate(o)node[right,font=\small]{$y[n]$ (amount owed)};
+\node[blk](d)at($(s)+(16mm,-14mm)$){$z^{-1}$};
+\node[blk](g)at($(s)+(0,-14mm)$){$a$};
+\draw[->,thick]($(s)+(26mm,0)$)|-(d.east);\draw[->,thick](d)--(g);\draw[->,thick](g)--(s);
+\node[font=\scriptsize,slate]at($(d)+(0,-7mm)$){last month};
+\node[font=\scriptsize,slate]at($(g)+(-9mm,-0mm)$){$1+r$};
+\end{tikzpicture}
+\end{center}
+
+%------------------------------------------------------------------ 3(a)
+\begin{qcard}{Q3(a)}{$z$-transform of the amount owed}{12}
+The $z$-transform of the amount owed follows from the $z$-transform of the input $x[n]$ and that of the first-order difference equation relating $y[n]$ to $x[n]$. \textbf{Demonstrate} that it is
+\[Y(z)=\frac{L}{1-az^{-1}}-\frac{Pz^{-1}}{(1-z^{-1})(1-az^{-1})},\qquad\abs z>a .\]
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Transform of the input.} Using $\delta[n]\pair1$ (all $z$) and the delay property on $u[n]\pair\frac1{1-z^{-1}}$ ($\abs z>1$):
+\[X(z)=L-P\,\frac{z^{-1}}{1-z^{-1}},\qquad\abs z>1 .\]
+\step{Step 2 --- Transform of the system.} The system is causal and starts from rest before $n=0$ (nothing owed before the loan), so the delay property gives $\Z\{y[n-1]\}=z^{-1}Y(z)$:
+\[Y(z)=az^{-1}Y(z)+X(z)\ \Longrightarrow\ H(z)=\frac{Y(z)}{X(z)}=\frac{1}{1-az^{-1}},\qquad\abs z>a .\]
+(Check: at $n=0$, $y[0]=a\,y[-1]+x[0]=0+L=L$, as required.)
+
+\step{Step 3 --- Multiply.}
+\[Y(z)=H(z)X(z)=\frac{L}{1-az^{-1}}-\frac{Pz^{-1}}{(1-z^{-1})(1-az^{-1})}.\]
+\step{Step 4 --- ROC.} The poles are $z=a$ and $z=1$; $y$ is right-sided, so the ROC is outside the outermost pole. With $a=1+r>1$:
+\[\abs z>\max(1,a)=a .\]
+\ans{$Y(z)=\dfrac{L}{1-az^{-1}}-\dfrac{Pz^{-1}}{(1-z^{-1})(1-az^{-1})}$, ROC $\abs z>a$ (since $a>1$).}
+\end{solution}
+
+%------------------------------------------------------------------ 3(b)
+\begin{qcard}{Q3(b)}{Inverse $z$-transform: the closed form}{13}
+\textbf{Demonstrate}, by inverting this $Y(z)$ with its ROC $\abs z>a$, that the amount owed is
+\[y[n]=La^n-\frac Pr\big(a^n-1\big),\qquad n\ge0 .\]
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- First term.} $\dfrac{L}{1-az^{-1}}$, ROC $\abs z>a$ (right-sided) $\ \Longrightarrow\ La^nu[n]$.
+
+\step{Step 2 --- Partial fractions for the second term.} Write $w=z^{-1}$:
+\[\frac{w}{(1-w)(1-aw)}=\frac{A}{1-w}+\frac{B}{1-aw}.\]
+Cover-up: at $w=1$, $A=\dfrac{1}{1-a}$; at $w=\frac1a$, $B=\dfrac{1/a}{1-1/a}=\dfrac1{a-1}$. Since $a-1=r$,
+\[\frac{z^{-1}}{(1-z^{-1})(1-az^{-1})}=\frac1r\Big[\frac{1}{1-az^{-1}}-\frac1{1-z^{-1}}\Big].\]
+(Check at $w=0$: left side $0$, right side $\frac1r(1-1)=0$ \checkmark.)
+
+\step{Step 3 --- Invert with the ROC.} Both terms are right-sided ($\abs z>a>1$): $\frac1{1-az^{-1}}\to a^nu[n]$ and $\frac1{1-z^{-1}}\to u[n]$. Hence
+\[\Z^{-1}\Big\{\frac{z^{-1}}{(1-z^{-1})(1-az^{-1})}\Big\}=\frac{a^n-1}{r}\,u[n].\]
+\step{Step 4 --- Combine.}
+\[\boxed{y[n]=La^n-\frac Pr\big(a^n-1\big),\qquad n\ge0}\]
+\step{Check.} $n=0$: $y[0]=L-0=L$ \checkmark. $\;n=1$: $La-\frac Pr(a-1)=L(1+r)-P$ \checkmark\ (one month of interest, one payment). Interpretation: the loan grows like $La^n$ while the payments accumulate like a savings account, $P\frac{a^n-1}{r}=P(1+a+\dots+a^{n-1})$.
+\ans{$y[n]=La^n-\dfrac Pr(a^n-1)$, $n\ge0$ (from $Y=\frac{L}{1-az^{-1}}-\frac Pr\big[\frac1{1-az^{-1}}-\frac1{1-z^{-1}}\big]$).}
+\end{solution}
+
+%------------------------------------------------------------------ 3(c)
+\begin{qcard}{Q3(c)}{The EMI formula}{10}
+The loan is fully repaid when $y[N]=0$. \textbf{Examine} this condition on the closed form of part (b) to obtain the EMI $P$ in terms of $L$, $r$ and $N$, and its value for $L=5{,}00{,}000$ taka, $r=1\%$ per month and $N=24$ months.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Set $y[N]=0$.}
+\[La^N-\frac Pr\big(a^N-1\big)=0\quad\Longrightarrow\quad\boxed{P=\frac{L\,r\,(1+r)^N}{(1+r)^N-1}}\]
+This is the standard EMI formula of banking.
+
+\step{Step 2 --- Numbers.} $L=500\,000$, $r=0.01$, $N=24$: $(1.01)^{24}=1.269735$.
+\[P=\frac{500\,000\times0.01\times1.269735}{1.269735-1}=\frac{6348.67}{0.269735}=23\,536.74\text{ taka}.\]
+\step{Step 3 --- Sanity checks.} Total repaid $=24P=564\,882$ taka, i.e.\ $64\,882$ taka of interest. Without interest the instalment would be $500\,000/24=20\,833$; the EMI must be larger, and it is. Iterating $y[n]=1.01\,y[n-1]-P$ from $y[0]=500\,000$ with this $P$ gives $y[24]=0$ (to rounding).
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=11cm,height=4.8cm,axis lines=left,xlabel={month $n$},ylabel={owed (thousand taka)},xmin=-0.8,xmax=25,ymin=0,ymax=540,xtick={0,4,...,24},ticklabel style={font=\scriptsize},label style={font=\scriptsize},grid=major,grid style={gray!20}]
+\addplot+[ycomb,navy,thick,mark=*,mark size=1.4pt,samples at={0,...,24}]{500*1.01^x-2353.6736*(1.01^x-1)};
+\addplot[crimson,dashed,domain=0:24]{500-500/24*x};
+\node[font=\scriptsize,crimson,anchor=south west]at(axis cs:13,290){straight line (no interest)};
+\end{axis}\end{tikzpicture}
+\end{center}
+{\small The balance falls slowly at first (most of each early instalment pays interest) and faster near the end --- the curve lies above the straight line.}
+\ans{$P=\dfrac{Lr(1+r)^N}{(1+r)^N-1}$; for $L=5{,}00{,}000$, $r=1\%$, $N=24$: $\;P\approx23{,}537$ taka per month (total repaid $\approx5{,}64{,}882$ taka).}
+\end{solution}

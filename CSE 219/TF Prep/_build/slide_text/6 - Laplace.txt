@@ -1,0 +1,815 @@
+
+===== page 1 =====
+The Laplace Transform
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Outline
+• Introduction: Generalizing the Fourier Transform
+• The Laplace Transform Definition
+• The Region of Convergence (ROC):
+• Left-Sided vs. Right-Sided Signals
+• Poles and Zeros
+• Properties of the ROC
+• The Inverse Laplace Transform:
+• Derivation & Bromwich Contour Integration
+• Finding Inverse via Partial-Fraction Expansion
+1
+
+===== page 3 =====
+Introduction and Definition
+
+===== page 4 =====
+Introduction to the Laplace Transform
+• Why general complex exponentials? We learnt that a broad class of functions can be represented as a
+sum of complex exponentials ejωt. Also, complex exponentials are eigenfunctions of LTI systems, i.e.
+y(t) = H(jω)ejωt for x(t) = ejωt.
+• Using the properties above, we expressed both input and output of an LTI system as a sum of complex
+exponentials.
+• However, the eigenfunction property holds for any arbitrary complex value s = σ + jω.
+• This broader property leads to a generalization of the continuous-time Fourier transform known as the
+Laplace Transform.
+• Key Advantages of the Laplace Transform:
+• It can analyze broad classes of signals and unstable systems where the Fourier transform does not exist.
+• It provides deeper insights into the stability or instability of systems.
+• It maintains powerful algebraic properties, forming an essential set of tools for system analysis, especially
+feedback systems.
+2
+
+===== page 5 =====
+System Response to Complex Exponentials
+• Recall that the response of a Linear Time-Invariant (LTI) system with impulse response h(t) to a complex
+exponential input x(t) = est is:
+y(t) = x(t) ∗h(t) =
+Z ∞
+−∞
+h(τ)x(t −τ)dτ =
+Z ∞
+−∞
+h(τ)es(t−τ)dτ
+= est
+Z ∞
+−∞
+h(τ)e−sτdτ = H(s)est
+• Here, the eigenvalue H(s) corresponding to the eigenfunction est is given by:
+H(s) =
+Z ∞
+−∞
+h(t)e−stdt
+• For pure imaginary values s = jω, this integral is simply the Fourier transform of h(t).
+• For general complex values of s, this is referred to as the Laplace transform of the impulse response h(t).
+3
+
+===== page 6 =====
+Definition of the Laplace Transform
+• Extending this beyond impulse responses, we define the Laplace transform of a general signal x(t) as
+follows:
+Laplace Transform
+X(s) ≜
+Z +∞
+−∞
+x(t)e−stdt
+• The complex variable s can be written in rectangular form as s = σ + jω, with σ and ω representing the
+real and imaginary parts, respectively.
+• We sometimes denote the Laplace transform in operator form as X(s) = L{x(t)} and the transform
+relationship as:
+x(t)
+L
+L
+←→X(s)
+4
+
+===== page 7 =====
+Connection to the Fourier Transform
+• When the real part of s is zero (s = jω), the Laplace transform becomes:
+X(jω) =
+Z +∞
+−∞
+x(t)e−jωtdt = F{x(t)}
+• The Laplace transform bears a straightforward relationship to the Fourier transform for general
+s = σ + jω:
+X(σ + jω) =
+Z +∞
+−∞
+x(t)e−(σ+jω)tdt
+=
+Z +∞
+−∞
+[x(t)e−σt]e−jωtdt
+Key Insight
+The Laplace transform of x(t) can be interpreted as the Fourier transform of x(t)e−σt.
+The real exponential weighting e−σt can force the signal into convergence, even if the Fourier transform
+of x(t) alone does not converge!
+5
+
+===== page 8 =====
+Examples of the Laplace Transform
+
+===== page 9 =====
+Example 9.1: A Right-Sided Exponential Signal
+• Signal: x(t) = e−atu(t).
+• Laplace transform:
+X(s) =
+Z ∞
+0
+e−(s+a)tdt
+=
+
+−
+1
+s + a e−(s+a)t
+∞
+0
+• We evaluate the upper limit:
+lim
+t→∞e−(s+a)t = lim
+t→∞e−(σ+a)te−jωt = 0 if σ + a > 0
+• Hence the integral converges if Re{s} > −a.
+• Evaluating the lower limit at t = 0 yields:
+X(s) =
+1
+s + a ,
+Re{s} > −a
+Time Domain x(t)
+1
+t
+x(t)
+Laplace Domain (s-plane)
+−a
+Re{s}
+Im{s}
+6
+
+===== page 10 =====
+Example 9.2: A Left-Sided Exponential Signal
+• Signal: x(t) = −e−atu(−t).
+• Laplace transform:
+X(s) =
+Z 0
+−∞
+−e−(s+a)tdt
+=
+
+1
+s + a e−(s+a)t
+0
+−∞
+• For convergence at t →−∞, exponentials must decay:
+σ + a < 0 =⇒Re{s} < −a
+• Evaluating yields the exact same algebraic expression:
+X(s) =
+1
+s + a ,
+Re{s} < −a
+Time Domain x(t)
+−1
+t
+x(t)
+Laplace Domain (s-plane)
+−a
+Re{s}
+Im{s}
+7
+
+===== page 11 =====
+The s-plane and Region of Convergence (ROC)
+• The Laplace transform depends on the complex
+variable s = σ + jω.
+• We visualize this using a 2D plot called the s-plane:
+• Horizontal axis (σ): Real part of s.
+• Vertical axis (jω): Imaginary part of s.
+• Region of Convergence (ROC): The specific set of values
+in the s-plane for which the integral X(s) converges to
+a finite value.
+• Unlike Fourier Transform, the ROC is an important part of
+the Laplace Transform.
+• As we saw in the previous two example, even though the
+algebraic expression for X(s) was the same, the ROC was
+different.
+• Relation to Fourier: The jω-axis (where σ = 0)
+corresponds to the Fourier transform. If the ROC
+includes this vertical axis, the Fourier transform of the
+signal converges!
+jω-axis
+(Fourier Transform)
+s = σ + jω
+σ
+jω
+ROC
+σ (Real)
+jω (Imag)
+8
+
+===== page 12 =====
+Rational Laplace Transforms
+• Many important LTI systems and signals have Laplace transforms that are rational functions of s, meaning
+they are ratios of two polynomials in s.
+• For a signal x(t) with a rational Laplace transform, we can express X(s) as:
+X(s) = N(s)
+D(s)
+• Zeros are the values of s for which N(s) = 0 (so X(s) = 0). We denote roots of the numerator with an o
+(◦) on the s-plane.
+• Poles are the values of s for which D(s) = 0 (so X(s) →∞). We denote roots of the denominator with
+an x (×).
+9
+
+===== page 13 =====
+Example 9.3: Sum of Two Exponentials
+• Signal: x(t) = 3e−2tu(t) −2e−tu(t)
+• Using linearity and Example 9.1:
+3e−2tu(t)
+L
+←→
+3
+s + 2 ,
+Re{s} > −2
+−2e−tu(t)
+L
+←→
+−2
+s + 1 ,
+Re{s} > −1
+• Combined transform:
+X(s) =
+3
+s + 2 −
+2
+s + 1 =
+s −1
+(s + 1)(s + 2)
+• ROC: Intersection yields Re{s} > −1.
+• Zeros: s = 1,
+Poles: s = −1, −2
+Pole-Zero Plot (s-plane)
+−2
+−1
+1
+Re{s}
+Im{s}
+Note: ROC bounded by the right pole (s = −1).
+10
+
+===== page 14 =====
+Example 9.4: Decay with Oscillation
+• Signal: x(t) = e−2tu(t) + e−t(cos 3t)u(t).
+• Expanding cos via Euler’s relation:
+x(t) = e−2tu(t) + 1
+2 e−(1−3j)tu(t) + 1
+2 e−(1+3j)tu(t)
+• Laplace transforms of individual terms:
+X1(s) =
+1
+s + 2 ,
+Re{s} > −2
+X2(s) =
+1/2
+s + (1 −3j) ,
+Re{s} > −1
+X3(s) =
+1/2
+s + (1 + 3j) ,
+Re{s} > −1
+• Combining algebraically gives:
+X(s) =
+2s2 + 5s + 12
+(s + 2)(s2 + 2s + 10) ,
+Re{s} > −1
+• Poles: s = −2, s = −1 ± 3j. Zeros: s ≈−1.25 ± 2.11j
+Pole-Zero Plot (s-plane)
+−2 −1
+−3j
+3j
+Re{s}
+Im{s}
+11
+
+===== page 15 =====
+Example 9.5: A Signal with an Impulse
+• Signal: x(t) = δ(t) −4
+3 e−tu(t) + 1
+3 e2tu(t)
+• The Laplace transform of the unit impulse converges
+for the entire s-plane:
+L{δ(t)} =
+Z ∞
+−∞
+δ(t)e−stdt = 1
+• Thus, the total transform is:
+X(s) = 1 −4/3
+s + 1 + 1/3
+s −2
+• Expanding and keeping common denominator:
+X(s) =
+3s2 −6s + 3
+3(s + 1)(s −2) =
+(s −1)2
+(s + 1)(s −2)
+• ROC: Intersection of conditions (Re{s} > −∞,
+Re{s} > −1, Re{s} > 2) yields Re{s} > 2.
+Pole-Zero Plot (s-plane)
+−1
+1
+2
+Re{s}
+Im{s}
+12
+
+===== page 16 =====
+Properties of the Region of
+Convergence (ROC)
+
+===== page 17 =====
+ROC Property 1 and 2
+Property 1: The ROC of X(s) consists of strips parallel to the jω-axis in the s-plane.
+Justification: The Laplace transform converges if x(t)e−st is absolutely integrable. If σ + jω is in
+the ROC, then Z ∞
+−∞
+x(t)e−(σ+jω)t dt =
+Z ∞
+−∞
+|x(t)| e−σtdt < ∞
+since
+e−jωt = 1
+Thus, convergence depends entirely on σ = Re{s}. If a point σ + jω converges, all points on the
+vertical line σ must also converge.
+Property 2: For rational Laplace transforms, the ROC does not contain any poles.
+Justification: By definition, X(s) evaluates to infinity at a pole. Since convergence requires X(s) to
+be finite, the integral naturally diverges at the exact location of any pole.
+13
+
+===== page 18 =====
+ROC Property 3: Finite-Duration Signals
+Property 3: If x(t) is of finite duration and is absolutely integrable, then the ROC is the entire
+s-plane.
+Justification: Let x(t)̸ = 0 only in T1 < t < T2. The absolute integrability integral becomes:
+Z T2
+T1
+|x(t)|e−σtdt
+Since the interval is finite, the maximum value of e−σt over [T1, T2] is bounded for any finite σ:
+Z T2
+T1
+|x(t)|e−σtdt ≤e−σTmax
+Z T2
+T1
+|x(t)|dt < ∞
+where Tmax =
+
+
+
+T1
+if σ > 0
+T2
+if σ < 0
+This is because if σ > 0, e−σt decays, so e−σT1 is the largest value of e−σt over [T1, T2]. If σ < 0,
+e−σt grows, so e−σT2 is the largest value of e−σt over [T1, T2].
+Thus, convergence spans from −∞< σ < ∞.
+14
+
+===== page 19 =====
+Example 9.6: An Apparent Pole Cancellation
+• Consider a finite-duration signal:
+x(t) =
+(
+e−at,
+0 < t < T
+0,
+otherwise
+• Evaluating the transform:
+X(s) =
+Z T
+0
+e−ate−stdt
+=
+1
+s + a
+h
+1 −e−(s+a)T i
+• By Property 3, the ROC is the entire s-plane.
+• But wait: There appears to be a pole at s = −a. Isn’t
+that a contradiction?
+• No! At s = −a, both numerator and denominator
+evaluate to 0. Using L’Hôpital’s rule:
+lim
+s→−a X(s) =
+lim
+s→−a
+" d
+ds
+ 1 −e−(s+a)T 
+d
+ds (s + a)
+#
+=
+lim
+s→−a Te−aT e−sT = T
+Time Domain x(t)
+T
+1
+t
+x(t)
+A finite-duration signal cannot have any true
+poles because the integrals remain strictly
+bounded over the finite interval.
+15
+
+===== page 20 =====
+ROC Property 4: Right-Sided Signals
+Property 4: If x(t) is right-sided, and if the line Re{s} = σ0 is in the ROC, then all values of
+s for which Re{s} > σ0 will also be in the ROC.
+Justification: A right-sided signal is zero prior to some finite time T1.
+If x(t)e−σ0t converges, then x(t)e−σt will decrease even faster as t →+∞whenever σ1 > σ0, as
+shown in the figure. More formally,
+Z ∞
+T1
+|x(t)|e−σ1tdt =
+Z ∞
+T1
+|x(t)|e−σ0te−(σ1−σ0)tdt ≤e−(σ1−σ0)T1
+Z ∞
+T1
+|x(t)|e−σ0tdt < ∞
+As e−(σ1−σ0)T1 and
+R ∞
+T1 |x(t)|e−σ0tdt are finite.
+T1
+x(t)e−σ0t
+x(t)e−σ1t
+t
+σ0
+Re{s}
+Im{s}
+16
+
+===== page 21 =====
+ROC Property 5: Left-Sided Signals
+Property 5: If x(t) is left-sided, and if the line Re{s} = σ0 is in the ROC, then all values of s
+for which Re{s} < σ0 will also be in the ROC.
+Justification: Analogous to Property 4, the signal extends to t →−∞. For convergence, we need
+exponential compounding to die out in the negative time direction, which occurs when σ1 < σ0.
+T2
+x(t)e−σ0t
+x(t)e−σ1t
+t
+σ0
+Re{s}
+Im{s}
+17
+
+===== page 22 =====
+ROC Property 6: Two-Sided Signals
+Property 6: If x(t) is two-sided, and if the line Re{s} = σ0 is in the ROC, then the ROC will
+consist of a strip in the s-plane that includes the line Re{s} = σ0.
+T0
+xR(t)
+xL(t)
+t
+• x(t) can be divided at any arbitrary T0 into xL(t)
+(red) and xR(t) (blue) such that
+x(t) = xL(t) + xR(t).
+• As L {x(t)} = L {xL(t)} + L {xR(t)} converges,
+L {xL(t)} and L {xR(t)} must converge with the
+ROC Re{s} < σL (red) and Re{s} > σR (blue)
+respectively according to the property 4 and 5 for
+some σL and σR.
+σR
+σ0
+σL
+Re{s}
+Im{s}
+• The ROC of x(t) is the intersection of the ROCs of
+xL(t) and xR(t), which is the region
+σR < Re{s} ≤σL.
+• Since σ0 is in the ROC, we must have
+σR < σ0 ≤σL.
+• Thus, the ROC is a strip in the s-plane that
+includes the line Re{s} = σ0.
+18
+
+===== page 23 =====
+Example 9.7: A Two-Sided Exponential Signal
+• Signal: x(t) = e−b|t|, for b > 0.
+• Since this is a two-sided signal, we can express it as the
+sum of a right-sided and a left-sided signal:
+x(t) = e−btu(t) + ebtu(−t)
+• From previous examples, the individual transforms are:
+e−btu(t)
+L
+←→
+1
+s + b ,
+Re{s} > −b
+ebtu(−t)
+L
+←→
+−1
+s −b ,
+Re{s} < b
+• For the total signal to have a Laplace transform, the two
+ROCs must overlap. Thus, we require −b < Re{s} < b.
+• If b ≤0, there is no common ROC, and the Laplace
+transform does not exist.
+• For b > 0, combining the transforms gives:
+X(s) =
+1
+s + b −
+1
+s −b =
+−2b
+s2 −b2
+• ROC: −b < Re{s} < b.
+Poles: s = ±b.
+1
+t
+x(t)
+−b
+b
+Re{s}
+Im{s}
+19
+
+===== page 24 =====
+ROC Properties 7 and 8: Rational Transforms
+Property 7: If the Laplace transform X(s) is rational, then its ROC is bounded by poles or
+extends to infinity. In addition, no poles are contained in the ROC.
+Justification: Rational transforms are combinations of exponentials (we will see this soon). And we
+saw already that the ROC of an exponential is bounded by a pole (e.g. e−atu(t) has a pole at −a
+and the ROC extends from −a to ∞).
+As the ROC of a linear combination of signals is the intersection of the ROCs of the individual
+signals, the ROC of a rational transform is bounded by poles or extends to infinity.
+Property 8: If X(s) is rational, then:
+• If x(t) is right-sided, the ROC is the region to the right of the rightmost pole.
+• If x(t) is left-sided, the ROC is the region to the left of the leftmost pole.
+Justification: Combination of property 4 and 5 with property 7.
+20
+
+===== page 25 =====
+Example 9.8: One Equation, Three Signals
+• Consider the rational transform:
+X(s) =
+1
+(s + 1)(s + 2)
+• Without specifying the ROC, this maps to three possible time-domain signals depending on the bounding
+poles (s = −1, −2):
+Right-Sided Signal
+Re{s} > −1
+−2
+−1
+Left-Sided Signal
+Re{s} < −2
+−2 −1
+Two-Sided Signal
+−2 < Re{s} < −1
+−2
+−1
+21
+
+===== page 26 =====
+The Inverse Laplace Transform
+
+===== page 27 =====
+The Inverse Laplace Transform: Derivation
+• Recall that we interpreted the Laplace transform of x(t) as the Fourier transform of the exponentially
+weighted signal x(t)e−σt:
+X(σ + jω) = F{x(t)e−σt} =
+Z ∞
+−∞
+x(t)e−σte−jωtdt
+• We can apply the Inverse Continuous-Time Fourier Transform to recover the weighted signal x(t)e−σt:
+x(t)e−σt = 1
+2π
+Z ∞
+−∞
+X(σ + jω)ejωtdω
+• Multiplying both sides by eσt yields:
+x(t) = 1
+2π
+Z ∞
+−∞
+X(σ + jω)e(σ+jω)tdω
+22
+
+===== page 28 =====
+The Inverse Laplace Formula
+• Let’s perform a change of variables in the integration. We substitute s = σ + jω.
+• Since σ is treated as constant during this integration, the differential becomes ds = jdω, or dω = ds
+j .
+• The limits of integration for ω are −∞to +∞, which correspond to s running from σ −j∞to σ + j∞.
+• σ must be chosen within the ROC of X(s), otherwise X(s) is not defined.
+Inverse Laplace Transform
+x(t) =
+1
+2πj
+Z σ+j∞
+σ−j∞
+X(s)estds
+where σ can be chosen anywhere within the ROC of X(s).
+23
+
+===== page 29 =====
+Evaluating the Inverse: Bromwich Integral
+• The equation above is known as the Bromwich Integral
+or the Mellin inversion formula.
+• This involves a contour integration in the complex
+s-plane along a straight vertical line Re{s} = σ.
+• In practice, this contour is closed along an infinite
+semicircle to the left or right (depending on t > 0 or
+t < 0), allowing the use of the Cauchy Residue Theorem:
+I
+C
+f(s)ds = 2πj
+X
+Residues enclosed by C
+• However, directly evaluating Cauchy residues via
+contour integrals is mathematically a bit tough.
+• If you are still interested you can check this video:
+https://youtu.be/r68zKdyIwVo
+σ
+Bromwich
+contour
+CR
+Re{s}
+Im{s}
+Contour closed to the left for t > 0, enclosing poles.
+24
+
+===== page 30 =====
+Numerical Approximation of Inverse Laplace
+• Sometimes we may not have an analytical inverse, or we only need a numerical approximation of x(t).
+• Recall that the inverse Laplace transform can be written as an integration over ω:
+x(t) = 1
+2π
+Z ∞
+−∞
+X(σ + jω)e(σ+jω)tdω
+• We can approximate this continuous integral with a discrete Riemann sum by taking small frequency
+steps ∆ω:
+x(t) ≈1
+2π
+∞
+X
+k=−∞
+X(σ + jk∆ω)e(σ+jk∆ω)t∆ω
+Numerical Approx. Inverse Laplace
+x(t) ≈∆ω
+2π
+∞
+X
+k=−∞
+X(σ + jk∆ω)e(σ+jk∆ω)t
+σ must still be chosen within the ROC.
+25
+
+===== page 31 =====
+Practical Approach: Partial-Fraction Expansion
+In many real-world problems we are dealing with rational Laplace transforms.
+• Instead of using the formal contour integration, we heavily rely on Partial-Fraction Expansion.
+• For rational Laplace transforms X(s) = N(s)
+D(s) with simple poles at s = −ai, we expand carefully:
+X(s) =
+M
+X
+i=1
+Ai
+s + ai
+• Because the Laplace transform is linear, we simply invert each first-order term
+Ai
+s+ai individually.
+• Importantly, to invert a term, we must know its ROC. There are two distinct time-domain signals for every
+term
+Ai
+s+ai depending on the assumed ROC.
+26
+
+===== page 32 =====
+The Importance of ROC for Inversion
+If the fractional term is
+A
+s + a:
+ROC is to the right (Re{s} > −a)
+−a
+Re{s}
+A
+s+a
+L
+←→Ae−atu(t)
+A
+t
+(Right-sided signal)
+ROC is to the left (Re{s} < −a)
+−a
+Re{s}
+A
+s+a
+L
+←→−Ae−atu(−t)
+−A
+t
+(Left-sided signal)
+27
+
+===== page 33 =====
+Examples 9.9, 9.10, 9.11: Partial Fraction Inversion
+• Let our transform be the system from Example 9.8:
+X(s) =
+1
+(s + 1)(s + 2) =
+A
+s + 1 +
+B
+s + 2
+• Using the cover-up method or equivalent algebra:
+A = (s + 1)X(s)|s=−1 =
+1
+s + 2
+
+s=−1
+= 1
+B = (s + 2)X(s)|s=−2 =
+1
+s + 1
+
+s=−2
+= −1
+• Thus, the expanded form is ALWAYS:
+X(s) =
+1
+s + 1 −
+1
+s + 2
+28
+
+===== page 34 =====
+Example 9.9: Inverting a Right-Sided ROC
+• Suppose the given ROC is Re{s} > −1.
+• By evaluating the overall ROC against each term’s pole, we can find the individual ROCs:
+Pole at s = −1 :
+ROC is to the right. =⇒
+1
+s + 1
+L
+←→+e−tu(t)
+Pole at s = −2 :
+ROC is to the right. =⇒
+1
+s + 2
+L
+←→+e−2tu(t)
+Resulting inverse transform:
+x(t) =
+ e−t −e−2t
+u(t)
+−2
+−1
+Re{s}
+29
+
+===== page 35 =====
+Example 9.10: Inverting a Left-Sided ROC
+• Now suppose the given ROC is Re{s} < −2.
+• By evaluating the overall ROC against each term’s pole, we can find the individual ROCs:
+Pole at s = −1 :
+ROC is to the left. =⇒
+1
+s + 1
+L
+←→−e−tu(−t)
+Pole at s = −2 :
+ROC is to the left. =⇒
+1
+s + 2
+L
+←→−e−2tu(−t)
+Resulting inverse transform:
+x(t) =
+ −e−t + e−2t
+u(−t)
+−2
+−1
+Re{s}
+30
+
+===== page 36 =====
+Example 9.11: Inverting a Two-Sided ROC
+• Finally, suppose the ROC is −2 < Re{s} < −1.
+• By evaluating the overall ROC against each term’s pole, we can find the individual ROCs:
+Pole at s = −1 :
+ROC is to the left. =⇒
+1
+s + 1
+L
+←→−e−tu(−t)
+Pole at s = −2 :
+ROC is to the right. =⇒
+1
+s + 2
+L
+←→+e−2tu(t)
+Resulting inverse transform:
+x(t) = −e−tu(−t) −e−2tu(t)
+−2
+−1
+Re{s}
+31

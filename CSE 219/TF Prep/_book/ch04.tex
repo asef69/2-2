@@ -1,0 +1,87 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 3--4}
+\chapter{Convolution and Interconnected Systems}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q1(b)}{CSE 219 \textbullet\ 22 batch p.1}{15}
+Consider the combination of discrete-time LTI systems in Figure 1: the input $x[n]$ goes through $h_1$ and $h_2$ in parallel, their outputs are added and passed through $h_3$ to give $y[n]$. The impulse responses are $h_1[n]=\delta[n]-\delta[n-2]$, $h_2[n]=u[n-1]$, $h_3[n]=\delta[n]-\delta[n-1]$. Suppose the input is $x[n]=u[n]$.
+(i) Express the equivalent impulse response $h_{eq}[n]$ of the overall system. (ii) Infer the output $y[n]$ for the given input.
+\end{qcard}
+\begin{solution}
+Parallel branches add; the cascade convolves: $h_{eq}=(h_1+h_2)*h_3$.
+\begin{align*}
+h_2*h_3&=u[n-1]-u[n-2]=\delta[n-1],\\
+h_1*h_3&=\delta[n]-\delta[n-1]-\delta[n-2]+\delta[n-3].
+\end{align*}
+\[h_{eq}[n]=h_1*h_3+h_2*h_3=\delta[n]-\delta[n-2]+\delta[n-3].\]
+For $x=u[n]$: $y=u*h_{eq}=u[n]-u[n-2]+u[n-3]$, i.e.
+\begin{center}\small\begin{tabular}{c|ccccccc}$n$&$<0$&0&1&2&3&4&$\ge5$\\\hline$y[n]$&0&1&1&0&1&1&1\end{tabular}\end{center}
+\ans{$h_{eq}[n]=\delta[n]-\delta[n-2]+\delta[n-3]$; $y[n]=u[n]-u[n-2]+u[n-3]=\{1,1,0,1,1,1,\dots\}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q1(c)}{EEE 211 \textbullet\ EEE p.1}{17}
+Consider the system in the figure: $x(t)$ feeds three parallel paths --- $h_1(t)$; $h_2(t)$ followed by $h_3(t)$; and $h_4(t)$ --- whose outputs are added and passed through $h_5(t)$ to give $y(t)$. Given $h_1=e^{-2t}u(t)$, $h_2=e^{-2t}u(t)$, $h_3=e^{-t}u(t)$, $h_4=\delta(t)$, $h_5=e^{-3t}u(t)$. Using time-domain techniques, (i) determine whether the system is BIBO stable; (ii) determine the output $y(t)$ for the input $x(t)=e^{-t}u(t)$.
+\end{qcard}
+\begin{solution}
+Useful pair: $e^{-at}u*e^{-bt}u=\dfrac{e^{-bt}-e^{-at}}{a-b}u(t)$ for $a\ne b$.
+
+\step{Middle path:} $h_2*h_3=e^{-2t}u*e^{-t}u=(e^{-t}-e^{-2t})u(t)$.
+\step{Sum of the three paths:} $g=h_1+h_2*h_3+h_4=e^{-2t}u+(e^{-t}-e^{-2t})u+\delta(t)=\delta(t)+e^{-t}u(t)$.
+\step{Overall:} $h_{eq}=g*h_5=e^{-3t}u+e^{-t}u*e^{-3t}u=e^{-3t}u+\tfrac12(e^{-t}-e^{-3t})u$, i.e.
+\[h_{eq}(t)=\tfrac12\big(e^{-t}+e^{-3t}\big)u(t).\]
+\step{(i)} $h_{eq}$ is causal and $\int_0^\infty\abs{h_{eq}}\dd t=\tfrac12(1+\tfrac13)=\tfrac23<\infty$: BIBO stable.
+
+\step{(ii)} $y=e^{-t}u*h_{eq}=\tfrac12\,e^{-t}u*e^{-t}u+\tfrac12\,e^{-t}u*e^{-3t}u=\tfrac12te^{-t}u+\tfrac14(e^{-t}-e^{-3t})u$.
+\ans{(i) Stable ($\int|h_{eq}|=\frac23$). \quad (ii) $y(t)=\big[\tfrac12te^{-t}+\tfrac14e^{-t}-\tfrac14e^{-3t}\big]u(t)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q2(a)}{EEE 211 \textbullet\ EEE p.2}{18}
+Graphically determine the convolution of the pair of signals in the figure: $x(t)=1$ for $1<t<2$ (and 0 elsewhere), and $h(t)$ a triangle of height 1 on $(-1,1)$ with peak at $t=0$.
+\end{qcard}
+\begin{solution}
+Since $x$ is a rectangle on $(1,2)$, $y(t)=\int h(\tau)\,x(t-\tau)\dd\tau=\int_{t-2}^{t-1}h(s)\dd s=H(t-1)-H(t-2)$, where $H(s)=\int_{-\infty}^{s}h$ is the running integral of the triangle:
+\[H(s)=\begin{cases}0,&s<-1,\\\frac{(s+1)^2}{2},&-1\le s\le0,\\1-\frac{(1-s)^2}{2},&0\le s\le1,\\1,&s>1.\end{cases}\]
+Slide the flipped rectangle (width 1) along $\tau$; the interval table is
+\begin{center}\small\begin{tabular}{@{}lll@{}}\toprule interval & overlap & $y(t)$\\\midrule
+$t<0$ & none & $0$\\
+$0\le t\le1$ & right part of $h$ enters & $\dfrac{t^2}{2}$\\
+$1\le t\le2$ & window $(t-2,t-1)$ covers the peak & $-t^2+3t-\dfrac32$\\
+$2\le t\le3$ & left part of $h$ leaves & $\dfrac{(3-t)^2}{2}$\\
+$t>3$ & none & $0$\\\bottomrule\end{tabular}\end{center}
+Checks: continuity at $t=1$ ($\frac12$), $t=2$ ($\frac12$), peak $y(1.5)=\frac34$, and area $\int y=(1)(1)=1$.
+\begin{center}
+\begin{tikzpicture}\begin{axis}[sig,width=8cm,height=3.6cm,title={$y(t)=x*h$},xmin=-0.5,xmax=3.5,ymin=-0.1,ymax=1,xtick={1,2,3}]
+\addplot[thick,navy,domain=0:1]{x^2/2};\addplot[thick,navy,domain=1:2]{-x^2+3*x-1.5};\addplot[thick,navy,domain=2:3]{(3-x)^2/2};
+\end{axis}\end{tikzpicture}\end{center}
+\ans{$y=\frac{t^2}2$ ($0\le t\le1$), $-t^2+3t-\frac32$ ($1\le t\le2$), $\frac{(3-t)^2}{2}$ ($2\le t\le3$), $0$ otherwise.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q8(a)}{CSE 219 \textbullet\ TF p.5}{20}
+Convolve $x[n]=3^nu[-n-1]+\big(\tfrac13\big)^nu[n]$ with $h[n]=\big(\tfrac14\big)^nu[n+3]$.
+\end{qcard}
+\begin{solution}
+Split the two-sided input (convolution distributes): $x=x_1+x_2$, $x_1=3^nu[-n-1]$, $x_2=(\frac13)^nu[n]$. The kernel $h[n-k]=(\tfrac14)^{n-k}$ is nonzero for $k\le n+3$.
+
+\step{$y_1=x_1*h$.} $x_1[k]\ne0$ for $k\le-1$, so $k\le\min(-1,n+3)$ and $y_1[n]=4^{-n}\sum_k12^k$:
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $n\le-4$ (upper limit $n+3$): $y_1[n]=4^{-n}\dfrac{12^{\,n+3}}{1-\frac1{12}}=\dfrac{12}{11}\,4^{-n}12^{\,n+3}=\dfrac{12^4}{11}\,3^{n}=\dfrac{256}{11}\,3^{\,n+4}$.
+\item $n\ge-3$ (upper limit $-1$): $y_1[n]=4^{-n}\dfrac{12^{-1}}{1-\frac1{12}}=\dfrac{4^{-n}}{11}$.
+\end{itemize}
+
+\step{$y_2=x_2*h$.} $x_2[k]\ne0$ for $k\ge0$, so $0\le k\le n+3$ (needs $n\ge-3$):
+\[y_2[n]=4^{-n}\sum_{k=0}^{n+3}\Big(\tfrac43\Big)^k=4^{-n}\,\frac{(4/3)^{n+4}-1}{1/3}=256\cdot3^{-(n+3)}-3\cdot4^{-n}.\]
+\step{Total.}
+\[
+y[n]=\begin{cases}\dfrac{256}{11}\,3^{\,n+4},&n\le-4,\\[8pt]256\cdot3^{-(n+3)}-\dfrac{32}{11}\,4^{-n},&n\ge-3.\end{cases}
+\]
+For $n\ge-3$: $y_1+y_2=\frac{4^{-n}}{11}+256\cdot3^{-(n+3)}-3\cdot4^{-n}$ and $\frac1{11}-3=-\frac{32}{11}$. Values: $y[-4]=23.27$, $y[-3]=69.82$ (peak), $y[-2]=38.79$, $y[-1]=16.81$, $y[0]=6.57$, $y[1]=2.43$.
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=10cm,height=4cm,axis lines=middle,xlabel={$n$},ticklabel style={font=\scriptsize},ymin=0,ymax=80,xmin=-9,xmax=6,xtick distance=1,ycomb,mark=*]
+\addplot+[ycomb,navy,mark=*,mark size=1.4pt]coordinates{(-8,0.288)(-7,0.864)(-6,2.59)(-5,7.77)(-4,23.27)(-3,69.82)(-2,38.79)(-1,16.81)(0,6.57)(1,2.43)(2,0.872)(3,0.306)};
+\end{axis}\end{tikzpicture}\end{center}
+\ans{$y[n]=\frac{256}{11}3^{n+4}$ for $n\le-4$; $\;y[n]=256\cdot3^{-(n+3)}-\frac{32}{11}4^{-n}$ for $n\ge-3$.}
+\end{solution}
+
+\input{ch04b}

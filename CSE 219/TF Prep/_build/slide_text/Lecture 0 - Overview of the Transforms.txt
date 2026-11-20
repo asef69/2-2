@@ -1,0 +1,924 @@
+
+===== page 1 =====
+Overview of the Transforms
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Outline
+• Before Fourier: an argument about a violin string, and the tides
+• Fourier and the Heat Equation: the idea that was rejected for fifteen years
+• From Series to Transform: whose name should be on it, and what the argument accidentally built
+• The Fast Fourier Transform: Gauss, the Cold War, and five printed pages
+• The Laplace Transform: a deaf telegraph clerk and a borrowed name
+• The z-Transform: radar, sampled data, and where it all ends up
+Nothing here is examinable
+Today is the map, not the territory. Every name and date exists because somebody needed to solve a
+problem they could not otherwise solve — and the tool they built is the one you will spend the rest of
+this course learning.
+1
+
+===== page 3 =====
+One Question, Two Hundred Years
+e
+MP3, AAC
+
+JPEG, HEIF
+ƚ
+WiFi, 4G, 5G
+Ʋ
+MRI
+Ϯ
+LIGO, EHT
+• Every one of these rests on a single question: what frequencies is this made of?
+• Nobody set out to invent it. It fell out of people trying to cool a cannon, predict a tide, tame a telegraph
+line, and catch a nuclear test.
+The plot of today’s lecture
+Watch for a pattern: three separate times, the right idea was rejected by the best mathematician in the
+room. Three times, the engineers used it anyway.
+2
+
+===== page 4 =====
+Before Fourier: An Argument About a
+String
+
+===== page 5 =====
+1747–1759: A Fight Over a Violin String
+• 1747: d’Alembert writes down the wave equation for a
+plucked string. 1748: Euler finds its normal modes — the
+pure shapes that vibrate without changing shape.
+• 1753, Daniel Bernoulli makes the leap: every possible
+motion of the string is a sum of those modes. He argues
+it from physics, and offers no proof.
+• 1759, Lagrange demolishes him. A sum of smooth sines
+cannot reproduce an arbitrary shape — a string plucked
+to a sharp corner, say. Euler agrees. Bernoulli is buried.
+• He was right. It took another seventy years to show it.
+n = 1
+n = 2
+n = 3
+sum
+Daniel Bernoulli
+“always a sum of modes”
+Joseph-Louis Lagrange
+“it cannot be”
+Sources: MacTutor: the vibrating string • Wikipedia: Fourier series (history)
+3
+
+===== page 6 =====
+Meanwhile, a Second Family Tree Is Growing
+• Long before anyone said “transform”, mathematicians were packing a sequence or a function into one
+object so calculus would turn into algebra.
+de Moivre, 1730: generating functions
+A(z) =
+∞
+∑
+n=0
+an zn
+Flip the sign of the exponent and you have writ-
+ten the z-transform, 217 years early.
+X(z) =
+∞
+∑
+n=−∞
+x[n] z−n
+Euler, 1744: an integral that does the same job
+∫∞
+0
+e−sxf(x) dx
+From 1785 Laplace uses exactly this to turn dif-
+ference and differential equations into algebra
+— while also writing the theory of probability
+and a mechanics of the solar system.
+Same trick, two costumes
+A sum over z−n for sequences; an integral over e−st for functions. Later you will prove they are the
+same object, joined by z = esT .
+Sources: Wikipedia: Laplace transform (history) • Wikipedia: z-transform (history)
+4
+
+===== page 7 =====
+Laplace, the Tides, and a Machine Made of Brass
+• 1775–76: Laplace replaces the old “the Moon pulls a
+bulge of water” picture with his tidal equations — the
+ocean as a driven, rotating dynamical system.
+• The engineering consequence: a tide is a sum of
+sinusoids whose frequencies come from astronomy
+and whose amplitudes and phases come from the
+harbour.
+• 1872: William Thomson (Lord Kelvin) builds a
+machine of pulleys and wire that adds ten of those
+sinusoids and draws the tide — a year of predictions
+in about four hours of cranking.
+• October 1943: a handwritten letter marked most
+urgent reaches Arthur Doodson in Liverpool, asking
+for 1944 tides at a place called only “Position Z”. He
+gets harmonic constants and no map, and runs them
+on Kelvin’s 1872 machine.
+• Position Z was Normandy. Those numbers picked the
+hour of D-Day.
+Pierre-Simon Laplace
+Kelvin’s tide-predicting machine,
+1872
+Analysis and synthesis, in brass
+The first Fourier synthesiser was made of
+gears — and people were adding up si-
+nusoids to predict the world long before
+anyone proved they were allowed to.
+Sources: Wikipedia: theory of tides • Physics Today: the tide predictions for D-Day • Wikipedia: tide-predicting machine
+5
+
+===== page 8 =====
+Fourier and the Heat Equation
+
+===== page 9 =====
+Joseph Fourier (1768–1830): Not Only a Mathematician
+• Son of a tailor, ninth of twelve children, orphaned by ten. He
+had finished Bézout’s six-volume mathematics course by
+fourteen.
+• Trained for the priesthood but never took vows. Joined the
+Revolution instead, was arrested in July 1794 and expected the
+guillotine — Robespierre was executed first.
+• 1798: sailed with Napoleon to Egypt as scientific adviser,
+helped found the Cairo Institute and edited the 24-volume
+Description de l’Égypte.
+• As Prefect of Isère he drained the Bourgoin marshes and built
+the road to Turin by day, and invented Fourier analysis at night.
+• In Grenoble he took an interest in a schoolboy named
+Jean-François Champollion and showed him his Egyptian
+collection. Champollion deciphered the Rosetta Stone in 1822.
+Joseph Fourier
+The eccentric
+Convinced heat was healthy,
+he
+kept
+his
+rooms
+hotter
+than Hades and went about
+wrapped in coats in summer.
+Sources: MacTutor: Joseph Fourier • Wikipedia: Joseph Fourier • The Conversation: Fourier at 250
+6
+
+===== page 10 =====
+The Actual Problem: How Does Heat Spread?
+• Fourier’s question was industrial and imperial:
+how does temperature evolve inside a solid — a
+cannon, a mine shaft, the Earth?
+• His answer was the heat equation:
+∂u
+∂t = α ∂2u
+∂x2
+• Easy to write, hard to solve, because u(x, 0) can
+be any shape.
+The one shape that behaves
+If u(x, 0) = sin(kx) then for all later times
+u(x, t) = e−αk2t sin(kx).
+A sinusoid diffuses into itself. It only shrinks
+— and the faster it wiggles, the faster it dies.
+a heated rod, cooling
+k = 1
+k = 3
+x
+u
+High frequencies vanish first: that is why a hot object forgets its detail
+before it forgets its warmth.
+7
+
+===== page 11 =====
+The Leap
+• If the only shape Fourier can solve is a sinusoid, then he must build every shape out of sinusoids. So he
+simply announces that he can:
+Fourier’s claim, 1807
+f(x) = a0 +
+∞
+∑
+k=1
+(
+ak cos kx + bk sin kx
+)
+,
+ak = 1
+π
+∫π
+−π
+f(x) cos kx dx
+Any periodic function. Including ones with corners. Including ones with jumps. Including ones nobody
+has written a formula for.
+• Then the whole problem dissolves: split the initial temperature into sinusoids, shrink each one by its own
+e−αk2t, and add them back up.
+• Notice what happened. A hard problem in x became an easy problem in k. That move — change domain,
+solve trivially, change back — is the entire subject of this course.
+The transform pattern
+hard operation in one domain −→multiplication in the other −→come back
+8
+
+===== page 12 =====
+21 December 1807: The Worst Committee You Could Draw
+• Fourier reads On the Propagation of Heat in Solid Bodies to the
+Institut de France. The referees are Lagrange, Laplace, Monge
+and Lacroix.
+• Lagrange is the greatest living analyst — and the same man who
+demolished Bernoulli’s sum-of-modes claim 48 years earlier. He
+objects again. Publication is blocked.
+• The Institut turns the question into the 1811 prize essay. Fourier
+enters and wins in January 1812 — with a public censure
+attached: “the manner in which the author arrives at these
+equations is not exempt of difficulties”. Still no printing.
+• So he waits. In 1822 he publishes it himself as Théorie
+analytique de la chaleur. He is by then Secretary of the
+Académie, and nobody can block him any more.
+Paris, 1822 — fifteen years after the memoir
+Worth remembering when your idea gets rejected
+Lagrange was not being stupid. He was being careful, and on the narrow mathematical point he was
+even partly right. He was still wrong about the thing that mattered.
+Sources: MacTutor: Joseph Fourier • IEEE Pulse: highlights in the history of the Fourier transform
+9
+
+===== page 13 =====
+What He Was Claiming, in One Picture
+1, 2, 4 and 11 sine terms against a square wave
+• A square wave has corners and jumps.
+Sines have neither.
+• Yet with enough of them, at exactly the
+right amplitudes, the sum flattens onto
+the square almost everywhere.
+• This is the picture Lagrange refused to
+believe.
+Keep an eye on the jump
+Look at the little spike that refuses to
+lie down at the discontinuity. It has its
+own story, and the wrong man got the
+credit. We will come back to it.
+10
+
+===== page 14 =====
+The Same Idea, as Rotating Arrows
+• Write the series in complex form and every
+term becomes a vector spinning at a
+constant rate:
+f(t) =
+∞
+∑
+k=−∞
+ck ejkω0t
+• |ck| is the length of the k-th arrow, ∠ck is
+where it starts, k is how fast — and which
+way — it turns.
+• Attach each arrow to the tip of the one
+before it. The final tip traces f(t).
+• With enough little arrows you can draw a
+square wave, a heartbeat, or your own
+signature.
+k = 1
+k = 2, 3, 4, . . .
+the tip draws f(t)
+Worth 25 minutes of your evening
+3Blue1Brown, But what is a Fourier series? From heat flow to circle drawings: youtu.be/r6sGWTCMz2k
+11
+
+===== page 15 =====
+Fourier’s Other Discovery
+• Having built a theory of heat, Fourier pointed it at the
+largest solid body within reach: the Earth.
+• In papers of 1824 and 1827 he worked out how warm a
+planet of Earth’s size, at Earth’s distance from the Sun,
+ought to be — and found it should be far colder than it is.
+• His explanation: the atmosphere lets sunlight in more
+easily than it lets heat back out. That is the greenhouse
+effect, described in 1824. He compared it to the glass of a
+hothouse — which is where the name came from — and
+every climate model today is a descendant of it.
+One person, two fields
+The man who gave signal processing its central tool also
+founded climate science. Both fell out of the same stub-
+born question about heat.
+“Heat, like gravity, penetrates every substance of the
+universe.”
+— Théorie analytique de la chaleur, 1822
+Sources: Wikipedia: Joseph Fourier • AIP: the discovery of global warming
+12
+
+===== page 16 =====
+From Series to Transform — and Whose
+Name Goes On It
+
+===== page 17 =====
+From a Ring to a Line
+• A Fourier series answers a question about a periodic signal: it lives on a circle, so only whole-numbered
+harmonics fit and the spectrum is a set of spikes at kω0.
+• Now stretch the period. As T →∞the spacing ω0 = 2π/T shrinks to zero, the spikes crowd together,
+and the sum becomes an integral.
+small T : widely spaced lines
+ω
+T →∞: a continuous spectrum
+The continuous-time Fourier transform
+X(jω) =
+∫∞
+−∞
+x(t) e−jωt dt
+x(t) = 1
+2π
+∫∞
+−∞
+X(jω) ejωt dω
+Same idea, one fewer restriction: the sig-
+nal no longer has to repeat.
+Why this matters more than it looks
+A series describes one signal. A transform is an operation you can apply to anything — and that is the
+object the rest of the story is about.
+13
+
+===== page 18 =====
+So Whose Transform Is It?
+• The integral pair was in the air, and at least four people had a
+claim.
+• Laplace, 1809 gives an integral formula in the Journal de l’École
+Polytechnique. Fourier’s own 1822 book credits him for it: “Elle a
+été donnée par M. Laplace …nous ne faisons que l’appliquer” —
+it was given by Mr Laplace; we merely apply it.
+• Fourier, 1811–1822 writes the forward and inverse sine and
+cosine transforms explicitly, and finds that differentiating n
+times multiplies the transform by (jω)n.
+• Cauchy, 1815 and Poisson, 1816 publish the same formula
+independently — and, unlike Fourier, prove that the integral
+converges.
+Cauchy, 1815
+Poisson, 1816
+Fourier spent his last years fighting priority claims
+from Biot and Poisson.
+The irony
+The man who blocked Fourier in 1807 is credited by Fourier in 1822 — and the rigour Lagrange demanded
+came from Cauchy and Poisson, who were racing Fourier for the result.
+Sources: IEEE Pulse: highlights in the history of the Fourier transform • MacTutor: Joseph Fourier
+14
+
+===== page 19 =====
+Nobody Called It “The Fourier Transform” Until 1915
+1822
+Fourier prints the
+transform pair inside
+a book about heat
+1831
+Liouville coins
+“Théorème de Fourier”
+(for the series)
+1915
+Plancherel writes
+“la transformée de
+Fourier” — the name
+1923
+Titchmarsh uses
+“Fourier transforms”
+in English
+1934
+Wiener and Paley fix
+the modern definition
+• Plancherel’s sentence, in 1915, is where the object gets its modern name: “Nous nommerons F(x) la
+transformée de f(x).”
+• So: invented around 1809–1816, named after one of its four discoverers in 1915, final form in 1934 — a
+hundred and twenty years after it was first written down.
+Sources: IEEE Pulse: highlights in the history of the Fourier transform • MacTutor: Michel Plancherel
+15
+
+===== page 20 =====
+The Argument Nobody Could Settle — and What It Built
+• Lagrange’s objection would not die, because “does this series
+actually converge?” turned out to be genuinely hard. Answering
+it rebuilt mathematics.
+• 1829, Dirichlet gives the first honest convergence conditions,
+and shows that at a jump the series converges to the midpoint.
+• 1854, Riemann needs a better notion of “area under a curve” for
+trigonometric series — and invents the Riemann integral.
+• 1870, Cantor asks a small question: can a function have two
+different trigonometric series? Chasing the exceptional sets
+where his proof failed, he invents set theory.
+• 1902, Lebesgue builds a new integral, again with Fourier series
+in mind. 1966, Carleson finally settles the question — 207 years
+after Lagrange raised it.
+Georg Cantor
+Scale of the accident
+Infinity, cardinality, the real
+line,
+measure theory:
+all
+downstream of a row about a
+vibrating string.
+Sources: Resonance: how did Cantor discover set theory and topology? • Wikipedia: sets of uniqueness • Wikipedia: Fourier series
+16
+
+===== page 21 =====
+The Overshoot That Would Not Go Away
+• 1848: an English mathematician, Henry Wilbraham,
+notices the spike at a jump, analyses it correctly,
+publishes — and is comprehensively ignored for the next
+66 years.
+• 1898: Albert Michelson — of Michelson–Morley — builds
+an 80-coefficient harmonic analyser out of springs and
+gears. Fed a square wave, it keeps drawing that same
+stubborn ear at every jump.
+• He writes to Nature assuming his machine is broken. A
+public argument with A. E. H. Love follows in the same
+pages.
+• 1899: J. W. Gibbs settles it. The machine is fine. The
+overshoot is real, it is about 9% of the jump, and it never
+goes away — it only gets narrower.
+• 1906: Bôcher names it the Gibbs phenomenon, after the
+man who explained it second.
+J. Willard Gibbs
+Michelson’s harmonic analyser,
+1898
+His printed approximations — the ears are visible at every
+jump
+Sources: Wikipedia: Gibbs phenomenon • Wikipedia: Henry Wilbraham
+17
+
+===== page 22 =====
+Four Fourier Transforms, One Idea
+• Fourier’s series needs a periodic, continuous signal. Let the period run to infinity and the sum becomes
+an integral. Sample the signal and the frequency axis becomes periodic. Do both and everything
+becomes finite — which is the only case a computer can touch.
+time is continuous
+time is discrete
+periodic
+aperiodic
+Fourier Series (CTFS)
+discrete, aperiodic spectrum ak
+DFS / DFT
+discrete, periodic spectrum X[k]
+Fourier Transform (CTFT)
+continuous, aperiodic X(jω)
+DTFT
+continuous, periodic X(ejω)
+the only one
+a computer can
+actually compute
+The rule that generates the whole table
+Discrete in one domain ⇐⇒periodic in the other.
+Next class, we derive every arrow in this square.
+18
+
+===== page 23 =====
+The Fast Fourier Transform
+
+===== page 24 =====
+The DFT Is Correct, and Uselessly Slow
+• Computing X[k] = ∑N−1
+n=0 x[n]W kn
+N
+straight
+from the definition costs N multiplications
+for each of N values of k: O(N2).
+• Double the data and you quadruple the work.
+That is the whole problem.
+N
+N2
+N log2 N
+1 024
+106
+104
+106
+1012
+2 × 107
+109
+1018
+3 × 1010
+The question of the next few classes
+Nothing about the DFT is wrong. It is sim-
+ply being computed stupidly — and the fix
+had been sitting in a notebook since 1805.
+101
+102
+103
+104
+105
+106
+101
+105
+109
+1013
+N
+operations
+N2 (direct DFT)
+N log2 N (FFT)
+19
+
+===== page 25 =====
+1805: Gauss Gets There First, and Tells Nobody
+• Gauss is chasing the newly discovered asteroids Pallas and
+Juno. He has a handful of noisy sightings and needs to
+interpolate a periodic orbit through them.
+• Doing the trigonometric coefficients by hand is brutal, so he
+finds a shortcut: split the samples into two interleaved halves,
+transform each, then combine. Then do it again. And again.
+• That is the radix-2 decimation-in-time FFT — the identical
+algorithm you will derive later in this course.
+• He writes it in a private notebook, in Latin, in a notation of his
+own. He never publishes it. It surfaces only in 1866, in his
+posthumous collected works, where essentially nobody reads
+it.
+Two years before Fourier
+The fast Fourier transform was written down before the
+Fourier transform was — and then lost for 160 years.
+Carl Friedrich Gauss
+Sources: Heideman, Johnson & Burrus, Gauss and the History of the Fast Fourier Transform, IEEE ASSP Magazine, 1984 • Wikipedia: Cooley–Tukey FFT
+20
+
+===== page 26 =====
+Why Anyone Cared in 1963
+• After 1945 the United States offered to give up its arsenal
+if others would forgo theirs. The offer failed, and the arms
+race started.
+• By the early 1960s both sides wanted a test ban, and both
+had the same obstacle: verification.
+• The Partial Test Ban Treaty of 1963 outlawed testing in the
+atmosphere, in space and underwater — everything
+visible from outside. It could not outlaw underground
+testing, because nobody could prove a violation.
+• An underground test shows up only as a shiver in the
+ground, recorded thousands of kilometres away, buried in
+a planet that shivers anyway.
+Nevada Test Site, 1957 — the kind of test a treaty could
+police
+A seismic record: everything looks like everything else
+Sources: Wikipedia: Partial Test Ban Treaty • CTBTO: the International Monitoring System
+21
+
+===== page 27 =====
+The Signature Is in the Spectrum
+• An earthquake is a slip along a fault: it
+releases its energy over seconds, so the
+energy sits at low frequencies.
+• A bomb is a point source going off at
+once: sharp onset, far more
+high-frequency content.
+• In the time domain the two traces look
+like each other. In the frequency domain
+they do not.
+• So: ring the Soviet Union with
+seismometers and take the DFT of
+everything they record, continuously,
+forever.
+• At O(N2), “continuously, forever” is not
+a plan. It is a wish.
+earthquake
+explosion
+frequency
+frequency
+22
+
+===== page 28 =====
+A Meeting, and a Cover Story
+• 1963. At a meeting of President Kennedy’s Science Advisory
+Committee on detecting underground tests, the Princeton
+statistician John Tukey mentions that he has been working
+on a way to speed up the Fourier transform.
+• Also in the room is Richard Garwin of IBM — a physicist who,
+at 23, had done the design work on the first hydrogen bomb.
+He grasps the consequence instantly.
+• Back at IBM Yorktown Heights, Garwin asks for a
+mathematical analyst and is given James Cooley. By Garwin’s
+own later account, he did not tell Cooley the real motive: the
+stated application was studying the spins in a crystal of
+helium-3.
+• Tukey also gave us two words you use every day: bit —
+Shannon credits him for it in 1948 — and, in 1958, the first
+printed use of software.
+John W. Tukey
+James W. Cooley
+Richard L. Garwin
+Sources: IEEE Spectrum: the FFT gets an IEEE Milestone • IBM Research: how IBM first demonstrated the FFT • helium-3 cover story per Garwin in Veritasium • Wikipedia: John
+Tukey
+23
+
+===== page 29 =====
+1965: Five Pages
+J. W. Cooley and J. W. Tukey
+An Algorithm for the Machine Calculation of Complex Fourier Series
+Mathematics of Computation 19 (1965), pp. 297–301.
+• O(N2) −→O(N log2 N). At N = 220 that is a
+factor of roughly 50 000.
+• The 1964 demonstration ran about a hundred
+times faster than the existing code, and could
+keep up with the seismic data in real time.
+• A calculation that took a day now takes under two
+seconds. Entire fields that were theoretically
+possible became routine overnight.
+How the profession rates it
+The FFT is on the IEEE/AIP list of the Top 10
+Algorithms of the 20th Century, and the 1964
+demonstration on an IBM 7094 carries an IEEE
+Milestone plaque.
+Gilbert Strang called it “the most important
+numerical algorithm of our lifetime”.
+• Several classes of this course are, in effect, a careful reading of those five pages and of what came after
+them.
+Sources: Wikipedia: fast Fourier transform • IEEE Spectrum: FFT milestone
+24
+
+===== page 30 =====
+The Part That Stings
+• The algorithm worked. The monitoring network it made possible got built. But by 1965 the moment had
+gone: the United Kingdom, France and China had all joined the club, and the political will for a
+comprehensive ban went with them.
+• The Comprehensive Nuclear-Test-Ban Treaty was not opened for signature until 1996 — and it has still
+not entered into force.
+• It is watched anyway. The CTBTO’s International Monitoring System is 321 stations and 16 laboratories
+across 89 countries, 170 of them seismic, running Fourier transforms day and night — exactly the machine
+Garwin wanted, thirty years late.
+The counterfactual
+Veritasium’s claim — and it is a claim, not a proof — is that an FFT a decade earlier might have made a
+comprehensive test ban verifiable while it was still politically possible. Either way, one thing is certain:
+the algorithm arrived too late for the treaty, and exactly in time for everything else.
+Sources: CTBTO: International Monitoring System • Wikipedia: CTBT • Veritasium: the most important algorithm of all time
+25
+
+===== page 31 =====
+The Laplace Transform
+
+===== page 32 =====
+When Fourier Is Not Enough
+Fourier
+X(jω) =
+∫∞
+−∞
+x(t) e−jωt dt
+Needs the integral to converge. A growing sig-
+nal such as e2tu(t) simply has no Fourier trans-
+form — and neither does any unstable system.
+Laplace
+X(s) =
+∫∞
+−∞
+x(t) e−st dt,
+s = σ + jω
+Multiply by e−σt first, then take the Fourier
+transform. Pick σ large enough and the inte-
+gral converges after all.
+• The price of that freedom is that you have to say which σ you used. That set of values is the region of
+convergence, and it will take up a good part of the second half of this course.
+The one-line summary of the whole course
+Fourier lives on a line (jω). Laplace lives on a plane (σ + jω). Everything else is bookkeeping.
+26
+
+===== page 33 =====
+Oliver Heaviside (1850–1925): The Outsider
+• Scarlet fever left him partly deaf as a child. He left school at
+sixteen, taught himself Morse, electricity, Danish and German,
+and worked as a telegraph clerk until the deafness ended that
+too. Then he simply stopped having a job, and did physics
+alone in a back room for decades.
+• He reduced Maxwell’s twenty equations in twenty variables to
+the four every physics student now learns, and coined
+impedance, inductance and reactance.
+• And he invented operational calculus: write p for d/dt, treat it
+as ordinary algebra, and solve circuit equations as if they were
+fractions. It worked; telegraph engineers used it daily. It was
+also, by 1890s standards, entirely unjustified — and the Royal
+Society rejected the paper for “irredeemable inadequacies in
+proof”.
+• He was right about the sky too: in 1902 he predicted a
+conducting layer in the upper atmosphere that reflects radio
+waves. Confirmed in 1923, it is still called the Heaviside layer.
+Oliver Heaviside
+His reply to his critics
+“Shall I refuse my dinner be-
+cause I do not fully under-
+stand the process of diges-
+tion?”
+Sources: MacTutor: Oliver Heaviside • quote traced to Electromagnetic Theory vol. II (1899), §224: source note
+27
+
+===== page 34 =====
+Vindication — and a Borrowed Name
+1785
+Laplace uses the
+transformation on
+difference equations
+1894
+Heaviside’s operational
+calculus rejected by
+the Royal Society
+1916
+Bromwich derives the
+contour inversion
+formula
+1926
+Carson and van der Pol
+tie the operators to
+the integral
+1937
+Doetsch’s text-
+book fixes
+the modern form —
+and the name
+• Bromwich’s inversion integral is the one you will meet later this term: x(t) =
+1
+2πj
+∫σ+j∞
+σ−j∞X(s)est ds.
+The name is an accident of history
+Laplace never wrote “the Laplace transform”. Heaviside, who made it an engineering tool, did not get
+his name on it either. The label settled in the 1920s and 30s — roughly 150 years after Laplace’s work,
+and after the one man who actually needed it was dead.
+Sources: Wikipedia: Laplace transform (history) • MacTutor: T. J. I’A. Bromwich
+28
+
+===== page 35 =====
+What the Laplace Transform Bought Us
+• A differential equation becomes a polynomial
+fraction H(s) = N(s)
+D(s) : the transfer function.
+• Its poles tell you whether the system rings, settles
+or explodes — without your solving anything.
+• Feedback becomes algebra: Y
+X =
+G(s)
+1 + G(s)H(s) .
+• Out of that came root locus, Bode and Nyquist plots,
+the PID controller, aircraft autopilots, the Apollo
+guidance computer, power-grid stabilisers, and
+every op-amp circuit you will ever design.
+Later this term
+Heaviside’s “just do algebra with d/dt” is now a
+rigorous method — and it is the one you will use
+to solve differential equations for the rest of your
+degree.
+stable
+unstable
+σ
+jω
+Poles (×) left of the axis: the system settles. Right of it: it runs
+away.
+29
+
+===== page 36 =====
+The z-Transform and the Digital Age
+
+===== page 37 =====
+1947: Radar, Sampled Data, and a Topologist
+• Wartime tracking radar does not see continuously. It sees in
+pulses: one sample per sweep of the antenna.
+• A control loop closed around such a sensor is not governed by
+a differential equation but by a difference equation — and the
+Laplace transform alone does not handle it cleanly.
+• At the MIT Radiation Laboratory, Witold Hurewicz solves it in
+the 1947 volume Theory of Servomechanisms by reviving the
+old generating-function idea for sampled sequences.
+• Hurewicz was a topologist by trade — the Hurewicz theorem and
+the Hurewicz fibration are his — who had wandered into control
+engineering because of the war. He died in 1956 after falling
+from a Mayan pyramid at Uxmal, on a conference excursion.
+The pattern repeats
+continuous →
+∫
+x(t)e−stdt
+sampled
+→
+∑
+x[n]z−n
+A
+war-driven
+engineering
+need,
+solved
+by
+reaching
+back two hundred years to
+Laplace’s
+generating
+func-
+tions.
+Sources: MacTutor: Witold Hurewicz • Wikipedia: z-transform (history)
+30
+
+===== page 38 =====
+1952: The Name, and the Picture That Ties It Together
+• Ragazzini and Zadeh, in the sampled-data
+group at Columbia, give it the name we still
+use: the z-transform. The coincidence with
+Zadeh’s initial appears to be exactly that —
+the letter was already standard in the
+difference-equation literature.
+• Zadeh went on to invent fuzzy logic in 1965,
+which is a second career most people
+would settle for.
+• Sample x(t) every T seconds; the Laplace
+transform of the sampled signal is a
+function of esT . Call that z:
+The bridge
+z = esT
+the jω axis wraps onto the unit circle; the
+stable left half-plane maps to the inside of it.
+σ
+jω
+stable
+s-plane
+z = esT
+Re
+Im
+stable
+z-plane
+Lotfi A. Zadeh
+We make this precise later in the course. Sampling
+itself — Nyquist 1928, Shannon 1949 — gets a class of
+its own.
+Sources: Wikipedia: z-transform • Language Log: Lotfi Zadeh and the z transform • Wikipedia: Nyquist–Shannon
+31
+
+===== page 39 =====
+Where the Transforms Actually Live Now
+
+JPEG, HEIF
+DCT — Nasir Ahmed, 1972
+e
+MP3, AAC
+tuned on Tom’s Diner
+ƚ
+WiFi, 4G, 5G
+the OFDM modulator is an IFFT
+Ʋ
+MRI
+the image is an inverse FT
+Ϯ
+LIGO, EHT
+black holes, 2015 and 2019
+ȋ
+DSP, control
+Laplace and z, everywhere
+One more rejection, for symmetry
+Nasir Ahmed proposed the discrete cosine
+transform to the US National Science Founda-
+tion in 1972. Rejected: a reviewer found it “too
+simple”. It is now in every JPEG on Earth.
+And one for fun
+Karlheinz Brandenburg tuned MP3 on Suzanne
+Vega’s Tom’s Diner: at bitrates where every-
+thing else sounded fine, her voice did not. He
+listened to it thousands of times.
+Sources: Wikipedia: Nasir Ahmed • Mental Floss: how Tom’s Diner tuned the MP3 • Wikipedia: OFDM
+32
+
+===== page 40 =====
+The Family Tree
+Fourier
+Series
+1807
+CTFT
+1809–1822
+Laplace
+1785 / 1937
+DTFT
+z-Transform
+1947 / 1952
+DFT
+FFT
+1805 / 1965
+T →∞
+add σ: s = σ + jω
+sample in t
+add r: z = rejω
+z = esT
+sample in ω
+divide & conquer
+sampling
+theorem
+what a
+computer sees
+stability,
+ROC
+digital
+filters
+N log N
+Two centuries, one semester
+Every arrow on this page was a fight. A dozen people, several of whom were told they were wrong, and
+one who was ignored for 160 years. You get all of it in one term.
+33
+
+===== page 41 =====
+Where to Go Next
+Watch
+• 3Blue1Brown, But what is a Fourier
+series? youtu.be/r6sGWTCMz2k
+• 3Blue1Brown, But what is the Fourier
+transform? youtu.be/spUNpyF58BY
+• Veritasium, The Most Important
+Algorithm of All Time
+youtu.be/nmgFG7PUHfo
+Read
+• Oppenheim, Willsky & Nawab, Signals
+and Systems, §3.1 — A Historical
+Perspective. Two pages; read them
+before next class.
+• Heideman, Johnson & Burrus, Gauss
+and the History of the Fast Fourier
+Transform, IEEE ASSP Magazine, 1984.
+• IEEE Pulse, Highlights in the History of
+the Fourier Transform.
+Next class
+Introduction to the DTFT and the DFT. We stop telling stories and start deriving — beginning with what
+happens to Fourier’s idea when time itself arrives in samples.
+Images from Wikimedia Commons: public domain except the tide-predicting machine (CC0), R. L. Garwin (CC BY-SA 3.0) and L. A. Zadeh (CC BY-SA 4.0). Full attributions in
+figures/CREDITS.txt.
+34

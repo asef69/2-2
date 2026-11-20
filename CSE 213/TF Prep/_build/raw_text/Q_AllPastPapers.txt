@@ -1,0 +1,3282 @@
+
+===== page 1 =====
+CamScanner
+
+===== page 2 =====
+CamScanner
+
+===== page 3 =====
+CamScanner
+
+===== page 4 =====
+CamScanner
+
+===== page 5 =====
+CamScanner
+
+===== page 6 =====
+CamScanner
+
+===== page 7 =====
+CamScanner
+
+===== page 8 =====
+CamScanner
+
+===== page 9 =====
+CamScanner
+
+===== page 10 =====
+CamScanner
+
+===== page 11 =====
+CamScanner
+
+===== page 12 =====
+CamScanner
+
+===== page 13 =====
+
+
+===== page 14 =====
+
+
+===== page 15 =====
+
+
+===== page 16 =====
+
+
+===== page 17 =====
+
+
+===== page 18 =====
+
+
+===== page 19 =====
+
+
+===== page 20 =====
+
+
+===== page 21 =====
+
+
+===== page 22 =====
+L-3/T-1/CSE 
+Date: 04/09/2021 
+ 
+BANGLADESH UNIVERSITY OF ENGINEERING AND TECHNOLOGY, DHAKA 
+L-3/T-1 B. Sc. Engineering Examinations Jan 2021 
+Sub: CSE 307 (Software Engineering) 
+Full Marks: 210  Time: 2 hours and 30 minutes 
+USE SEPARATE SCRIPTS FOR EACH SECTION. 
+The figures in the margin indicate full marks. 
+SECTION – A 
+There are FOUR questions in this section. Answer any THREE. 
+1. (a) Consider a web based application that stores the information of users for registration 
+purpose. After successful registration the registration page returns a user identification 
+number (userID) which identifies the users for further references. The registration process 
+also requires identifiers to identify the home district and educational qualification. The 
+web application has the facility to create a home district and educational qualifications as 
+per requirement of the user applying for registration if there is no available home district 
+and educational qualification in the list of the interface. The transactions made by the web 
+based application will also be identified by another identifier (TxID). A particular 
+identifier will never be duplicate and it is expected that the identifiers are created serially 
+starting from 1. These numbers will actually be used as the primary keys in the data 
+storage table for accessing the data. Demonstrate creation of those identifiers in the back 
+end of your application whenever necessary by the user interface. You do not need to 
+demonstrate the details of user interface or front end. It is expected that a suitable design 
+pattern must be used to demonstrate the solution. 
+(15) 
+(b) 
+There are three servers serving sorting requests using selection, insertion and quicksort 
+algorithms. There is a central broker that receives request of sorting by an algorithm with 
+the data to be sorted. The central broker forwards the request to the appropriate server and 
+returns the result to the class requesting for sorting service after getting the sorted array 
+from the server. The central broker maintains a queue if more than one request arrives at a 
+time. Demonstrate the use of mediator pattern for this system. 
+(20) 
+ 
+ 
+ 
+2. (a) A company is headed by a Managing Director. There are three divisions under Managing 
+Director namely Technical, Administration and Finance. Each of these divisions is headed 
+by a Manager. The Technical Division consists of five Developers under the supervision 
+of the Technical manager. The Administration is run by three executives under the 
+supervision of the Admin Manager. There are two officers under Finance Manager. You 
+are to implement the hierarchy of the employees using composite pattern. The composite 
+class must have the provision to show all the employees under any employee. Write all 
+the classes for demonstrating this hierarchy of employees.  
+(20) 
+(b) 
+The estimated line of codes for a IoT based application is approximately 50 KLOC. The 
+project must be finished within a year. Calculate the effort using dynamic multivariate 
+model. 
+ 
+(15)
+
+===== page 23 =====
+L-3/T-1/CSE 
+Date: 04/09/2021 
+ 
+3. (a) The main goal of a software engineer is to make the developed code testable. Define this 
+goal using goal definition template. Write down the questions that must be answered in 
+order to achieve this goal. Identify the metrics that help answer these questions with 
+formula of measurement and necessary data collections. Discuss two of the metrics 
+identified based on the general attributes of the metrics. 
+ 
+(20) 
+(b) 
+You are a project manager in a software development project where the budget of 
+development is limited. Employing reviewer for system requirement specification, design 
+and code requires a huge budget that may lead towards falling short of budget. You may 
+recruit more testers instead which are not that much costly in terms of salary. What will 
+be your decision considering overall situation? Justify your decision. 
+(15) 
+ 
+ 
+ 
+4. (a) Consider a project to develop result processing system which is scheduled to deliver by 
+the end of Year 2021. The software is being developed for Dhaka Education Board. The 
+project manager has to consider issues related to the pandemic. Identify five risks while 
+planning this software development project. Discuss the impact and exposure of the risks 
+with proper justification. Briefly describe the risk mitigation plans for the identified risks.   
+(20) 
+(b) 
+Consider the following table where all the duration estimates of various activities of a 
+project are listed and the network proceeds from Node 1 to Node 9. 
+Activity 
+Initial Node 
+Final Node 
+Estimated 
+Duration 
+(days) 
+A 
+1 
+2 
+2 
+B 
+2 
+3 
+2 
+C 
+2 
+4 
+3 
+D 
+2 
+5 
+4 
+E 
+3 
+6 
+2 
+F 
+4 
+6 
+3 
+G 
+5 
+7 
+6 
+H 
+6 
+8 
+2 
+I  
+6 
+7 
+5 
+J 
+7 
+8 
+1 
+K 
+8 
+9 
+2 
+(15) 
+ 
+ 
+ 
+Draw an Activity on Arrow Diagram representing the project. Identify all paths in the network diagram. 
+What is the critical path of the project? Discuss the significance of the critical path.
+
+===== page 24 =====
+L-3/T-1/CSE 
+Date: 04/09/2021
+ 
+BANGLADESH UNIVERSITY OF ENGINEERING AND TECHNOLOGY, DHAKA 
+L-3/T-1 B. Sc. Engineering Examinations Jan 2021 
+Sub: CSE 307 (Software Engineering) 
+Full Marks: 210 Time: 2 hours and 30 minutes
+USE SEPARATE SCRIPTS FOR EACH SECTION 
+The figures in the margin indicate full marks. 
+SECTION – B 
+There are FOUR questions in this section. Answer any THREE. 
+5. (a)
+Ward is a division of a hospital or a suite of rooms shared by patients who need a similar 
+kind of care. In a hospital, there are a number of wards, each of which may be empty or 
+have on it one or more patients. Each ward has a unique name. Wards are differentiated 
+by gender of its patients, i.e. male wards and female wards. A ward can only have patients 
+of the gender admitted to it. Every ward has a fixed capacity, which is the maximum 
+number of patients that can be on it at one time (i.e. the capacity is the number of beds in 
+the ward). Different wards may have different capacities. The doctors in the hospital are 
+organized into teams. Each team has a unique name or code (e.g. Orthopedics or 
+Pediatrics) and is headed by a consultant doctor or attending physician. She or he can 
+supervise fellows, residents, and medical students. The rest of the team members are all 
+junior doctors. Each doctor could be a member of no more than one team. Everyday each 
+consultant doctor visits the patients admitted under him/her. During this visit, s/he 
+prescribes treatment or modifies previous prescription. When a patient is ready to be 
+released, s/he advises the release. 
+Based on the scenario discussed above, draw a Class Diagram. 
+(20)
+(b) 
+In the ERP application developed for an organization, there is a Human Resource 
+Management (HRM) module. It has components of Employment Record, Promotion 
+management, Payroll and Loan management, Disciplinary Action management, and 
+Pension management. All these components need to interact with the Accounts 
+Management module. If there is any allegation against an employee, the employee is 
+suspended and disciplinary investigation is carried out. During suspension, the employee 
+gets half of his/her salary. After completion of the investigation, if s/he is proved 
+innocent, the reduced salary is paid back.  
+Mention the requirements of 4 inter-component integrations of HRM module and 2 inter-
+module integrations between HRM and Accounts module that you will need to consider 
+for Integration Testing. 
+(15)
+ 
+ 
+ 
+6. (a)
+Write down two program snippets to show examples of code smells Data Clump and 
+Refused Bequest. 
+(20)
+(b) 
+Write down the steps of Continuous Integration in DevOps life-cycle. What are the 
+benefits of Containerization?  
+(15)
+
+===== page 25 =====
+L-3/T-1/CSE 
+Date: 04/09/2021
+ 
+7. (a)
+What are fixtures in Unit testing? Give 3 examples. 
+Write down a unit testing method to test values from partitions of a grading system 
+having the following grading policy: 
+Mark>80: A 
+Mark>70 and <=80: B 
+Mark>60 and <=70: C 
+Consider Boundary value analysis. 
+(20)
+(b) 
+What do you understand by Non-repudiation. Give 2 examples of Non-repudiation in the 
+context of software application. What are the practices you should follow to ensure 
+Integrity while developing a web application? 
+(15)
+ 
+ 
+ 
+8. (a)
+You are trying to log-in to your BIIS account. Discuss all the steps of communications 
+that will take place inside the application developed following Model-View-Controller 
+architecture. Discuss the advantages of Microservice architecture. 
+(20)
+(b) 
+What is the difference between Load and Stress testing? Discuss in the context of BIIS. Is 
+code-review a Black-box testing? Justify your answer. 
+(15)
+
+===== page 26 =====
+L-3/T -1ICSE
+Date:
+06/1112019
+BANGLADESH
+UNIVERSITY
+OF ENGINEERING
+AND TECHNOLOGY,
+DHAKA
+L-3/T-I.
+B. Sc. Engineering Examinations
+2018-2019
+Sub: CSE 307 (Software Engineering)
+Full Marks: 210
+Time:
+3 Hours
+The figures in the margin indicate full marks.
+USE SEPARA TE SCRIPTS FOR EACH SECTION
+SECTION
+-A
+There are FOUR questions in this section. Answer any THREE.
+I.
+(a)
+Bangladesh
+Shipping
+Management
+(BSM)
+prides
+itself
+on
+having
+up-to-date
+information
+on the processing
+and current locations of each shipped item. To do this,
+BSM relies on a company-wide
+information
+system. Shipped items are the heart of the
+BSM product tracking information
+system. Shipped items may be of two types, goods
+and food. They can be characterized
+by item number
+(unique),
+weight,
+dimensions,
+insurance amount, destination,
+and final delivery date. Shipped items are received into
+the BSM system
+at a single retail center.
+Shipped
+items make
+their way to their
+destination
+via one or
+more standard
+BSM transportation
+events
+(i.e. flights, truck
+deliveries). These transportation events are characterized by a unique schedule Number, a
+type (e.g., flight, truck), and a delivery Route.
+Design a Class diagram to implement the scenario described above.
+(b)
+What
+do
+you
+understand
+by
+Equivalence
+Partitioning?
+Create
+test
+input
+set
+considering standard practices to test different user roles ofBIIS.
+(c) What do you understand by defect rate and defect density in Software Engineering?
+Why are checklists used in code review?
+2.
+(a) An application needs to be developed to simulate and study robots' interaction.
+You
+have the following classes:
+!Behaviour -an interface that defines the behavior of a robot
+AggressiveBehaviour,
+DefensiveBehaviour,
+NormalBehaviour
+- each of them defines a
+specific behavior.
+Robot - It keeps or gets information
+such as position, close obstacles,
+etc., and passes
+necessary information to the appropriate class.
+In order to select an action, the Behaviour classes need information
+that is passed from
+robot sensors like position, close obstacles, etc.
+In the main section of the application the several robots are created and several different
+behaviors
+are created. Each robot
+has a different behavior assigned:
+'Big Robot' is an
+aggressive one and attacks any other robot found, 'George v.2.l' is really scared and run
+away in the opposite direction when it encounter another robot and 'R2' is pretty calm and
+ignore any other robot. At some point the behaviors are changed for each robot.
+Draw a class diagram to present appropriate design pattern and write necessary codes so
+that your code fulfils all the requirements.
+Contd
+P/2
+(14)
+(12)
+(9)
+(20)
+
+===== page 27 =====
+=2=
+CSE 307
+Contd ..... O. NO.2
+(b) Give an example of test execution ensuring method, branch and condition coverage.
+What are the characteristics of good unit testing?
+(15)
+3.
+(a) A general manager
+of an office is entitled to have a laptop per year. The laptop
+requisition process is implemented in a software application.
+Give examples of positive
+and negative testing in the context of testing the software process.
+(7)
+(b) There is a software application that can be used by the students of a University
+to
+provide them with the list of their grades for their exams. This application needs to run in
+different ways depending on the users that are using it. For example, the admin needs to
+have some buttons enabled whereas those buttons need to be disabled for the student. The
+Builder
+provides
+the
+interface
+for
+building
+forms
+depending
+on
+the
+user
+login
+information.
+The ConcreteBuilders
+are the specific forms for each type of user. The
+product is the final form that the application will use in the given case and the Director is
+the application that, based on the login information, needs a specific form. Draw a class
+diagram to present Builder design pattern and write necessary codes so that your code
+fulfills all the requirements.
+(20)
+(c) Discuss cohesion and coupling in briefin
+the context of software engineering.
+(8)
+4.
+(a) Discuss Integration, Beta, and Usability testing in brief.
+(9)
+(b) Suppose you have a Bird class with flyO and makeSoundO
+methods.
+And also a
+ToyDuck
+class with squeakO method.
+Let's assume
+that you are short on ToyDuck
+objects and you would like to use Bird objects in their place. Birds have some similar
+functionality but implement a different interface, so we can't use them directly. Draw a
+class diagram
+to present
+Adapter
+design
+pattern
+for the scenario
+above
+and write
+necessary codes so that your code fulfills all the requirements.
+(18)
+(c) Show example class diagram of Aggregation
+and Composition
+in the context of a
+video rental store.
+(8)
+SECTION-B
+There are FOUR questions in this section. Answer any THREE.
+5.
+(a)
+(i) Write down the formula for calculation risk exposure/risk
+impact and define the
+variables used.
+(ii)
+Spectrum Electronics Ltd. produces lO,OOOICs every month, and each of those ICs
+cost $5. The probability of an IC being faulty is 10%. However,
+Spectrum Electronics
+Ltd. replaces every faulty IC with a new one, completely
+free of charge. Calculate the
+overall risk exposure for this situation.
+(4+8=12)
+Contd
+P/3
+
+===== page 28 =====
+.~: ..
+I .•
+r
+=3=
+CSE 307 ;
+I'
+Contd ..... .o. NO.5:
+Ut
+I
+(b) Draw the graph of Development
+cost vs. Development
+schedule
+progress
+111 the
+l ,\. '
+context of AgIle Development.
+(10)
+k'i
+,
+.
+.
+(c) What does framework activity mean in the context of software processes? Name five
+framew~rk~ctiv~ties encouraged in Personal Software Process (PSP).
+(3+ 10';"13)
+~1 I.
+.
+6.
+(a) Name the four P's of Project Management.
+(4)
+.;\'1 I
+(b) From the Fig. for Question 6(b) compute the expected cost for each path and suggest
+'1
+••
+I
+the best possible course of action.
+l<"
+J
+(20)
+~-"~"."""'"
+:"
+'"",-l!i.~.:nii,"i'f("0'."
+~",,,, .•~I~d1~Td_.Qg~S.1
+:,i'e~,.~*~.
+t;1b~1Sjt\~1~o/,:if' .:,.,~~:l.t:-~~~~ f
+.~Ij
+Fig. for Question 6(b)
+.
+(c) ABC Software Ltd. has been hired to deliver a busincss application within a year. The
+a,:"
+l
+software engineers and developers at ABC Software Ltd. have estimated that the software
+~ •
+I
+.
+will probably require
+71 KLOCs of code. Using the software
+equation,
+compute
+the
+II
+'"
+I
+estimated effort in 'person-months.
+(11)
+'~~ I
+'
+7.
+(a) Name of three phases of Adaptive Software Development
+(ASD). Draw a diagram
+. .l ,1
+I
+'"
+showing the phases of the Extreme Programming (XP) method.
+(6+W=16)
+lIl!
+\
+.1,
+(b) Define Scope Creep. Compute the overall Defect Removal Efficiency of a software
+11
+:JJ:
+r
+I
+team if 300 defects were found and rectified before the delivery and 50 more defects
+11 'l
+I
+surfaced after the delivery..
+(2+5=7)
+{\ .t
+~
+(c) X Software Ltd. has budgeted a total of $200,000 to buy, setup, test, and maintain a
+{I .,.
+I
+new syste.m. ,tThe p.lanedvalues
+for each task are: Buy-$60,000,
+Setup-$75,000,
+Test-
+•
+i~,
+I
+$40,000, Mairitain-$25,000.
+Among these phases, only the first phase has been completed
+!ll
+i
+and the actual cost of buying was $70,000.
+Contd
+P/4
+
+===== page 29 =====
+=4=
+CSE 307
+(7)
+(6x2=12)
+(2+8=10)
+(4+10+4=18)
+Using the above information, compute the following-
+(i) Schedule performance index (SPI)
+(ii) Cost performance index (CPI)
+(iii) Budgeted cost at completion (BAC)
+(iv) Estimated cost at completion (EAC)
+(v) Schedule Variance (SV)
+(vi) Cost Variance (CV)
+8.
+(a) Draw the V Model in the context of Prescriptive Process Models.
+(b) (i) When will you use the Incremental model?
+(ii) List four problems associated with Evolutionary Process Models.
+(c) Using the information given in the Table for Q 8(c) do the following
+(i) Draw a network diagram.
+(ii) Compute the Early Start (ES) and Late Start (LS) for each node.
+(iii) Clearly mention the critical path/paths.
+Note that, you have to show the computation
+steps required for determining
+ES and LS
+for all nodes.
+Table for Q. 8(c)
+Activity
+Predecessor
+Duration
+A
+(None)
+5
+B
+(None)
+1
+C
+A.
+2
+D
+A,B
+3
+E
+A
+2
+F
+C,E
+3
+G
+D,H
+4
+H
+B,E
+2
+I
+H
+.
+1 .
+J
+F,G,I
+.
+1
+
+===== page 30 =====
+
+
+===== page 31 =====
+
+
+===== page 32 =====
+
+
+===== page 33 =====
+
+
+===== page 34 =====
+
+
+===== page 35 =====
+L-3/T-lICSE
+Date: 15/07/2017
+BANGLADESH
+UNIVERSITY
+OF ENGINEERING
+AND TECHNOLOGY,
+DHAKA
+L-3/T -1
+B. Sc. Engineering Examinations 2016-2017
+Sub: CSE 307 (Software Engineering and Information System Design)
+Full Marks: 280
+Time: 3 Hours
+(15)
+--
+The figures in the margin indicate full marks.
+USE SEPARATE SCRIPTS FOR EACH SECTION
+SECTION-A
+There are FOUR questions in this section. Answer any THREE.
+1. (a) Discuss some extensibility mechanisms ofUML diagram.
+(12)
+(b) What are the different types of output document of a system? Explain with examples.
+(12)
+(c) Let's assume that, your company developed a system for which the development cost is
+$50,000. Your system analyst tells you that the operating cost for the next year is $5,000 and
+in each year the operating cost will increase by $1000. The expected cash inflow is given in
+the following table:
+Year 1
+Yeat2
+Year 3
+Year 4
+Year 5
+Year 6
+Cash inflow
+$18,000
+$22,000
+$26,000
+$33,000
+$41,000
+$50,000
+Considering discount rate of 11% calculate the payback period. Also calculate its ROI
+(Return on Investment) for these 6 years.
+(d) Write short note on "Ishikawa Diagram".
+2.
+The following is a narrative description of the business process of a bank:
+There are two types of uses in a Bank: Normal user and Foreign User. Both users can create
+account, deposit money and withdraw money. For money withdrawal there are certain rules.
+A user can make a withdrawal of maximum 3,00,000 taka per day. At each transaction the
+highest limit of withdrawal is 1,00,000 taka. A user can make a maximum of 5 withdrawals
+per day. After every three months, interest is added to the account balance. If an account
+balance reaches 20,00,000 taka, for every deposit to that account 2% bonus is applied. The
+foreign user has one extra capability. He can convert his taka to foreign currency.
+The use cases of this scenario are:
+(i) Create account
+(ii) Deposit money
+(iii) Withdraw money
+(iv) Update balance
+(v) Calculate bonus
+(vi) Calculate interest and
+(vii) Convert to foreign currency.
+Contd
+P12
+(7%)
+
+===== page 36 =====
+=2=
+CSE 307
+Contd ... Q. No.2
+Now answer the following questions based on the above scenario.
+(a) Draw the use case diagram of this system.
+(b) Write use case narrative for the use case "withdraw money".
+(c) Draw sequence diagram for the use case "withdraw money".
+(d) List all the entity classes of this system. Draw state chart diagram of the most important
+entity class in your consideration.
+3.
+(a) Write short notes on the following software vulnerabilities: Also provide example and
+way around on these vulnerabilities.
+(i) Buffer Overflow Attack
+(ii) SQL Injection
+(b) What are the checklists for a code reviewer to review the Non-Functional requirements of
+~project? Explain in short.
+(c) The following code takes a user choice from the user. If the choice is I, it increments the
+value of x which is initialized as 5. If the choice is anything else, value for x is decremented.
+Now rewrite this code so that the code follows the MVC principle.
+package
+withouttnvc;
+import
+java.util.Scanner;
+public
+class
+withoutMVC
+{
+public
+static
+void
+main(String[]
+args)
+{
+intchoice;
+int x=5;
+system.out.println("Enter
+your
+choide~
+D);
+Scanner
+sc=new
+Scanner(System.in);
+choice~sc.nextInt();
+if(choice==l)
+x = incx(x);
+else.x
+= decx(x);
+.. ~-
+Systetn.out. println ("Newv:al'lle:"+x);
+}
+public
+static
+int
+incx(int
+x)
+{
+x++;
+return
+x;
+}
+!
+public
+static
+int decx (int x)
+{
+x;..-;
+return
+x;
+}
+}
+Contd
+P/3
+(13)
+(7%)
+(13)
+(13)
+(15)
+(15)
+
+===== page 37 =====
+, .
+=3=
+CSE 307
+4.
+(a) Donald Trump is a rookie UI designer. He designed the following registration page of an
+e-commerce site (e.g. amazon. com) where the user can browse though various items and buy
+items. Point out all the problems associated with this page in details.
+'~'i: (16)
+".' ..
+LAST NAME
+PASSWORD 0
+USERNAME
+FIRST NAME
+EMAIL
+MOBILE (2)
+HOME ADDRESS
+SEX
+MOBILE
+NATIONALITY
+SHIPPING
+ADDRESS
+DATE OF BIRTH 0
+PREFERRED mMS
+DToys
+DCfothes
+0Electronics
+0 Books
+osports
+EXPIRY DATE I03/10
+/2014
+Credit Card Type
+1_v:i_sa
+tJ
+OJ
+Credit card no
+.
+(b) What are the steps o~ system construction and implementation? Mention only the steps.
+You do not need to explain them.
+(c) Write down Sehneiderman's 8 Golden Rules for UI design in short.
+(d) Consider the following design of an EM! Calculator. In this system, the user inputs his
+loan amount, interest rate and tenure. The system calculates the EM!. Point out the problems
+associated with this design and draw a paper prototype of this page to solve these problems.
+Contd
+P/4
+(8%)
+(12)
+
+===== page 38 =====
+=4=
+SECTION -B
+There are FOUR questions in this section. Answer any THREE.
+5.
+(a) Describe eager and lazy initialization of singleton class. :
+(5+5+5 = 15)
+Give an example where lazy initialization should be preferred over eager initialization.
+(b) Briefly describe Spiral process model.
+(10+5=15)
+Write down the arguments in favor of and in opposition to Spiral process model.
+(c) Assume that you are trying to implement syntax highlighting in a programming language
+editor. To perform this, you need to be able to parse different kinds of files such as .c,.cpp,
+.java, .html etc. All the parsers implement an interface named Parser which contains all the
+functions required to parse a file. When a file is selected, you will decide which parser to use
+based on the extension of the file. Now which design pattern should be followed to
+implement the selection process? Write appropriate java implementation of your solution.
+(3+7=10)
+[Hint: You don't need to write the parsers. Clearly mention the assumptions you have made.]
+(d) Draw the UML class diagram of "Class Adapter Pattern". Write down the pros and cons
+of Object Adapter Pattern and Class Adapter Pattern.
+(3+3% =6%)
+6.
+(a) Write short notes on the following:
+(3x5=15)
+i. Sprint
+ii. Backlog
+iii. Pair Programming
+iv. Code Refactoring
+v. Spike Solution
+(b) Explain how "Extreme Programming (XP)' follows the agility principles.
+(15)
+(c) Using the following decision tree find out the decision that a project manager should take
+in order to complete "System X".
+(10)
+=.t
+3BO
+,OOO •
+.. •.. l450.009.
+:$275,000
+" '$350)xiO
+(d) Describe Pareto Principle.
+Contd
+P/5
+
+===== page 39 =====
+=5=
+CSE 307
+7.
+(a) Write down the five steps of test-driven development.
+(5+10=15)
+Demonstrate all the steps sequentially with the help of an example.
+(b) Draw a PERT chart using the durations and dependencies of the tasks shown in the
+following table. Report the critical path and estimated project completion time.
+Task
+Dependency
+Duration
+A
+-
+1
+B
+-
+3
+C
+A
+3
+D
+B,C
+5
+E
+C
+1
+F
+D
+4
+G
+E,F
+3
+H
+G
+2
+I
+G
+2
+J
+H, I
+5
+K
+J
+6
+(c) Describe how distributed VCS and centralized VCS store all the different versions of a
+repository? Draw necessary diagrams to describe your answer.
+(d) Team A found 342 errors during the software engineering process prior to release.
+Whereas team B found 184 errors. What additional measures would have to be made for
+projects A and B to determine which of the teams eliminated errors more efficiently? What
+(15)
+(10)
+metrics would you propose to help in making the determination?
+8.
+(a) Differentiate between the following pairs:
+I.
+fork vs git clone
+Il.
+git pull vs git fetch
+Ill.
+git branch vs git checkout
+IV.
+master vs HEAD
+v.
+Centralized VCS vs Distributed VCS
+(b) Draw two diagrams depicting the monolithitic and microservice architectural design of a
+taxi-hailing application project. (Make appropriate assumptions about the functionalities and
+(3x5=15)
+features of the applications.)
+(4+4+7=15)
+Describe which drawbacks of the monolithic architecture are solved by the microservice
+architecture.
+Contd
+P/6
+
+===== page 40 =====
+=6=
+CSE 307
+(c) Perform function-point analysis using the data in the table given below and estimate the
+total cost of the project. Assuming that the project adjustment factor is 17, programmers in
+the organization can complete 18 function point per month, and each programmer charges
+$5,200 per month for this service.
+(10)
+Functions
+Count per Complexity
+Weight By Complexity
+Simple
+Average
+Complex
+Simple
+Average
+Complex
+Inputs
+3
+4
+1
+2
+4
+6
+Outputs
+0
+6
+2
+4
+5
+7
+Files
+0
+0
+5
+2
+5
+7
+Inquires
+0
+8
+0
+10
+15
+20
+Interfaces
+0
+3
+4
+4
+7
+10
+(d) Which class design principle does the code in figure 8(d) violates? Re-write the code to
+remove the violation of the principle.
+,.. ~i-
+class GraphicEditor{
+public
+float getArea(Shape
+s){
+if(s.m_type
+===
+l)return s.width*s.width;'
+else if (S.ffi~type=== 2)return 3.1416*~L~~,v;g..,
+"
+'
+......)C;'~j~~:
+class Shape{
+int ffi_type;
+class Rect~ngle
+~xtends Shape{
+.int width;
+Rectangle (int width) (
+super.ffi_type== 1;
+this.width
+== width;
+class Circle extends Shape {
+int r;
+Circle(int
+radius) {
+super.ffi_type== 1;
+this.r
+== radius;
+}
+L-:'
+
+===== page 41 =====
+.\
+L-3/T-lICSE
+Date: 04/02/2016
+BANGLADESH
+UNIVERSITY
+OF ENGINEERING
+AND TECHNOLOGY,
+DHAKA
+L-3/T-l
+B. Sc. Engineering Examinations 2014-2015
+Sub: CSE 307 (Software Engineering and Information System Design)
+Full Marks:
+280
+Time:
+3 Hours
+The figures in the margin indicate full marks.
+USE SEPARA TE SCRIPTS FOR EACH SECTION
+SECTION -A
+There are FOUR questions in this section. Answer any THREE.
+1. (a) What are the quality attributes for software product revision? Define three metrics to
+measure one of these attributes.
+(b) Your goal is to reduce the number of errors in coding. Define three matrices for this
+goal using goal oriented software measurement.
+(c) Describe the significance of token, glue token and super glue token to define cohesion
+and coupling.
+(d) Describe a scenario of reviewing the code for a method implementing quick-sort. Mention
+the participants and sample ofthe queries made by the reviewers in the review process.
+(e) A software development
+is being done in seven phases. Each of the first four phases
+generate 25 errors. In the 2nd, 3rd and 4th phase, 40% errors of the previous phase are
+paused through without amplification
+and 60% errors of the previous phases are passed
+with an amplification
+by the phase number. The final three phases are testing phases
+without generating any error. The DRE of these three phases are 60% each. In the first
+four phases, the DRE of the review is defined by 20%xx, where x is the phase number.
+Find the remaining errors at the end of software development.
+2.
+(a) Demonstrate an example showing that exhaustive testing is nearly impossible.
+(b) Consider a module that finds the maximum number in an array ofn.numbers.
+Identify
+the test cases for loop testing.
+(c) Consider a module which sorts several floating point data in descending order. Write
+down the code for automated tester that tests the order as well as originality of the data.
+Here originality means the unsorted input and sorted output are the same set of data.
+(d) What are the components of unit test environment? Explain each of them.
+(e) Explain different types of integration testin& strategies.
+3.
+(a) In estimating a software development
+effort in function point method the following
+data are collected:
+Counts
+Pessimistic
+Most likely
+Optimistic
+Weight
+Number of user inputs
+40
+30
+20
+5
+Number of user outputs
+10
+8
+7
+5
+Number of use inquiries
+30
+20
+15
+4
+Number of files
+8
+5
+4
+6
+Number external Interfaces
+10
+8
+6
+8
+Algorithms
+20
+15
+10
+6
+Contd
+P12
+(8)
+(7)
+(10)
+(15)
+(12)
+(13)
+(7)
+(8)
+(l0)
+
+===== page 42 =====
+=2=
+CSE 307
+Contd ... Q. No. 3(a)
+In the complexity multiplier is 0.75 and a person can implement eight function points in a
+week, find the estimated budget. Average salary of a developer is Tk. 50,000 per month.
+(b) Write down the guide lines for estimating the software project.
+(c) Write down the reasons behind the failure of software projects.
+(d) What do you mean by project risk? Explain with example.
+(e) Consider the following risks shown below for a Banking software development project:
+Risk
+Probability
+Employee turnover
+30%
+Discontinuation
+of Development platform support
+50%
+Change of customer requirement
+20%
+Reduction number of customers in the market
+40%
+Missing delivery deadline
+60%
+Regulatory Constraints
+70%
+Change of technology
+55%
+Write down the impact of these risks with proper reasoning. Do formal risk analysis and
+show mitigation plan for the first five risks.
+4.
+(a) Why are framework activities not applicable for any software development project?
+(b) Compare incremental and spiral model for software development process.
+(c) Describe
+unified
+process
+for software
+development.
+How
+does
+the
+concept
+of
+concurrency and evolution applied in unified process?
+(d) Describe the distinguishing
+features of scrum model.
+(e) You are the architect for the software system that controls operation of a microwave
+oven. Which type of architecture will be most suitable? Explain with proper reasoning.
+SECTION -B
+There are FOUR questions in this section. Answer any THREE.
+(7)
+(6X)
+(8)
+(15)
+(10)
+(10)
+(10)
+5.
+(a) A magazine company's customer sends an order coupon to the company's order entry
+department. The order entry clerk approves the order and prepares a four-part sales order
+form. The clerk then enters the order into the sales journal
+and accounts
+receivable
+subsidiary ledger. The first three copies of the sale orders are forwarded to the fulfillment
+department;
+the fourth is filed by date along with the order coupon. The fulfillment
+department
+determines
+which reward will be offered to the customer
+and updates the
+other to add reward infonnation.
+The first copy of the order is mailed to the customer, the
+second is sent to the company's distribution center, and the third is filed numerically.
+(20)
+Draw a prototype of the information system of the magazine company.
+Contd
+P/3
+
+===== page 43 =====
+=3=
+CSE 307
+Contd ... Q. No.5
+(b) Discuss the disadvantages
+of the prototyping technique.
+(10)
+(c) What types of UML diagrams do exits? Name each diagram type and describe its
+main purpose. Classify each of the UML diagram types as static or dynamic.
+(10)
+(d) What is the value of the money after 5 years whose present value is $100, assuming a
+5% discount rate?
+(6X)
+6.
+(a) What is the difference between Structural and Behavioral
+patterns? Provide criteria
+for determining
+if a new pattern should be considered
+Structural
+or Behavioral.
+The
+criteria must also explain why the current patterns are classified as they are.
+(10)
+(b) Give one design pattern that can be reduce dependence on hardware and/or software
+platforms. Explain how the pattern reduces a program's dependence
+on hardware and/or
+software platforms.
+(12)
+(c) A company has decided to open a training school, which will deal with trainees
+employed in several departments.
+It is also intended that the training school will accept
+students of the local university who will pay a small fee. A new system is required to deal
+with registration, assigning trainees/students
+to one of the available classes, allocation of
+resources, (such as classrooms
+and tutors from the local university)
+and attendance. A
+class is always held in the same classroom. The university tutors will be paid for each
+hour they teach. They always teach in the same classroom
+but may teach different
+classes; however the classroom can be used by different tutors at different times. Briefly
+describe a fact-finding approach for this system.
+(15)
+(d) A book is written by an author, published by a publisher, sold by a book store, and
+read by a reader. Moreover, for a reader to read a book, she must buy it from a book store
+that is selling it. Draw a use case diagram
+for this scenario,
+showing
+relationships
+between different use cases.
+(9X)
+7.
+(a) Explain different kinds of feasibility analyses used in information system design.
+(15)
+(b) In a Video Rental System a Customer makes a Video request
+to the Rent
+Video
+process. The Rent Video process also receives Video info. from the Video Libraty
+data
+store. The process produces a Bill to the Customer, and stores the Rental info. into the
+Rental data store.
+(10+ 12)
+A Customer can Return Video by providing Video and Rental info. The process stores the
+Video info. into the Video Library data store and Rental info. into the Rental data store.
+As a result, Return receipt is delivered to the Customer. Note that Data Flow Diagram
+does not answer in what way and in what order the information is being used throughout
+a system.
+If this infonnation
+is important and worth mentioning,
+consider to model it
+. with diagrams. Finally, a Manager can receive Rental report from the Generate Rental
+Report process and the infonnation
+involved is provided by the Rental data store.
+Draw a context diagram and data flow diagram of the Video Rental System.
+(c) Explain two different types of interaction diagrams with example.
+(97j')
+Contd
+P/4
+
+===== page 44 =====
+•
+=4=
+CSE 307
+8.
+(a) Describe different types of classes used in a class diagram with example.
+(12%)
+(b) Consider, you have a collection of several hundred music CDs. Your friends love to
+borrow them, often borrowing several at the same time. You don't mind lending the CDs,
+but it is becoming difficult for you to keep track of which friend borrowed
+which CD.
+The difficulty is increased by the fact that you have more than one copy of some CDs.
+Also you are thinking of introducing
+a daily fee per CD loaned. For these reasons you
+would like to build a database, which you could query to find out how many CDs a given
+friend has; how long the friend has had them and how much he or she owes; who has a
+particular CD and so on. Draw class and sequence diagram for the above scenano.
+(12+ 10)
+(c) ABC Advertising
+specializes
+in using large helium balloons
+to help business with
+their
+marketing.
+They
+rely
+on computer
+processing
+and
+databases
+to manage
+the
+distribution of balloons around the country. Customers can hire their advertising balloon
+by phoning the state branch of ABC Advertising.
+(6+6)
+Whoever answers the telephone, checks the booking file to see if the requested time by
+the customer is available. The customer contact details, advertising text, balloon type and
+install instructions
+are taken down and entered into the customer
+file. A total price is
+negotiated
+and 10% deposit is requested
+from the customer.
+This is. written into the
+accounts file.
+When the deposit has been received a receipt is sent to the customer and the accounts file
+is updated. A designer then uses the advertising details to create a number of design and
+these are sent to the customer. The customer selects the appropriate
+design and adds
+comments for any alteration and returns the design to ABC Advertising.
+The changes are
+made and the customer file is updated with the design details that will be used.
+The balloon is created and an account is produced and sent to the customer. Installation is
+then completed at the prearranged
+time. When the full payment has been received from
+the customer the account file is updated and a statement showing all payPlent details is
+sent to the customer.
+At the end of the week business transaction report is produced
+from the customer and
+account files and this is sent to the head office.
+(i) Suggest whether a centralized or distributed information system would be used in
+the above situation. Give two reasons for your answer.
+(ii) ABC Advertising is also developing a web site for online booking. They are also
+considering adding an online payment section for deposits. Describe a fact finding
+strategy a System Analyst could use to gather information about the sites requirements .
+•
+
+===== page 45 =====
+..
+....
+L-3ff-I/CSE
+Date; 08/0812015
+RANGLADESH
+(}]\'jVERSITY OF ENGINEEIUNG AND TECHNOLOGY,
+DHAKA
+L-3iT-l
+B. Sc. Engineering ExaminatlOn~ 2013-2014
+Sub: CSE 307
+(Software Engineering and Information System Design)
+Full Marks: 280
+Time:
+3 Hours
+(12)
+(12)
+(77j)
+(6)
+The figures in the margin indicate full marks.
+USE SEPARATE SCRIPTS FOR EACH SECTION
+SECTIO]" -A
+There are FOUR questions in this section, Answer any THREE.
+1.
+(a) You ftre to analyze the requirements
+for a government
+otlicc to automate the filing
+system. Describe how fact finding, qucstiolUlairc and intcrvic,",s play different roles to
+elicit requirements.
+(h) Deslgn a lypical room JRP (Joint Requirement Planning) session. Mention the roles
+and responsibilities
+of different participants,
+(el Defme ex/ends and uses relationship in 'L,'e case diagrams with proper real life examples.
+(d) Consider a teller of n bank serving clients to deposit exammation
+fee" in a queue.
+Show the extended version of lise case for depositing examinatlOn fees by a student.
+(15)
+2,
+(a) Why arc the following factor,; considered m selecting software teams:
+(8)
+(l) Degree ofmodularization
+of the problem
+(li) Rigidity of the deliver)' date
+(iii) Si~e of the system to be developed
+(iv) Quality of the prograJmners
+(b) Write down the general form of empirical estimation model. How are the equations
+developed'?
+(8)
+(c) You are a CTO of a bank. Your management
+has asked you to e~tahhsh mobile
+banking for the customers of the bank. You have stndied the mobile banking solution
+market and found the following alternatives:
+(10 7j)
+(i) Building the system by the in hou~e programmer might require 100 Man-Month if
+it is simple and it might require 150 Man-Month lfit is diflicult. It is assumed that the
+probability that the system IS ditlerent to build is 0,65.
+(ii) Reusing the previously developed system in another good "ptioll, The estimated
+effort for mmor and major change requirements
+to modify the sY8lem for mobile
+banking arc 80 Man-Month and 120 Man-Month respectively_
+(iii) Pureha~ing an olT the shelf mobile banking system Tk. 50 lacs only. But the
+estimated effort tor major and minor customizations
+arc 40 Man-Monlh and 60 Man-
+Month respectively W1thequal pr\lhability.
+[fthe cost of average Man Month i" Tk. 80 thousand then which alternate should be the
+wisest decision for the eTO?
+(d) "Reactive Risk Management
+is not a Risk Management"
+_ Justify w1[h appropriate
+example and reasoning.
+COlltd
+p/2
+
+===== page 46 =====
+.,
+•
+~2=
+CSE307
+Could ... Q. No.2
+(e) Explain the risks associated with the following factors:
+0) Reasonableness
+of delivery date
+(ii) Sophistication
+of the cll~tomer
+(iii) Deviation nfthe product Size,
+(f) Explain ti~k mitigation
+tcchniqlll;l using the risk table.
+3.
+(a) Con~i(krthe following call and retum architecture of 3 subsystem:
+(6)
+(8)
+(10)
+Show the sequence nrle.~ts done in lup down integration mentioning the stub, and drivm
+(b) Explam the debuggingproces, with a diagram describingits process.
+(8)
+(el Consider a module which shorts a number of floating point data m ascending order.
+Write down the driver code for generating different ~i~es of data set. Write down the code
+!t>rthismodu!e.
+(12)
+(d) Con~ider a module lhat sums I.Ipn numbers. Identify the tcst cascs for loop t~stillg.
+(10)
+(~) D~monstrate
+equivalence
+portioning for rcducing the nllmber of test cases with an
+~xumple,
+4.
+(a) Consider an aircraft controller "ith th~ provision of automatic and manual control. These
+amid
+be switched whcnever pilot wants. Ther~ ure temperatme.
+pressurc amI humidity
+<,en",]-,;in the aircraft and thesc information are displayed in the cockpit. The alllomatic
+rontroller decides movement based on the ~en,or data and GPS system output Bllt wh~never
+the mrcruft is under manual control thc system move, based on the pilots input. Write a DFD
+of th~ ')'Stem mld generate thc architccturc of the lliKTaftcontroller system.
+(b) Explain thc architcctllre of sothvare system for thc followmg case:
+(1) A blllmg software for Titas Gas Transmis,ion
+and Distribution Company Ltd
+(Ii) An emhedded system software that controls a microwave woven.
+(iii) Software li,r Network Interface Card
+(iv) MA TLAB sohware.
+(6X)
+(1773')
+(12)
+Contd.
+.. P/3
+
+===== page 47 =====
+,
+•
+..,
+~3=
+CSE 307
+Could ... Q. No.4
+(c) Discuss framework and umbrella adivilie,
+for ,,,flw;lre development.
+(d) Find a sllltable 80flware development process for the following case:
+(i) A scientific software
+development
+that require lots of illnov~tioll and there arc
+unknown issues,
+(ii) A quick development of stock brokerage sol",(io11for a new instrument.
+(iii) A large software development with very unstabk
+L1sers.
+Show proper reasoning for each casco
+SECTIO;\/- B
+There arc FOUR questions in this ~eCllOn Answer <lnyTHREE.
+5
+(al \1/hat lSa model
+in the context of informati Oil system design'!
+(b) What arc the four kinds of things ll,ed in UML~
+(~) Whllt is discovery prototyping'!
+(d) Briefly dcscnhc the fad 'finding methods.
+(e) What is meant by JRP? Describe its advantages and disadvantages,
+6,
+(a) Whatls meant by agile methOlI~
+(b) Briefly describe different computing layers with respect to upplication architeernre,
+(c) Bridl y describe hWllun engineering guidelines for user interface de.'>lgn.
+(d) Consider thc tollowmg problem de8cription:
+Consider an online rcservation
+system for a hll~ company, The bus company
+ineludes
+several buses and realizes
+trips to dlfterenl
+eitie.,. Puch bus is identified
+by its plate
+number
+and a separately
+assigncd
+bu~ number.
+The trips are based on a predefined
+schedule and stop at predelined
+bus stations. Each bus can have only one trip per day,
+Each bus ineludes a dnver and one hostess. For long trips, the bus w1l1have a breaks at
+,ervice
+and rest areas, There
+arc (v..'otypes of trips: normul trips and express tnps.
+Express tnps do not stop at intennediate
+stations and get faster at the destination,
+Seats can be rcscrved by customer~ on the web site of thc bus company
+The customer
+ha, the option to directly pay for the scat through the website. In that case, the scat cannot
+be cancelled (neither by the customer nor by the company). If the customer has not paid
+for the ~eat, the bus company can cancel the scat if the customer does not show up one
+hour belore the tnp. When the reservation is cancelled, the seat will become free and can
+be sold to another cU8tomer. Both the customer and the company staff must authenlleate
+themselves tor perlorming operations with the system
+Draw a use ease diagram tor desenbmg the functional requirements
+of the above system.
+Contd
+P/4
+(8)
+(9)
+(5)
+(12)
+(5)
+(14)
+(lOX)
+(6X)
+(10)
+(8)
+(22)
+
+===== page 48 =====
+,
+".
+• •
+CSE 307
+7. (a) To take CSE 308, a smdcnt must go through
+the followmg
+process.
+When the
+instructor posts assignment
+I, each student must form a team, do the assignment and hand
+it in, When assignment
+2 is posted, each student works on it with her tern,. When the
+midterm assignment
+is made available, each student writes 11 Arter both assignment
+2
+and the midterm are done with, each student waits for assignment
+3, and when it is
+available. docs it with her learn Draw a class diagram (with altributes, where appropriate)
+that describes entities and relationship relevant to the process. In parllcular,
+,tudell!,
+are
+members of teams. Each lcam has 2 or 3 members. Each team completes 0 10 3
+assignments. Each student takes exactly olle midterm test. Each assignment
+and midteml
+is ,",signed a mark.
+(b) Draw a sequence diagram to represent the following seenano:
+(20)
+(16%)
+A patient arrives at a Magnetic
+Resonance
+Imaging (MRI) center carrying a doctor's
+referral form, A clerk in the Intake Departm~nt reviews the referral form for complctene,>s,
+ehecks the Active Doctor
+file to verify that th~ doctor is in good standing with the
+department, and signs the doctor's referral rOml. The intake dep~rtment clerk then prepares
+a 3-part MRI assignment form, which ldcntifies the MRlmachine
+a~d tedmician, The third
+copy of the MRI assigrunent is mailed to the doctor, th~ seco~d copy is recorded by date
+with the refeIT~I,and the first copy is forwarded to the Imaging Department. A technician is
+the imaging department performs the imaging procedure, update, the assignment form to
+include information about when the procedure was performed.
+(c) Distin!.-,'uishbetween distributed and eentralized arehitectLlre. What are the advantages
+of distributed arch,tecture?
+(10)
+~, (a) Wlmt l~the pr~ent valu~ of$ 1.000 one year from now, assuming a 10% discoLllltmte?
+(5)
+(b) What is payhaek analy~is? Explain briefly how it works.
+(10)
+(e) Draw context
+and data /low diagram
+for the case deseribed
+helow,
+Datu flow
+dIagrams which are impossible to interpret because of all the scratching out and ehanges
+are less likcly to be treated gener01l8ly.
+The Blood Bank Testing
+Unit. This is one unit within the College Street Red Cross
+Blood Donor Centre. On the day following a blood don~tion, the Blood Bank unit tests
+all hlood i"r hlood type ~nd potential viral agents. They send the results of these test., to
+the Processing Office (another unit of the Centre). For ea~h tested blood unit. they fill out
+a torm Wh,~h lists the blood unit number, the blood type, the date and the results or the
+test. If the tests indicate that the blood may be contaminated with a viral agent, the blood
+unit is destroyed, This i~ indiCilted on the test form. Blood units have a limited shelf life,
+Contd,
+.. pi5
+
+===== page 49 =====
+••
+=5=
+CSE 307
+Could ... Q. No. S(c)
+The Blood Bank receives a list every day of tho>c units which have exceeded their shelf
+life. These arc discarded
+and the li~l sent back (0 the Processing
+Office with 3 signed
+indication of the disposal of the unit,. The Blood also dlstributes blood to various
+hospitals requesting hlond. Request,> USllUl1y com~ in ill[ specific blood types. The Blood
+Bank prepares refrigerated
+containers of these unit and distributes
+them to the hospital
+vans when they arrive to pick up their supply. The Blood Bank r~c~ives a listing for each
+hospital and the specific units of blood to supply to the ho~pital from the Processing
+Office. The order is printed in triplicate. When the order 1<;filled, (h~ lab technician signs
+the order and returns a copy to the Processing Offiec. A copy Of,( travels with the blood
+to the requesting hospital. The final copy is kepI in the Blood Bank records but discarded
+after one year,
+
+===== page 50 =====
+'L-.:3ff-lICSE.
+Date: 17/05/2014
+", i'NGLADESH
+UNIVERSITY
+OF ENGINEERING
+AND TECHNOLOGY,
+DHAKA
+~.,'I
+L-3/T-l
+B. Sc. Engineering Examinations 2012-2013
+/,{'
+Sub: CSE 307 (Software Engineering and Information System Design)
+Full Marks:
+280
+Time: 3 Hours
+The figures in the margin indicate full marks.
+USE SEPARATE SCRIPTS FOR EACH SECTION
+";>
+SECTION
+- A
+There are FOUR questions in this section. Answer any THREE.
+1. (a) Differentiate
+between
+tlGeneric" and "Bespoke"
+software
+products
+with
+suitable
+examples.
+(b) "Waterfall Model may lead to blocking state" - Do you agree with the statement?
+Why or why not?
+(7)
+(c) Suppose
+you have
+to develop
+an application
+that takes
+a string
+of the format
+A operatorl
+B operator2
+C as input and provides
+the result
+of the corresponding
+operation. Here, A, B and C are number string and the operator 1 and operator2 are any
+one of +, -, *, / operators. Which design pattern will you chose to design a solution to the
+problem and why? Draw the appropriate class diagram for your proposed solution approach. (4+10=14)
+(d) Describe the phases of "Unified Process" in brief .
+. (e) At the conclusion
+of a project that used the Unified Process, it has been determined
+that 30 errors were found during the elaboration phase and 12 errors were found during
+construction phase. The error found in the construction phase were traceable to errors that
+were not discovered in the elaboration phase. But no errors were found in the transition
+phased. What is the DRE of the elaboration phase?
+2.
+(a) Differentiate
+between
+lazy and eager initialization
+of Singleton
+pattern.
+Draw the
+structure of singleton pattern.
+(b) Draw the corresponding
+PERT chart of Table-I and find out the critical path(s).
+Task
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+Dependency
+--
+--
+A
+B,C
+C
+D
+E,F
+G
+G
+H,I
+J
+Duration
+I
+3
+3
+5
+I
+4
+3
+2
+2
+5
+6
+(15)
+(5)
+(6+4=10)
+(14)
+(4)
+I~ I~
+Table-I for Q. No. 2(b)
+(c) Draw the schematic
+diagram
+of RAD model and explain
+why it is a high speed
+adaptation of "Waterfall Model".
+(7+5=12)
+(d) Discuss
+use of "Project Velocity"
+with respect to Extreme
+Programming
+model.
+Provide a suitable example.
+(6%)
+(e) A Web Application
+and its support environment have not been fully fortified against
+attack. Web engineers estimate that the likelihood of repelling attack is only 30 percent.
+The system
+does
+not contain
+sensitive
+or controversial
+information,
+so that
+threat
+probability is 25 percent. What is the integrity of the application?
+Contd
+P12
+
+===== page 51 =====
+=2=
+CSE 307
+3.
+(a) "To use LOC and FP for estimation,
+a historical baseline of information
+must be
+established" - explain.
+\
+(6%)
+(b) Suppose company A has taken up project S. Table 2 and 3 shoe the frequency and
+weight of the Function Points of project S respectively. External factors that affect project
+S are ranked from 0 to 5 and shown in Table 4. From historical data it can be found that
+the A's average productivity
+is 24 FP/pm and labor rate is $ 48000 per year. Calculate the
+estimated project cost and effort.
+(15)
+Table- 2 (Weight assignment of Function Points) for questiOn 3(b)
+--". ---_. -"---
+FPs
+Simple
+Avera2e
+ComDlex
+Inputs
+2
+4
+6
+Outputs
+3
+5
+7
+Files
+5
+10
+15
+Inquires
+2
+4
+6
+~
+Interfaces
+4
+7
+10
+.
+Table ..3 (Frequency of Function Points) for questIon 3(b)
+FPs
+Simple
+Avera2e
+ComDlex
+Inputs.
+-
+4
+2
+Outputs
+2
+2
+4
+Files
+2
+5
+1
+Inquires
+1
+-
+5
+.
+Interfaces
+10
+3
+-
+,
+.
+Ii
+Rank
+4
+5
+4
+5
+3
+5
+4
+Data Backu
+and Recove
+5
+Table- 4 (External Factors) for question 3(b)
+Contd
+P/3
+
+===== page 52 =====
+=3=
+,CSE 307
+Contd ..• Q. No.3
+(c) Consider the decision tree shown in Figure 1 for project S. Difficult implementation
+of project S costs the same as deduced in question 3(b). Simple implementation
+of project
+S costs
+75% of the
+difficult
+implementation.
+Given
+company
+A's priority
+is cost
+minimization, what will be your decision regarding the implementation
+of project S?
+(12)
+.';;'
+S\n\~ (0.30)
+?
+SptemS
+?
+$275.000
+$310.000
+$490.000
+$210,000
+S4OO.ooo
+$3SO,ooo
+$500,000
+(3+10=13)
+)
+4.
+(a) Suppose a project developed in C programming
+language. Propose four "Data faults"
+that should be checked during project inspection.
+(6)
+(b) What is the primary
+motivation
+behind "Interface
+Segregation
+Principle"?
+With a
+suitable "bad example" explain the "Interface Segregation Principle".
+(14 %)
+(c) Consider
+the following
+code of "Counting
+Sort" algorithm
+that sorts an integer
+array ar, whose elements
+are drawn from the range [0, k). Here, n is the length of ar
+(n>O). Now,
+draw the corresponding
+flow graph
+of "Counting
+Sort" algorithm
+and
+identify the independent paths. For each independent path, design suitable test cases.
+/** Sort the n elements in ar, drawn from the values [0, k). */
+(20)
+Contd
+P/4
+
+===== page 53 =====
+=4=
+CSE 307
+Contd •.. Q. No. 4(c)
+int* countingSort (int *ar, int n, int k) {
+1. int i, idx = 0
+2. If(n>
+1){
+3.
+int *B = calloc (k, sizeof (int»;
+4.
+for (i = 0; i <n; itt)
+{
+5.
+B(ar(i]]++;
+}
+6.
+for (i =0; i < k; itt)
+{
+7.
+while (B(i]-- > 0) {
+8.
+ar(idx++] = i;
+}
+}
+9.
+free(B);
+}
+10. return ar;
+}
+(d) Differentiate between:
+(i) Verification and Validation
+(ii) Defect Testing and Debugging
+SECTION-B
+There are FOUR questions in this section. Answer any THREE.
+(6)
+\:.~.
+0:
+5.
+(a) The "Sweet Treat" company is 'a small, independent
+business that sells sweets and
+cakes to the public. The proprietor
+is very keen on baking and specializes
+in making
+homemade
+sweets
+and
+cakes
+for sale
+in the shop.
+Besides,
+making
+a lot of the
+confectionary
+sold in the shop, the proprietor
+also buys sweets and some cakes from
+suppliers to increase the range of products for sale.
+(18)
+The proprietor keeps records of the quantities of stock he has on hand. The stock includes
+raw ingredients
+for his baking, and also the sweets and cakes he buys from suppliers.
+Once a week proprietor
+checks the stock to dispose of anything that is past its 'sell by'
+date. He also checks to see if any raw ingredients or any pre-made sweets and cakes need
+to be ordered from the suppliers. The proprietor orders supplies on a 'Cash on Delivery'
+basis, so all deliveries are paid for immediately after they arrive .
+.At the end of each day, the proprietor checks how many of each homemade
+item have
+been sold. He keeps a record of these sales, and uses this to decide how many of each
+cake or sweet to make for the following day.
+Produce a top level data flow diagram of the "Sweet Treat" company.
+(b) Consider
+the following
+cash flow description
+for an online auction
+management
+system which is ready to develop. Amounts given in dollar value.
+(15)
+Assuming an 11% discount rate, what would be the payback period? Calculate annual
+ROJ. Would be a good investment?
+Contd
+P/5
+
+===== page 54 =====
+.
+'
+=5=
+CSE307
+I
+Contd
+ou Q. No. 5(b)
+Year
+Development Cost
+o
+588,040
+Year
+Estimated operation,
+Estimated benefit
+and maintenance cost
+1
+15,500
+150,500
+2
+17,880
+185,000
+3
+16,500
+200,000
+4
+19,000
+215,000
+5
+18,140
+240,000
+6
+20,000
+--'
+- 270,500
+(c) Draw a collaboration
+diagram to illustrate the following scenario: a word-processor
+(active object) creates a print file and then asynchronously requests a print spooler (active
+object) to print the job. The print spooler repeatedly reads a block from the print file and
+sends the block to the printer (active object) using a procedure call.
+Also draw an activity diagram of the print file operation.
+(d) What is JRP? Who are the JRP participants?
+(9)
+6.
+(a) A grocery store has just implemented
+a new sales system. The system generates~
+invoice for each sale. Consider the following collaboration diagram for creating invoice. (10+2+4)
+:.E.md.I.I£t
+3.2: [product available]
+calcAmount(qty,price)
+:~
+1:Invoice No:: Newlnvoice()
+2: SearchProdu~(query)
+3: SeleetProcluet(pcode,qty)
+4: SavelnvoiceO
+I
+2.1: sear'chproduct(Query)l
+3.1: GetPrice(pcode)
+4.1.1: UpdateQuantity(pcode,qty)
+f'8\AYfl-
+~'~
+C()\\o.lPoYO\+\o~
+d(08crarrn 1m ~..((6-.)
+Now answer the following:
+-(i) Draw the sequence diagram for creating invoice.
+(ii) Include stereotypes for each classes.
+(iii) Find the UML Class for Invoice. Include everything that can be determined from
+the
+above
+diagram
+such
+as attributes,
+methods.
+You
+do not
+need
+to include
+information which is not contained in the above diagram.
+Contd
+P/6
+
+===== page 55 =====
+=6=
+CSE307
+Contd ••. Q. No.6
+(b) Assume that a chain shopping store is going to implement an information system.
+Every customer is associated vv'itha branch. If a customer purchases products worth more
+than Tk. 50,000 in a month, he/she becomes a super customer for that month. Super
+customers get special offer for purchases from any branch in the specified month. Every
+branch has several employees and one manager. The manager of the branch defines the
+offer for that branch. So, offer of one branch is not relat~d to the offer of another branch.
+Now answer the following based on the given scenario.
+(i) What database tables do you need for the store?
+(ii) For each database tables, find whether you should replicate or partition the data.
+Justify your answer.
+(c) What are the drawbacks of two-tier client-server architec.mre?How can theproblem
+be solved?
+(d) Document management system (DMS) is used to track. and store electronic
+documents. It is usually capable of history tracking i.e., keeping track of the different
+versions modified by different users. Now discuss the intangible benefits of a DMS.
+7. (a) Give a state diagram that describes the process of.passing a graduate course as a set.of
+concurrent activities. The process works as follows: To pass, a student has to attend all
+..
+but two lectures, present to the class a paper she read, and complete a course project, due
+on the last day of the term. To give her presentations, the student is given a date by the
+instructor, prepares her presentation, and gives it on the assigned day. At any'time, the
+student can drop the course.
+Define events, conditions and actions for transitions in your diagram, where appropriate.
+(b) Assume that you are designing.an information system for.a health center. Possible
+users of your system are doctor, nurse, patient, receptionist, pharmacist, attendant and
+patient. What are the seven fact finding methods? Argue which fact finding method(s)
+you should select for each_user? '
+(c) Different librarians work in different shifts in the university central library. The
+library contains multiple copies of each book. Each book is written by one or more
+authors and published by.a publisher. A user may borrow up to 10 books at a time. User
+returns a borrowed book to the librarian working in that shifJ:.Now design a class
+diagram with attributes 'and associations based upon the above scenario. You don't have
+to show any methods.
+(d) What are the different kinds of things in.UML?
+8. (a) The Northeast Hotel's websiJe allows potential guests to make a room reservation,
+specifying .the dates and type of room. If they have registered with the website
+previously, their stored details are used to speed up the process; otherwise they are
+required to register as a new customer. Each reservation is given a unique res~rvation
+code. -Beforethe date of their stay, they may enter this reservation code'into the website
+to amend or cancel the reservation.
+Contd
+P17
+(4+10)
+(10)
+(6.%)
+(15)
+(15)
+(12)
+(4.%)
+
+===== page 56 =====
+(9)
+I'I.
+.•
+•
+=7=
+"
+CSE307
+•
+Contd ... Q. No. 8(a)
+Amendments
+can include altering the dates, changing the room type or the number of
+guests in each room. When the guests arrive at the hotel the reservation id IS used by the
+receptionist to quickly find the reservation to check them in. At the end of their stay, the
+receptionist checks the guests out. At this point, the hotel system validates their payment
+through the card payment system. A printed invoice may be requested by the guests. The
+hotel has many room types available, each with a room-type name, .number of guests and
+additional facility information. Each room in the hotel has a room number and is of one
+specific type. Monthly
+reports are prepared
+by the system which may be viewed on
+request by the Hotel Manager.
+(15+5)
+(i) Produce a System Use Case diagram for the above scenario.
+(ii) Also give the Use Case Dependency diagram.
+(b) What does the abbreviation
+CRC stand for? Name two benefits derived from the use
+of CRC when used for class modeling?
+(5)
+(c) A fellow designer has asked you to review the dialogue to be use~ in several screens
+for a new application.
+Give your opinion about the following messages
+based on the
+/
+.
+guidelines of tone and terminology.
+(5)
+.
+(i) An error message that says DISCHARGE,
+DATE MUST BE ON OR AFTER
+ADMISSION DATE.
+(H) An instr1;lctionthat says ENTER THE CLIENTS NAME NOW.
+(iii) An error message that says DATA IS SO FAR OUT OF RANGE
+IT HAS
+LEFT THE SOLAR SYSTEM.
+(iv) A question that asks DO YOU WANT TO RDF THE ACR BEFORE
+"UCI'
+!NG" CMIS?
+(v) An error
+message that says DON'T
+WORRY-NOT
+EVERONE
+GETS
+IT
+RIGHT THE FIRST TIME.
+(d) Define (any three):
+(i) Stratification of Sampling Method
+(ii) Batch Input Processing
+(iii) Stub Test
+(iv) POS Terminal
+(v) Reverse Engineering
+(e) Suppose you have applied for a building permit. The authority, after receiving the
+application,
+reviews
+it for completeness.
+From this stage, the verified
+application
+is
+forwarded for compliance checking. The authority has to review the application for zone
+,compliance
+and environment
+compliance.
+Further permission
+or registration
+for towers
+may be needed from aviation authorities.
+If all criteria are fulfilled, the authority will
+issue you the building permit. Now give the decomposition
+diagram of the "Building
+Permit Application Process System"~
+
+===== page 57 =====
+L-3/T-lICSE
+Date: 23/09/2013
+BANGLADESH UNIVERSITY
+OF ENGINEERING
+AND TECHNOLOGY,
+DHAKA
+L-3/T-l
+B. Sc. Engineering Examinations 2011-2012
+Sub: CSE 307 (Software Engineering and Information System Design)
+Full Marks: 280
+'Time:
+3 Hours
+USE SEPARATE SCRIPTS FOR EACH SECTION
+The figures in the margin indicate full marks .
+....._._~__-_ ..~_--_." .._..~__
+_
+_._-----_
+_._-_
+_------_
+__ __
+_-..,_
+_-
+SECTION-A
+There are FOUR questions in this section. Answer any THREE.
+1.
+(a) Discuss the differe~t implementation issues and consequences of Composite Pattern.
+(14)
+(b) Write a Java code fragment based on Singleton Patt~rn. There should be class called
+Base, which can be inherited by other cla~ses. Define two classes called Derivedl
+and
+Derived2 that will inherit Base. The maximum number of instances of Derivedl
+and
+Derived2 that can be created is 5 and 10 respectively. Write a main function where two
+arrays of Derived 1 a,nd Derived2
+are created respectively
+and show the Singleton
+implementation.
+(c) Discuss
+the
+different
+types
+of
+document
+standards
+with
+respect
+to
+quality
+management.
+(b) What is process based quality? Describe process based qu~ity briefly.
+2.
+(a) Read the following scenario carefully:
+(18~)
+(6)
+(8)
+(18~)
+A car rental company
+called "ABC Car Rentals" provides
+rent-a-car
+services to its
+customers. To rent a 9ar from the company a customer must first visit its office. He then
+provides the time aI1d duration to a company employee
+at the office. The employee
+checks the system and shows the customer available car models. The customer chooses
+a car model. The employee checks if that model is available for the given time. If not
+then the customer is asked to choose again. After the car model is fixed the employee
+asks the customer
+for his national
+id number and other necessary
+information.
+The
+information is entered into the system by the employee. The specific car is also booked
+for that particular time given by the customer. The employee then informs the customer
+about the rental cost and asks him to pay half the cost in advance. If the customer is
+unable to pay the cost then the booking is cancelled.
+Now give the use c~e narrative for the use-cas.e "Rent a Car" given this scenario.
+(b) Define resilient ~d non-resilient systems.
+(6)
+(c) What are the different types of messages
+in a sequence
+diagram?
+Discuss them
+briefly with exampl~s.
+(12)
+I
+(d) What is a CRC ~ard? Discuss its usages.
+(10)
+21
+Contd
+P/2
+
+===== page 58 =====
+=2=
+CSE307
+3.
+(a) What are the different types of events ina state chart diagram?
+(8)
+(b) An insurance company provides life insurance policies to its customer. A customer
+can purchase a policy worth Tk 3,50,000 for the duration of 5 years. After purchasing a
+policy the customer must pay monthly installments
+of Tk 5000 to the company. If a
+customer fails to pay the installment he becomes a defaulter. A defaulter must pay an
+extra Tk 500 for each month he did not pay to become a regular client again. If a
+customer fails to pay 6 consecutive
+installments
+then his policy is cancelled
+by the
+company. If the customer dies within the given time period then the company pays the
+nominee Tk 3,50,000. If the customer does not die during the period then the customer
+'.
+is paid Tk 3,50,000 by the company ..
+Now draw the state chart diagram of a customer for this system.
+(c) What are the different phases of constructing a new system? Describe them.
+(d) What are the different installation strategies while implementing' a new system?
+4.
+(a) What are the different types of System Design Approaches?
+Describe the different
+types of Model Driven Approaches.
+(b) What is three-tiered or n-tiered client/server computing? Discuss its various aspects.
+(c) What are the four essential elements of a Design Pattern? Discuss them briefly.
+(d) What are the difference between the usage of bar charts and column charts? When
+do we use radar charts and scatter charts?
+SECTION-B
+There are FOUR questions in this section. Answer. any THREE.
+5.
+(a) Classify
+each
+of
+the
+following
+statements
+according
+to
+its
+most
+appropriate
+requirement category by indicating
+1, 2, 3, 4, 5, 6 or 7, where the numbers denote the
+following categories:
+1 - The sentence is a performance requirement.
+2 - The sentence is a portability requirement.
+3 - The sentence is a security requirement.
+4 - The sentence is a usability requirement.
+5 - The sentence is an availability requirement.
+6 - The sentence is a maintainability requirement.
+7 - The sentence is a domain requirement.
+Contd
+P/3
+(14%)
+(16)
+(8)
+(18%)
+(12)
+(8)
+(8)
+I
+(10)
+
+===== page 59 =====
+=3=
+CSE307
+Contd ... Q. No. 5(a)
+."..."
+Statement
+Category
+i)
+The system must authenticate the user at each new session.
+ii)
+On average, no more than 2 failures requiring a system restart
+shall occur within a month of operation.
+iii)
+At most 5% of the source code shall be operating
+system
+specific.
+iv)
+The methods of the system shall have a maximum cyclomatic
+complexity of 6.
+v)
+The system shall be able to run with all functionality enabled
+within 250 MB of internal memory
+and 2 GB of external
+memory.
+vi)
+The rocket shall reach a speed of 11.2 km/s in order to evade
+earth gravity.
+vii)
+The system shall be operational on Windows XP, Windows
+Vista, and Windows 7.
+viii) The system shall require less than five mouse clicks to add a
+weekly meeting to a user's calendar.
+ix)
+After a 2 hours training period, a regular user shall be able to
+add a new customer within 3 minutes.
+x)
+The Olympics 'Ticketing System shall be able to process 100
+ticket requests per minute at peak load.
+(b) What is agile software development?
+Briefly describe' different
+stages of extreme
+programming.
+(c) Compare and contrast the Scrum approach to project management
+with conventional
+plan-based approaches.
+The comparisons
+should be based on the effectiveness
+of each
+approach
+for planning
+the allocation
+of people
+to projects,
+estimating
+the cost of
+projects,
+maintaining
+team
+cohesion,
+and
+managing
+changes
+in
+project
+team
+membership.
+(18%)
+(18)
+6.
+(a) CSE department of BUET has got a very exciting project of modifying an existing
+bankin~ solution. The solution is now working in different branches of many banks. But
+it has one major disadvantage that it does not use any centralized database. Now the task
+is to do a complete requirement
+analysis, design and redevelopment
+of the banking
+solution so that it can support online (any branch) banking. The project may need a
+complete technological
+up gradation. Also, 'CSE department has the problem of losing
+skilled personnel
+as teachers
+frequently
+leave for higher studies.
+Identify
+the risks
+associated in this project and describe how you plan to cope up with these.
+(16 % )
+(b) What are the different ways in which software engineer: can deal with errors? What
+are the advantages
+and disadvantages
+of these approaches?
+List and discuss as many
+ways as you can think of.
+(12)
+Contd
+P/4
+
+===== page 60 =====
+=4=
+CSE 307
+Contd •••Q. No.6
+(c) The following Table sets out a number of tasks, their durations, and their
+dependencies. Draw a bar chart showing the project schedule.
+Task
+Duration
+Dependencies
+T1
+10
+T2
+15
+T1
+T3
+10
+Tl,T2
+T4
+20
+T5
+10
+T6
+15
+T3,T4
+T7
+20
+T3
+T8
+35
+T7
+T9
+15
+T6
+TlO
+5
+TS,T9
+Tll
+10
+T9
+Tl2
+20
+TlO
+Tl3
+35
+.T3,T4
+Tl4
+10
+T8,T9
+T15
+20
+T2,T14
+T16
+10
+T1S
+7
+(a) Your company is developing software for an on-line stock-trading service. The
+software contains the following subsystems: a database 9f stockholder accountS,a web-
+based client through which customers place orders and request stock prices, an ordering
+server which processes stock transactions as requested by clients, and a networking
+system for communicating with an external stock price server (for up-to-the-minute
+stock prices).
+For each of the following test cases, indicate whether it should be run during unit,
+integration, or system testing.
+If you feel a test should be run in more than one testing phase, state the phases and
+justify your answer.
+(i)
+Assuming the server is. up, do stockholders receive price quotes within 3
+seconds ev.enif 200 stockholders request quotes simultaneously?
+(ii) Does the ordering server accept an order only if the stockholder's account has
+sufficient funds to cover the order?
+(iii) Does the client refuse orders for stocks that do not exist?
+(iv) If the server receive, an order to purchase stock and the stockholder has
+sufficient funds, is the stock eventually purchased?
+(v)
+Once stockholder's account has been.removed from the account database, is
+that stockholder prohibited from placing orders through the software?
+Contd
+PIS
+(18)
+(10)
+t.
+
+===== page 61 =====
+•
+=5=
+(
+,
+CSE 307
+Contd ... Q. No.7
+(b) Draw the control
+flow graph for the following
+function.
+Then
+determine
+the
+cyclomatic
+complexity
+and the basis set of independent
+paths of the CFG. Finally
+. prepare test cases that force execution of each path in the basis set.
+.
+public
+double
+calculate(int
+amount)
+{
+double
+rushCharge
+= 0;
+if
+(nextday.equals("yes"))
+{
+rushCharge
+= 14.50;
+}
+double
+tax = amount
+*
+.0725;
+if
+(amount
+>= 1000)
+{
+shipcharge
+= amount
+*
+.06 + rushCharge;
+}
+else
+if
+(amount
+>=
+200)
+{
+shipcharge
+= amount
+*
+.08 + rushCharge;
+}
+else
+if
+(amount
+>=
+100)
+{
+shipcharge
+= 13.25
++ rushCharge;
+}
+else
+if
+(amount
+>=
+50)
+{
+shipcharge
+= 9.95 + rushCharge;
+}
+else
+if
+(amount
+>= 25)
+{
+shipcharge
+= 7.25
++ rushCharge;
+}
+else
+{
+shipcharge
+5.25
++ rushCharge;
+}
+total = amount
++ tax + shipcharge;
+return
+total;
+Ilend
+calculate
+(c) Briefly describe the techniques of estimating different stages of agile development.
+(25)
+(11%)
+8.
+(a) You have an impatient, result-oriented
+client who keeps on changing requirements.
+Which process model would you adopt to keep the development under control? Why?
+(10)
+(b) Describe the four phases of the Rational Unified Process (RUP). Mention four ways
+in which the RUP differs from the Waterfall process model.
+(c) How COCOMO
+II model for cost estimation
+can be used at various
+stages of a
+project life cycle?
+Contd
+P/6
+(12)
+(15)
+
+===== page 62 =====
+=6=
+CSE307
+Contd ... Q. No.8
+(d) The structure chart below illustrates the hierarchy of modules in a software sub.
+system:
+(9%)
+ROOT
+MI
+M7
+~ ....•.
+~
+Describe the sequence of module tests for integrating the modules using the depth first
+top-down approach.
+
+===== page 63 =====
+'
+...
+~-:
+L-3/T-lICSE
+Date: 19/03/2012
+BANGLADESH
+UNIVERSITY
+OF ENGINEERING
+AND TECHNOLOGY,
+DHAKA
+L-3!T-1
+B. Sc. Engineering Examinations 2010-2011
+Sub: CSE 307 (Software Engineering and Information System Design)
+Full Marks:
+280
+Time: 3 Hours
+USE SEPARATE SCRIPTS FOR EACH SECTION
+The figures in the margin indicate full marks.
+SECTION-A
+There are FOUR questions in this Section. Answer any THREE.
+1. (a) Read the following Use Case Carefully.
+Use Case:
+Check Out Books
+Primary
+Actor: Worker
+Stakeholders and Interests:
+-Worker: wants fast, and easy check out of books.
+-Patron: wants fast check out, and does not want to be charged for books they did not
+check out.
+-Library: wants fast check out of books, and wants to make sure that all books that leave
+the library have been checked out. Wants to allocate books fairly.
+-Government: wants to protect investment in books and keep costs down.
+Wants to promote learning and citizen happiness.
+Preconditions:
+The Worker has been authenticated.
+Success
+Guarantee
+(Post
+conditions):
+The System
+remembers
+that the Patron
+has
+checked out the books.
+Main Success Scenario
+(or Basic Flow):
+1. The Worker tells the System the identity of a patron who wishes to check out books.
+2. The System confirms that the patron is allowed to check out books, and remembers the
+patron's identity.
+3. The Worker tells the system the identity of a book this patron is checking out.
+4. The System confirms that the book can circulate, calculates the due date based on
+whether the patron is a facuIty member or a student, and records that the patron has
+checked
+out this book,
+which
+is due on the calculated
+due date,
+and makes
+that
+information available from the library catalog.
+5. The System tells the Worker the due date (which also confirms that the book has been
+checked out).
+The Worker repeats steps 3-5 until indicates done.
+Extensions
+(or Alternative
+Flows):
+2a. if the patron is not allowed to check out books because they have violated
+some
+library policy (for example, if the patron has not paid their university bill or library fines):
+Contd
+P/2
+I~
+(247j)
+
+===== page 64 =====
+..;.
+"
+=2=
+. CSE 307
+Contd ... Q. No. l(a)
+1. The System tells the Worker that the patron is not allowed to check out books and the
+reason for this prohibition.
+2. The use case ends.
+4a. If the book that is being checked out is non-circulating;
+1. The System tells the Worker why the book is non-circulating.
+2. The use case continues from step 3 in the main success scenario.
+Special Requirements
+-There are different due dates depending on the kind of patron one is dealing with. For
+example, faculty can take out books for the whole academic year, whereas students can
+only take them out for a limited time.
+-The System must respond to the Worker, at least giving some progress indication, within
+3 seconds, 95% of the time.
+-Workers are experts, because they use the system continuously,
+so the interface should
+have minimal interaction and should minimize the physical effort involved; for example,
+workers should not have to be prompted.
+-Displays for the worker should be visible from one meter away.
+-The system should be quiet.
+Technology
+and Data Variations
+List:
+3a. Barcode scanners are normally used to identify books.
+3b. Books without barcodes have to be entered manually.
+Frequency
+of Occurrence:
+nearly continuous.
+Open Issues: How to deal with failures and recovery?
+How to deal with overnight check out of reserve items.
+How to deal with library books that are unknown to the circulation system.
+Now draw a Collaboration
+and Class diagram,
+which should be relatively complete for
+the use case given. It should include associations also.
+(b) List all behavioral UML diagrams and describe the purpose of each of them.
+(8)
+(c) Draw an Activity diagram
+that represents the making of a cup of tea. The initial three
+activities are Fill kettle with water, Find cup and Find tea bag and they may be performed
+in parallel. When the Find cup and Find tea bag are completed the activity Place tea bag
+in cup can start. The kettle must have boiled and the tea bag must have been placed in the
+cup before the activity Add water to cup can begin. If milk is required then activity Add
+milk should be performed.
+(10)
+(d) Assume that A, B, C and Boolean variables, X, Y, Z are outcomes. Propose a decision
+table for the following procedure:
+(4)
+Contd
+P/3
+
+===== page 65 =====
+•
+.•.
+=3=
+CSE 307
+Contd ... Q. No. l(d)
+If A then if B then X
+else if C then Y else Z endIf endIf
+else if C then X else Z endIf
+endIf
+Make sure your final table is in simplified form, i.e., does not have redundant rows or
+columns.
+2.
+(a) To buy a book electronically
+from chapters. com, a customer needs to select the book
+from a list provided by Chapter's eCommerce system, provide credit card information to
+the system, then the system gets authorization
+from the bank for the payment,
+and --if
+positive -- confirms the sale. The order is then sent to the orders department and when the
+book becomes available, it is shipped to the customer. Also, the order department charges
+the customer's credit card by informing the bank of the amount.
+Draw a Sequence
+diagram
+that models this process. Make sure to model all relevant
+actors and the interactions
+between them. Do show explicitly the time intervals when
+different actors actively participate in the process you are modeling.
+(12)
+(b) Give a State Chart
+diagram
+that describes the lifetime of a video tape in a video
+store. You can assume that a video tape is purchased, packaged properly
+(plastic case
+with identification information on the outside), put in the video store database, and is then
+put up for rental. Customer who choose to rent it, check it out and return it in 3 days. If a
+customer fails to return it, the store calls him/her the next day. The call is repeated a
+second time after 2 more days, and if the tape is not returned within 2 more days, the
+store delegates the matter to a collection agency and removes the video tape from its
+collection. If the tape is damaged on return, it is removed from the collection database
+also. Finally, if the tape is missing during the annual store inventory, it is removed from
+the collection database as well.
+(12 X )
+Make sure to define events, conditions,
+actions for transitions
+in your diagram, where
+appropriate.
+(c) A book is written by an author, published by a publisher,
+sold by a book store, and
+read by a reader. Moreover, for a reader to read a book, she must buy it from a book store
+that is selling it.
+(8)
+Draw a Use Case diagram
+for this scenario, showing relationships between different use
+cases.
+(d) (i) What is the present value of$
+1,000 one year from now, assuming a 10% discount
+rate?
+(ii) Explain the difference
+between return
+on investment
+and payback
+period.
+Why
+might you need to know both in order to decide which of two different
+development
+alternatives represents a better investment for a particular organization?
+Contd
+P/4
+(4+10)
+
+===== page 66 =====
+•
+=4=
+CSE 307
+3.
+(a) The Blood Bank Testing Unit. This is one unit within the College Street Red Cross
+Blood Donor Centre. On the day following a blood donation, the Blood Bank unit tests
+all blood for blood type and potential viral agents. They send the results of these tests to
+the Processing Office (another unit of the Centre). For each tested blood unit, they fill out
+a form which lists the blood unit number, the blood type, the date and the results of the
+test. If the tests indicate that the blood may be contaminated with a viral agent, the blood
+unit is destroyed. This is indicated on the test form.
+(12 X)
+Blood units have a limited shelf life. The Blood Bank receives a list every day of those
+units which have exceeded their shelf life. These are discarded and the list sent back to
+the Processing Office with a signed indication of the disposal of the units.
+The Blood Bank also distributes blood to various hospitals requesting
+blood. Requests
+usually
+come
+in for
+specific
+blood
+types.
+The
+Blood
+Bank
+prepares
+refrigerated
+containers of these units and distributes them to the hospital vans when they arrive to
+pick up their supply. The Blood Bank receives a listing for each hospital and the specific
+units of blood to supply to the hospital from the Processing Office. The order is printed in
+triplicate. When the order is filled, the lab technician signs the order and returns a copy to
+the Processing Office. A copy of it travels with the blood to the requesting hospital. The
+final copy is kept in the Blood Bank records but discarded after one year.
+Draw a data flow diagram for the Blood Bank Testing Unit System.
+(b) Define each of the following with suitable examples:
+(24)
+(i) Detailed Report
+(ii) Summary Report
+(iii) Exception Report
+(iv) Turnaround Document
+(v) Two-Tier Architecture
+(vi) Three-Tier Architecture
+(vii) File-Server Architecture
+(viii) Agile Method
+(c) The ordinary way to extend a software system is to find a suitable superclass, and to
+subclass it, You can also "inherit" behavior from more than one class by copying some of
+the operations of the second class and delegating calls to an instance of that class. Both of
+these extension
+techniques,
+however,
+require
+that you know
+at compile
+time what
+behavior you want to add. Name these two techniques that we just described. Should one
+of these techniques require a preferential treatment?
+(5)
+Contd
+PIS
+-'
+
+===== page 67 =====
+•
+=5=
+CSE 307
+Contd ... Q. NO.3
+(d) Does the following code fragment implement the Factory design pattern? Explain
+in
+brief
+(5)
+public class XMLReaderFactory
+{
+/ / This method returns an instance of a class
+/ / that implements the XMLReader interface.
+/ / the specific class it creates and returns is
+/ / based on a system property.
+public static XMLReader createXMLReader
+( ) ;
+}
+public interface XMLReader
+{
+public void setContentHandler
+(ContentHandler
+handler) :
+public void parse (InputStream is) ;
+}
+4.
+(a) Which of the following (i) and (ii) is a valid implementation
+of Singleton Pattern?
+Give specific reason for each of the following implementation.
+(5)
+(i)
+public class Singleton {
+private static Singleton s_singleton = new Singleton () ;
+private Singleton ()
+{}
+private static Singleton getInstance()
+{
+return s_singleton;
+}
+}
+(ii)
+public class Singleton
+{
+private Singleton ()
+{}
+private static class SingletonHolder
+{
+private static final Singleton instance = new Singleton () ;
+}
+public static Singleton getInstance ()
+{
+return SingletonHolder.
+instance;
+}
+}
+(b) Write down the guideline for input design and output design of a system.
+(c) In principle
+a social network
+service focuses on building
+online communities
+of
+people who share interests
+and/or activities,
+or who are interested
+in exploring
+the
+interests and activities
+of others. Facebook
+support groups that people can join. Each
+group has a title, administrative
+members,
+a group type (open! closed),
+and a list of
+related groups.
+Otherwise,
+a group operates just like an ordinary
+page. If somebody
+writes on the wall page of the group, the information is broadcasted
+to all the members
+and it is visualized in the news feeds of the members.
+Contd
+P/6
+(5+5)
+
+===== page 68 =====
+•
+=6=
+CSE 307
+Contd ... Q. No. 4.(c)
+Which design pattern is the most appropriate to handle this basic functionality
+of such a
+Faceb09k group? Users should be able to join a group as well as leave a group if they get
+bored. Once a user has joined a group it will automatically receive any updates that are
+published on the wall. Give a short explanation.
+In particular,
+show a complete
+class
+diagram(s) and enough code fragments to illustrate your use of the pattern to solve the
+problem.
+(12)
+(d) Now let's suppose that you would like to extend the functionality
+of Facebook group
+that you have created in Question. 4(c) by adding the possibility
+that besides normal
+users a group page can also be a member of another group. As an example it should be
+possible that the group page of the "CSE BUET 08" joins the "BUETIANS"
+group. As a
+consequence
+all the members
+of the "CSE BUET
+08" group become
+automatically
+members of the "BUETIANS" group.
+(12 %)
+Which design pattern is most appropriate to accommodate this change? How the solution
+proposed in the previous example shall be extended. Please give a short explanation why.
+Show a complete class diagram(s) and enough code fragments to illustrate your use of the
+pattern to solve the problem.
+(e) Suppose Alice told you the following story
+(7)
+"At the company for which I work we are facing this problem: We have a large amount
+of application software written using a particular library. Let's call this library LibX. The
+provider of this library was XIndustries AB. We wanted to extend the functionality of our
+application
+and for this reason we tried to contact XIndustries
+AB to implement
+the
+necessary library functionality.
+To our surprise we found out that XIndustries
+AB has
+gone out of business.
+Fortunately
+we found out that there is another company
+called
+YEnterprise
+AB is producing
+LibY that provides the same functionality
+as LibX but
+many of the classes have different interfaces. We don't have access to the source code of
+the old library LibX and neither to the source code of LibY. What should we do?"
+Which design pattern is most appropriate
+to accommodate
+this change?
+In particular,
+show an appropriate class diagram to solve the problem.
+SECTION-B
+There are FOUR questions in this Section. Answer any THREE.
+5.
+(a) What do you know about COCOMO model? Describe the basic CO COMO model
+with its limitations. How COCOMO II model for cost estimation can be used at various
+stages of a project lifecycle?
+(5+ 10+ 15)
+(b) How Ishikawa
+diagram
+is used to identify, explore and depict problems,
+and the
+causes and the effects of those problems? Describe with an appropriate example.
+(16 %)
+Contd
+P17
+
+===== page 69 =====
+=7=
+CSE 307
+6.
+(a) Discuss about waterfall model and iterative model of software development.
+(b) What are the challenges that arise in quality management
+of a software development
+process? Suppose your team is developing
+customized
+hospital management
+software.
+Identify the quality criteria for such a project.
+(c) What is the difference between verification and validation? What input! output faults
+you may check while designing a banking transaction module.
+(d) Describe the communication
+practices a software engineer should adopt.
+(e) Suppose you are writing a 'Queue' class. Design some test cases to verify your code.
+7.
+(a) Discuss about professional and ethical responsibilities
+of a software engineer.
+(b) As a part of ensuring eGovernance goal, the Government is going to computerize
+its
+land management
+process
+that keeps records
+about land ownership
+and transfers
+of
+ownerships. It is your responsibility
+to do the requirement
+analysis for such a project.
+What fact finding techniques you may use and how?
+(c) Your company has previously made the very successful game BUET Premier League
+2011 (BPL 2011). But new 3D technology
+has arrived and the introduction
+of Kinect
+sensor requires you to upgrade the game to a newer version. Now, the overall market
+condition is not good due to economic recession, and this game may be a key to success
+for your company
+over the other game developing
+firms in the market.
+Identify the
+associated risks in this project and describe how you plan to cope up with these.
+8.
+(a) What is the difference between software engineering and system engineering?
+(b) Suppose you are the project manager of a newly founded software firm and you are
+estimating the cost of a customized
+VOIP software to quote in a tender process.
+The
+market is very competitive, but you have the advantage of having some skilled persons in
+your firm. What pricing factors you should consider while making that cost estimation
+and why?
+(c) Describe the following software cost estimation techniques:
+(i) Parkinson's Law.
+(ii) Pricing to win.
+(d) Find the critical path of a project using PERT chart base on the following
+table
+describing task dependencies and the expected duration of each task.
+Task
+Prerequisite
+Duration
+A
+-
+2
+B
+-
+3
+Contd
+P/8
+(3+3)
+(4+8)
+(2+5)
+(6%)
+(15)
+(6%)
+(25)
+(15)
+(5)
+(15%)
+(3+3)
+(20)
+'.
+
+===== page 70 =====
+."
+CSE 307
+Contd ... Q. No. Sed)
+=8=
+C
+A
+3
+D
+B,C
+5
+E
+C
+1
+F
+D
+4
+G
+E,F
+3
+H
+G
+2
+I
+G
+3
+J
+H,I
+5
+K
+J
+6
+.{
+-
+-/(

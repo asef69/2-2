@@ -1,0 +1,94 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 1--2}
+\chapter{Signal Energy, Power and Periodicity}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q3(a)}{CSE 219 \textbullet\ 22 batch p.2}{15}
+Suppose $x[n]=(3-4j)\,e^{j\frac{13\pi}{7}n}$ is a complex exponential discrete-time signal.
+\begin{enumerate}[label=(\roman*),leftmargin=2em,itemsep=1pt,topsep=2pt]
+\item Show whether the real and imaginary parts of $x[n]$ are periodic or not. If periodic, determine the fundamental period.
+\item Justify carefully whether the phase shift in each part can be interpreted as an integer time shift of a cosine sequence.
+\end{enumerate}
+\end{qcard}
+\begin{solution}
+Write $3-4j=5e^{-j\theta}$ with $\theta=\tan^{-1}\frac43=0.9273$ rad. Then
+\[
+x[n]=5\,e^{j(\frac{13\pi}{7}n-\theta)},\qquad
+\Re x[n]=5\cos\!\Big(\tfrac{13\pi}{7}n-\theta\Big),\quad
+\Im x[n]=5\sin\!\Big(\tfrac{13\pi}{7}n-\theta\Big)=5\cos\!\Big(\tfrac{13\pi}{7}n-\theta-\tfrac\pi2\Big).
+\]
+\step{(i) Periodicity.} A sequence $\cos(\omega_0n+\varphi)$ is periodic iff $\omega_0N=2\pi m$ for integers $N,m$, i.e.\ $2\pi/\omega_0=N/m$ is rational; the phase plays no role. Here $\omega_0=13\pi/7$ and
+\[
+\frac{2\pi}{\omega_0}=\frac{14}{13}\ \text{(rational)}\ \Longrightarrow\ N_0=14\quad(m=13).
+\]
+Both the real and the imaginary part are periodic with fundamental period $N_0=14$; after 14 samples the angle has advanced by $13\cdot2\pi$.
+
+\step{(ii) Phase as an integer shift.} Shifting $\cos(\omega_0n)$ right by an integer $n_0$ gives $\cos(\omega_0n-\omega_0n_0)$, so the phase obtainable by an integer shift is $\omega_0n_0=\frac{13\pi}{7}n_0$, which (mod $2\pi$) is always an integer multiple of $\pi/7$. The real part has phase $\theta=0.9273$ rad $=2.066\,\frac{\pi}{7}$, not an integer multiple of $\pi/7$ ($\cos\theta=3/5$, and $\theta/\pi$ is irrational). The imaginary part has the further offset $\pi/2$, which is $3.5\,\frac\pi7$ --- again not a multiple. Hence \emph{neither} phase can be produced by an integer time shift. They are shifts of the underlying continuous-time cosine by a fraction of a sample, $t_0=\theta/\omega_0\approx0.1264$ samples.
+\ans{(i) Both parts are periodic, $N_0=14$. (ii) No: $\theta=\tan^{-1}\frac43$ is not an integer multiple of $\pi/7$, so the phase is not an integer shift (it is a non-integer shift of $\approx0.126$ sample).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q5(c)}{CSE 219 \textbullet\ TF p.3}{5}
+Is the signal $x[n]=2\cos\!\big(\frac{16\pi n}{63}+\frac{\pi}{3}\big)$ a periodic signal? Explain your answer.
+\end{qcard}
+\begin{solution}
+$\omega_0=\frac{16\pi}{63}$, so $\frac{2\pi}{\omega_0}=\frac{63}{8}=\frac Nm$ is rational with $N=63$, $m=8$ in lowest terms. The sequence repeats after 63 samples (the angle advances by $16\pi=8\cdot2\pi$); the phase $\pi/3$ does not affect the period. A smaller $N$ would require $\frac{16\pi}{63}N\in2\pi\mathbb Z$, i.e.\ $8N/63\in\mathbb Z$, so $63\mid N$.
+\ans{Yes, periodic with fundamental period $N_0=63$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q1(a)}{EEE 211 \textbullet\ EEE p.12}{10}
+Is the following signal periodic? If so, what is the period?
+\[x(t)=\sqrt{e^{j5\pi t}}+\sin^2\!\Big(3t-\frac\pi4\Big).\]
+\end{qcard}
+\begin{solution}
+\[
+\sqrt{e^{j5\pi t}}=e^{j5\pi t/2}\ \ (\text{principal root}),\qquad
+\sin^2\!\Big(3t-\tfrac\pi4\Big)=\tfrac12-\tfrac12\cos\!\Big(6t-\tfrac\pi2\Big).
+\]
+Periods: $T_1=\dfrac{2\pi}{5\pi/2}=\dfrac45$; the constant has no period; $T_2=\dfrac{2\pi}{6}=\dfrac\pi3$. The sum is periodic only if $T_1/T_2$ is rational:
+\[\frac{T_1}{T_2}=\frac{4/5}{\pi/3}=\frac{12}{5\pi}\ \text{(irrational)}.\]
+\ans{Not periodic.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q1(b)}{EEE 211 \textbullet\ EEE p.12}{10}
+Determine whether the signal $e^{-3t}\sin\!\big(\frac{2\pi}{3}t-4\big)u(t)$ is a power or an energy signal. Justify your answer.
+\end{qcard}
+\begin{solution}
+Let $\omega=2\pi/3$. Since $\sin^2\le1$,
+\[E=\int_0^\infty e^{-6t}\sin^2(\omega t-4)\dd t\le\int_0^\infty e^{-6t}\dd t=\frac16<\infty ,\]
+so the signal has finite energy and therefore zero average power. The exact value follows from $\sin^2\theta=\frac12(1-\cos2\theta)$:
+\[
+E=\frac1{12}-\frac12\Re\!\left\{\frac{e^{-j8}}{6-j2\omega}\right\}
+=\frac1{12}-\frac{6\cos8+2\omega\sin8}{2(36+4\omega^2)}=0.08333-0.03055=0.0528 .
+\]
+\ans{Energy signal ($E\approx0.0528$, $P=0$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q5(b)}{EEE 211 \textbullet\ EEE p.20}{10}
+Analytically determine whether the following signals are power or energy signals: (i) $u(t-6)-u(-t+8)$, and (ii) $2r(t-4)u(t)$.
+\end{qcard}
+\begin{solution}
+\step{(i)} $u(t-6)=1$ for $t>6$ and $u(8-t)=1$ for $t<8$. Hence
+\[x(t)=u(t-6)-u(8-t)=\begin{cases}-1,&t<6,\\0,&6<t<8,\\+1,&t>8.\end{cases}\]
+The energy is infinite, but the average power is finite:
+\[P_\infty=\lim_{T\to\infty}\frac1{2T}\Big[\int_{-T}^{6}1\dd t+\int_8^T1\dd t\Big]=\lim\frac{(T+6)+(T-8)}{2T}=1 .\]
+\step{(ii)} $2r(t-4)u(t)=2(t-4)$ for $t\ge4$ and $0$ otherwise: a ramp that grows without bound. $E=\int_4^\infty4(t-4)^2\dd t=\infty$ and $P=\lim\frac1{2T}\int_4^T4(t-4)^2\dd t=\lim\frac{4(T-4)^3}{6T}=\infty$.
+\ans{(i) Power signal, $P=1$. \quad (ii) Neither energy nor power signal.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q6(a)}{EEE 211 \textbullet\ EEE p.30}{15}
+Determine whether the following signals are power signals, energy signals or neither. Justify the answer.
+(i) $x_1(t)=\exp\!\big[j(2\pi t+\pi/4)\big]+\exp[-2|t|]$;
+(ii) $x_2(t)=\big[u(\cos t)-\delta(t-k\pi)\big]^{0.5}$, where $k=\pm1,\pm3,\pm5,\ldots,\infty$.
+\end{qcard}
+\begin{notebox}The impulses of $x_2$ sit at the odd multiples of $\pi$, where $\cos t=-1$ and $u(\cos t)=0$, so the bracket is negative there. The solution takes $|x_2|^2$ as $u(\cos t)$ plus the magnitudes of the impulse terms; the printed signal is not a classical function.\end{notebox}
+\begin{solution}
+\step{(i)} $\abs{x_1}^2=1+e^{-4|t|}+2e^{-2|t|}\cos(2\pi t+\pi/4)$. The last two terms are absolutely integrable, so they add nothing to $\frac1{2T}\int_{-T}^{T}$ as $T\to\infty$:
+\[P=1,\qquad E=\infty.\]
+\step{(ii)} $u(\cos t)$ is a $0/1$ square wave with period $2\pi$ (it equals 1 for $|t|<\pi/2$ within a period). The impulses repeat every $2\pi$ as well, so $|x_2|^2$ is periodic with period $2\pi$ and $E=\infty$. Over one period $(-\pi,\pi]$ the energy is $\pi$ (from the square wave) plus $1$ (the unit impulse at $t=\pi$ in magnitude), so
+\[P=\frac1{2\pi}(\pi+1)=\frac12+\frac1{2\pi}\approx0.659 .\]
+\ans{(i) Power signal, $P=1$. \quad (ii) Periodic with infinite energy and finite average power: a power signal (value $\frac12+\frac1{2\pi}$ under the stated reading).}
+\end{solution}

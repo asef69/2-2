@@ -1,0 +1,422 @@
+<meta charset="utf-8">
+<title>CSE 213 Green Card</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="CSE 213 Software Engineering: lesson notes from both teachers' slides, every term-final question solved, practice, exam map, cheat sheet and tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Zilla+Slab:wght@500;600;700&display=swap">
+<style>
+/* Layout: sticky top bar, left topic index on wide screens (drawer on phones), one reading column. */
+:root{
+  --bg:#f6f8f6; --surface:#ffffff; --surface2:#eef3ef; --fg:#1c2622; --fg-strong:#0e1613; --muted:#5b6a63; --line:#d6dfd9;
+  --accent:#17765a; --accent-strong:#0f5a44; --accent-soft:#e3f2ec; --warm:#c7571f;
+  --c-focus-b:#c47a00; --c-focus-f:#fff4e0; --c-mem-b:#2e7d32; --c-mem-f:#e8f5e9; --c-trap-b:#c62828; --c-trap-f:#fdecea;
+  --c-ans-b:#1f5fa8; --c-ans-f:#e8f0fb; --c-note-b:#7a8580; --c-note-f:#eef1ef; --code-bg:#f0f3f1; --pr:#6a3fa0; --pr-soft:#f1ebf8;
+  --f-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --f-head:"Zilla Slab",Georgia,serif; --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1512; --surface:#161e1a; --surface2:#1c2621; --fg:#dbe5df; --fg-strong:#f1f7f3; --muted:#92a39a; --line:#2b3a33;
+  --accent:#4cc79d; --accent-strong:#7fe0bd; --accent-soft:#16332a; --warm:#f0925c;
+  --c-focus-b:#e0a032; --c-focus-f:#2c2412; --c-mem-b:#58b95e; --c-mem-f:#17281a; --c-trap-b:#ef6a6a; --c-trap-f:#2e1818;
+  --c-ans-b:#6aa6ee; --c-ans-f:#16233a; --c-note-b:#8d9a94; --c-note-f:#1d2622; --code-bg:#1a241f; --pr:#b793e6; --pr-soft:#231b30; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1512; --surface:#161e1a; --surface2:#1c2621; --fg:#dbe5df; --fg-strong:#f1f7f3; --muted:#92a39a; --line:#2b3a33;
+  --accent:#4cc79d; --accent-strong:#7fe0bd; --accent-soft:#16332a; --warm:#f0925c;
+  --c-focus-b:#e0a032; --c-focus-f:#2c2412; --c-mem-b:#58b95e; --c-mem-f:#17281a; --c-trap-b:#ef6a6a; --c-trap-f:#2e1818;
+  --c-ans-b:#6aa6ee; --c-ans-f:#16233a; --c-note-b:#8d9a94; --c-note-f:#1d2622; --code-bg:#1a241f; --pr:#b793e6; --pr-soft:#231b30; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-sans);padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+a{color:var(--accent-strong);text-decoration:none} a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+code,pre,kbd{font-family:var(--f-mono)}
+code{font-size:.88em;background:var(--code-bg);padding:1px 5px;border-radius:4px}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);border-bottom:1px solid var(--line)}
+.topbar-in{display:flex;align-items:center;gap:14px;max-width:1320px;margin:0 auto;padding:9px max(16px,env(safe-area-inset-left,0px)) 9px max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:baseline;gap:10px;font:700 19px var(--f-head);color:var(--fg-strong);white-space:nowrap}
+.brand small{font:500 10.5px var(--f-mono);letter-spacing:.09em;color:var(--muted)}
+.brand:hover{text-decoration:none}
+.nav{display:flex;gap:2px}
+.nav a{padding:6px 11px;border-radius:7px;color:var(--muted);font-weight:500;font-size:14.5px}
+.nav a:hover{background:var(--surface2);text-decoration:none;color:var(--fg-strong)}
+.nav a.on{background:var(--accent-soft);color:var(--accent-strong)}
+.spacer{flex:1}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{background:none;border:0;color:var(--muted);font:500 12px var(--f-sans);padding:6px 9px;cursor:pointer}
+.seg button.on{background:var(--accent-soft);color:var(--accent-strong)}
+.jump{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:8px;padding:6px 10px;font:500 13px var(--f-sans);cursor:pointer}
+.jump kbd{font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;width:36px;height:34px;color:var(--fg);cursor:pointer}
+.shell{display:flex;max-width:1320px;margin:0 auto;align-items:flex-start}
+.side{width:280px;flex:none;position:sticky;top:calc(53px + env(safe-area-inset-top,0px));max-height:calc(100vh - 53px);overflow:auto;padding:18px 10px 40px max(16px,env(safe-area-inset-left,0px));font-size:13.5px}
+.side h4{margin:16px 0 4px;font:600 10.5px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.side a{display:flex;gap:7px;padding:3px 8px;border-radius:6px;color:var(--fg);line-height:1.35}
+.side a:hover{background:var(--surface2);text-decoration:none}
+.side a.on{background:var(--accent-soft);color:var(--accent-strong);font-weight:600}
+.side a .n{font:500 11.5px var(--f-mono);color:var(--muted);min-width:22px;padding-top:1px}
+.side a.done .n{color:var(--accent)}
+.side a.done .n::after{content:"✓"}
+main{flex:1;min-width:0;padding:26px max(16px,env(safe-area-inset-right,0px)) 80px 28px}
+#view{max-width:880px}
+.scrim{display:none}
+h1,h2{font-family:var(--f-head);color:var(--fg-strong);text-wrap:balance;line-height:1.2}
+h1{font-size:clamp(28px,4.5vw,42px);margin:0 0 14px;font-weight:700}
+h2{font-size:26px;margin:34px 0 10px}
+h3{font-size:18px;margin:26px 0 8px;font-weight:600;color:var(--fg-strong)}
+h3.pr{color:var(--pr)} h4{font-size:15px;margin:18px 0 6px;color:var(--muted)}
+.crumb{font:500 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.src{color:var(--muted);font-size:13.5px;font-style:italic;margin:2px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{font:500 12px var(--f-mono);padding:2px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line);color:var(--muted)}
+.chip.hot{background:var(--accent-soft);color:var(--accent-strong);border-color:transparent}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 14px var(--f-sans);cursor:pointer}
+.btn:hover{border-color:var(--accent);text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#06201a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#06201a}}
+.btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong)}
+.tbl{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:7px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--surface2);font-weight:600;font-size:13px;color:var(--fg-strong);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td code{white-space:pre-wrap}
+ul,ol{padding-left:22px} li{margin:3px 0}
+.co{margin:14px 0;padding:10px 14px;border-left:4px solid var(--c-note-b);background:var(--c-note-f);border-radius:0 8px 8px 0}
+.co p{margin:6px 0}.co .cl{font:600 10.5px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--c-note-b)}
+.co-focus{border-color:var(--c-focus-b);background:var(--c-focus-f)}.co-focus .cl{color:var(--c-focus-b)}
+.co-memorize{border-color:var(--c-mem-b);background:var(--c-mem-f)}.co-memorize .cl{color:var(--c-mem-b)}
+.co-trap{border-color:var(--c-trap-b);background:var(--c-trap-f)}.co-trap .cl{color:var(--c-trap-b)}
+.co-answer{border-color:var(--c-ans-b);background:var(--c-ans-f)}.co-answer .cl{color:var(--c-ans-b)}
+pre.code{background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;margin:12px 0;font-size:12.8px;line-height:1.5}
+pre.code code{background:none;padding:0;font-size:inherit}
+.formula{text-align:center;font-weight:600;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:12px auto;max-width:640px}
+.fig{margin:16px 0;text-align:center}.fig img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;cursor:zoom-in;background:#fff}
+.fig figcaption{font-size:13px;color:var(--muted);margin-top:5px}
+.prov{color:var(--muted);font-size:13.5px;font-style:italic}
+.pq{margin:6px 0;padding-left:2px}
+details.sol{border:1px solid var(--line);border-left:4px solid var(--c-mem-b);border-radius:0 8px 8px 0;background:var(--surface);margin:12px 0}
+details.sol>summary{cursor:pointer;padding:9px 14px;font-weight:600;color:var(--c-mem-b);list-style:none}
+details.sol>summary::before{content:"▸ "} details.sol[open]>summary::before{content:"▾ "}
+.solbody{padding:2px 14px 12px}
+.ans{margin:8px 0}
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:34px;align-items:center;padding:8px 0 24px}
+.hero p{font-size:17px;color:var(--muted);max-width:56ch}
+.stats{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0}
+.stat b{display:block;font:600 30px var(--f-mono);color:var(--accent-strong);line-height:1}.stat span{font-size:12.5px;color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.count{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.count .big{font:600 56px/1 var(--f-mono);color:var(--warm)}
+.count .lbl{font:500 11px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-top:14px}
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.unit h3{margin:0 0 2px;font-family:var(--f-head);font-size:18px}
+.unit .who{font:500 11px var(--f-mono);color:var(--muted);margin-bottom:8px}
+.unit a.l{display:flex;gap:8px;padding:3px 0;color:var(--fg);font-size:14px;line-height:1.35}
+.unit a.l .n{font:500 12px var(--f-mono);color:var(--muted);min-width:24px}
+.unit a.l.done .n{color:var(--accent)}.unit a.l.done .n::after{content:" ✓"}
+.part{font:600 12px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:30px 0 -4px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+.qh{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;padding:10px 14px}
+.qh b{font:600 14px var(--f-mono);color:var(--fg-strong)}.qh .m{font:500 12px var(--f-mono);color:var(--warm)}
+.qtext{padding:0 14px 8px;font-size:14.5px;color:var(--fg)}
+.qact{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 12px;align-items:center}
+.qimg{border-top:1px solid var(--line);background:#fff;text-align:center;padding:8px}
+.qimg img{max-width:100%;height:auto;cursor:zoom-in}
+.sm{font-size:13px;padding:5px 10px}
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:14px 0}
+.pcard{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:var(--fg)}
+.pcard:hover{border-color:var(--accent);text-decoration:none}
+.pcard .y{font:700 22px var(--f-head);color:var(--fg-strong)}.pcard .s{font-size:13px;color:var(--muted)}
+.heat td,.heat th{text-align:center;padding:5px 8px;font-size:13px}.heat td:first-child,.heat th:first-child{text-align:left}
+.heat td.c{font:600 13px var(--f-mono)}
+.heat tr.ug td{background:var(--surface2);font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
+.tool h3{margin:0 0 6px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:10px 0}
+.row label{display:flex;flex-direction:column;gap:3px;font:500 12px var(--f-mono);color:var(--muted)}
+input[type=number],input[type=text],select{background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:7px;padding:7px 9px;font:15px var(--f-sans);min-width:0}
+input[type=number]{width:110px}
+.out{margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:14.5px}
+.day{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--surface);padding:12px 16px}
+.day h4{margin:0;font:700 17px var(--f-head);color:var(--fg-strong)}.day .dt{font:500 11.5px var(--f-mono);color:var(--warm)}
+.day label{display:flex;gap:8px;align-items:baseline;font-size:14.5px;padding:2px 0}
+.bar{height:6px;background:var(--surface2);border-radius:4px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--accent)}
+.nextprev{display:flex;justify-content:space-between;gap:12px;margin:34px 0 0;flex-wrap:wrap}
+.nextprev a{flex:1;min-width:200px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;color:var(--fg)}
+.nextprev small{display:block;font:500 11px var(--f-mono);color:var(--muted);text-transform:uppercase}
+.nextprev a.nx{text-align:right}
+.filter{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(10,16,13,.55);display:none;align-items:flex-start;justify-content:center;padding:12vh 16px 16px}
+.modal.on{display:flex}
+.mbox{width:min(620px,100%);background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;max-height:70vh;display:flex;flex-direction:column}
+.mbox input{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:14px 16px;font-size:17px;width:100%;background:var(--surface)}
+.mres{overflow:auto}.mres a{display:block;padding:9px 16px;color:var(--fg);border-bottom:1px solid var(--line)}
+.mres a:hover,.mres a.sel{background:var(--accent-soft);text-decoration:none}.mres small{display:block;color:var(--muted);font-size:12.5px}
+.zoom{position:fixed;inset:0;z-index:110;background:rgba(10,16,13,.88);display:none;overflow:auto;padding:16px;cursor:zoom-out}
+.zoom.on{display:block}.zoom img{display:block;margin:0 auto;width:min(1200px,100%);height:auto;background:#fff}
+.foot{margin-top:46px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:1000px){
+  .side{position:fixed;z-index:70;left:0;top:0;bottom:0;max-height:none;width:min(300px,86vw);background:var(--surface);border-right:1px solid var(--line);transform:translateX(-102%);transition:transform .18s ease-out;padding-top:calc(16px + env(safe-area-inset-top,0px))}
+  body.open .side{transform:none}
+  body.open .scrim{display:block;position:fixed;inset:0;z-index:65;background:rgba(10,16,13,.45)}
+  .burger{display:block}
+  main{padding-left:max(16px,env(safe-area-inset-left,0px))}
+  .nav{display:none}
+}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.jump .lbl,.jump kbd{display:none}.brand small{display:none}h2{font-size:22px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.side{transition:none}}
+</style>
+
+<header class="topbar"><div class="topbar-in">
+  <button class="burger" id="burger" type="button" aria-label="Open topic index">&#9776;</button>
+  <a class="brand" href="#home">CSE 213 Green Card<small>SOFTWARE ENGINEERING</small></a>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a href="#home" data-k="home">Topics</a><a href="#papers" data-k="papers">Past papers</a><a href="#practice" data-k="practice">Practice</a>
+    <a href="#map" data-k="map">Exam map</a><a href="#sheet" data-k="sheet">Cheat sheet</a><a href="#tools" data-k="tools">Tools</a>
+  </nav>
+  <span class="spacer"></span>
+  <div class="seg" id="theme" role="group" aria-label="Theme"><button type="button" data-t="system">Auto</button><button type="button" data-t="light">Light</button><button type="button" data-t="dark">Dark</button></div>
+  <button class="jump" id="jump" type="button"><span class="lbl">Jump to</span><kbd>Ctrl K</kbd></button>
+</div></header>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+  <aside class="side" id="side" aria-label="Topic index"></aside>
+  <main><div id="view"></div></main>
+</div>
+<div class="modal" id="modal"><div class="mbox"><input id="q" type="text" placeholder="Search topics, questions, patterns…" autocomplete="off"><div class="mres" id="mres"></div></div></div>
+<div class="zoom" id="zoom"><img alt="" id="zimg"></div>
+<script type="application/json" id="data">/*DATA*/</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById("data").textContent);
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var T={},U={},G=D.groups;
+D.topics.forEach(function(t){T[t.id]=t}); D.units.forEach(function(u){U[u.id]=u});
+var EM={}; D.emap.rows.forEach(function(r){EM[r.id]=r});
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var done={},solved={};
+try{done=JSON.parse(st("c213-done")||"{}");solved=JSON.parse(st("c213-solved")||"{}")}catch(e){}
+function save(){st("c213-done",JSON.stringify(done));st("c213-solved",JSON.stringify(solved))}
+var nDone=function(){return Object.keys(done).filter(function(k){return done[k]}).length};
+
+/* ---------- theme */
+function setTheme(t){var r=document.documentElement;if(t==="system")r.removeAttribute("data-theme");else r.setAttribute("data-theme",t);st("c213-theme",t);$$("#theme button").forEach(function(b){b.classList.toggle("on",b.dataset.t===t)})}
+$("#theme").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setTheme(b.dataset.t)});
+setTheme(st("c213-theme")||"system");
+
+/* ---------- sidebar */
+function side(cur){
+  var h="";
+  [["A","Anindya Sir · Design, UML, testing"],["B","IJ Mam · Patterns, process, quality"]].forEach(function(p){
+    h+="<h4>"+p[1]+"</h4>";
+    D.units.filter(function(u){return u.part===p[0]}).forEach(function(u){
+      h+="<h4 style='margin-top:10px;text-transform:none;letter-spacing:0;font:600 12.5px var(--f-sans);color:var(--fg-strong)'><a href='#u-"+u.id+"' style='padding:0'>"+esc(u.title)+"</a></h4>";
+      u.lessons.forEach(function(id){var t=T[id];h+="<a href='#t-"+id+"' class='"+(cur==="t-"+id?"on ":"")+(done[id]?"done":"")+"'><span class='n'>"+(t.part==="A"?"":"B")+t.num+"</span><span>"+esc(t.title)+"</span></a>"});
+    });
+  });
+  $("#side").innerHTML=h;
+}
+
+/* ---------- pieces */
+function mk(n){return n==null?"":(Math.round(n*10)/10)}
+function ql(e){return "<b>"+esc(e.year)+" · Q"+esc(e.qno)+"</b><span class='m'>"+esc(e.marks)+" marks</span><span class='chip'>"+esc(e.course)+"</span>"+(e.date?"<span class='chip'>"+esc(e.date)+"</span>":"")}
+function qcard(e,gid){
+  var g=G[gid],h="<div class='qcard' data-gid='"+gid+"'><div class='qh'>"+(e.kind==="practice"?"<b>Practice "+esc(e.n)+"</b><span class='m'>"+esc(e.marks)+" marks</span>":ql(e));
+  if(e.kind!=="practice"&&e.topic&&T[e.topic])h+="<a class='chip hot' href='#t-"+e.topic+"'>"+esc(T[e.topic].title)+"</a>";
+  h+="</div>";
+  var txt=e.kind==="practice"?e.title:e.text; if(txt)h+="<div class='qtext'>"+esc(txt)+"</div>";
+  var same=g.entries.filter(function(x){return x!==e}).map(function(x){return x.kind==="practice"?"":x.year+" Q"+x.qno}).filter(Boolean);
+  if(same.length)h+="<div class='qtext' style='color:var(--muted);font-size:13px'>Same question also in: "+esc(same.join(", "))+"</div>";
+  h+="<div class='qact'><button class='btn sm' data-show='"+gid+"'>Show question and solution</button><label style='font-size:13px;color:var(--muted)'><input type='checkbox' data-solved='"+gid+"'"+(solved[gid]?" checked":"")+"> I can solve this</label></div></div>";
+  return h;
+}
+function gcard(gid){ // a group listed on a topic page
+  var g=G[gid],ps=g.entries.filter(function(e){return e.kind==="paper"});
+  var e=ps[0]||g.entries[0];
+  var h="<div class='qcard' data-gid='"+gid+"'><div class='qh'>"+ps.map(function(x){return "<b>"+esc(x.year)+" Q"+esc(x.qno)+"</b><span class='m'>"+esc(x.marks)+"</span>"}).join("<span style='color:var(--line)'>|</span>")+"</div>";
+  var txt=ps.map(function(x){return x.text}).filter(Boolean)[0]; if(txt)h+="<div class='qtext'>"+esc(txt)+"</div>";
+  h+="<div class='qact'><button class='btn sm' data-show='"+gid+"'>Show question and solution</button><label style='font-size:13px;color:var(--muted)'><input type='checkbox' data-solved='"+gid+"'"+(solved[gid]?" checked":"")+"> I can solve this</label></div></div>";
+  return h;
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-show]");
+  if(b){var card=b.closest(".qcard"),ex=$(".qimg",card);if(ex){ex.remove();b.textContent="Show question and solution";return}
+    var g=G[b.dataset.show],d=document.createElement("div");d.className="qimg";d.innerHTML="<img src='"+g.img+"' width='"+g.w+"' height='"+g.h+"' alt='Question and solution' loading='lazy' data-zoom='1'>";card.appendChild(d);b.textContent="Hide";return}
+  var z=e.target.closest("img[data-zoom]");
+  if(z){$("#zimg").src=z.src;$("#zoom").classList.add("on");return}
+  if(e.target.closest("#zoom")){$("#zoom").classList.remove("on");return}
+  var dn=e.target.closest("[data-done]");
+  if(dn){var id=dn.dataset.done;done[id]=!done[id];save();route();return}
+});
+document.addEventListener("change",function(e){var c=e.target.closest("[data-solved]");if(c){solved[c.dataset.solved]=c.checked;save()}});
+
+/* ---------- pages */
+function home(){
+  var nt=D.topics.length,nq=0,pm=D.papers.length;D.papers.forEach(function(p){nq+=p.n});
+  var h="<section class='hero'><div><h1>Software engineering, from SOLID to the last test case.</h1><p>Both halves of CSE 213, lesson by lesson, in plain words. Under each topic sit the term-final questions that test it, cropped from the printed solution book, with full solutions.</p>"+
+    "<div class='stats'><div class='stat'><b>"+nt+"</b><span>lessons</span></div><div class='stat'><b>"+nq+"</b><span>solved questions</span></div><div class='stat'><b>"+pm+"</b><span>papers, 2010-11 to 2024-25</span></div></div>"+
+    "<div class='cta'><a class='btn primary' href='#t-a1'>Start with lesson 1</a><a class='btn' href='#tools'>5-day plan</a><a class='btn' href='#map'>Where the marks go</a></div><p style='font-size:14px;margin-top:14px' id='prog'></p></div>"+
+    "<div class='count'><div class='lbl'>Term final</div><div class='big' id='cd'></div><div id='cdl' style='color:var(--muted);font-size:14px;margin-top:6px'></div><div class='bar'><i id='cdb' style='width:0'></i></div><div style='font-size:13px;color:var(--muted)' id='cdp'></div></div></section>";
+  [["A","Part A · Anindya Sir","Design principles, creational patterns, UML diagrams, use case, BPMN, testing"],["B","Part B · IJ Mam","Structural and behavioral patterns, process models, unit testing, refactoring, ethics"]].forEach(function(p){
+    h+="<div class='part'>"+p[1]+" — "+p[2]+"</div><div class='units'>";
+    D.units.filter(function(u){return u.part===p[0]}).forEach(function(u){
+      h+="<div class='unit'><h3><a href='#u-"+u.id+"'>"+esc(u.title)+"</a></h3><div class='who'>"+u.lessons.length+" lessons · quick notes · exam map</div>";
+      u.lessons.forEach(function(id){var t=T[id],em=EM[id];h+="<a class='l "+(done[id]?"done":"")+"' href='#t-"+id+"'><span class='n'>"+(t.part==="A"?"":"B")+t.num+"</span><span>"+esc(t.title)+(em&&em.years>=3?" <span class='chip hot'>"+em.years+"/7 papers</span>":"")+"</span></a>"});
+      h+="</div>";
+    });
+    h+="</div>";
+  });
+  h+="<p class='foot'>Built from Anindya Sir's and IJ Mam's slides and the term-final papers 2010-11 to 2024-25 (2024-25 is the batch 22 paper). Facade, Command, Chain of Responsibility and Interpreter are not in this term's syllabus and are left out. Old course code CSE 307 is the same course; CSE 325 rows are AI Sir's diagram questions.</p>";
+  return h;
+}
+function countdown(){
+  var el=$("#cd");if(!el)return;
+  var tgt=new Date(2026,10,21),now=new Date(),d=Math.ceil((tgt-now)/864e5);
+  el.textContent=d>0?d:"0";$("#cdl").textContent=d>0?(d===1?"day to go · 21 Nov":"days to go · 21 Nov"):(d===0?"Exam day · 21 Nov":"Exam date has passed");
+  var tot=D.topics.length,n=nDone();$("#cdb").style.width=Math.round(100*n/tot)+"%";$("#cdp").textContent=n+" of "+tot+" lessons marked done";
+  $("#prog").textContent=n?n+" of "+tot+" lessons marked done.":"";
+}
+function topic(id){
+  var t=T[id],u=U[t.unit],em=EM[id],i=D.topics.indexOf(t),pv=D.topics[i-1],nx=D.topics[i+1];
+  var h="<div class='crumb'><a href='#u-"+u.id+"'>"+esc(u.title)+"</a> · "+(t.part==="A"?"Anindya Sir":"IJ Mam")+"</div><h1>Lesson "+t.num+" · "+esc(t.title)+"</h1>"+(t.source?"<div class='src'>"+esc(t.source)+"</div>":"");
+  h+="<div class='chips'>"+(em?"<span class='chip "+(em.years>=3?"hot":"")+"'>asked in "+em.years+" of last 7 papers</span>":"")+"<span class='chip'>"+t.q.length+" solved question"+(t.q.length===1?"":"s")+"</span><button class='btn sm "+(done[id]?"on":"")+"' data-done='"+id+"'>"+(done[id]?"✓ Done":"Mark done")+"</button></div>";
+  h+=t.html;
+  if(t.q.length){
+    h+="<h2>Past-paper questions on this topic</h2>";
+    var chap=t.q.map(function(g){return G[g]}).some(function(g){return !g.exact});
+    h+="<p class='prov'>"+(chap?"Questions the book files under this chapter are shown too; some may cover a neighbouring lesson of the same unit.":"")+" Open a card to see the printed question with its solution.</p>";
+    var ordered=t.q.slice().sort(function(a,b){var ea=G[a].exact?0:1,eb=G[b].exact?0:1;return ea-eb||a-b});
+    ordered.forEach(function(g){h+=gcard(g)});
+  }
+  h+="<div class='nextprev'>"+(pv?"<a href='#t-"+pv.id+"'><small>Previous</small>"+esc(pv.title)+"</a>":"<span></span>")+(nx?"<a class='nx' href='#t-"+nx.id+"'><small>Next</small>"+esc(nx.title)+"</a>":"")+"</div>";
+  return h;
+}
+function unit(id){
+  var u=U[id];
+  var h="<div class='crumb'>"+(u.part==="A"?"Anindya Sir":"IJ Mam")+"</div><h1>"+esc(u.title)+"</h1><div class='chips'>"+u.lessons.map(function(l){return "<a class='chip hot' href='#t-"+l+"'>"+(T[l].part==="A"?"":"B")+T[l].num+" · "+esc(T[l].title)+"</a>"}).join("")+"</div>";
+  if(u.note)h+="<p class='src'>"+esc(u.note)+"</p>";
+  h+="<h2>Exam map</h2>"+u.map+"<h2>Quick notes</h2>"+u.quick;
+  if(u.senior)h+="<h2>Senior diagram practice (AI Sir, CSE 325)</h2>"+u.senior;
+  return h;
+}
+function papers(){
+  var h="<h1>Past papers</h1><p>Every question in the solution book, grouped by paper. Questions repeated across papers are solved once and shown under each paper that set them.</p><div class='pcards'>";
+  D.papers.forEach(function(p){h+="<a class='pcard' href='#p-"+p.id+"'><div class='y'>"+esc(p.id)+"</div><div class='s'>"+p.n+" questions · "+mk(p.marks)+" marks</div><div class='s'>"+esc(p.courses.join(", "))+"</div></a>"});
+  return h+"</div><p class='prov'>2024-25 is the batch 22 paper (10/05/2026). CSE 307 is the old code for the same course; CSE 325 rows are AI Sir's diagram questions.</p>";
+}
+function paper(id){
+  var p=D.papers.filter(function(x){return x.id===id})[0];if(!p)return "<h1>Paper not found</h1>";
+  var h="<div class='crumb'><a href='#papers'>Past papers</a></div><h1>"+esc(p.id)+" term final</h1><div class='chips'><span class='chip'>"+p.n+" questions</span><span class='chip'>"+mk(p.marks)+" marks</span>"+p.courses.map(function(c){return "<span class='chip'>"+esc(c)+"</span>"}).join("")+"</div>";
+  var last="";
+  p.entries.forEach(function(e){if(e.course!==last){h+="<h3>"+esc(e.course)+(e.date?" · "+esc(e.date):"")+"</h3>";last=e.course}h+=qcard(e,e.gid)});
+  return h;
+}
+function practice(){
+  var h="<h1>Practice</h1><p>Write the answer first, then open the solution. Each set belongs to one lesson and says whether its questions are actual paper questions, adapted ones or constructed.</p>";
+  var f=window.__pf||"";
+  h+="<div class='filter'><button class='btn sm "+(f===""?"on":"")+"' data-pf=''>All</button>"+D.units.map(function(u){return "<button class='btn sm "+(f===u.id?"on":"")+"' data-pf='"+u.id+"'>"+esc(u.title)+"</button>"}).join("")+"</div>";
+  D.practice.forEach(function(p){if(f&&p.unit!==f)return;
+    h+="<div class='tool' style='margin-top:12px'>"+(p.topic?"<div class='crumb'><a href='#t-"+p.topic+"'>"+esc(T[p.topic].title)+"</a></div>":"")+p.html+"</div>"});
+  if(!f||f==="A6"){h+="<h2>Original BPMN problems</h2><p class='prov'>Five practice problems modelled on recent papers, with solutions.</p>";D.bpmn.forEach(function(b){h+=qcard({kind:"practice",n:b.n,title:b.title,marks:b.marks},b.gid)})}
+  return h;
+}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-pf]");if(b){window.__pf=b.dataset.pf;route()}});
+function emap(){
+  var Y=D.emap.years,h="<h1>Exam map</h1><p>How often each lesson was asked in the last seven term finals (2018-19 to 2024-25, CSE 307 and CSE 213 papers). Darker means more questions. Focus on the lessons with four or more papers first.</p>";
+  h+="<div class='filter'><button class='btn sm "+(window.__ms==="f"?"on":"")+"' data-ms='f'>Sort by frequency</button><button class='btn sm "+(window.__ms!=="f"?"on":"")+"' data-ms=''>Syllabus order</button></div>";
+  h+="<div class='tbl'><table class='heat'><thead><tr><th>Lesson</th>"+Y.map(function(y){return "<th>"+y.slice(2)+"</th>"}).join("")+"<th>Papers</th><th>Marks</th></tr></thead><tbody>";
+  var rows=D.emap.rows.slice();
+  if(window.__ms==="f"){rows.sort(function(a,b){return b.years-a.years||b.marks-a.marks})}
+  var lastu="";
+  rows.forEach(function(r){
+    if(window.__ms!=="f"&&r.unit!==lastu){h+="<tr class='ug'><td colspan='"+(Y.length+3)+"'>"+esc(U[r.unit].title)+"</td></tr>";lastu=r.unit}
+    h+="<tr><td><a href='#t-"+r.id+"'>"+(T[r.id].part==="A"?"":"B")+T[r.id].num+" · "+esc(r.title)+"</a></td>"+r.counts.map(function(c){return "<td class='c' style='"+(c?"background:color-mix(in srgb,var(--accent) "+Math.min(80,18+c*22)+"%,transparent)":"")+"'>"+(c||"")+"</td>"}).join("")+"<td class='c'>"+r.years+"/7</td><td class='c'>"+mk(r.marks)+"</td></tr>";
+  });
+  h+="</tbody></table></div><p class='prov'>Counts are questions per paper. Topics outside both teachers' slides (cost estimation, risk, architecture and similar) are not in this table.</p>";
+  return h;
+}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-ms]");if(b){window.__ms=b.dataset.ms;route()}});
+function sheet(){
+  var h="<h1>Cheat sheet</h1><p>One page of rules to read in the last hour. The quick notes of every unit follow the tables.</p>"+D.sheet+"<h2>Quick notes by unit</h2>";
+  D.units.forEach(function(u){h+="<h3>"+esc(u.title)+"</h3>"+u.quick});
+  return h;
+}
+var PICK=[["Create objects without naming the concrete class (one product)","Factory Method","t-a5"],["Create a matching family of products","Abstract Factory","t-a6"],["Exactly one shared instance","Singleton","t-a7"],["Build a complex object step by step","Builder","t-a8"],["Add features to an object at run time, no subclass explosion","Decorator","t-i1"],["Treat one object and a tree of objects the same way","Composite","t-i2"],["Reuse a class whose interface does not match","Adapter","t-i3"],["Two dimensions that vary independently","Bridge","t-i4"],["Swap an algorithm at run time","Strategy","t-i5"],["Fixed skeleton, subclasses fill in the steps","Template Method","t-i6"],["Notify many dependents when one object changes","Observer","t-i7"],["Untangle many-to-many object communication","Mediator","t-i8"],["Behaviour depends on the object's internal state","State","t-i9"]];
+function tools(){
+  var h="<h1>Tools</h1>";
+  var tgt=new Date(2026,10,21),now=new Date(),dd=Math.ceil((tgt-now)/864e5);
+  h+="<div class='tool'><h3>Five-day plan</h3><p class='prov'>Exam on 21 Nov"+(dd>0?" ("+dd+" days left)":"")+". Ticking a lesson here marks it done everywhere.</p>";
+  D.plan.forEach(function(p){
+    var d=new Date(tgt.getTime()-(6-p.day)*864e5),dn=p.items.filter(function(i){return done[i]}).length;
+    h+="<div class='day'><div class='dt'>Day "+p.day+" · "+d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})+"</div><h4>"+esc(p.title)+"</h4><div style='font-size:13.5px;color:var(--muted)'>"+esc(p.note)+"</div><div class='bar'><i style='width:"+Math.round(100*dn/p.items.length)+"%'></i></div>";
+    p.items.forEach(function(i){h+="<label><input type='checkbox' data-pd='"+i+"'"+(done[i]?" checked":"")+"><a href='#t-"+i+"'>"+(T[i].part==="A"?"":"B")+T[i].num+" · "+esc(T[i].title)+"</a></label>"});
+    h+="</div>";
+  });
+  h+="</div>";
+  h+="<div class='tool'><h3>Cyclomatic complexity</h3><p class='prov'>V(G) = E − N + 2 = P + 1. Count the edges and nodes of the flow graph, or just the decisions.</p><div class='row'><label>Edges E<input type='number' id='cE' value='9' min='0'></label><label>Nodes N<input type='number' id='cN' value='7' min='0'></label><label>or decisions P<input type='number' id='cP' min='0' placeholder='optional'></label></div><div class='out' id='cOut'></div></div>";
+  h+="<div class='tool'><h3>Equivalence classes and BVA</h3><p class='prov'>Closed integer range [a, b]. Boundary tests as taught: a−1, a, a+1, b−1, b, b+1.</p><div class='row'><label>Lower a<input type='number' id='bA' value='30'></label><label>Upper b<input type='number' id='bB' value='70'></label></div><div class='out' id='bOut'></div></div>";
+  h+="<div class='tool'><h3>Which pattern?</h3><div class='row'><label style='flex:1;min-width:240px'>The problem says…<select id='pk' style='width:100%'>"+PICK.map(function(p,i){return "<option value='"+i+"'>"+esc(p[0])+"</option>"}).join("")+"</select></label></div><div class='out' id='pOut'></div></div>";
+  return h;
+}
+function toolsInit(){
+  function c(){var E=+$("#cE").value,N=+$("#cN").value,P=$("#cP").value;var v=P!==""?(+P+1):(E-N+2);$("#cOut").innerHTML="<strong>V(G) = "+v+"</strong>: "+v+" independent (basis) paths, so at least "+v+" test cases for branch coverage."+(P!==""?" Computed from P + 1.":" Computed from E − N + 2.")}
+  function b(){var a=+$("#bA").value,z=+$("#bB").value;if(a>z){$("#bOut").textContent="Lower bound must not exceed the upper bound.";return}
+    $("#bOut").innerHTML="Classes: invalid &lt; "+a+", valid "+a+"–"+z+", invalid &gt; "+z+" (3 tests, one each).<br>BVA: <code>"+[a-1,a,a+1,z-1,z,z+1].join(", ")+"</code> (add a nominal value such as "+Math.round((a+z)/2)+")."}
+  function p(){var x=PICK[+$("#pk").value];$("#pOut").innerHTML="<strong>"+x[1]+"</strong> · <a href='#"+x[2]+"'>open the lesson</a>"}
+  ["cE","cN","cP"].forEach(function(i){$("#"+i).oninput=c});["bA","bB"].forEach(function(i){$("#"+i).oninput=b});$("#pk").onchange=p;c();b();p();
+}
+document.addEventListener("change",function(e){var c=e.target.closest("[data-pd]");if(c){done[c.dataset.pd]=c.checked;save();var y=window.scrollY;route();window.scrollTo(0,y)}});
+
+/* ---------- router */
+function route(){
+  var k=(location.hash||"#home").slice(1)||"home",v=$("#view"),nav="home",h;
+  document.body.classList.remove("open");
+  if(k==="home"){h=home();nav="home"}
+  else if(k.indexOf("t-")===0&&T[k.slice(2)]){h=topic(k.slice(2));nav="home"}
+  else if(k.indexOf("u-")===0&&U[k.slice(2)]){h=unit(k.slice(2));nav="home"}
+  else if(k==="papers"){h=papers();nav="papers"}
+  else if(k.indexOf("p-")===0){h=paper(k.slice(2));nav="papers"}
+  else if(k==="practice"){h=practice();nav="practice"}
+  else if(k==="map"){h=emap();nav="map"}
+  else if(k==="sheet"){h=sheet();nav="sheet"}
+  else if(k==="tools"){h=tools();nav="tools"}
+  else {h=home()}
+  v.innerHTML=h;
+  $$("#nav a").forEach(function(a){a.classList.toggle("on",a.dataset.k===nav)});
+  side(k);countdown();if(k==="tools")toolsInit();
+  var tt=k.indexOf("t-")===0&&T[k.slice(2)];document.title=tt?"Lesson "+T[k.slice(2)].num+" · CSE 213 Green Card":"CSE 213 Green Card";
+}
+var lastK=null;
+window.addEventListener("hashchange",function(){route();window.scrollTo(0,0)});
+route();
+
+/* ---------- menu, search */
+$("#burger").onclick=function(){document.body.classList.toggle("open")};$("#scrim").onclick=function(){document.body.classList.remove("open")};
+var IDX=null;
+function strip(h){return h.replace(/<[^>]+>/g," ").replace(/\s+/g," ")}
+function buildIdx(){IDX=[];
+  D.topics.forEach(function(t){IDX.push({h:"#t-"+t.id,t:"Lesson "+t.num+" · "+t.title,s:(t.part==="A"?"Anindya Sir":"IJ Mam")+" · "+U[t.unit].title,x:(t.title+" "+strip(t.html)).toLowerCase(),w:3})});
+  D.units.forEach(function(u){IDX.push({h:"#u-"+u.id,t:u.title+" · quick notes and exam map",s:"Unit",x:(u.title+" "+strip(u.quick)).toLowerCase(),w:2})});
+  D.papers.forEach(function(p){p.entries.forEach(function(e){if(e.text)IDX.push({h:"#p-"+p.id,t:p.id+" Q"+e.qno+" · "+e.text.slice(0,90),s:e.course+" · "+e.marks+" marks",x:(e.text+" "+e.year+" q"+e.qno).toLowerCase(),w:1})})});
+  [["#papers","Past papers"],["#practice","Practice"],["#map","Exam map"],["#sheet","Cheat sheet"],["#tools","Tools: plan, complexity, BVA, pattern picker"]].forEach(function(x){IDX.push({h:x[0],t:x[1],s:"Page",x:x[1].toLowerCase(),w:2})});
+}
+var sel=0,res=[];
+function search(q){if(!IDX)buildIdx();q=q.toLowerCase().trim();var box=$("#mres");if(!q){res=IDX.filter(function(i){return i.w>=2}).slice(0,12)}else{var tk=q.split(/\s+/);res=IDX.filter(function(i){return tk.every(function(t){return i.x.indexOf(t)>=0})}).sort(function(a,b){var ta=a.t.toLowerCase().indexOf(tk[0])>=0?1:0,tb=b.t.toLowerCase().indexOf(tk[0])>=0?1:0;return tb-ta||b.w-a.w}).slice(0,14)}
+  sel=0;box.innerHTML=res.length?res.map(function(r,i){return "<a href='"+r.h+"' class='"+(i===0?"sel":"")+"'>"+esc(r.t)+"<small>"+esc(r.s)+"</small></a>"}).join(""):"<a style='color:var(--muted)'>No match</a>"}
+function openJ(){$("#modal").classList.add("on");$("#q").value="";search("");setTimeout(function(){$("#q").focus()},0)}
+function closeJ(){$("#modal").classList.remove("on")}
+$("#jump").onclick=openJ;$("#q").oninput=function(){search(this.value)};
+$("#modal").addEventListener("click",function(e){if(e.target===this||e.target.closest("a[href]"))closeJ()});
+document.addEventListener("keydown",function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();openJ();return}
+  if(e.key==="Escape"){closeJ();$("#zoom").classList.remove("on");return}
+  if($("#modal").classList.contains("on")&&(e.key==="ArrowDown"||e.key==="ArrowUp"||e.key==="Enter")){e.preventDefault();var as=$$("#mres a");if(!as.length)return;
+    if(e.key==="Enter"){if(res[sel]){location.hash=res[sel].h;closeJ()}return}
+    sel=(sel+(e.key==="ArrowDown"?1:-1)+as.length)%as.length;as.forEach(function(a,i){a.classList.toggle("sel",i===sel)});as[sel].scrollIntoView({block:"nearest"})}
+});
+})();
+</script>

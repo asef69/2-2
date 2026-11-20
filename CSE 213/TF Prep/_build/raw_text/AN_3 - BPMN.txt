@@ -1,0 +1,316 @@
+
+===== slide 1 =====
+BPMN Introduction
+A BPMN process model is a graph consisting of four types of core elements:
+activity
+gateway
+event
+sequence flow
+start
+end
+[notes] Slide notes: as per previous slide (LR)
+
+===== slide 2 =====
+An order-to-cash process is triggered by the receipt of a purchase order from a customer. Upon receipt, the purchase order has to be checked against the stock to determine if the the requested item(s) are available. Depending on stock availability the purchase order may be confirmed or rejected. 
+If the purchase order is confirmed, an invoice is emitted and the goods requested are shipped. The process completes by archiving the order or if the order is rejected.
+Let’s start modeling
+Order-to-cash
+
+===== slide 3 =====
+An order-to-cash process is triggered by the receipt of a purchase order from a customer. 
+Upon receipt, the purchase order has to be checked against the stock to determine if the the requested item(s) are available. 
+Depending on stock availability the purchase order may be confirmed or rejected. 
+If the purchase order is confirmed, an invoice is emitted and the goods requested are shipped. 
+The process completes by archiving the order or if the order is rejected.
+Let’s start modeling – break it down
+Order-to-cash
+
+===== slide 4 =====
+An order-to-cash process is triggered by the receipt of a purchase order from a customer. 
+Upon receipt, the purchase order has to be checked against the stock to determine if the the requested item(s) are available.
+Let’s start modeling – break it down
+Order-to-cash
+
+===== slide 5 =====
+BPMN Model
+5
+Order-to-cash
+[notes] Start event: trigger
+End event: process outcome
+Split gateway: this is where the control flow is split into two or more branches. In this case the flow is split into two mutually exclusive branches (one taken when items are not in stock, the other when the items are in stock).
+
+Talk about triggers and outcomes: this process has one trigger and two possible outcomes. Without reading the content, I can already see this process can end up in an order being fulfilled (which in this case is a positive outcome) or rejected (negative outcome)
+
+Clearly, for the organization running this process, like a seller or supplier, the goal is to fulfil the order, so that value can be generated for the customer who submitted the order.
+
+It is important to ensure consistency across all our models. One way of doing this is to establish some conventions for labelling events and activities.
+
+===== slide 6 =====
+An order-to-cash process is triggered by the receipt of a purchase order from a customer. 
+Upon receipt, the purchase order has to be checked against the stock to determine if the the requested item(s) are available. 
+Depending on stock availability the purchase order may be confirmed or rejected. 
+If the purchase order is confirmed, an invoice is emitted and the goods requested are shipped. 
+The process completes by archiving the order or if the order is rejected.
+Let’s start modeling – break it down
+Order-to-cash
+
+===== slide 7 =====
+BPMN Model
+startevent
+endevent
+activity
+split gateway
+7
+Order-to-cash
+endevent
+Event: noun + past-participle verb (e.g. insurance claim lodged)
+Naming conventions
+Activity: verb + noun (e.g. assess credit risk)
+[notes] Start event: trigger
+End event: process outcome
+Split gateway: this is where the control flow is split into two or more branches. In this case the flow is split into two mutually exclusive branches (one taken when items are not in stock, the other when the items are in stock).
+
+Talk about triggers and outcomes: this process has one trigger and two possible outcomes. Without reading the content, I can already see this process can end up in an order being fulfilled (which in this case is a positive outcome) or rejected (negative outcome)
+
+Clearly, for the organization running this process, like a seller or supplier, the goal is to fulfil the order, so that value can be generated for the customer who submitted the order.
+
+It is important to ensure consistency across all our models. One way of doing this is to establish some conventions for labelling events and activities.
+
+===== slide 8 =====
+A start event triggers a new process instanceby generating a token that traverses the sequence flow (“tokens source”)
+
+
+An end event signals that a process instance has
+completed with a given outcome by consuming
+a token (“tokens sink”)
+A little bit more on events…
+8
+start
+event
+end
+event
+
+===== slide 9 =====
+XOR-split  takes one outgoing branch
+
+
+
+XOR-join  proceeds when one incoming branch has completed
+A little more on gateways: XOR Gateway
+9
+An XOR Gateway captures decision points (XOR-split) and points where alternative flows are merged (XOR-join)
+[notes] The term “Gateway” implies that there is a gating mechanism that either allows or disallows passage of tokens through the Gateway. As Tokens arrive at a Gateway, they can be split apart on output or merged together on input, as the Gateway mechanisms are invoked.
+
+Decision points, where the flow is splitted between two or more alternatives,
+
+===== slide 10 =====
+Example: XOR Gateway
+5
+Invoice checking process
+[notes] A default flow is the default branch to be chosen from an (X)OR-split if all other conditions evaluate to false
+
+===== slide 11 =====
+A little more on gateways: AND Gateway
+11
+An AND Gateway provides a mechanism to create and synchronize “parallel” flows.
+AND-split  takes all outgoing branches
+
+
+
+AND-join  proceeds when all incoming branches have completed
+[notes] By “parallel” we intend flows which can proceed indipendendly of each other
+
+===== slide 12 =====
+12
+Example: AND Gateway
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s012_5.png]
+Airport security check
+[notes] Let’s take, as an example, the security check at an airport. Depending on the layout of the airport, on its passengers traffic at the moment we approach the security check, we may first pass through the security screening and then our luggage will pass through screening, or, for example, luggage screening may start first, and while this is being done, we quickly pass through security screening (as most often happens). However, in order to proceed to the departure level, we first have to pass both screenings: security and luggage
+
+===== slide 13 =====
+Revised order-to-cash process model
+XOR-split
+AND-split
+AND-join
+13
+[notes] So, coming back to our example, in order to disambiguate these gateways, and assigning a proper behavior to our model, we need to use…
+
+===== slide 14 =====
+A company has two warehouses that store different products: Amsterdam and Hamburg. When an order is received, it is distributed across these warehouses: if some of the relevant products are maintained in Amsterdam, a sub-order is sent there; likewise, if some relevant products are maintained in Hamburg, a sub-order is sent there. Afterwards, the order is registered and the process completes.
+Between XOR and AND
+14
+Order distribution process
+[notes] Sometimes, the number of branches to be taken varies from one instance to another:
+
+===== slide 15 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s015_8.png]
+Solution 1
+XOR-split
+XOR-join
+AND-split
+AND-join
+15
+Order distribution process
+
+===== slide 16 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s016_7.png]
+Solution 2
+16
+Order distribution process
+XOR-split
+XOR-join
+AND-split
+AND-join
+
+===== slide 17 =====
+OR Gateway
+17
+An OR Gateway provides a mechanism to create and synchronize n out of m parallel flows.
+OR-split  takes one or more branches depending on conditions
+
+
+OR-join  proceeds when all active incoming branches have completed
+[notes] By “parallel” we intend flows which can proceed indipendendly of each other
+
+For OR-join make difference with AND-join: “active”
+
+===== slide 18 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s018_10.png]
+Solution using OR Gateway
+OR-split
+OR-join
+18
+Order distribution process
+[notes] Similar to the XOR-split, the OR-split can be equipped with a default flow which is taken if the conditions on all other branches are false
+
+===== slide 19 =====
+Beware: Beginner’s Mistake…
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s019_21506.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s019_21508.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s019_6.png]
+[notes] It is worth emphasizing here that activities located in two parallel paths do not need to be performed simultaneously. For example, “Send invoice” and “Ship goods” need not occur both at the same time, although due to a cosmic coincidence, they could happen at the same time. Instead, it might happen that first the invoice is sent and later the goods are shipped. Or things may happen in the reverse order.
+
+===== slide 20 =====
+Guidelines: Naming Conventions
+Give a name to every event and task
+For tasks: verb followed by business object name and possibly complement
+Issue Driver Licence, Renew Licence via Agency
+For message events: object + past participle
+Invoice received, Claim settled
+Avoid generic verbs such as Handle, Record…
+Label each XOR-split with a condition
+Policy is invalid, Claim is inadmissible
+
+===== slide 21 =====
+Organizational Elements in BPMN – Pools & Lanes
+21
+Pool
+Captures a resource class. Generally used to model a business party (e.g. a whole company)
+Lane
+A resource sub-class within a pool. Generally used to model departments (e.g. shipping, finance), internal roles (e.g. Manager, Associate), software systems (e.g. ERP, CRM)
+[notes] A Pool acts as the container for the Sequence Flow between activities. The Sequence Flow cannot cross the boundaries of a Pool
+
+Lanes can be nested (e.g. an outer set of Lanes for company departments and an inner set for roles within each department)
+
+Complement your BPMN models with organizational charts, role-responsibility matrices, RACI diagrams
+
+===== slide 22 =====
+Order-to-cash process with lanes
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s022_8.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s022_9.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s022_10.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s022_7.png]
+
+===== slide 23 =====
+A Message Flow represents a flow of information between two process parties (Pools)
+Message Flow
+23
+A Message Flow can connect:
+directly to the boundary of a Pool  captures an informative message to/from that party
+to a specific activity or event within that Pool  captures a message that triggers a specific activity/event within that party
+[notes] The interaction between Pools, e.g., between two collaborating organizations, is shown through the Message Flow
+
+Depicted by a dashed line with an open arrowhead
+
+Describe send and receive activity and their semantics in terms of data tokens
+
+===== slide 24 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_9.png]
+Order-to-cash process with a black-box customer pool
+24
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_5.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_8.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_12.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_14.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_15.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s024_16.png]
+[notes] Now we have all ingredients to capture our order to cash example
+
+===== slide 25 =====
+A Sequence Flow cannot cross the boundaries of a Pool (message flows can)
+Both Sequence Flow and Message Flow can cross the boundaries of Lanes
+A Message Flow cannot connect two flow elements within the same pool
+Pools, Lanes and Flows: syntactic rules
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_4.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_6.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_11.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_12.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_20.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_21.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_22.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_25.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_26.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_29.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_30.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_31.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s025_32.png]
+[notes] So to sum up,
+
+===== slide 26 =====
+The purchase order document serves as an input to the stock availability check. Based on the outcome of this check, the status of the document is updated, either to “approved” or “rejected”. If the order is approved, an invoice and a shipment notice are produced.
+Order-to-cash process, again
+26
+[notes] Let’s have a look at some artifacts...
+
+===== slide 27 =====
+Model with information artifacts
+27
+
+===== slide 28 =====
+A Data Object captures an artifact required (input) or produced (output) by an activity.
+Can be physical or electronic
+BPMN Information Artifacts
+28
+A Data Store is a place containing data objects that must be persisted beyond the duration of a process instance. 
+It is used by an activity to store (as output) or retrieve (as input) data objects.
+[notes] Represent input and output of a process activity.
+
+, e.g. a database for electronic artifacts or a filing cabinet for physical ones.
+
+===== slide 29 =====
+A Text Annotation is a mechanism to provide additional text information to the model reader
+Doesn’t affect the flow of tokens through the process
+Quick Note: BPMN Text Annotations
+29
+[notes] Sometimes we may need to provide additional information to the process model reader, for the sake of improving the understanding of the model. For example, in the order-to-cash process we may want to specifcy that activity “Ship goods” also includes the packaging of the products. Also, we may want to clarify what business rule is followed behind the choice of suppliers or the approval of an order. All this information is provided via text annotations which do not affect the flow of the process model.
+
+Say that in a text annotation the connection, called association in BPMN, is undirected
+
+A text annotation is depicted as an open-ended rectangle encapsulating the text of the annotation, and is linked to a process modeling element via a dotted line
+
+===== slide 30 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s030_4.jpg]
+
+===== slide 31 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s031_7.jpg]
+
+===== slide 32 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s032_5.png]
+
+===== slide 33 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s033_5.png]
+
+===== slide 34 =====
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_3 - BPMN\s034_5.png]
+Sources: https://sparxsystems.com/resources/gallery/diagrams/business/bus-bpmn_business_process-book_lending_example.html
+More: https://camunda.com/bpmn/examples/

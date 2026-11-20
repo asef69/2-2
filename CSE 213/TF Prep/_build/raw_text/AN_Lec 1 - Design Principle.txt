@@ -1,0 +1,389 @@
+
+===== page 1 =====
+1
+Software Design Principles
+(Chapter 3) from 
+Dive Into DESIGN PATTERNS
+
+===== page 2 =====
+2
+Encapsulation on Method Level (before)
+
+===== page 3 =====
+3
+Encapsulation on Method Level (after)
+
+===== page 4 =====
+4
+Encapsulation: class level (before)
+
+===== page 5 =====
+5
+Encapsulation: class level (before)
+
+===== page 6 =====
+6
+Interface is Better than Implementation
+After making this 
+change, you won’t 
+probably feel any 
+immediate benefit. 
+On the contrary, the 
+code has become 
+more complicated 
+than it was before. 
+However, if you feel 
+that this might
+be a good extension 
+point for some extra 
+functionality, or that
+some other people 
+who use your code 
+might want to 
+extend it
+here, then go for it.
+
+===== page 7 =====
+7
+Diamond Problem in Multiple Inheritance
+Both Class A and 
+Class B have 
+implementation of 
+doSomething()
+
+===== page 8 =====
+8
+Example of Tight Coupling
+
+===== page 9 =====
+9
+Getting rid of tight coupling
+After this change, the Company 
+class has become independent
+from various employee classes. 
+Now you can extend this class
+and introduce new types of 
+companies and employees while
+still reusing a portion of the base 
+company class. Extending
+the base company class doesn’t 
+break any existing code that
+already relies on it.
+
+===== page 10 =====
+10
+SOLID Design Principles
+Single responsibility principle
+Open / closed principle
+Liskov substitution principle
+Interface segregation principle
+Dependency inversion principle
+• SOLID is a mnemonic for five design principles intended to
+make software designs more understandable, flexible and
+maintainable 
+• The cost of applying these principles into a program’s architecture 
+might be making it more complicated than it should be.
+
+===== page 11 =====
+11
+Single Responsibility Principle: A class 
+should have just one reason to change. 
+Every class should have a 
+single responsibility, and 
+that responsibility should be 
+entirely encapsulated by the 
+class. 
+Less fragile code
+Low coupling
+High cohesion
+Changeability
+Maintainability
+Testability and easier 
+debugging
+
+===== page 12 =====
+12
+Open/Closed Principle: Classes should be open 
+for extension but closed for modification
+
+===== page 13 =====
+13
+The idea was that 
+once completed, 
+the 
+implementation of 
+a class could only 
+be modified to 
+correct errors; new 
+or changed 
+features would 
+require that a 
+different class be 
+created.
+
+===== page 14 =====
+14
+public class Rectangle
+{
+public double Width { get; set; }
+public double Height { get; set; }
+}
+public class AreaCalculator
+{
+public double Area(Rectangle[] shapes)
+{
+double area = 0;
+foreach (var shape in shapes)
+{
+area += shape.Width*shape.Height;
+}
+return area;
+}
+}
+
+===== page 15 =====
+15
+public double Area(object[] shapes)
+{
+double area = 0;
+foreach (var shape in shapes)
+{
+if (shape is Rectangle)
+{
+Rectangle rectangle = (Rectangle) shape;
+area += rectangle.Width*rectangle.Height;
+}
+else
+{
+Circle circle = (Circle)shape;
+area += circle.Radius * circle.Radius * Math.PI;
+}
+}
+return area;
+}
+Add Circle
+
+===== page 16 =====
+16
+Add Ellipse, Triangle, …?
+public abstract class Shape
+{
+public abstract double Area();
+}
+public class Rectangle : Shape
+{
+public double Width { get; set; }
+public double Height { get; set; }
+public override double Area()
+{
+return Width*Height;
+}
+}
+public class Circle : Shape
+{
+public double Radius { get; set; }
+public override double Area()
+{
+return Radius*Radius*Math.PI;
+}
+}
+
+===== page 17 =====
+17
+public class AreaCalculator
+{
+public double Area(Shape[] shapes)
+{
+double area = 0;
+foreach (Shape shape in shapes)
+{
+area += shape.Area();
+}
+return area;
+}
+}
+public class Ellipse : Shape
+{
+public double majorRadius { get; set; }
+public double minorRadius { get; set; }
+public override double Area()
+{
+return majorRadius * minorRadius *Math.PI;
+}
+}
+Add Ellipse in OCP
+
+===== page 18 =====
+18
+Liskov Substitution Principle 
+• When extending a class, remember that you should be able 
+to pass objects of the subclass in place of objects of the 
+parent class without breaking the client code. 
+• This means that the subclass should remain compatible with 
+the behavior of the superclass. 
+• In other words, every subclass/derived class should be 
+substitutable for their base/parent class.
+• When overriding a method, extend the base behavior rather 
+than replacing it with something else entirely.
+• The substitution principle is a set of checks that help predict 
+whether a subclass remains compatible with the code that 
+was able to work with objects of the superclass.
+
+===== page 19 =====
+19
+
+===== page 20 =====
+20
+
+===== page 21 =====
+21
+Interface Segregation Principle 
+• Clients shouldn’t be 
+forced to depend on 
+methods they
+do not use. 
+• Try to make your 
+interfaces narrow enough 
+that client classes
+don’t have to implement 
+behaviors they don’t 
+need.
+
+===== page 22 =====
+22
+
+===== page 23 =====
+23
+Dependency Inversion Principle 
+• High-level classes shouldn’t depend on low-level classes. Both should 
+depend on abstractions. 
+• Abstractions shouldn’t depend on details. Details should depend on 
+abstractions.
+Depend upon Abstractions. Do not depend upon concretions.
+
+===== page 24 =====
+24
+
+===== page 25 =====
+25
+Inverted Dependency
+
+===== page 26 =====
+26
+How DIP works?
+• The High-level module does not depend on concrete 
+2nd level modules. Instead, the High-level module depends 
+on abstract interfaces which are defined based on the 
+services the High-level module requires from the Lower-level 
+modules.
+• Secondly, the lower-level modules extend the abstract 
+interfaces. So, when the High-level module invokes the 
+abstract interface, the required task is actually serviced by 
+one of the Lower-level module implementations. 
+• Thus, both the High-level module and the Lower-level 
+modules are concerned with the abstract interface structure 
+and depend on it.
+
+===== page 27 =====
+27
+Example: Without DIP
+public class LightBulb {
+public void turnOn() {
+System.out.println("LightBulb: Bulb turned on...");
+}
+public void turnOff() {
+System.out.println("LightBulb: Bulb turned off...");
+}
+}
+
+===== page 28 =====
+28
+Example: Without DIP
+public class ElectricPowerSwitch {
+public LightBulb lightBulb;
+public boolean on;
+public ElectricPowerSwitch(LightBulb lightBulb) {
+this.lightBulb = lightBulb;
+this.on = false;
+}
+public boolean isOn() {
+return this.on;
+}
+public void press(){
+boolean checkOn = isOn();
+if (checkOn) {
+lightBulb.turnOff();
+this.on = false;
+} else {
+lightBulb.turnOn();
+this.on = true;
+}
+}
+}
+
+===== page 29 =====
+29
+Example: DIP
+public interface Switch {
+boolean isOn();
+void press();
+}
+public interface Switchable {
+void turnOn();
+void turnOff();
+}
+
+===== page 30 =====
+30
+Example: DIP
+public class ElectricPowerSwitch implements Switch {
+public Switchable client;
+public boolean on;
+public ElectricPowerSwitch(Switchable client) {
+this.client = client;
+this.on = false;
+}
+public boolean isOn() {
+return this.on;
+}
+public void press(){
+boolean checkOn = isOn();
+if (checkOn) {
+client.turnOff();
+this.on = false;
+} else {
+client.turnOn();
+this.on = true;
+}
+}
+}
+
+===== page 31 =====
+31
+Example: DIP
+public class Fan implements Switchable {
+@Override
+public void turnOn() {
+System.out.println("Fan: Fan turned on...");
+}
+@Override
+public void turnOff() {
+System.out.println("Fan: Fan turned off...");
+}
+}
+public class LightBulb implements Switchable {
+@Override
+public void turnOn() {
+System.out.println("LightBulb: Bulb turned on...");
+}
+@Override
+public void turnOff() {
+System.out.println("LightBulb: Bulb turned off...");
+}
+}
+
+===== page 32 =====
+32
+Reference
+Agile Software Development, Principles, Patterns, and Practices
+by Robert C. Martin

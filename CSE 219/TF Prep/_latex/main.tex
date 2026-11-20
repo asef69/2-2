@@ -1,0 +1,90 @@
+\documentclass[11pt,a4paper,openany]{book}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,mathtools,bm,booktabs,array,tabularx,enumitem,fancyhdr,titlesec,microtype,multicol}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz,pgfplots}\pgfplotsset{compat=1.17}\usetikzlibrary{arrows.meta,calc,patterns}
+\usepackage[hidelinks]{hyperref}
+\usepackage[a4paper,margin=2.2cm,headheight=14pt]{geometry}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\renewcommand{\arraystretch}{1.25}
+
+\definecolor{navy}{HTML}{1F3864}\definecolor{sky}{HTML}{2E75B6}\definecolor{amber}{HTML}{E08A00}
+\definecolor{forest}{HTML}{2E7D32}\definecolor{crimson}{HTML}{C62828}\definecolor{plum}{HTML}{5B2C83}
+\definecolor{paper}{HTML}{F7F9FC}
+
+% headings
+\titleformat{\part}[display]{\bfseries\Huge\color{navy}}{\partname~\thepart}{10pt}{}
+\titleformat{\chapter}[display]{\bfseries\huge\color{navy}}{\color{sky}\chaptertitlename~\thechapter}{6pt}{}[\vspace{-2pt}{\color{sky}\titlerule[1.2pt]}]
+\titleformat{\section}{\Large\bfseries\color{navy}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{sky}}{\thesubsection}{0.6em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{16pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[LE]{\small\color{gray}CSE 219 Formula \& Method Handbook}\fancyhead[RO]{\small\color{gray}\nouppercase{\leftmark}}
+\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% boxes
+\tcbset{enhanced,breakable,boxrule=0.6pt,arc=2pt,left=7pt,right=7pt,top=5pt,bottom=5pt,fonttitle=\bfseries\small,before skip=8pt,after skip=8pt}
+\newtcolorbox{formula}[1][Key formulas]{colback=sky!7,colframe=sky,title={#1},coltitle=white,colbacktitle=sky}
+\newtcolorbox{method}[1][Method]{colback=forest!6,colframe=forest,title={#1},coltitle=white,colbacktitle=forest}
+\newtcolorbox{pitfall}[1][Traps]{colback=crimson!5,colframe=crimson,title={#1},coltitle=white,colbacktitle=crimson}
+\newtcolorbox{inexam}[1][In the exam]{colback=amber!8,colframe=amber,title={#1},coltitle=white,colbacktitle=amber}
+\newtcolorbox{example}[1]{colback=paper,colframe=plum,title={Worked example --- #1},coltitle=white,colbacktitle=plum}
+\newtcolorbox{proofbox}[1][Proof]{colback=white,colframe=navy!70,title={#1},coltitle=white,colbacktitle=navy!70}
+\newenvironment{steps}{\begin{enumerate}[leftmargin=1.6em,itemsep=1pt,topsep=2pt,label=\bfseries\color{forest}\arabic*.]}{\end{enumerate}}
+
+% math macros
+\newcommand{\jw}{j\omega}\newcommand{\Xjw}{X(j\omega)}\newcommand{\ejw}[1]{e^{#1}}
+\newcommand{\E}{\mathrm{e}}\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ak}{a_k}\newcommand{\wo}{\omega_0}
+\newcommand{\Z}{\mathcal{Z}}\newcommand{\Lap}{\mathcal{L}}\newcommand{\F}{\mathcal{F}}
+\newcommand{\rect}{\operatorname{rect}}\newcommand{\sinc}{\operatorname{sinc}}\newcommand{\sgn}{\operatorname{sgn}}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\ROC}{\mathrm{ROC}}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand{\pair}{\;\longleftrightarrow\;}
+\newcommand{\mk}[1]{{\color{crimson}\bfseries#1}}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+\fill[navy] (current page.north west) rectangle ($(current page.north east)+(0,-9cm)$);
+\fill[sky] ($(current page.north west)+(0,-9cm)$) rectangle ($(current page.north east)+(0,-9.35cm)$);
+\node[anchor=north west,text=white,align=left,inner sep=0] at ($(current page.north west)+(2.2cm,-2.6cm)$) {\fontsize{34}{38}\selectfont\bfseries CSE 219\\[4pt]\fontsize{22}{26}\selectfont Signals and Linear Systems};
+\node[anchor=north west,text=white!85!navy,align=left,inner sep=0] at ($(current page.north west)+(2.2cm,-6.6cm)$) {\Large Formulas, Methods and Worked Patterns\\ for the Term Final};
+\end{tikzpicture}
+\vspace*{10.2cm}
+
+{\large\color{navy}\bfseries What this handbook covers}\par\smallskip
+\begin{tabular}{@{}p{0.47\textwidth}p{0.47\textwidth}@{}}
+\textbf{Part I --- Anik Sir} (Lectures 1--7)\newline Signals, LTI systems and convolution, Fourier series, Fourier transform. &
+\textbf{Part II --- Ashraf Sir}\newline DTFT/DFT, FFT, sampling, Laplace and $z$-transform.\\
+\end{tabular}
+\vfill
+\begin{tcolorbox}[colback=paper,colframe=navy!40]
+\small Built from the lecture slides, the 2022--23 and 2023--24 CSE 219 term finals, the earlier EEE~211/301 and CSE~311 papers on the same content, and both practice sets. Every formula is stated once, followed by the \emph{general procedure} to attack that question type and a worked example taken from a past paper.
+\end{tcolorbox}
+\end{titlepage}
+
+\chapter*{How to Use This Handbook}
+\addcontentsline{toc}{chapter}{How to Use This Handbook}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.6cm}X@{}}
+\textcolor{sky}{Blue box} & The formulas to know by heart.\\
+\textcolor{forest}{Green box} & The step-by-step procedure for a question type.\\
+\textcolor{crimson}{Red box} & Common traps and sign/limit mistakes.\\
+\textcolor{amber}{Amber box} & Which TF questions this appears in, and what they ask.\\
+\textcolor{plum}{Purple box} & A fully worked example from a past paper or the practice sets.\\
+\end{tabularx}
+
+\medskip
+\textbf{Scope notes.} Anik Sir's syllabus excludes slides marked $(*)$ and Parseval's theorem; long foundation derivations are for intuition only. Short proofs are given in compact form (see the \emph{Proofs} boxes). Ashraf Sir's Lecture~0 is history and not examinable.
+
+\tableofcontents
+
+\mainmatter
+\input{basics}
+\input{parta}
+\input{partb1}
+\input{partb2}
+\input{appendix}

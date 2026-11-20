@@ -1,0 +1,1230 @@
+
+===== page 1 =====
+Sampling
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Outline
+• Introduction: representing a continuous-time signal by its samples — and the ambiguity
+• Sampling as multiplication: the time-domain row of the map
+• Two roads to Xp(jω): multiply-then-transform (a dead end) versus transform-then-convolve
+• The tools: duality, multiplication ↔convolution, the spectrum of an impulse train
+• The key observation: convolving with impulses copies the spectrum
+• The Sampling Theorem: Nyquist rate and aliasing
+• Signal Reconstruction: ideal low-pass filtering, zero-order hold, linear interpolation
+• Revisiting the DFT: practical considerations and periodic signals
+1
+
+===== page 3 =====
+Introduction and Terminology
+
+===== page 4 =====
+Recap: Representation by Samples
+• In Lecture 1 we turned a continuous-time signal x(t) into a sequence by reading it at uniform intervals,
+x[n] = x(nT), and never looked back.
+• Question: under what conditions is x(t) uniquely determined by — and exactly recoverable from — its
+samples?
+• Exact recovery is possible if the signal is band-limited (its Fourier transform is zero outside a finite band
+of frequencies) and the samples are taken sufficiently close together.
+• This is the Nyquist–Shannon Sampling Theorem. Today we derive it, and the derivation is one picture.
+2
+
+===== page 5 =====
+Ambiguity in Representation by Samples
+• Generally, infinitely many continuous-time signals can yield the exactly same discrete sequence when
+sampled at interval T.
+−3T
+−2T
+−T
+T
+2T
+3T
+x1(t)
+x2(t)
+x3(t)
+t
+3
+
+===== page 6 =====
+Sampling as Multiplication: The Time-Domain Row
+• To analyze sampling mathematically, represent it as multiplying x(t) by a periodic impulse train p(t).
+(Lecture 1 wrote the period as Ts; here it is simply T.)
+x(t)
+×
+T
+p(t)
+=
+xp(t)
+Impulse-Train Sampling
+p(t) =
++∞
+∑
+n=−∞
+δ(t −nT),
+xp(t) = x(t) p(t) =
++∞
+∑
+n=−∞
+x(nT) δ(t −nT)
+• Each impulse picks up the value of x(t) where it stands, so the weights x(nT) are exactly the samples
+x[n]. So far, this is the picture from Lecture 1.
+4
+
+===== page 7 =====
+Two Roads to Xp(jω)
+
+===== page 8 =====
+The Map: What We Know and What We Want
+• Suppose we know x(t) — and therefore its spectrum X(jω). Sampling hands us xp(t). What is its
+spectrum Xp(jω), and how is it related to X(jω)?
+x(t)
+×
+T
+p(t)
+=
+xp(t)
+−ωM
+ωM
+X(jω)
+∗
+?
+P (jω)
+=
+?
+Xp(jω)
+F
+F
+F
+• Top row: known. Bottom row: two question marks. From the top-left corner to the bottom-right one there
+are two roads.
+5
+
+===== page 9 =====
+Road 1: Multiply First, Then Transform
+x(t)
+×
+T
+p(t)
+=
+xp(t)
+−ωM
+ωM
+X(jω)
+∗
+?
+P (jω)
+=
+?
+Xp(jω)
+F
+F
+F
+Road 1
+The product is already in hand, so just transform it; the impulses sift the integral:
+Xp(jω) =
+Z ∞
+−∞
+X
+n
+x(nT) δ(t −nT) e−jωt dt =
+∞
+X
+n=−∞
+x(nT) e−jωnT
+A formula, not a picture
+ Correct — Lecture 1 relabelled ωT 7→ω and called it the DTFT.  It says what Xp(jω) is, not how it
+looks.  X(jω), the one thing we were given, appears nowhere. It cannot be interpreted. Park it.
+6
+
+===== page 10 =====
+Road 2: Transform First, Then Convolve
+x(t)
+×
+T
+p(t)
+=
+xp(t)
+−ωM
+ωM
+X(jω)
+∗
+?
+P (jω)
+=
+?
+Xp(jω)
+F
+F
+F
+Road 2
+• Go down first: X(jω) we have, P(jω) we can look for. Then combine along the bottom row.
+• A product in time should become a convolution in frequency, Xp(jω) =
+1
+2π X(jω) ∗P(jω). If so, Xp(jω)
+is built out of X(jω) — and then maybe, just maybe, we can read off how the two spectra are related.
+Two tools to build first
+(1) Multiplication ↔convolution, which we get from the convolution property by duality.
+(2) The spectrum P(jω) of the impulse train.
+7
+
+===== page 11 =====
+Tool 1: Fourier Transform Duality
+• We derive the duality principle from the inverse Fourier transform:
+x(t) = 1
+2π
+∫
+X(jω)ejωtdω =⇒2πx(−t) =
+∫
+X(jω)e−jωtdω
+• Swapping the names t and ω:
+2πx(−ω) =
+∫
+X(jt)e−jωtdt = F{X(jt)}
+• Hence, the duality principle:
+x(t)
+F
+←→X(jω) =⇒X(jt)
+F
+←→2πx(−ω)
+• Every transform pair we know comes with a free twin: swap the roles of time and frequency, flip, and
+scale by 2π.
+8
+
+===== page 12 =====
+Tool 2: Multiplication Is Convolution in the Frequency Domain
+• We know from the Convolution Property that,
+x1(t) ∗x2(t)
+F
+←→X1(jω)X2(jω)
+• By duality,
+X1(jt) ∗X2(jt)
+F
+←→2πx1(−ω)x2(−ω)
+X1(jt)
+F
+←→2πx1(−ω)
+X2(jt)
+F
+←→2πx2(−ω)
+• Substituting X1(jt) with u(t) and X2(jt) with v(t):
+u(t)
+F
+←→2πx1(−ω) = U(jω)
+v(t)
+F
+←→2πx2(−ω) = V (jω)
+• Substituting we get:
+u(t)v(t)
+F
+←→1
+2π U(jω) ∗V (jω)
+• Hence the bottom row of the map really is a convolution — one unknown left, P(jω):
+Xp(jω) = 1
+2π [X(jω) ∗P(jω)]
+9
+
+===== page 13 =====
+Tool 3, First Attempt: P(jω) Straight from the Definition
+• Transform the train term by term; each impulse sifts:
+P(jω) =
+∫∞
+−∞
+∑
+n
+δ(t −nT) e−jωt dt =
+∞
+∑
+n=−∞
+e−jωnT
+• The same kind of answer as Road 1, with the same problem:
+an infinite sum of complex exponentials in ω. What does it
+look like? Worse, we would have to convolve X(jω) with it. 
+Dead end #2.
+Change of plan
+p(t) is periodic with period T, and periodic signals have a
+second representation: the Fourier series. Rewrite p(t) as
+a Fourier series first, then transform. Be patient — in two
+slides it will be clear why this helps.
+t
+T
+p(t)
+F
+∞
+∑
+n=−∞
+e−jωnT
+?
+true, but what
+does it look like?
+10
+
+===== page 14 =====
+Tool 3, Second Attempt: Fourier Series First
+• p(t) has period T, so with ωs = 2π/T:
+p(t) =
++∞
+∑
+k=−∞
+ck ejkωst,
+ck = 1
+T
+∫T/2
+−T/2
+p(t) e−jkωst dt
+• Only one impulse, δ(t), lives inside one period. Sifting:
+ck = 1
+T
+∫T/2
+−T/2
+δ(t) e−jkωst dt = 1
+T e0 = 1
+T
+for every k
+The impulse train as a Fourier series
+p(t) = 1
+T
++∞
+∑
+k=−∞
+ejkωst
+t
+T
+p(t)
+k
+1
+T
+0
+1
+−1
+ck — every harmonic, equal weight
+Fourier
+series
+• A sum of exponentials again — but a very different one. Before: e−jωnT , functions of ω we could not
+draw. Now: ejkωst, pure tones in t at the frequencies kωs. And the CTFT of a pure tone is the one
+spectrum everybody can draw.
+11
+
+===== page 15 =====
+The CTFT of a Pure Tone Is an Impulse
+• Sifting gives δ(t) ↔1. Duality with x = δ, X = 1:
+1
+F
+←→2π δ(−ω) = 2π δ(ω)
+• Frequency shift, straight from the definition:
+ejω0tx(t)
+F
+←→
+∫
+x(t) e−j(ω−ω0)t dt = X(j(ω −ω0))
+• Hence a pure tone is a single impulse,
+ejkωst ↔2π δ(ω −kωs), and the Fourier series transforms
+term by term:
+t
+T
+p(t)
+ω
+ωs
+2π
+T
+P (jω)
+F
+Spectrum of the impulse train
+P(jω) = 1
+T
+∑
+k
+2π δ(ω −kωs) = 2π
+T
++∞
+∑
+k=−∞
+δ(ω −kωs)
+• Good news. An impulse train in time is an impulse train in frequency, spaced ωs = 2π/T apart (closer
+samples, sparser spectrum) — and impulses are the easiest thing in the world to convolve with.
+12
+
+===== page 16 =====
+Why Impulses Are Good News: What Convolution Does
+• Recall where convolution came from: an LTI system
+with impulse response h(t). Feed it δ(t), get h(t).
+Feed it δ(t −t0), get h(t −t0) — time invariance.
+• Output = input ∗impulse response, so
+δ(t −t0) ∗h(t) = h(t −t0)
+• Convolving with a shifted impulse does nothing but
+copy h to t0, scaled by the impulse’s weight. By
+linearity, convolving with a train of impulses puts
+one copy at every impulse.
+• The same in frequency, by sifting:
+X(jω) ∗δ(ω −ω0) =
+∫
+X(jθ) δ(ω −θ −ω0) dθ
+= X(j(ω −ω0))
+δ(t −t0)
+h(t)
+h(t −t0)
+Convolving with impulses just places copies
+∗
+0
+=
+13
+
+===== page 17 =====
+Back to the Map: Every Impulse Becomes a Copy of X(jω)
+x(t)
+×
+T
+p(t)
+=
+xp(t)
+−ωM
+ωM
+X(jω)
+∗
+ωs
+2π/T
+P (jω)
+=
+ωs
+1/T
+Xp(jω)
+F
+F
+F
+Road 2
+Xp(jω) = 1
+2π X(jω) ∗2π
+T
+X
+k
+δ(ω −kωs) = 1
+T
+X
+k
+X(jω) ∗δ(ω −kωs) = 1
+T
++∞
+X
+k=−∞
+X
+ j(ω −kωs)
+
+Spectrum of the sampled signal
+Copies of X(jω), one at every impulse of P(jω): spaced ωs apart, each scaled by 1/T. This is the
+observation behind the Nyquist–Shannon theorem. The copies sit ωs apart and each is 2ωM wide —
+do they overlap?
+14
+
+===== page 18 =====
+The Sampling Theorem
+
+===== page 19 =====
+From the Map to the Theorem
+• Suppose x(t) is band-limited: X(jω) = 0 for |ω| > ωM.
+• On the map, Xp(jω) is a row of copies of X(jω) centred at 0, ±ωs, ±2ωs, . . . ; the copy at kωs occupies
+[kωs −ωM, kωs + ωM].
+• Neighbouring copies stay apart exactly when the right edge of one, ωM, comes before the left edge of the
+next, ωs −ωM:
+ωM < ωs −ωM ⇐⇒ωs > 2ωM
+• If they stay apart, the copy at the origin is an untouched X(jω)/T, and a low-pass filter can cut it out:
+x(t) is recoverable from its samples.
+• If they overlap, the copies add where they meet, and no filter can un-mix them.
+15
+
+===== page 20 =====
+Nyquist-Shannon Sampling Theorem
+Nyquist-Shannon Sampling Theorem
+Let x(t) be a band-limited signal with X(jω) = 0 for |ω| > ωM. Then x(t) is uniquely determined by
+its samples x(nT), n = 0, ±1, ±2, . . . , if
+ωs > 2ωM
+where ωs = 2π/T. The minimum sampling frequency 2ωM is called the Nyquist rate.
+−ωM
+ωM
+ωs −ωM
+ωs
+ωs + ωM
+1/T
+ωs > 2ωM
+ω
+Xp(jω)
+16
+
+===== page 21 =====
+Visualizing the Spectrum: Oversampling
+−ωM
+ωM
+1
+ω
+X(jω)
+−ωM
+ωM
+ωs −ωM
+ωs
+ωs + ωM
+1/T
+Guard band
+ω
+Xp(jω)
+• When ωs > 2ωM, exact copies of the original spectrum are perfectly separated.
+• The original signal can be recovered by isolating the baseband copy using a low-pass filter!
+17
+
+===== page 22 =====
+Visualizing the Spectrum: Undersampling (Aliasing)
+−ωM
+ωM
+1/T
+Aliasing!
+Aliasing!
+ωs
+−ωs
+ω
+Xp(jω)
+• When ωs < 2ωM, the shifted copies overlap with the baseband spectrum.
+• High frequencies fold over into the low-frequency band, distorting the signal. This phenomenon is called
+aliasing.
+• The original signal x(t) cannot be recovered by low-pass filtering.
+18
+
+===== page 23 =====
+Signal Reconstruction
+
+===== page 24 =====
+Ideal Reconstruction
+• By the sampling theorem, if ωs > 2ωM, the baseband spectrum of xp(t) (the copy of the spectrum X(jω)
+at the origin) is an exact replica of X(jω) scaled by 1/T.
+• We can recover x(t) by applying an ideal low-pass filter to xp(t).
+xp(t)
+Ideal LPF H(jω)
+xr(t) = x(t)
+• The frequency response of the ideal LPF must be:
+H(jω) =
+{
+T
+|ω| < ωc
+0
+|ω| > ωc
+where
+ωM < ωc < ωs −ωM
+• Commonly, we choose the cutoff frequency exactly in the middle: ωc = ωs/2, because it follows the
+assumption that ωM < ωs/2.
+19
+
+===== page 25 =====
+The Ideal Low-Pass Filter
+−π/T
+π/T
+T
+ω
+H(jω)
+Frequency Response H(jω)
+−3T
+−T
+T
+3T
+1
+t
+h(t)
+Impulse Response h(t)
+• The frequency response H(jω) is a rectangular pulse with cutoff ωc = ωs/2 = 2πfs/2 = π/T.
+• The time-domain impulse response h(t) = sinc(t/T) extends infinitely in both directions, making the
+ideal LPF unrealizable.
+20
+
+===== page 26 =====
+Deriving the Ideal Interpolation Filter h(t)
+To find the time-domain impulse response h(t) of an ideal low-pass filter with cutoff ωc = π/T
+and constant amplitude T, we compute the Inverse Fourier Transform:
+h(t) = 1
+2π
+Z ∞
+−∞
+H(jω)ejωtdω = 1
+2π
+Z π/T
+−π/T
+Tejωtdω
+= T
+2π
+ejωt
+jt
+π/T
+−π/T
+= T
+πt
+ej(π/T )t −e−j(π/T )t
+2j
+
+= T
+πt sin
+πt
+T
+
+= sinc
+ t
+T
+
+
+Recall sinc(x) = sin(πx)
+πx
+
+Result: The time-domain filter corresponding to a perfect frequency cutoff is exactly the infinitely
+wide sinc function!
+21
+
+===== page 27 =====
+Interpolation with the Ideal LPF
+• The impulse response h(t) of the ideal LPF (cutoff
+ωc = π/T) is:
+h(t) = sinc
+( t
+T
+)
+= sin(πt/T )
+πt/T
+• The reconstructed signal xr(t) = xp(t) ∗h(t) becomes:
+xr(t) =
+
+
++∞
+∑
+n=−∞
+x(nT)δ(t −nT)
+
+∗h(t)
+=
++∞
+∑
+n=−∞
+x(nT)sinc
+( t −nT
+T
+)
+• Superposition of shifted sinc functions.
+t
+• However, h(t) is non-causal and decays very slowly. It is unrealizable in practice. We need
+approximations.
+22
+
+===== page 28 =====
+Zero-Order Hold (ZOH)
+The simplest practical reconstruction method is the Zero-Order Hold (ZOH).
+• Concept: Simply hold the sample value
+constant until the next sample arrives.
+• This forms a “staircase” approximation x0(t) of
+the continuous signal.
+• Widely used in Digital-to-Analog Converters
+(DACs).
+T
+t
+ˆx(t)
+• We can view this mathematically as filtering the impulse-sampled signal xp(t) with a rectangular pulse
+h0(t).
+23
+
+===== page 29 =====
+Why is h0(t) a Rectangle?
+• In a reconstructed output signal, an original sample y(nT) contributes strictly via a shifted, scaled
+version of the base filter: y(nT) · h(t −nT).
+• The shape of h(t) dictates the weighting of the sample y(nT) over continuous time.
+For Zero-Order Hold:
+• We desire the sample y(nT) to simply hold its full
+weight of 1 constant precisely until the next sample at
+(n + 1)T arrives.
+• Thus, the isolated weight of y(nT) must jump to 1 at
+t = nT and abruptly drop back to 0 at t = (n + 1)T.
+• Therefore, the underlying impulse response h0(t) must
+inherently be a rectangular block formally spanning
+from 0 to T!
+nT
+(n + 1)T
+1
+Weight of y(nT )
+held at 1
+y(nT)
+24
+
+===== page 30 =====
+Deriving the ZOH Frequency Response
+The ZOH impulse response h0(t) is simply a rectangular pulse equal to 1 over [0, T].
+We construct H0(jω) strictly via continuous Fourier integration:
+H0(jω) =
+Z ∞
+−∞
+h0(t)e−jωtdt
+=
+Z T
+0
+(1)e−jωtdt =
+e−jωt
+−jω
+T
+0
+= 1 −e−jωT
+jω
+=
+e−jωT/2 
+ejωT/2 −e−jωT/2
+jω
+= e−jωT/2
+ 2
+ω sin
+ωT
+2
+
+= Te−jωT/2 sinc
+ωT
+2π
+
+T
+1
+t
+h0(t)
+25
+
+===== page 31 =====
+Frequency Domain view of ZOH
+−ωs −ωs
+2
+ωs
+2
+ωs
+T
+ω
+|H0(jω)|
+Frequency Response |H0(jω)|
+T
+2T
+3T
+1
+t
+h0(t)
+Impulse Response h0(t)
+• h0(t) is a rectangle of width T. Its frequency response includes a sinc function:
+H0(jω) = Te−jωT/2sinc
+(
+ωT
+2π
+)
+.
+We notice that,
+• In the passband |ω| ≤ωs/2, the gain is not constant, attenuating high frequencies slightly.
+• Outside the passband, the gain is non-zero, allowing high-frequency aliasing copies to leak through.
+26
+
+===== page 32 =====
+Linear Interpolation (First-Order Hold)
+• Linear Interpolation connects adjacent samples
+with straight lines.
+• This produces a continuous, much smoother
+approximation x1(t) than the ZOH staircase.
+• Achieved by filtering the impulse-sampled
+signal xp(t) with a triangular pulse h1(t).
+T
+t
+ˆx(t)
+• The impulse response h1(t) is a triangle spanning [−T, T] with peak height 1 at t = 0.
+27
+
+===== page 33 =====
+Why is h1(t) a Triangle?
+• In a reconstructed signal, a given sample y(nT) contributes via y(nT) · h1(t −nT).
+• The shape of h1(t) thus dictates the weighting of y(nT) over time.
+For Linear Interpolation:
+Given a weight α ∈[0, 1], we should have,
+y(t) = (1 −α)y((n −1)T ) + αy(nT )
+for t ∈[(n −1)T, nT ]
+y(t) = (1 −α)y(nT ) + αy((n + 1)T )
+for t ∈[nT, (n + 1)T ]
+Therefore,
+• The weight of y(nT) should linearly rise strictly
+from 0 to 1 between (n −1)T and nT.
+• It should linearly fall from 1 back to 0 between nT
+and (n + 1)T.
+• At all other times, its weight must precisely be 0
+to isolate its exact local influence.
+• Therefore, h1(t) must inherently be a symmetric
+triangle!
+(n −1)T
+(n + 1)T
+1
+nT
+Weight
+rises 0 →1
+Weight
+falls 1 →0
+y((n −1)T )
+y(nT )
+y((n + 1)T )
+28
+
+===== page 34 =====
+First-Order Hold: Convolution Intuition
+A linear interpolation triangle filter h1(t) can be formed by convolving two shifted zero-order hold
+rectangles!
+h1(t) = 1
+T
+
+h0(t + T/2) ∗h0(t + T/2)
+
+−T
+2
+T
+2
+1
+slide
+Rectangles overlapping
+−T
+T
+1
+h1(t)
+• h0(t + T/2) is just the standard ZOH block, centered exactly
+on time t = 0.
+• Area of overlap grows linearly to a peak, and drops cleanly
+linearly!
+• The peak area is T × 1 = T, hence the factor 1
+T , as the
+triangle peak should be 1.
+Frequency Derivation: Use F{x ∗x} = F{x}2.
+H1(jω) = 1
+T
+h
+F
+n
+h0(t + T/2)
+oi2
+= 1
+T
+
+T sinc
+ωT
+2π
+2
+= T sinc2
+ωT
+2π
+
+29
+
+===== page 35 =====
+Frequency Domain view of Linear Interpolation
+−ωs −ωs
+2
+ωs
+2
+ωs
+T
+ω
+|H1(jω)|
+Frequency Response |H1(jω)|
+−2T
+−T
+T
+2T
+1
+t
+h1(t)
+Impulse Response h1(t)
+• h1(t) is a triangular pulse spanning [−T, T]. Its frequency response is H1(jω) = Tsinc2 (
+ωT
+2π
+)
+.
+• Because of the convolution property, H1(jω) is proportional to the square of the ZOH response, without
+the phase delay.
+30
+
+===== page 36 =====
+Comparing Reconstruction Filters
+• Let’s compare the frequency domain magnitudes against the ideal filter (assuming T = 1):
+−ωs/2
+ωs/2
+Ideal
+ZOH
+Linear
+ω
+|H(jω)|
+• Linear interpolation has much faster high-frequency rolloff (less leakage) than ZOH, making it a ”better”
+low-pass filter approximation.
+31
+
+===== page 37 =====
+Connection to the DFT
+
+===== page 38 =====
+Practical Limitation: Time vs. Frequency
+The Uncertainty Principle
+Signals cannot be both time-limited
+and strictly band-limited!
+• Finite-duration captures mean
+X(jω) inherently extends to
+infinite frequencies.a
+aInteresting watch: 3Blue1Brown -
+Uncertainty Principle
+Unavoidable Aliasing
+Sampling any real-world signal causes
+some aliasing!
+The infinite spectral
+tails will always overlap and leak into
+our baseband.
+Time-Limited Signal
+−T/2
+T/2
+t
+Infinite Frequency Spectrum & Aliasing
+Aliasing Tails
+ωs
+ω
+Xp(jω)
+32
+
+===== page 39 =====
+DTFT Revisited from the Sampled Signal
+Road 1 gave us the CTFT of the sampled impulse train directly:
+Xp(jω) =
+∞
+X
+n=−∞
+x[n]e−jωnT
+Xp(j(ω + ωs)) =
+∞
+∑
+n=−∞
+x[n]e−j(ω+ωs)nT
+=
+∞
+∑
+n=−∞
+x[n]e−jωnT e−j2πn
+= Xp(jω)
+• Road 2 says this same function is the train of
+copies 1
+T
+∑
+k X(j(ω −kωs)).
+• It repeats every ωs = 2π
+T .
+• Under ωT 7→ω, the same expression becomes
+the DTFT:
+X(ejω) =
+∞
+∑
+n=−∞
+x[n]e−jωn.
+−ωs
+−ωs/2
+ωs/2
+ωs
+one period = ωs
+shifted copy
+shifted copy
+ω
+|Xp(jω)|
+33
+
+===== page 40 =====
+Baseband Copy, Aliasing, and the Ideal LPF
+Xp(jω) = 1
+T
+∞
+∑
+r=−∞
+X(j(ω −rωs))
+• The central band [−ωs/2, ωs/2] contains the
+original copy centered at 0.
+• Every other interval of width ωs is a shifted
+copy of that same spectrum.
+• For finite-duration captures the tails are
+infinite, so some aliasing leakage remains,
+but the baseband picture is still the same
+one from the Nyquist proof.
+• The ideal reconstruction filter keeps exactly
+that baseband copy:
+H(jω) =
+{
+T,
+|ω| < ωs/2
+0,
+otherwise
+−ωs
+−ωs/2
+ωs/2
+ωs
+ideal LPF keeps this band
+original copy
+shifted copy
+shifted copy
+ω
+|Xp(jω)|
+34
+
+===== page 41 =====
+Inverse DTFT from the Ideal LPF
+• Ideal reconstruction uses one
+ωs-wide period of the sampled
+spectrum:
+x(t) = 1
+2π
+∫ωs/2
+−ωs/2
+Xp(jω)ejωt Tdω
+• After the same mapping ωT 7→ω
+used to derive the DTFT,
+Xp(jω) −→X(ejω)
+Tdω −→dω
+• Also,
+[−ωs/2, ωs/2]
+ωT 7→ω
+[−π, π]
+Applying the mapping at the sample locations,
+x[n] = x(nT) = 1
+2π
+∫π
+−π
+X(ejω)ej ω
+T T n dω
+= 1
+2π
+∫π
+−π
+X(ejω)ejωn dω
+Inverse DTFT
+x[n] = 1
+2π
+∫
+2π
+X(ejω)ejωn dω
+As the area is the same regardless of which period we choose.
+35
+
+===== page 42 =====
+DFT as Uniform Samples of One ωs-Wide Period
+X[k] = Xp
+
+j kωs
+N
+
+= X(ejω)
+
+ω= 2π
+N k
+• Undoing the relabeling, a normalized DTFT
+point at ω sits at the physical frequency
+ω/T = ωωs/(2π).
+• So an N-point DFT takes N uniformly
+spaced samples across one physical
+period of width ωs.
+• For even N, bins k = 0, . . . , N/2 run from
+dc to the highest positive frequency.
+• Bins k = N/2 + 1, . . . , N −1 then
+continue as wrapped negative
+frequencies: large negative first, then
+back toward dc.
+ωs/2
+ωs
+ωs/N
+positive
+wrapped
+negative
+DFT evaluates N bins
+ω
+|Xp(jω)|
+36
+
+===== page 43 =====
+Periodic Signals Give Harmonic Line Spectra
+• If the underlying signal has period T0,
+then ω0 = 2π/T0 and
+x(t) =
+∞
+∑
+k=−∞
+akejkω0t.
+• Its CTFT is therefore a line spectrum:
+X(jω) = 2π
+∞
+∑
+k=−∞
+akδ(ω −kω0).
+• If we sample exactly N times in one
+period, then
+T0 = NT,
+ωs = 2π
+T = Nω0.
+One Period in Time
+−T0
+T0
+t
+Harmonic Line Spectrum
+ω0
+ω
+X(jω)
+37
+
+===== page 44 =====
+Sampling Copies the Periodic Line Spectrum
+From the Nyquist proof, the sampled spectrum is a
+sum of shifted copies of the original spectrum:
+Xp(jω) = 1
+T
+∞
+∑
+r=−∞
+X(j(ω −rωs))
+= 1
+T
+∞
+∑
+r=−∞
+2π
+∞
+∑
+k=−∞
+akδ((ω −rωs) −kω0)
+= 2π
+T
+∞
+∑
+r=−∞
+∞
+∑
+k=−∞
+akδ(ω −kω0 −rωs)
+• Each harmonic line is copied to every
+passband.
+• Depending on the bandwidth, the copied line
+spectra may overlap and alias into each other.
+ωs
+possible
+overlap
+ω
+Xp(jω)
+38
+
+===== page 45 =====
+Nyquist Condition for the Periodic Case
+If the original periodic signal is bandlimited to the
+Nyquist band,
+|kω0| < ωs/2,
+then ak = 0 whenever |k| ≥N/2. The copied line
+spectrum becomes
+Xp(jω) = 2π
+T
+∞
+∑
+r=−∞
+∑
+|k|<N/2
+akδ(ω −kω0 −rωs).
+• Now one passband contains one clean,
+non-overlapping copy of the original
+harmonic line spectrum.
+• This is the periodic-signal version of the
+Nyquist condition.
+ωs
+gap: no overlap
+ω
+Xp(jω)
+39
+
+===== page 46 =====
+The Same Spectrum from the Sampled Sequence
+From Lecture 1 (DTFT and DFT), the sampled periodic
+signal itself has the Fourier series
+xp(t) =
+∞
+∑
+ℓ=−∞
+cℓejℓω0t,
+cℓ= 1
+T0
+N−1
+∑
+n=0
+x[n]e−j 2π
+N ℓn = 1
+T0
+X[ℓ].
+Since cℓ+N = cℓ, choose any N consecutive indices
+K and write ℓ= k + rN:
+Xp(jω) = 2π
+∞
+∑
+ℓ=−∞
+cℓδ(ω −ℓω0)
+= 2π
+∞
+∑
+r=−∞
+∑
+k∈K
+ck+rNδ(ω −(k + rN)ω0)
+= 2π
+∞
+∑
+r=−∞
+∑
+k∈K
+ckδ(ω −kω0 −rωs).
+This equation matches exactly with the previous one.
+Therefore, the coefficients must be related.
+ωs
+same copy locations,
+now labeled by ck
+ω
+Xp(jω)
+Coefficient Match
+ck = ak
+T ,
+X[k] = T0ck = T0
+T ak = Nak
+Hence, if the periodic signal is bandlimited to the Nyquist
+band, the DFT bins are scaled versions of the original Fourier
+series coefficients.
+40
+
+===== page 47 =====
+Reconstruction Gives x(t) and the IDFT
+−ωs/2
+ωs/2
+integrate one passband
+ω
+TXp(jω)
+Inside one passband only the non-overlapping harmonics remain:
+x(t) =
+1
+2π
+∫ωs/2
+−ωs/2
+T Xp(jω)ejωt dω
+= T
+∑
+|k|<N/2
+ckejkω0t =
+∑
+|k|<N/2
+akejkω0t.
+So the LPF recovers x(t) exactly when Nyquist holds. With t = nT ,
+T0 = NT :
+x[n] = x(nT ) = T
+∑
+|k|<N/2
+ckejkω0nT
+= 1
+N
+∑
+|k|<N/2
+X[k]ej 2π
+N kn.
+Periodicity of X[k] then shifts the index set to k = 0, . . . , N −1:
+Inverse DFT
+x[n] = 1
+N
+N−1
+∑
+k=0
+X[k]ej 2π
+N kn
+41

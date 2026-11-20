@@ -1,0 +1,107 @@
+\renewcommand{\teacherTag}{ASHRAF SIR \textbullet\ LAPLACE IN SYSTEMS}
+\chapter{Laplace Transform: Differential Equations, Circuits and Feedback}
+
+\noindent{\sffamily\small\color{slate}$\mathcal L\{y'\}=sY-y(0^-)$, \ $\mathcal L\{y''\}=s^2Y-sy(0^-)-y'(0^-)$. Total response = zero-input (initial conditions) + zero-state (input). Feedback: $T=\dfrac{G}{1+GH}$. Stable $\Leftrightarrow$ all closed-loop poles in the open left half-plane.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q6(a)}{CSE 219 \textbullet\ 22 batch p.3}{12}
+Solve $y''+7y'+12y=x'+2x$ with $x(t)=u(t)$ and zero initial conditions by the Laplace transform.
+\end{qcard}
+\begin{solution}
+\[(s^2+7s+12)Y=(s+2)X,\quad X=\frac1s\ \Rightarrow\ Y=\frac{s+2}{s(s+3)(s+4)}.\]
+Partial fractions: $\dfrac{A}{s}+\dfrac B{s+3}+\dfrac C{s+4}$ with $A=\dfrac2{12}=\dfrac16$, $B=\dfrac{-1}{(-3)(1)}=\dfrac13$, $C=\dfrac{-2}{(-4)(-1)}=-\dfrac12$.
+\[y(t)=\Big[\tfrac16+\tfrac13e^{-3t}-\tfrac12e^{-4t}\Big]u(t).\]
+Check: $y(0)=\frac16+\frac13-\frac12=0$ and $y(\infty)=\frac{2}{12}=H(0)\cdot1$.
+\ans{$y(t)=\big(\frac16+\frac13e^{-3t}-\frac12e^{-4t}\big)u(t)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q8(b)}{EEE 211 \textbullet\ EEE p.6}{18}
+For $y''+5y'+6y=x'+x$ with $y(0^-)=2$, $y'(0^-)=1$ and $x(t)=e^{-4t}u(t)$, find the zero-input response (ZIR) and zero-state response (ZSR) by the Laplace transform.
+\end{qcard}
+\begin{solution}
+\[(s^2+5s+6)Y-\big[sy(0^-)+y'(0^-)+5y(0^-)\big]=(s+1)X-x(0^-).\]
+With $x(0^-)=0$ and $X=\frac1{s+4}$:
+\[Y(s)=\underbrace{\frac{2s+11}{(s+2)(s+3)}}_{\text{ZIR}}+\underbrace{\frac{s+1}{(s+2)(s+3)(s+4)}}_{\text{ZSR}} .\]
+ZIR: $\dfrac{7}{s+2}-\dfrac5{s+3}$. ZSR: $-\dfrac{1/2}{s+2}+\dfrac2{s+3}-\dfrac{3/2}{s+4}$.
+\begin{align*}
+y_{zi}(t)&=\big(7e^{-2t}-5e^{-3t}\big)u(t),\\
+y_{zs}(t)&=\big(-\tfrac12e^{-2t}+2e^{-3t}-\tfrac32e^{-4t}\big)u(t),\\
+y(t)&=\big(\tfrac{13}2e^{-2t}-3e^{-3t}-\tfrac32e^{-4t}\big)u(t).
+\end{align*}
+Check: $y_{zi}(0)=2$, $y_{zi}'(0)=-14+15=1$ (ok).
+\ans{ZIR $=7e^{-2t}-5e^{-3t}$; ZSR $=-\frac12e^{-2t}+2e^{-3t}-\frac32e^{-4t}$ (for $t\ge0$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q7(c)}{EEE 211 \textbullet\ EEE p.15}{11}
+Solve $y'+2y=e^{-3t}u(t)$ with $y(0^-)=1$ using the Laplace transform.
+\end{qcard}
+\begin{solution}
+$sY-1+2Y=\dfrac1{s+3}\Rightarrow Y=\dfrac1{s+2}+\dfrac{1}{(s+2)(s+3)}=\dfrac1{s+2}+\dfrac1{s+2}-\dfrac1{s+3}=\dfrac2{s+2}-\dfrac1{s+3}$.
+\ans{$y(t)=\big(2e^{-2t}-e^{-3t}\big)u(t)$; $y(0)=1$ (ok).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q8(a)}{EEE 211 \textbullet\ EEE p.31}{15}
+For $y''+3y'+Ky=x''$, find the values of $K$ for which the system is BIBO stable. For $K=2$, find the zero-input response with $y(0^+)=0$, $y'(0^+)=1$.
+\end{qcard}
+\begin{solution}
+$H(s)=\dfrac{s^2}{s^2+3s+K}$. The poles are the roots of $s^2+3s+K$. For a second-order polynomial with positive leading coefficient, both roots lie in the left half-plane iff all coefficients are positive:
+\[3>0,\qquad K>0\ \Rightarrow\ K>0 .\]
+(For $0<K\le\frac94$ the poles are real and negative, for $K>\frac94$ complex with real part $-\frac32$.) At $K=2$ the characteristic equation $s^2+3s+2=(s+1)(s+2)$, so
+\[y_{zi}=Ae^{-t}+Be^{-2t},\quad y(0)=A+B=0,\ \ y'(0)=-A-2B=1\Rightarrow B=-1,\ A=1 .\]
+\ans{BIBO stable iff $K>0$. For $K=2$: $y_{zi}(t)=e^{-t}-e^{-2t}$, $t\ge0$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q5(b)}{EEE 211 \textbullet\ EEE p.4}{15}
+A plant $G(s)=\dfrac1{s+2}$ is controlled by $C(s)=\dfrac{s+1}{s}$ in a unity-feedback loop with input $x(t)=Au(t)$. Does the output settle to the input value? What happens if the plant is $\dfrac1{s-2}$?
+\end{qcard}
+\begin{solution}
+Open loop $L=CG=\dfrac{s+1}{s(s+2)}$; closed loop
+\[T(s)=\frac{L}{1+L}=\frac{s+1}{s^2+2s+s+1}=\frac{s+1}{s^2+3s+1}.\]
+Poles: $s=\frac{-3\pm\sqrt5}2=-0.38,-2.62$ --- both in the left half-plane, so $T$ is stable and the final value theorem applies: $y(\infty)=\lim_{s\to0}s\cdot T(s)\frac As=T(0)A=A$. Yes, the integrator in the controller gives zero steady-state error.
+
+For $G=\dfrac1{s-2}$: $T=\dfrac{s+1}{s(s-2)+s+1}=\dfrac{s+1}{s^2-s+1}$, poles $\frac12\pm j\frac{\sqrt3}2$ in the right half-plane: the output oscillates with growing amplitude, so there is no final value (the final value theorem cannot be used for an unstable system).
+\ans{Stable loop: $y(\infty)=A$ (since $T(0)=1$). With $\frac1{s-2}$ the closed-loop poles are $\frac12\pm j0.866$: unstable, no steady state.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q3(a)}{EEE 211 \textbullet\ EEE p.18}{15}
+Two systems $H_1(s)=\dfrac1{s^2+bs+(b-3)}$ and $H_2(s)=-2$ are connected in a feedback loop ($H_1$ forward, $H_2$ in the feedback path). Find the overall $H(s)$ and the values of $b$ for which it is stable.
+\end{qcard}
+\begin{notebox}The figure is read as standard negative feedback, $H=\dfrac{H_1}{1+H_1H_2}$. If the diagram uses a positive summing junction, replace $1+H_1H_2$ with $1-H_1H_2$.\end{notebox}
+\begin{solution}
+\[H=\frac{H_1}{1+H_1H_2}=\frac{1}{(s^2+bs+b-3)-2}=\frac{1}{s^2+bs+(b-5)}.\]
+Stable iff both coefficients are positive: $b>0$ and $b-5>0$, i.e.\ $b>5$.
+\ans{$H(s)=\dfrac1{s^2+bs+b-5}$; stable for $b>5$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q3}{EEE 211 \textbullet\ EEE p.23}{35}
+A multipath channel is $y(t)=x(t)+a\,x(t-T)$. Find $H(s)$. Show that the inverse system can be built as a feedback system, find its impulse response, and state when it is causal and stable.
+\end{qcard}
+\begin{solution}
+\step{Channel.} $H(s)=1+ae^{-sT}$, $h(t)=\delta(t)+a\delta(t-T)$.
+
+\step{Inverse system.} $H_{inv}(s)=\dfrac1{1+ae^{-sT}}$. This is a feedback loop with forward path $1$ and feedback path $ae^{-sT}$ (a delay $T$ with gain $a$) and \emph{negative} feedback: $w(t)=x(t)-a\,w(t-T)$.
+
+\step{Impulse response.} Expand for $|ae^{-sT}|<1$: $\dfrac1{1+ae^{-sT}}=\sum_{k=0}^\infty(-a)^ke^{-ksT}$, so
+\[h_{inv}(t)=\sum_{k=0}^{\infty}(-a)^k\delta(t-kT).\]
+\step{Causality and stability.} All impulses are at $t\ge0$: causal (ROC a right half-plane, $\operatorname{Re}s>\frac{\ln|a|}{T}$). Absolute integrability: $\sum_k|a|^k<\infty\iff|a|<1$. The ROC then includes the $j\omega$-axis.
+\ans{$H=1+ae^{-sT}$; $h_{inv}=\sum_{k\ge0}(-a)^k\delta(t-kT)$ (feedback of $-a\,e^{-sT}$); causal, and stable iff $|a|<1$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q5(b)}{EEE 211 \textbullet\ EEE p.29--30}{20}
+A current source $i_s(t)=2$ A for $t\le0$ and $4e^{-2t}$ A for $t\ge0$ drives a parallel combination of $R=2\,\Omega$ and $L=2$ H. Find the inductor current $i_L(t)$ for $t\ge0$ using the Laplace transform.
+\end{qcard}
+\begin{solution}
+\step{Initial condition.} For $t<0$ the source is constant, so the inductor is a short circuit and carries the whole current: $i_L(0^-)=2$ A.
+
+\step{Node equation.} With $v=L\frac{\dd i_L}{\dd t}$ across both elements: $i_s=\dfrac vR+i_L=\dfrac LRi_L'+i_L=i_L'+i_L$ (since $L/R=1$). Transform:
+\[I_S=sI_L-i_L(0^-)+I_L=(s+1)I_L-2,\qquad I_S=\frac4{s+2}.\]
+\[I_L=\frac{I_S+2}{s+1}=\frac{4}{(s+1)(s+2)}+\frac2{s+1}=\frac{6}{s+1}-\frac4{s+2}.\]
+\ans{$i_L(t)=6e^{-t}-4e^{-2t}$ A, $t\ge0$ (check: $i_L(0)=2$ A (ok)).}
+\end{solution}

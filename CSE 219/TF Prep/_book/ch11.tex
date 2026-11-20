@@ -1,0 +1,89 @@
+\renewcommand{\teacherTag}{ASHRAF SIR \textbullet\ DFT AND FFT}
+\chapter{DFT, FFT and Fast Algorithms}
+
+\noindent{\sffamily\small\color{slate}$X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn}$, \ $W_N=e^{-j2\pi/N}$, \ $x[n]=\frac1N\sum_kX[k]W_N^{-kn}$. Linear convolution of lengths $L,M$ via the DFT needs $N\ge L+M-1$.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q5(a)}{CSE 219 \textbullet\ 22 batch p.3}{15}
+Compute the 8-point DFT of $x[n]=\{1,2,3,4,3,2\}$ using the radix-2 decimation-in-time FFT, showing all butterflies.
+\end{qcard}
+\begin{solution}
+Zero-pad to $N=8$: $x=\{1,2,3,4,3,2,0,0\}$. Bit-reversed input order $x[0],x[4],x[2],x[6],x[1],x[5],x[3],x[7]=1,3,3,0,2,2,4,0$. Twiddles: $W_8^0=1$, $W_8^1=\frac{1-j}{\sqrt2}$, $W_8^2=-j$, $W_8^3=\frac{-1-j}{\sqrt2}$.
+
+\step{Stage 1} (pairs, $W_2^0=1$): $(1,3)\to(4,-2)$; $(3,0)\to(3,3)$; $(2,2)\to(4,0)$; $(4,0)\to(4,4)$.
+
+\step{Stage 2} (blocks of 4, $W_4^0=1$, $W_4^1=-j$):
+\begin{align*}
+A&=[4,-2,3,3]\to A_0=4+3=7,\ A_1=-2-3j,\ A_2=4-3=1,\ A_3=-2+3j,\\
+B&=[4,0,4,4]\to B_0=8,\ B_1=-4j,\ B_2=0,\ B_3=4j .
+\end{align*}
+\step{Stage 3} ($X[k]=A_k+W_8^kB_k$, $X[k+4]=A_k-W_8^kB_k$):
+\begin{center}\small\renewcommand{\arraystretch}{1.2}\begin{tabular}{@{}c|c|c@{}}$k$&$X[k]$&$X[k+4]$\\\hline
+0&$7+8=15$&$7-8=-1$\\
+1&$(-2-3j)+W_8^1(-4j)=-4.828-5.828j$&$0.828-0.172j$\\
+2&$1+(-j)(0)=1$&$1$\\
+3&$(-2+3j)+W_8^3(4j)=0.828+0.172j$&$-4.828+5.828j$\end{tabular}\end{center}
+\[X=\{15,\ -4.828-5.828j,\ 1,\ 0.828+0.172j,\ -1,\ 0.828-0.172j,\ 1,\ -4.828+5.828j\}.\]
+The result is conjugate-symmetric, $X[8-k]=X^*[k]$, as expected for real input.
+\ans{$X[k]=\{15,\,-4.828-5.828j,\,1,\,0.828+0.172j,\,-1,\,0.828-0.172j,\,1,\,-4.828+5.828j\}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q5(b)}{CSE 219 \textbullet\ 22 batch p.3}{10}
+Find the linear convolution of $x=\{1,2\}$ and $h=\{1,1\}$ using the DFT.
+\end{qcard}
+\begin{solution}
+The result has length $2+2-1=3$, so use $N=4$ (zero-padding).
+\[X=\{3,\ 1-2j,\ -1,\ 1+2j\},\qquad H=\{2,\ 1-j,\ 0,\ 1+j\}.\]
+\[Y=XH=\{6,\ -1-3j,\ 0,\ -1+3j\}.\]
+Inverse DFT, $y[n]=\frac14\sum_kY[k]j^{kn}$: $y[0]=\frac{6-1-3j-1+3j}4=1$, $y[1]=\frac{12}4=3$, $y[2]=\frac84=2$, $y[3]=0$.
+\ans{$y[n]=\{1,3,2\}$ (direct check: $(1+2z^{-1})(1+z^{-1})=1+3z^{-1}+2z^{-2}$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q7(a)}{CSE 219 \textbullet\ 22 batch p.4}{15}
+Compute the DFT of $x=\{1,2,3,4,9,0,7,8\}$ using the $2\times4$ Cooley--Tukey (matrix) method: (i) DFT of the columns, (ii) twiddle-factor multiplication, (iii) DFT of the rows.
+\end{qcard}
+\begin{solution}
+Write $n=4n_1+n_2$ ($n_1=0,1$; $n_2=0..3$) and $k=k_1+2k_2$ ($k_1=0,1$; $k_2=0..3$).
+\[\text{matrix of }x:\ \begin{bmatrix}1&2&3&4\\9&0&7&8\end{bmatrix}.\]
+\step{(i) 2-point DFT of each column:} $\begin{bmatrix}10&2&10&12\\-8&2&-4&-4\end{bmatrix}$.
+
+\step{(ii) Twiddles} $W_8^{k_1n_2}$: row $k_1=0$ unchanged; row $k_1=1$ multiplied by $W_8^{n_2}$, $W_8=\frac{1-j}{\sqrt2}$:
+\[[-8,\ 2W_8,\ -4W_8^2,\ -4W_8^3]=[-8,\ 1.414-1.414j,\ 4j,\ 2.828+2.828j].\]
+\step{(iii) 4-point DFT of each row:} row 0 gives $X[0],X[2],X[4],X[6]$; row 1 gives $X[1],X[3],X[5],X[7]$:
+\begin{align*}
+\text{row 0: }&\mathrm{DFT}_4[10,2,10,12]=[34,\ 10j,\ 6,\ -10j],\\
+\text{row 1: }&\mathrm{DFT}_4[-8,\,1.414-1.414j,\,4j,\,2.828+2.828j]=[-3.757+5.414j,\ -12.243-2.586j,\ -12.243+2.586j,\ -3.757-5.414j].
+\end{align*}
+Interleaving:
+\[X=\{34,\ -3.757+5.414j,\ 10j,\ -12.243-2.586j,\ 6,\ -12.243+2.586j,\ -10j,\ -3.757-5.414j\}.\]
+\ans{$X[k]$ as above ($X[0]=34$ is the sum of the samples; $X[k]$ conjugate-symmetric).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q7(b)}{CSE 219 \textbullet\ 22 batch p.4}{10}
+Derive the chirp-$z$ (Bluestein) algorithm for computing the DFT. Why must the FFT size satisfy $M\ge2N-1$?
+\end{qcard}
+\begin{solution}
+Use $nk=\tfrac12\big[n^2+k^2-(k-n)^2\big]$ in $X[k]=\sum_{n=0}^{N-1}x[n]W^{nk}$, $W=e^{-j2\pi/N}$:
+\[X[k]=W^{k^2/2}\sum_{n=0}^{N-1}\underbrace{x[n]W^{n^2/2}}_{a[n]}\;\underbrace{W^{-(k-n)^2/2}}_{b[k-n]}=W^{k^2/2}\,(a*b)[k].\]
+So the DFT is: (1) multiply $x$ by the chirp $W^{n^2/2}$; (2) convolve with the chirp $b[m]=W^{-m^2/2}$; (3) multiply by $W^{k^2/2}$. The convolution is done with FFTs of any convenient size (e.g.\ a power of two), which is why Bluestein works for any $N$ (including primes) in $O(N\log N)$.
+
+\emph{Why $M\ge2N-1$.} The index $k-n$ runs from $-(N-1)$ to $N-1$, so $b$ has $2N-1$ non-zero points. The linear convolution of $a$ (length $N$) with $b$ must not wrap around circularly: we need $M\ge N+(2N-1)-1$ for full linear convolution, but only outputs $k=0..N-1$ are used and those are uncontaminated once $M\ge2N-1$ (the wrapped terms land outside the $N$ wanted samples).
+\ans{$X[k]=W^{k^2/2}\sum x[n]W^{n^2/2}W^{-(k-n)^2/2}$: chirp multiply, convolve, chirp multiply; zero-pad to $M\ge2N-1$ so circular wrap-around does not corrupt $X[0..N-1]$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q4(c)}{CSE 219 \textbullet\ TF p.2}{15}
+Compare the computational complexity of the direct DFT with the radix-2 FFT.
+\end{qcard}
+\begin{solution}
+\emph{Direct DFT:} each of $N$ outputs needs $N$ complex multiplications and $N-1$ additions, so $N^2$ multiplications, $N(N-1)$ additions: $O(N^2)$.
+
+\emph{Radix-2 FFT} ($N=2^m$): $\log_2N$ stages, each with $N/2$ butterflies (1 complex multiplication, 2 additions). So
+\[\tfrac N2\log_2N\ \text{multiplications},\qquad N\log_2N\ \text{additions}:\ O(N\log N).\]
+\begin{center}\small\begin{tabular}{@{}rrrr@{}}\toprule$N$&$N^2$&$\frac N2\log_2N$&speed-up\\\midrule8&64&12&5.3\\64&4096&192&21\\1024&1\,048\,576&5120&205\\\bottomrule\end{tabular}\end{center}
+The saving grows with $N$: the FFT reuses sub-results by splitting the sum into even and odd samples.
+\ans{Direct: $N^2$ multiplications. FFT: $\frac N2\log_2N$, i.e.\ about $205\times$ fewer for $N=1024$.}
+\end{solution}

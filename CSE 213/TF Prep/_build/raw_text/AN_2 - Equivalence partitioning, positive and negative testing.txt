@@ -1,0 +1,146 @@
+
+===== slide 1 =====
+Equivalence partitioning
+Divides the input data of a software unit into partitions of equivalent data assuming that all the conditions in one partition will be treated in the same way by the software.
+
+We need to test only one condition from each partition.
+
+ If one condition in a partition works, we assume all of the conditions in that partition will work, and so there is little point in testing any of these others.
+
+Similarly, if one of the conditions in a partition does not work, then we assume that none of the conditions in that partition will work.
+
+===== slide 2 =====
+Example Program
+A savings account in a bank has a different rate of interest depending on the balance in the account. The rate chart is as following:
+0.5% rate of interest is given if the balance in the account is in the range of $0 to $1000
+ 0.75% rate of interest is given if the balance in the account is in the range of $1000 to $10000
+1% rate of interest is given if the balance in the account is above $10000
+Invalid data | Partition 2 | Partition 3 | Partition 4
+Balance <0 | 0 ≤ Balance <1000 | 1000 ≤ Balance< 10000
+ | 10000 ≤ Balance
+ Interest = undefined | Interest = 0.5% | Interest = 0.75% | Interest = 1.0%
+
+===== slide 3 =====
+How not to test?
+float calculateSavingsInterest(float balance)
+float interestCalc= calculateSavingsInterest(0);
+assertEquals(0.0, interestCalc);
+float interestCalc= calculateSavingsInterest(500.0);
+assertEquals(2.5, interestCalc);
+float interestCalc= calculateSavingsInterest(1000.0);
+assertEquals(7.5, interestCalc);
+float interestCalc= calculateSavingsInterest(2000.0);
+assertEquals(15.0, interestCalc);
+…  …  …
+float interestCalc= calculateSavingsInterest(5000.0);
+assertEquals(37.5, interestCalc);
+How many partitions tested?
+
+===== slide 4 =====
+How to test?
+float calculateSavingsInterest(float balance)
+try{
+	float interestCalc= calculateSavingsInterest(-1.0);
+	fail(“Exception expected”)
+}catch(Exception ex){}
+
+float interestCalc= calculateSavingsInterest(100.0);
+assertEquals(0.50, interestCalc);
+
+float interestCalc= calculateSavingsInterest(2000.0);
+assertEquals(15.0, interestCalc);
+
+float interestCalc= calculateSavingsInterest(20000.0);
+assertEquals(200.0, interestCalc);
+1
+
+
+2
+
+3
+
+
+4
+
+===== slide 5 =====
+Boundary value analysis
+Boundary value analysis is based on testing at the boundaries between partitions
+
+More application errors occur at the boundaries of input domain.
+
+Used to identify errors at boundaries rather than finding those exist in center of input domain.
+Invalid data | Partition 2 | Partition 3 | Partition 4
+Balance <0 | 0 ≤ Balance <1000 | 1000 ≤ Balance <10000
+ | 10000 ≤ Balance
+ Interest = undefined | Interest = 0.5% | Interest = 0.75% | Interest = 1.0%
+-0.01 | 0, 0.01, 999.99 | 1000, 9999.99 | 10000
+
+===== slide 6 =====
+Positive testing
+Positive testing validates that an application will work on giving valid input data.
+
+ Verifies that the application is NOT showing error when it is not supposed to
+6184536032
+What is your phone number?
+
+===== slide 7 =====
+Negative testing
+Performed on the system by providing invalid data as input. 
+
+Checks whether an application behaves as expected with the negative input.
+
+ Ensures that your application can gracefully handle invalid input or unexpected user behavior.
+xyZ#53()032
+What is your phone number?
+
+===== slide 8 =====
+Typical Negative Testing Scenarios
+Not populating required fields
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_2 - Equivalence partitioning, positive and negative testing\s008_4.png]
+
+===== slide 9 =====
+Correspondence between data and field types
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_2 - Equivalence partitioning, positive and negative testing\s009_4.png]
+Populating fields with incorrect data type
+
+===== slide 10 =====
+Allowed number of characters
+Some applications or webpages may have set maximum / minimum values or number of characters for fields
+
+ Create a test that enters more characters into the field than is allowed.
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_2 - Equivalence partitioning, positive and negative testing\s010_5.png]
+
+===== slide 11 =====
+Allowed data bounds and limits
+Applications can use input fields that accept data in a certain range
+
+Create a negative test that enters a value smaller than the lower bound or greater than the upper bound of the specified field
+-1
+Please enter day?
+13
+Please enter month?
+
+===== slide 12 =====
+Out of range values
+Create test exceeding the bounds of the data types
+
+Integer range:
+ -32,768 to 32,767 [2 bytes]
+ -2,147,483,648 to 2,147,483,647 [4 bytes]
+
+Float range:
+-3.4E+38 to +3.4E+38
+
+===== slide 13 =====
+Reasonable data
+Check application with unreasonable input data
+Name with 300 characters
+Human Age: 200 years
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_2 - Equivalence partitioning, positive and negative testing\s013_4.png]
+
+===== slide 14 =====
+Web session testing
+Can we access any URL without logging in?
+Record some of the URL when you were logged in, try those again after you are logged out
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_2 - Equivalence partitioning, positive and negative testing\s014_4.png]
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_2 - Equivalence partitioning, positive and negative testing\s014_5.png]

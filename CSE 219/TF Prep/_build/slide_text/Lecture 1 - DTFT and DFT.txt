@@ -1,0 +1,1257 @@
+
+===== page 1 =====
+DTFT and DFT
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Last Time: Four Transforms, One Square
+• Last class ended on a promise: one structural rule generates every Fourier-type transform.
+• We already know the left column — the CTFS and the CTFT — from continuous-time analysis.
+• Today we derive the right column: what happens to Fourier’s idea when time arrives in samples.
+time is continuous
+time is discrete
+periodic
+aperiodic
+Fourier Series (CTFS)
+known 
+DFS / DFT
+today, Part I & III
+Fourier Transform (CTFT)
+known 
+DTFT
+today, Part II
+1
+
+===== page 3 =====
+Outline
+• Part I — From Fourier Series to the DFT: sample a periodic signal; the Fourier integral becomes a sum; the
+Discrete Fourier Series (DFS); the DFT and its inverse.
+• Reading the bins: where the negative frequencies live.
+• Part II — The Discrete-Time Fourier Transform: sample an aperiodic signal; the DTFT, its 2π-periodicity,
+and its inverse.
+• Part III — The DFT Through the DTFT Lens: the DFT as N evenly spaced samples of the DTFT; zero-padding;
+a worked example; bins in hertz.
+2
+
+===== page 4 =====
+From Fourier Series to the DFT
+
+===== page 5 =====
+Recap of the CTFS
+• Let’s start with a continuous-time periodic
+signal x(t) with period T0:
+x(t + T0) = x(t),
+ω0 ≜2π
+T0
+.
+• We have learnt the Continuous-Time Fourier
+Series (CTFS) representation:
+CTFS Pair
+x(t) =
+∞
+X
+k=−∞
+ckejkω0t
+ck = 1
+T0
+Z
+T0
+x(t)e−jkω0tdt
+T0
+T0
+t
+x(t)
+3
+
+===== page 6 =====
+Seeing the Fourier Series: Wind One Period
+Ǜ Interactive: wind one period of this signal; step the rate through its harmonics
+Picture after 3Blue1Brown, But what is the Fourier Transform? (2018)
+• Multiply x(t) by e−jkω0t: each value becomes a radius and kω0t an angle, so the graph is wound around
+the origin, k turns per period. The coefficient ck =
+1
+T0
+R
+T0 x(t) e−jkω0tdt is the center of mass of the
+wound curve.
+x(t) = 1 + 0.8 cos ω0t + 0.5 cos 2ω0t,
+one period
+k = 1: the loop closes, centroid = c1 = 0.4
+k = 3: the mass cancels, centroid = c3 = 0
+• One period is enough: after T0 the angle has advanced by 2πk, so every later period retraces the same
+loop. Only the rates kω0 close it — hence a line spectrum.
+4
+
+===== page 7 =====
+Uniform Sampling of a Periodic Signal
+Ǜ Interactive: sample this waveform: slide N and watch Ts shrink
+We are interested in a representation for discrete signals. We can sample x(t) to get a discrete
+signal x[n].
+• Sample x(t) uniformly with sampling
+period Ts.
+• Assume T0 is captured by N samples:
+T0 = NTs
+(N ∈Z+).
+• The purely discrete sequence x[n] is
+defined as:
+x[n] ≜x(nTs),
+n ∈Z.
+• Thus x[n] is inherently N-periodic:
+x[n + N] = x[n].
+Ts
+T0 = NTs
+N samples
+N samples
+n
+x[n]
+5
+
+===== page 8 =====
+Sampling as an Impulse Train
+• We can represent the sampled signal mathematically using an impulse train (aka Dirac comb).
+• Multiplying the continuous signal x(t) with the impulse train p(t) gives us the sampled signal xp(t).
+• Each sample x[n] is weighted by a Dirac delta function at time nTs.
+Ts
+t
+p(t)
+Impulse train p(t) = ∑δ(t −nTs).
+t
+xp(t)
+Sampled signal xp(t) = x(t)p(t).
+xp(t) =
+∞
+∑
+n=−∞
+x(nTs) δ(t −nTs) =
+∞
+∑
+n=−∞
+x[n] δ(t −nTs).
+6
+
+===== page 9 =====
+The Integral Becomes a Sum
+• The sampled signal xp(t) is still T0-periodic, so it has a CTFS. Let ck be its coefficients:
+ck = 1
+T0
+Z
+T0
+xp(t) e−jkω0t dt.
+• Substitute xp(t) = P∞
+n=−∞x[n]δ(t −nTs); the impulses sift the integral:
+ck = 1
+T0
+Z t0+T0
+t0
+
+
+∞
+X
+n=−∞
+x[n]δ(t −nTs)
+
+e−jkω0t dt
+= 1
+T0
+N−1
+X
+n=0
+x[n]
+Z t0+T0
+t0
+δ(t −nTs)e−jkω0t dt = 1
+T0
+N−1
+X
+n=0
+x[n] e−jkω0nTs
+• Since ω0Ts = 2π
+T0 Ts = 2π
+N , we arrive at a finite sum:
+ck = 1
+T0
+N−1
+X
+n=0
+x[n] e−j 2π
+N kn.
+We can take t0 = −Ts
+2 , so δ(t −nTs) is non-zero in [t0, t0 + T0] only for n = 0, 1, 2, . . . , N −1.
+7
+
+===== page 10 =====
+Only N Distinct Coefficients
+• Examine the exponent in ck:
+ck+N = 1
+T0
+N−1
+X
+n=0
+x[n]e−j 2π
+N (k+N)n
+= ck e−j2πn
+| {z }
+=1
+= ck
+• The frequency coefficients are N-periodic:
+sampling in time made the spectrum
+periodic!
+• Only N unique frequency values exist
+before the spectrum repeats.
+• We conventionally keep the window
+k = 0, 1, . . . , N −1.
+Ǜ Interactive: sample a period, watch ak repeat with period N
+−N
+−N
+2
+N
+2
+N
+3N
+2
+2N
+N-periodic
+same N values,
+over and over
+the N we keep
+k
+|ck|
+8
+
+===== page 11 =====
+Reading the Bins: Where the Negative Frequencies Went
+Ǜ Interactive: explore the bins on a live DFT: hover, click, or draw your own period
+• The natural spectrum is centered
+at k = 0: low frequencies in the
+middle, negative k on the left.
+• Periodicity moves each negative
+coefficient into the window
+0, . . . , N −1:
+c−k = cN−k.
+• The negative side is not lost — it
+folds onto the upper bins.
+How to read N bins
+Bins 0 →N
+2 : positive frequencies,
+low →high. Bins N
+2
+→N: nega-
+tive frequencies, high →low. A real
+lowpass signal peaks at k = 0 and
+near k = N, and dips at k = N
+2 .
+−N
+2
+N
+2
+N
+2
+N
+negative
+positive
+k
+|ck|
+positive: low →high
+negative: high →low
+k
+|ck|
+9
+
+===== page 12 =====
+Can CTFS Synthesis Give Us Back x[n]? No.
+• We cannot simply use the CTFS synthesis equation to recover our discrete signal:
+∞
+X
+k=−∞
+ckejkω0t = xp(t)
+• It rebuilds the continuous-time impulse train xp(t) — not the sequence x[n] we want — and it spends
+infinitely many terms repeating the same N coefficient values.
+t
+xp(t)
+What CTFS synthesis rebuilds: impulses. 
+n
+x[n]
+What we want: the sequence itself. 
+• But there is a familiar pattern: analysis uses e−j···, synthesis uses e+j···. Let’s build a discrete synthesis
+that uses only the N unique coefficients.
+10
+
+===== page 13 =====
+The Inverse Trick (1/2): Orthogonality
+• From the analysis sum, the N unique coefficients are (writing T0ck to clear the scaling):
+T0 ck =
+N−1
+X
+m=0
+x[m] e−j 2π
+N km,
+k = 0, 1, . . . , N −1.
+• Multiply both sides by e+j 2π
+N kn and sum over the N unique k:
+N−1
+X
+k=0
+(T0ck) ej 2π
+N kn =
+N−1
+X
+k=0
+ N−1
+X
+m=0
+x[m]e−j 2π
+N km
+!
+ej 2π
+N kn
+=
+N−1
+X
+m=0
+x[m]
+ N−1
+X
+k=0
+ej 2π
+N k(n−m)
+!
+• Evaluate the inner summation using the geometric series sum formula. For n̸ = m:
+N−1
+X
+k=0
+
+ej 2π
+N (n−m)k
+= 1 −ej2π(n−m)
+1 −ej 2π
+N (n−m) =
+1 −1
+1 −ej 2π
+N (n−m) = 0
+11
+
+===== page 14 =====
+The Inverse Trick (2/2): The Discrete Inverse
+• And for n = m, the summation simply evaluates to:
+N−1
+X
+k=0
+e0 = N =⇒
+N−1
+X
+k=0
+ej 2π
+N k(n−m) =
+(
+N
+n = m
+0
+n̸ = m
+• All terms in the outer sum vanish except m = n:
+N−1
+X
+k=0
+(T0ck) ej 2π
+N kn = x[n] · N
+=⇒
+x[n] = 1
+N
+N−1
+X
+k=0
+(T0ck) ej 2π
+N kn.
+• A finite sum recovers the samples exactly — no impulses, no infinite series.
+• Notice: both directions only ever touch the N numbers T0ck. That combination is the natural
+discrete-frequency object — it deserves its own name.
+12
+
+===== page 15 =====
+The Discrete Fourier Series (DFS)
+Ǜ Interactive: the DFS of one period: every k, repeating with period N
+• Forget the continuous signal for a moment: let ˜x[n] be any N-periodic sequence. The same finite sums
+form a self-contained series representation:
+Discrete Fourier Series (DFS) Pair
+ak = 1
+N
+N−1
+X
+n=0
+˜x[n] e−j 2π
+N kn
+|
+{z
+}
+analysis
+˜x[n] =
+N−1
+X
+k=0
+ak ej 2π
+N kn
+|
+{z
+}
+synthesis
+• It is the exact discrete analogue of the CTFS — same shape, integral →sum — and its validity is exactly
+the orthogonality trick from the last two slides:
+CTFS (period T0)
+DFS (period N)
+Analysis
+ck =
+1
+T0
+R
+T0 x(t) e
+−jk 2π
+T0
+t
+dt
+ak =
+1
+N
+PN−1
+n=0 ˜x[n] e−jk 2π
+N n
+Synthesis
+x(t) = P∞
+k=−∞ck e
+jk 2π
+T0
+t
+˜x[n] = PN−1
+k=0 ak ejk 2π
+N n
+Coefficients
+infinitely many
+N unique
+(ak+N = ak)
+13
+
+===== page 16 =====
+Seeing the DFS: Wind the N Samples
+Ǜ Interactive: wind its 8 samples; click any bin to wind at that k
+• Wind the N samples instead of the curve: point n sits at radius x[n], angle −2π
+N kn. Their center of mass
+is the DFS coefficient ak =
+1
+N
+PN−1
+n=0 x[n] e−j 2π
+N kn: a plain average — that is why the integral became a
+sum.
+N = 8 samples of that period
+2π
+8
+n=0
+n=1
+k = 1 ( 2π
+8
+per sample): a1 = 0.4
+6π
+8
+n=0
+n=1
+k = 3 ( 6π
+8
+per sample): a3 = 0
+• Every sample turns by the same angle 2π
+N k; after N samples the points repeat, so one period is still
+enough. And k + N turns each sample by the same angle mod 2π: only N coefficients are distinct — as
+derived.
+14
+
+===== page 17 =====
+The Discrete Fourier Transform (DFT)
+Ǜ Interactive: the N bins of the DFT, with X[k] = Nak on hover
+• For a length-N sequence {x[n]}N−1
+n=0 , define the transform as the bare analysis sum (no scale factor). It is
+customary to write it with the twiddle factor
+WN ≜e−j 2π
+N ,
+W N
+N = 1
+(an N-th root of unity — powers of WN cycle).
+DFT / IDFT Pair
+X[k] ≜
+N−1
+X
+n=0
+x[n] W kn
+N
+=
+N−1
+X
+n=0
+x[n] e−j 2π
+N kn,
+k = 0, 1, . . . , N −1
+x[n] = 1
+N
+N−1
+X
+k=0
+X[k] W −kn
+N
+= 1
+N
+N−1
+X
+k=0
+X[k] ej 2π
+N kn,
+n = 0, 1, . . . , N −1
+• Connection to the DFS: X[k] = N ak — the DFT of a periodic discrete signal is its DFS, up to the 1
+N
+convention factor.
+• Connection to the sampled continuous signal: ck =
+1
+T0 X[k] — the CTFS coefficients of xp(t) are the DFT
+values scaled by
+1
+T0 .
+15
+
+===== page 18 =====
+We Never Needed the Continuous Signal
+Ǜ Interactive: draw the N samples yourself — no x(t) required
+• Look at the DFT formula again: it consumes only the N numbers x[0], . . . , x[N −1]. Nothing in it
+remembers Ts or x(t).
+• The sampling story was scaffolding: its only job was to show why the Fourier integral became a sum once
+the signal lived on samples.
+• Any length-N (or N-periodic) list of numbers — an audio buffer, a pixel row, a sensor log — has a
+DFS/DFT, no continuous ancestor required.
+t
+x(t)
+Ts
+t
+x(nTs)
+N −1
+n
+x[n]
+sample
+forget
+the clock
+Scaffolding removed
+DFS: a Fourier series whose integral collapsed to a sum.
+DFT: the DFS, rescaled.
+That is all they are.
+16
+
+===== page 19 =====
+Part I in One Picture: N Points ←→N Coefficients
+• We started with a continuous-time periodic
+signal x(t).
+• Sampling it yielded a periodic discrete
+sequence x[n] with period N.
+• Its frequency representation ck is uniquely
+defined by exactly N contiguous components.
+• The DFT transforms exactly N points of x[n]
+into N unique frequency coefficients X[k].
+• The IDFT perfectly reconstructs those N points
+in time from these N frequency values.
+N points in Time
+DFT
+IDFT
+N points in Freq
+N
+2
+N −1
+• positive frequencies (low →high)
+• folded negative frequencies (high →low)
+17
+
+===== page 20 =====
+The Discrete-Time Fourier Transform
+
+===== page 21 =====
+Now Let the Signal Be Aperiodic
+Ǜ Interactive: a finite burst, its samples, and what sampling does to its spectrum
+But does this machinery only apply to periodic signals? What if the signal is aperiodic?
+• Let’s consider an aperiodic signal x(t) restricted to a finite interval T0.
+• Uniformly sampling this yields a finite-length sequence x[n] that is nonzero only for 0 ≤n ≤N −1.
+• Using the impulse-train representation, the sampled signal is:
+xp(t) = x(t)p(t) =
+∞
+X
+n=−∞
+x[n]δ(t −nTs) =
+N−1
+X
+n=0
+x[n]δ(t −nTs)
+T0
+t
+x(t)
+n
+x[n]
+t
+xp(t)
+18
+
+===== page 22 =====
+CTFT of the Samples: The DTFT
+Ǜ Interactive: the DTFT of a handful of samples, as a continuous curve
+• An aperiodic signal calls for the Fourier transform. Take the CTFT of the sampled impulse train:
+Xp(jω) =
+∞
+X
+n=−∞
+x[n]e−jωnTs
+• Now compress the frequency axis by the sampling period, i.e. apply the mapping ωTs 7→ω.
+• Under that relabeling, the same spectrum becomes the Discrete-Time Fourier Transform (DTFT):
+Discrete-Time Fourier Transform (DTFT)
+X(ejω) ≜Xp(jω)
+
+ωTs7→ω =
+∞
+X
+n=−∞
+x[n]e−jωn.
+• Hence, the DTFT is the Fourier transform of the sampled signal, with a compressed frequency axis. The
+new ω is digital frequency: radians per sample.
+• For our length-N capture,
+X(ejω) =
+N−1
+X
+n=0
+x[n]e−jωn.
+19
+
+===== page 23 =====
+Aperiodic: Wind the Whole Segment, at Any Rate
+Ǜ Interactive: wind the cosine segment at any rate
+• Take a finite segment of a shifted cosine, x(t) = 1 + cos 6πt for 0 ≤t ≤1.5 s: nothing repeats outside it,
+so the winding runs over the entire segment, and its centroid times the duration is the transform
+X(jω) =
+R
+x(t) e−jωtdt. No rate is special, so every ω gets its own value: a continuous spectrum.
+x(t) = 1 + cos 6πt on 0 ≤t ≤1.5 s: 4.5
+cycles
+ω = 4π (2 Hz): mostly cancels, centroid
+≈0.08j
+ω = 6π (3 Hz): a perfect cardioid, centroid
+0.5 −0.07j
+• At the cosine's own rate every cycle traces the same cardioid r = 1 + cos θ, and the mass sits to the right
+of the origin. At any other rate the cycles spread around the circle and nearly cancel; the small residue —
+here from 4.5 cycles not closing — is the continuous skirt of the spectrum.
+20
+
+===== page 24 =====
+Only N Points to Wind: The DTFT and Digital Frequency
+Ǜ Interactive: wind its 36 samples: 8 per cycle, so 3 Hz is π/4 per sample
+• Sample the segment, x[n] = x(nTs) with Ts =
+1
+24 s: the winding places the points x[n] e−jωn on the
+same curve, and with no period all of them count, X(ejω) = P
+n x[n] e−jωn = N·centroid. Consecutive
+points are turned by the same angle ω — the digital frequency, in radians per sample, equal to ωphysTs.
+N = 36 samples, 8 per cycle, on the same
+cosine
+ω
+n=0
+n=1
+ω = π/6 per sample = 4πTs: centroid
+≈0.09j
+ω
+n=0
+n=1
+ω = π/4 per sample = 6πTs: centroid
+≈0.5 −0.07j
+• 3 Hz becomes 6π ·
+1
+24 = π
+4 radians per sample, and the 36 points land on just 8 spots of the cardioid,
+piling up there. Turning by ω + 2π per sample places the very same points, so X(ejω) must repeat every
+2π — next slide.
+21
+
+===== page 25 =====
+The DTFT Is 2π-Periodic
+Ǜ Interactive: pulses, decays and tones: their DTFTs over two periods
+Period of the DTFT
+Each
+term
+repeats
+every
+2π
+(as
+e−j2πn = 1), so:
+X(ej(ω+2π)) = X(ejω)
+How to Read One Period
+• Any 2π-wide window holds one full
+period.
+• A common principal interval is
+[−π, π].
+• [π, 2π) is the folded copy of [−π, 0).
+Before ωTs 7→ω the axis was physical frequency. Undoing
+the relabel, [−π, π] corresponds to [−ωs
+2 , ωs
+2 ] with ωs =
+2π
+Ts ; we revisit that view in Sampling.
+−2π
+−π
+π
+2π
+|X(ejω)|
+one period = 2π (principal interval [−π, π])
+low freq
+high freq
+high freq
+negative
+positive
+wrapped negative
+−2π shift
+ω
+22
+
+===== page 26 =====
+The Inverse DTFT
+• Same pattern as Part I: synthesis should use e+jωn. But the spectrum is now a continuous function of ω,
+so instead of summing over N unique bins we integrate over one 2π period:
+ˆx[n] ≜1
+2π
+Z
+2π
+X(ejω) ejωn dω.
+• Substitute the analysis sum X(ejω) = P
+m x[m]e−jωm and swap sum and integral:
+ˆx[n] =
+∞
+X
+m=−∞
+x[m] 1
+2π
+Z
+2π
+ejω(n−m) dω.
+• Orthogonality over one period: for integer r = n −m, complete cycles integrate to zero:
+1
+2π
+Z π
+−π
+ejωr dω =
+(
+1
+r = 0
+0
+r̸ = 0
+=⇒
+ˆx[n] = x[n].
+Inverse DTFT
+x[n] = 1
+2π
+Z
+2π
+X(ejω) ejωn dω
+23
+
+===== page 27 =====
+The DTFT Pair, and the Square So Far
+DTFT Pair
+X(ejω) =
+∞
+X
+n=−∞
+x[n] e−jωn
+x[n] = 1
+2π
+Z
+2π
+X(ejω) ejωn dω
+• x[n] is a continuum superposition of
+ejωn over one period — versus the DFS: a
+finite sum of N of them.
+continuous t
+discrete n
+periodic
+aperiodic
+CTFS 
+ck =
+1
+T0
+R
+T0 x(t)e−jkω0tdt
+DFS / DFT 
+X[k] = PN−1
+n=0 x[n]W kn
+N
+CTFT 
+X(jω) =
+R
+x(t)e−jωtdt
+DTFT 
+X(ejω) = P
+n x[n]e−jωn
+sample
+in t
+sample
+in t
+sample in ω?
+next
+24
+
+===== page 28 =====
+The DFT Through the DTFT Lens
+
+===== page 29 =====
+The DFT Samples the DTFT
+Ǜ Interactive: watch the bins sit on the DTFT curve
+• Just look at the DFT definition: it is the DTFT
+evaluated at discrete frequencies ω = 2π
+N k —
+nothing to derive:
+X[k] =
+N−1
+X
+n=0
+x[n] e−j 2π
+N kn = X(ejω)
+
+ω= 2π
+N k.
+• So the N-point DFT takes N evenly spaced
+samples over one 2π period of the DTFT.
+• For even N: bins 0, . . . , N
+2 climb from dc to the
+highest positive frequency; the rest hold the
+folded negatives.
+π
+2π
+2π
+N
+k = 0, . . . , N
+2
+k = N
+2 + 1, . . . , N −1
+DFT evaluates N bins
+ω
+|X(ejω)|
+One transform, two views
+Periodic view: Fourier-series coefficients.
+Aperiodic view: N samples of the DTFT.
+Same N numbers.
+25
+
+===== page 30 =====
+Reading DFT Bins, Once More
+Ǜ Interactive: the same 8 bins, centered and as computed
+• Bin k sits at ωk = 2π
+N k; past k = N
+2
+these are the folded negative
+frequencies. For N = 8:
+k
+0
+1
+2
+3
+4
+5
+6
+7
+ωk
+0
+π
+4
+π
+2
+3π
+4
+π
+−3π
+4
+−π
+2
+−π
+4
+• dc →rising positive →highest (π) →
+negative, falling back toward dc.
+How to read N bins
+Bins 0 →
+N
+2 : positive frequencies, low
+→high. Bins N
+2
+→N: negative fre-
+quencies, high →low. A real lowpass sig-
+nal peaks at k = 0 and near k = N, and
+dips at k = N
+2 .
+−π
+π
+π
+2π
+negative
+positive
+ω
+|X(ejω)|
+k=1
+k=7
+positive: low →high
+negative: high →low
+ω
+|X(ejω)|
+26
+
+===== page 31 =====
+Zero-Padding: Same Spectrum, Finer Samples
+Ǜ Interactive: zero-pad to 2N, 4N, 8N and see the same curve sampled finer
+• Zero-padding: for a length-N sequence x[n],
+artificially append zeros to reach a total length
+M ≥N.
+• Appended zeros add nothing to the DTFT sum —
+the spectrum is unchanged. But the M-point
+DFT now samples it at spacing 2π
+M instead of 2π
+N :
+XM[k] =
+M−1
+X
+n=0
+x[n] e−j 2π
+M kn = X(ejω)
+
+ω= 2π
+M k.
+More pixels, not more information
+Zero-padding interpolates the picture of the same
+DTFT. It cannot resolve what the N real samples
+never captured.
+N
+M
+n
+x[n] padded
+π
+2π
+2π
+M
+◦old N bins
+ω
+|X(ejω)|
+27
+
+===== page 32 =====
+A Complete Numeric Example (N = 4)
+• Let x[n] = {1, 2, 3, 4}. With N = 4:
+W4 = e−j 2π
+4 = −j, so W kn
+4
+= (−j)kn cycles
+through 1, −j, −1, j.
+• Apply X[k] = P3
+n=0 x[n]W kn
+4
+:
+X[0] = 1 + 2 + 3 + 4 = 10
+X[1] = 1 −2j −3 + 4j = −2 + 2j
+X[2] = 1 −2 + 3 −4 = −2
+X[3] = 1 + 2j −3 −4j = −2 −2j
+• Check the bins: ω3 = 2π·3
+4
+= 3π
+2 ≡−π
+2 , and indeed
+X[3] = X∗[1].
+Ǜ Interactive: this very x[n], with every bin to hover
+W kn
+4
+n=0
+n=1
+n=2
+n=3
+k=0
+1
+1
+1
+1
+k=1
+1
+−j
+−1
+j
+k=2
+1
+−1
+1
+−1
+k=3
+1
+j
+−1
+−j
+1
+2
+3
+10
+2
+√
+2
+2
+2
+√
+2
+k
+|X[k]|
+Negative-frequency partners
+Bin 3 is bin 1’s negative-frequency partner:
+for real signals |X[k]| is symmetric about N
+2 .
+(Full symmetry properties: next lecture.)
+28
+
+===== page 33 =====
+Back to Physical Frequency
+Ǜ Interactive: rulers under one spectrum: k →ω →f at any sampling rate
+• The DTFT axis was normalized: ω = ΩTs,
+where Ωis physical frequency (rad/s) and
+ωs = 2π
+Ts . Undo it for bin k:
+ωk = 2π
+N k
+7−→
+Ωk = ωk
+Ts
+= k ωs
+N .
+• The fold carries over in physical units: bins
+0 →N
+2 span 0 →ωs
+2 ; bins N
+2 →N span
+−ωs
+2 →0.
+• Relabeling the axis changes units, not
+samples: the same N numbers, the same
+fold.
+π per sample = half the sampling rate
+ω = π
+↔
+Ω=
+ωs
+2 : one 2π period of the
+DTFT is one ωs of physical frequency, exactly
+the [−ωs
+2 , ωs
+2 ] window from the DTFT lecture.
+1
+2
+3
+4
+5
+6
+7
+0
+1
+2
+3
+4
+−3
+−2
+−1
+× ωs
+8
+positive: Ω= k ωs
+N
+negative: Ω= (k −N) ωs
+N
+k
+|X[k]|
+Same stems as ever — only the ruler above them is new (N = 8).
+29
+
+===== page 34 =====
+From Bins to Hertz
+Ǜ Interactive: slide a tone across the band and see which bin it lands in
+• The samples came from a clock: rate
+fs =
+1
+Ts . Relabel once more, to Hz:
+f =
+Ω
+2π , so ωs
+2 7→fs
+2 and the bin spacing is
+∆f = fs
+N =
+1
+NTs
+= 1
+T0
+.
+• Bin k corresponds to:
+fk =
+
+
+
+k fs
+N
+0 ≤k ≤N
+2
+(k −N) fs
+N
+N
+2 < k ≤N −1
+• This is exactly the ordering
+numpy.fft.fftfreq reports, and why
+spectrum tools show 0 to fs
+2 .
+1
+2
+3
+4
+5
+6
+7
+0
+1
+2
+3
+4
+−3
+−2
+−1
+kHz
+positive: f = k fs
+N
+negative: f = (k −N) fs
+N
+k
+|X[k]|
+Example: N = 8 samples at fs = 8 kHz =⇒∆f = 1 kHz per bin.
+30
+
+===== page 35 =====
+The Big Picture
+
+===== page 36 =====
+The Square, Fully Derived
+continuous t
+discrete n
+periodic
+aperiodic
+CTFS
+ck =
+1
+T0
+R
+T0 x(t)e−jkω0tdt
+x(t) = P∞
+k=−∞ckejkω0t
+DFS / DFT
+X[k] = PN−1
+n=0 x[n]W kn
+N
+x[n] =
+1
+N
+PN−1
+k=0 X[k]W −kn
+N
+CTFT
+X(jω) =
+R ∞
+−∞x(t)e−jωtdt
+x(t) =
+1
+2π
+R ∞
+−∞X(jω)ejωtdω
+DTFT
+X(ejω) = P∞
+n=−∞x[n]e−jωn
+x[n] =
+1
+2π
+R
+2π X(ejω)ejωndω
+sample in t
+R
+→P
+sample in t
+spectrum
+2π-periodic
+sample in ω:
+N bins
+Discrete in one domain ⇐⇒periodic in the other — proven, not promised
+Sampling time made the spectrum 2π-periodic.
+Sampling frequency (keeping N bins) made time
+N-periodic.
+31
+
+===== page 37 =====
+Summary
+DFS Pair (˜x[n] is N-periodic)
+ak =
+1
+N
+PN−1
+n=0 ˜x[n] e−j 2π
+N kn
+˜x[n] = PN−1
+k=0 ak ej 2π
+N kn
+DFT / IDFT Pair (WN = e−j2π/N)
+X[k] = PN−1
+n=0 x[n] W kn
+N
+x[n] =
+1
+N
+PN−1
+k=0 X[k] W −kn
+N
+DTFT Pair
+X(ejω) = P∞
+n=−∞x[n] e−jωn
+x[n] =
+1
+2π
+R
+2π X(ejω) ejωn dω
+The Three Bridges
+• ck =
+1
+T0 X[k]
+(sampled continuous
+periodic)
+• X[k] = N ak
+(DFT = DFS, rescaled)
+• X[k] = X(ejω)
+
+ω= 2π
+N k (DFT samples DTFT)
+Reading the bins — one last time
+Bins 0 →N
+2 : positive frequencies, low →high.
+Bins N
+2 →N: negative frequencies, high →low.
+32
+
+===== page 38 =====
+Next Class
+Read
+• Oppenheim, Willsky & Nawab, §5.1 —
+the DTFT, developed from the discrete
+Fourier series.
+• Tan & Jiang, §4.1 — the DFT, developed
+from Fourier series coefficients of
+periodic digital signals.
+Try
+• Compute the 4-point DFT of
+x[n] = {1, 0, −1, 0} by hand. Which
+bins light up, and why those two?
+• In numpy: compare fft(x) of a signal
+with and without zero-padding.
+• Play with the interactive demos linked
+at the bottom of the slides: one lab for
+periodic signals, one for aperiodic.
+Next class
+Properties of the DFT — linearity, time and frequency shifts, conjugate symmetry, Parseval’s relation,
+and the convolution theorem. After that: why the DFT’s N2 cost is a scandal, and the fix that was found
+in 1805 — the FFT.
+33

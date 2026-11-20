@@ -1,0 +1,566 @@
+
+===== page 1 =====
+Presentation 15
+1
+State
+• The current state of an object is determined by the 
+current value of the object’s attributes and the links 
+that it has with other objects
+• For example the class StaffMember has an 
+attribute startDate which determines whether a
+StaffMember object is in the probationary state
+• ‘A state is a condition during the life of an object or an 
+interaction during which it satisfies some condition, 
+performs some action or waits for some event....
+
+===== page 2 =====
+Presentation 15
+CSE 405N
+2
+State Diagram and Statechart Diagram
+• State Diagrams are used to capture the behavior 
+of a software system. 
+• UML State diagrams can be used to model the 
+behavior of a class, a subsystem, a package, or 
+even an entire system. 
+• It is also called a Statechart diagram.
+• These diagrams are used to model the event-
+based system. 
+• A state of an object is controlled by an event. 
+• Statechart diagrams are used to describe various 
+states of an entity within the application system.
+
+===== page 3 =====
+Presentation 15
+CSE 405N
+3
+Statechart Diagram
+Pending
+Active
+Lapsed
+Transition
+between
+states
+when [rateStartDate  <=  
+currentDate]
+when [rateFinishDate  <=  
+currentDate]
+after [1 year]
+Final state
+Initial state
+Change
+event
+GradeRate()
+Elapsed-time
+event
+Statechart for 
+the class
+GradeRate
+Movement 
+from one 
+state to 
+another is 
+dependent 
+upon events 
+that occur 
+with the 
+passage of 
+time.
+
+===== page 4 =====
+Presentation 15
+CSE 405N
+4
+Types of Event
+• A change event occurs when a condition becomes 
+true
+• A call event occurs when an object receives a call 
+to one of its operations either from another object 
+or from itself
+• A signal event occurs when an object receives a 
+signal (an asynchronous communication)
+• An elapsed-time event is caused by the passage of 
+a designated period of time after a specified event 
+(frequently the entry to the current state)
+
+===== page 5 =====
+Presentation 15
+CSE 405N
+5
+Events 
+Commissioned
+Active
+authorized(authorizationCode) [contract Signed]
+/setCampaignActive( )
+This event must 
+correspond to an 
+operation in the 
+Campaign class
+
+===== page 6 =====
+Presentation 15
+CSE 405N
+6
+Actions and Activities 
+State Name
+entry / action expression
+exit/ action expression
+do / activity
+include / submachine
+A state may 
+include a sub-
+statechart
+Name 
+compartment
+Internal 
+transition 
+compartment
+Internal actions and activities for a state
+
+===== page 7 =====
+Presentation 15
+CSE 405N
+7
+Menu Visible
+itemSelected() / highlightItem()
+entry / displayMenu
+exit   / hideMenu
+do    /  playSoundClip
+Actions and Activities
+Menu Visible state for a 
+DropDownMenu object
+Entry action 
+causes the menu 
+to be displayed
+Event itemSelected()
+triggers the action 
+highlightItem()
+Exiting the state 
+triggers
+hideMenu()
+While the object remains 
+in the Menu Visible 
+state, the activity causes a 
+sound clip to be played
+
+===== page 8 =====
+Presentation 15
+8
+
+===== page 9 =====
+Presentation 15
+9
+
+===== page 10 =====
+Presentation 15
+CSE 405N
+10
+Statechart for 
+the class 
+Campaign
+Commissioned
+authorized(authorizationCode)
+[contract signed]
+/setCampaignActive() 
+/assignManager()
+assignStaff()
+Active
+Completed 
+Paid
+campaignCompleted()
+/prepareFinalStatement()
+paymentReceived(payment)
+[paymentDue - payment > 0]
+paymentReceived(payment)
+[paymentDue – payment <= 0]
+archiveCampaign()
+/unassignStaff();
+unassignManager()
+Action-expression 
+assigning manager 
+and staff on object 
+creation
+Guard condition 
+ensuring complete 
+payment before 
+entering Paid
+Recursive transition 
+models any payment 
+event that does not 
+reduce the amount 
+due to zero or 
+beyond
+
+===== page 11 =====
+Presentation 15
+CSE 405N
+11
+A revised 
+statechart 
+for the class
+Campaign
+Commissioned
+authorized(authorizationCode)
+[contract signed]
+/setCampaignActive() 
+/assignManager();
+assignStaff()
+Active
+Completed 
+Paid
+campaignCompleted()
+/prepareFinalStatement()
+paymentReceived(payment)
+[paymentDue – payment > 0]
+paymentReceived(payment)
+[paymentDue - payment = 0]
+archiveCampaign()
+/unassignStaff();
+unassignManager()
+paymentReceived(payment)
+[paymentDue - payment < 0]
+/generateRefund()
+If the user 
+requirements were 
+to change, so that 
+an overpayment is 
+now to result in 
+the automatic 
+generation of a 
+refund, a new 
+transition is added
+
+===== page 12 =====
+Presentation 15
+CSE 405N
+12
+Nested Substates
+Advert Preparation
+campaignCompleted()
+/prepareFinalStatement()
+Running Adverts
+Scheduling
+confirmSchedule()
+extendCampaign()
+/modify Budget()
+advertsApproved()
+/authorize()
+Active
+The Active state of
+Campaign showing nested 
+substates
+The transition from the initial 
+pseudostate symbol should not be 
+labelled with an event but may be 
+labelled with an action, though it is not 
+required in this example
+
+===== page 13 =====
+Presentation 15
+CSE 405N
+13
+Nested States
+Active
+include / Running
+The Active state of
+Campaign with the 
+detail hidden
+Hidden 
+decomposition 
+indicator icon
+The submachine 
+Running is 
+referenced using the 
+include statement
+
+===== page 14 =====
+Presentation 15
+CSE 405N
+14
+The Active State with Concurrent Substates
+Advert Preparation
+Running Adverts
+Scheduling
+confirmSchedule()
+extendCampaign()
+/modify Budget()
+advertsApproved()
+/authorize()
+Active
+Survey
+Evaluation
+surveyComplete()
+runSurvey()
+Running
+Monitoring
+campaignCompleted()
+/prepareFinalStatement()
+
+===== page 15 =====
+Presentation 15
+CSE 405N
+15
+Concurrent States
+• A transition to a complex state is equivalent to a 
+simultaneous transition to the initial states of each 
+concurrent statechart
+• An initial state must be specified in both nested 
+statecharts in order to avoid ambiguity about 
+which substate should first be entered in each 
+concurrent region
+• A transition to the Active state means that the 
+Campaign object simultaneously enters the 
+Advert Preparation and Survey states
+
+===== page 16 =====
+Presentation 15
+CSE 405N
+16
+Concurrent States
+• Once the composite states is entered a transition may 
+occur within either concurrent region without having 
+any effect on the state in the other concurrent region
+• A transition out of the Active state applies to all its 
+substates (no matter how deeply nested)
+
+===== page 17 =====
+Presentation 15
+CSE 405N
+17
+Synchronized Concurrent Threads.  
+Synchronization bar
+Explicitly showing how an event triggering a transition to a 
+state with nested concurrent states causes specific 
+concurrent substates to be entered
+Shows that the composite state is not exited until both 
+concurrent nested statecharts are exited
+
+===== page 18 =====
+Presentation 15
+CSE 405N
+18
+Preparing Statecharts
+• Two approaches may be used:
+– Behavioural approach
+– Life cycle approach
+
+===== page 19 =====
+Presentation 15
+CSE 405N
+19
+Behavioural Approach
+1. Examine all interaction diagrams that involve 
+each class that has heavy messaging.
+2. Identify the incoming messages on each 
+interaction diagram that may correspond to 
+events.  Also identify the possible resulting 
+states.
+3. Document these events and states on a statechart.
+4. Elaborate the statechart as necessary to cater for 
+additional interactions as these become evident, 
+and add any exceptions.
+
+===== page 20 =====
+Presentation 15
+CSE 405N
+20
+Behavioural Approach
+5. Develop any nested statecharts (unless this has 
+already been done in an earlier step).
+6. Review the statechart to ensure consistency with 
+use cases. In particular, check that any 
+constraints that are implied by the statechart are 
+appropriate.
+7. Iterate steps 4, 5 and 6 until the statechart 
+captures the necessary level of detail.
+8. Check the consistency of the statechart with the 
+class diagram, with interaction diagrams and 
+with any other statecharts and models.
+
+===== page 21 =====
+Presentation 15
+CSE 405N
+21
+Sequence Diagram with Implicit States
+Campaign  
+Manager       
+listCampaigns()
+*getCampaignDetails()
+:CompleteCampaignUI
+:CompleteCampaign
+:Client   
+:Campaign   
+showClientCampaigns()
+selectClient()
+completeCampaign()
+completeCampaign()
+campaignCompleted()
+startInterface()
+*getClient()
+Sequence diagram for use case Set Campaign Completed
+
+===== page 22 =====
+Presentation 15
+CSE 405N
+22
+Initial 
+statechart 
+for the 
+Campaign
+Class
+Commissioned
+authorized(authorizationCode)
+[contract signed]
+/setCampaignActive() 
+/assignManager();
+assignStaff()
+Advert Preparation
+Completed 
+Paid
+campaignCompleted()
+/prepareFinalStatement()
+paymentReceived(payment)
+[paymentDue – payment > zero]
+paymentReceived(payment)
+[paymentDue - payment = zero]
+archiveCampaign()
+/unassignStaff();
+unassignManager()
+paymentReceived(payment)
+[paymentDue - payment < zero]
+/generateRefund()
+Running Adverts
+Scheduling
+confirmSchedule()
+extendCampaign()
+/modify Budget()
+advertsApproved()
+/authorize()
+
+===== page 23 =====
+Presentation 15
+CSE 405N
+23
+Revised 
+statechart 
+for the 
+Campaign
+class
+Commissioned
+authorized(authorizationCode)
+[contract signed]
+/setCampaignActive() 
+/assignManager();
+assignStaff()
+Advert Preparation
+Completed 
+Paid
+campaignCompleted()
+/prepareFinalStatement()
+paymentReceived(payment)
+[paymentDue – payment > 0]
+paymentReceived(payment)
+[paymentDue - payment = 0]
+archiveCampaign()
+/unassignStaff();
+unassignManager()
+paymentReceived(payment)
+[paymentDue - payment < 0]
+/generateRefund()
+Running Adverts
+Scheduling
+confirmSchedule()
+extendCampaign()
+/modify Budget()
+advertsApproved()
+/authorize()
+Active
+
+===== page 24 =====
+Presentation 15
+CSE 405N
+24
+Final 
+version 
+of 
+Campaign
+statechart
+Advert Preparation
+Running Adverts
+Scheduling
+confirmSchedule()
+extendCampaign()
+/modify Budget()
+advertsApproved()
+/authorize()
+Running
+Survey
+Evaluation
+surveyComplete()
+runSurvey()
+Monitoring
+authorized(authorizationCode)
+[contract signed]
+/setCampaignActive() 
+/assignManager();
+assignStaff()
+Paid
+paymentReceived(payment)
+[paymentDue – payment > zero]
+paymentReceived(payment)
+[paymentDue - payment = zero]
+archiveCampaign()
+/unassignStaff();
+unassignManager()
+paymentReceived(payment)
+[paymentDue - payment < zero]
+/generateRefund()
+Active
+campaignCompleted()
+/prepareFinalStatement()
+Commissioned
+Completed 
+campaignCancelled()
+/calculateCosts();
+prepareFinalStatement()
+campaignCancelled()
+/cancelSchedule()
+calculateCosts();
+prepareFinalStatement()
+
+===== page 25 =====
+Presentation 15
+Scenario
+• The garage experiences the following events:mode-
+XXX: the operator sets the garage control mode to 
+XXX (off, auto, closed, open).
+• exitgate: an exit gate signals that a car has left.
+• entrygate: an entry gate signals that a car has entered.
+• The garage counts the number of cars it holds (count), 
+and knows its maximum capacity (max).
+• The entry gates should be locked in closed mode; 
+unlocked in open mode; are in no particular state in off 
+mode; and in auto mode, should be locked if the 
+garage is full.
+• The operator may set any mode at any time.
+•
+25
+
+===== page 26 =====
+Presentation 15
+26
+
+===== page 27 =====
+Presentation 15
+CSE 405N
+27
+
+===== page 28 =====
+Presentation 15
+CSE 405N
+28
+
+===== page 29 =====
+Presentation 15
+CSE 405N
+29

@@ -1,0 +1,130 @@
+
+===== page 1 =====
+1
+Sequence diagrams
+• Sequence diagram: an “interaction diagram” that models a 
+single scenario executing in a system
+• Shows what messages are sent and when
+• Visualizes the execution sequences of an use case
+
+===== page 2 =====
+2
+Key parts of a sequence diagram
+• Participant: an object or an entity; 
+the sequence diagram actor
+ꟷsequence diagram starts with an 
+unattached "found message" arrow
+• Message: communication between 
+objects
+• Axes in a sequence diagram: 
+ꟷhorizontal: which participant is acting
+ꟷvertical: time (↓ forward in time)
+
+===== page 3 =====
+3
+Sequence diagram from a use case
+1.
+The user presses the “check 
+email” button.
+2.
+The client first sends all 
+unsent email to the server.
+3.
+After receiving an 
+acknowledgement, the client 
+asks the server if there is any 
+new email.
+4.
+If so, it downloads the new 
+email.
+5.
+Next, it deletes old thrashed 
+email from the server.
+:Client
+:Server
+checkEmail
+sendUnsentEmail
+newEmail
+response
+[newEmail] getEmail
+deleteOldEmail
+
+===== page 4 =====
+4
+Syntax: Representing objects
+• An object: a box with an underlined 
+label that specifies the object type, 
+and optionally the object name.
+ꟷWrite the object's name if it clarifies 
+the diagram.
+• An object's "life line" is represented by 
+a dashed vertical line.
+ꟷRepresents the life span of the object 
+during the scenario being modeled
+Objectname:classname
+
+===== page 5 =====
+5
+Representing messages between objects
+• A message (method call): horizontal 
+arrow to the receiving object.
+ꟷWrite message name and arguments above 
+the arrow.
+• Type of arrow indicates types of 
+messages:
+ꟷSynchronous message: solid arrow with a 
+solid head.
+ꟷAsynchronous message: solid arrow with a 
+stick head.
+ꟷReturn message: dashed arrow with stick 
+head.
+
+===== page 6 =====
+6
+Indicating method execution
+• Activation: thick box over object's life line, 
+drawn when an object's method is on the 
+stack
+ꟷEither that object is running its code, or it is on 
+the stack waiting for another object's method to 
+finish
+• Nest activations to indicate an object calling 
+itself.
+
+===== page 7 =====
+7
+Lifetime of objects
+• Object creation: an arrow with new 
+written above it
+ꟷAn object created after the start of 
+the scenario appears lower than the 
+others.
+• Object deletion: X at the bottom of 
+object's lifeline
+ꟷJava doesn't explicitly delete objects; 
+they fall out of scope and are garbage 
+collected.
+
+===== page 8 =====
+8
+Alternatives, options, and loops
+Frame: a box around part of a sequence diagram
+if → (opt) [condition]
+if/else→ (alt) [condition], separated by horizontal dashed line
+loop → (loop) [condition or items to loop over]
+
+===== page 9 =====
+9
+Example: Sequence diagram
+
+===== page 10 =====
+10
+UML editors
+• Rational Rose (commercial): http://www-
+03.ibm.com/software/products/en/ratirosefami
+• ArgoUML: http://argouml.tigris.org/
+• Violet: http://alexdp.free.fr/violetumleditor/page.php
+• Visual Pardigm (commercial): http://www.visual-
+paradigm.com/solution/freeumltool/
+• StarUML: http://staruml.io/
+• UMLet: http://www.umlet.com/

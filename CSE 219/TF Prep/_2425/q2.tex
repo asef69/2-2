@@ -1,0 +1,125 @@
+\renewcommand{\teacherTag}{QUESTION 2 \textbullet\ 35 MARKS}
+\chapter{The Parking Sensor: Band-pass Sampling and Cross-correlation}
+
+\begin{scenario}
+A parking sensor sends out a short 40 kHz ultrasonic pulse, listens for the echo from the nearest obstacle, and works out the distance (Figure~1 of the paper). Because of the Doppler effect and other effects, the received signal occupies the band 38--42 kHz. The Nyquist rate for this signal is therefore 84 kHz, but the sensor samples at a far lower rate, $f_s=18$ kHz. The engineer argues that, in the sampled signal, the copies of the positive and negative halves of the spectrum do not overlap.
+
+Once the echo is captured, its delay is found by cross-correlating the received samples $y[n]$ with the stored samples $x[n]$ of the transmitted pulse,
+\[c[m]=\sum_nx[n]\,y[n+m],\]
+which has its peak at the delay. The software computes $c[m]$ through the DFT. The delay in samples gives the distance, remembering that the sound travels to the obstacle and back at 340 m/s.
+\end{scenario}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,scale=0.9]
+\fill[pattern=north east lines,pattern color=slate](-0.6,-0.05)rectangle(9.3,-0.3);\draw(-0.6,-0.05)--(9.3,-0.05);
+\draw[thick,navy,rounded corners=2pt](0,0.35)rectangle(2.6,1.0);\draw[thick,navy](0.6,1.0)--(0.9,1.5)--(1.9,1.5)--(2.2,1.0);
+\draw[thick,navy](0.6,0.3)circle(0.28);\draw[thick,navy](2.0,0.3)circle(0.28);
+\fill[crimson](2.62,0.62)circle(0.07);\node[font=\tiny,below]at(2.75,0.05){sensor};
+\fill[slate!40](8.4,-0.05)rectangle(8.9,2.0);\draw[thick](8.4,-0.05)rectangle(8.9,2.0);\node[font=\scriptsize,above]at(8.65,2.0){obstacle};
+\draw[->,thick,teal](2.8,1.15)--node[above,font=\scriptsize]{transmitted pulse $x[n]$}(8.3,1.15);
+\draw[<-,thick,coral,dashed](2.8,0.65)--node[below,font=\scriptsize]{echo $y[n]$}(8.3,0.65);
+\draw[<->](2.62,-0.6)--node[below,font=\scriptsize]{distance $d$}(8.4,-0.6);
+\end{tikzpicture}
+\end{center}
+
+%------------------------------------------------------------------ 2(a)
+\begin{qcard}{Q2(a)}{Is the engineer right? (band-pass sampling)}{12}
+\textbf{Examine}, with a sketch of the spectrum of the received signal sampled at $f_s=18$ kHz, whether the engineer's claim is correct and where the 38--42 kHz band appears in the baseband $\abs f<9$ kHz.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- The idea.} The Nyquist rate $2f_{\max}=84$ kHz is needed for a signal that occupies \emph{all} frequencies up to 42 kHz. This signal occupies only a 4 kHz-wide band, $B=42-38=4$ kHz. Sampling still repeats the spectrum every $f_s$; what matters is only whether the shifted copies of the band \emph{collide}.
+
+\step{Step 2 --- Where the copies go.} The real signal has two bands: $P=[38,42]$ kHz and its mirror $N=[-42,-38]$ kHz. After sampling, each is copied to every shift by $18k$ kHz:
+\begin{center}\small\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}c|cc@{}}\toprule
+shift&copy of $P=[38,42]$&copy of $N=[-42,-38]$\\\midrule
+$-18$ / $+18$&$[20,24]$&$[-24,-20]$\\
+$-36$ / $+36$&$\mathbf{[2,6]}$&$\mathbf{[-6,-2]}$\\
+$-54$ / $+54$&$[-16,-12]$&$[12,16]$\\\bottomrule\end{tabular}\end{center}
+Inside the baseband $\abs f<9$ kHz we find exactly two copies: $[2,6]$ kHz (from the positive band) and $[-6,-2]$ kHz (from the negative band). They do not touch: the gap between them is $4$ kHz around $f=0$, and $3$ kHz to each edge $\pm9$.
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth]
+\begin{scope}[x=0.165cm,y=1cm]
+\node[font=\sffamily\scriptsize\bfseries,navy,anchor=west]at(-48,1.4){(i) Received signal (analogue)};
+\draw[->](-48,0)--(49,0)node[right,font=\scriptsize]{$f$ (kHz)};
+\fill[navy!30](38,0)--(38,0.45)--(42,0.95)--(42,0)--cycle;\draw[navy,thick](38,0)--(38,0.45)--(42,0.95)--(42,0);
+\fill[coral!35](-42,0)--(-42,0.95)--(-38,0.45)--(-38,0)--cycle;\draw[coral,thick](-42,0)--(-42,0.95)--(-38,0.45)--(-38,0);
+\foreach \x in {-42,-38,38,42}{\node[below,font=\tiny]at(\x,0){$\x$};}\node[below,font=\tiny]at(0,0){$0$};
+\node[font=\tiny,navy]at(40,1.15){$P$};\node[font=\tiny,coral]at(-40,1.15){$N$};
+\end{scope}
+\begin{scope}[x=0.29cm,y=1cm,yshift=-2.6cm]
+\node[font=\sffamily\scriptsize\bfseries,navy,anchor=west]at(-27,1.55){(ii) After sampling at $f_s=18$ kHz};
+\fill[gold!25](-9,0)rectangle(9,1.3);\node[font=\tiny,anchor=south]at(0,1.3){baseband $\abs f<9$ kHz};
+\draw[->](-27,0)--(28,0)node[right,font=\scriptsize]{$f$ (kHz)};
+\foreach \c in {20,2,-16}{\fill[navy!30](\c,0)--(\c,0.45)--(\c+4,0.95)--(\c+4,0)--cycle;\draw[navy,thick](\c,0)--(\c,0.45)--(\c+4,0.95)--(\c+4,0);}
+\foreach \c in {-24,-6,12}{\fill[coral!35](\c,0)--(\c,0.95)--(\c+4,0.45)--(\c+4,0)--cycle;\draw[coral,thick](\c,0)--(\c,0.95)--(\c+4,0.45)--(\c+4,0);}
+\foreach \x in {-24,-16,-12,-9,-6,-2,2,6,9,12,16,24}{\node[below,font=\tiny]at(\x,0){$\x$};}
+\draw[dashed,slate](-9,0)--(-9,1.3)(9,0)--(9,1.3);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+{\small Blue: copies of the positive band $P$; orange: copies of the negative band $N$. The sloped tops show the orientation (38 kHz edge low, 42 kHz edge high).}
+
+\step{Step 3 --- Formal check (band-pass sampling theorem).} A band $[f_L,f_H]$ sampled at $f_s$ is alias-free if for some integer $n$
+\[\frac{2f_H}{n}\le f_s\le\frac{2f_L}{n-1}.\]
+With $f_L=38$, $f_H=42$: for $n=5$, $\ \frac{84}5=16.8\le18\le\frac{76}4=19$ \checkmark. So $f_s=18$ kHz lies inside an allowed window.
+
+\step{Step 4 --- Where the band lands.} $38$ kHz maps to $38-2(18)=2$ kHz and $42$ kHz to $6$ kHz: the band is translated, \emph{not} inverted (an even multiple of $f_s/2$ was subtracted). A Doppler echo at $40$ kHz $\pm\Delta$ appears at $4$ kHz $\pm\Delta$.
+\begin{keyidea}Band-pass (under-)sampling: a narrow band far from d.c.\ only needs $f_s>2B$ \emph{and} a placement where the copies of $+$ and $-$ halves interleave without touching.\end{keyidea}
+\ans{The engineer is right. At $f_s=18$ kHz the band 38--42 kHz appears in the baseband at 2--6 kHz (positive half) and at $-6$ to $-2$ kHz (negative half); the copies do not overlap ($16.8\le f_s\le19$ kHz is an allowed band-pass window).}
+\end{solution}
+
+%------------------------------------------------------------------ 2(b)
+\begin{qcard}{Q2(b)}{Cross-correlation through the DFT}{12}
+\textbf{Demonstrate} that the circular cross-correlation $c[m]=\sum_{n=0}^{N-1}x[n]\,y[((n+m))_N]$ of two real length-$N$ sequences has the DFT $C[k]=X^*[k]\,Y[k]$, stating how much zero-padding, if any, is needed for this route to give the ordinary (linear) cross-correlation.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Take the DFT of $c[m]$.} With $W=W_N=e^{-j2\pi/N}$,
+\[C[k]=\sum_{m=0}^{N-1}c[m]W^{km}=\sum_{n=0}^{N-1}x[n]\sum_{m=0}^{N-1}y[((n+m))_N]\,W^{km}.\]
+\step{Step 2 --- Change the inner index.} Put $l=((n+m))_N$. As $m$ runs over $0..N-1$, so does $l$, and $m\equiv l-n\pmod N$. Since $W^N=1$, $W^{km}=W^{k(l-n)}=W^{kl}W^{-kn}$:
+\[C[k]=\sum_{n=0}^{N-1}x[n]W^{-kn}\;\sum_{l=0}^{N-1}y[l]W^{kl}.\]
+\step{Step 3 --- Recognise the two factors.} The second sum is $Y[k]$. For a \emph{real} $x$, $\sum x[n]W^{-kn}=\Big(\sum x[n]W^{kn}\Big)^*=X^*[k]$. Hence
+\[\boxed{C[k]=X^*[k]\,Y[k]}\qquad\Longrightarrow\qquad c=\mathrm{IDFT}\{X^*\,Y\}.\]
+Cost: two FFTs, one product and one inverse FFT, $O(N\log N)$, against $O(N^2)$ for the direct double sum.
+
+\step{Step 4 --- Zero-padding.} The linear cross-correlation $c_{\text{lin}}[m]=\sum_nx[n]y[n+m]$ of a length-$N_x$ pulse and a length-$N_y$ recording is non-zero for lags
+\[-(N_x-1)\le m\le N_y-1\qquad(N_x+N_y-1\text{ values}).\]
+A length-$M$ circular correlation equals the linear one \emph{folded} with period $M$: $c_{\text{circ}}[m]=\sum_rc_{\text{lin}}[m+rM]$. The folded copies do not overlap only if $M\ge N_x+N_y-1$. Therefore pad both sequences with zeros to
+\[\boxed{M\ge N_x+N_y-1\ \ (=2N-1\text{ for two length-}N\text{ sequences})}\]
+Then $c_{\text{circ}}[m]=c_{\text{lin}}[m]$ for $0\le m\le N_y-1$, and the negative lags appear at the end: $c_{\text{circ}}[M-l]=c_{\text{lin}}[-l]$. In practice $M$ is rounded up to a power of 2 for the radix-2 FFT.
+\ans{$C[k]=\sum_nx[n]W^{-kn}\sum_ly[l]W^{kl}=X^*[k]Y[k]$. Zero-pad both sequences to at least $N_x+N_y-1$ points ($2N-1$ for equal lengths $N$) so the circular correlation equals the linear one.}
+\end{solution}
+
+%------------------------------------------------------------------ 2(c)
+\begin{qcard}{Q2(c)}{Peak of $c[m]$ and the distance}{11}
+To save memory, the sensor only starts recording 30 samples after the pulse has been sent. For one measurement the stored pulse is $x=\{1,2,0,0\}$ and the recording is $y=\{0,1,2,0\}$. Use either method to find the peak of $c[m]$ and, from it, the distance to the obstacle.
+\end{qcard}
+\begin{solution}
+\step{Method 1 --- direct sum.} $c[m]=\sum_nx[n]y[n+m]$, with only $x[0]=1$, $x[1]=2$ non-zero: $c[m]=y[m]+2y[m+1]$.
+\begin{center}\small\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}c|ccccc@{}}
+lag $m$&$-1$&0&1&2&3\\\hline
+$y[m]+2y[m+1]$&$0+2(0)$&$0+2(1)$&$1+2(2)$&$2+2(0)$&$0$\\
+$c[m]$&0&2&\textbf{5}&2&0\end{tabular}\end{center}
+\step{Method 2 --- via the DFT.} $N=4$ is enough: the pulse spans 2 samples and the recording 3, so $2+3-1=4$ (part (b)).
+\begin{align*}
+X[k]&=\{3,\ 1-2j,\ -1,\ 1+2j\},\\
+Y[k]&=\{3,\ -2-j,\ 1,\ -2+j\},\\
+C[k]=X^*[k]\,Y[k]&=\{9,\ (1+2j)(-2-j),\ (-1)(1),\ (1-2j)(-2+j)\}=\{9,\ -5j,\ -1,\ 5j\}.
+\end{align*}
+Inverse DFT, $c[m]=\frac14\sum_kC[k]\,j^{km}$:
+\[c[0]=\tfrac{9-5j-1+5j}4=2,\quad c[1]=\tfrac{9+5+1+5}4=5,\quad c[2]=\tfrac{9+5j-1-5j}4=2,\quad c[3]=\tfrac{9-5+1-5}4=0 .\]
+Both methods agree: $c=\{2,\mathbf 5,2,0\}$, peak at lag $m^\star=1$ (the recorded $\{1,2\}$ is the pulse shifted by one sample).
+
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=7cm,height=4cm,axis lines=middle,xlabel={$m$},ylabel={$c[m]$},xtick={-1,0,1,2,3},ytick={2,5},ymin=0,ymax=6,xmin=-1.6,xmax=3.6,ticklabel style={font=\scriptsize},label style={font=\scriptsize}]
+\addplot+[ycomb,navy,thick,mark=*,mark size=2pt]coordinates{(-1,0)(0,2)(1,5)(2,2)(3,0)};
+\node[font=\scriptsize,crimson,anchor=west]at(axis cs:1.15,5.2){peak, $m^\star=1$};
+\end{axis}\end{tikzpicture}
+\end{center}
+
+\step{Step 3 --- Total delay.} The recording started 30 samples after transmission, so the echo delay is
+\[D=30+m^\star=31\text{ samples},\qquad \tau=\frac{D}{f_s}=\frac{31}{18\,000}\text{ s}=1.722\text{ ms}.\]
+\step{Step 4 --- Distance.} The sound goes to the obstacle and back: $2d=v\tau$.
+\[d=\frac{v\tau}{2}=\frac{340\times31}{2\times18\,000}=0.293\text{ m}.\]
+\ans{$c[m]=\{2,5,2,0\}$ ($m=0..3$), peak $c[1]=5$; total delay $31$ samples $=1.722$ ms at $f_s=18$ kHz, so the obstacle is $d\approx0.293$ m $\approx29$ cm away.}
+\end{solution}

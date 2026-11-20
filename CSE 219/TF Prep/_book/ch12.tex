@@ -1,0 +1,137 @@
+\renewcommand{\teacherTag}{ASHRAF SIR \textbullet\ LAPLACE TRANSFORM}
+\chapter{Laplace Transform: ROC, Properties and Inverse}
+
+\noindent{\sffamily\small\color{slate}$X(s)=\int x(t)e^{-st}\dd t$. Right-sided $\Rightarrow$ ROC is a right half-plane; left-sided $\Rightarrow$ left half-plane; two-sided $\Rightarrow$ a vertical strip. Poles are never inside the ROC.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q7(a)}{EEE 211 \textbullet\ EEE p.15}{12}
+Find the Laplace transform and ROC of (i) $e^{-at}u(t)$ for $a>0$ and $a<0$, (ii) $-e^{-at}u(-t)$ for $a<0$.
+\end{qcard}
+\begin{solution}
+(i) $\displaystyle\int_0^\infty e^{-(s+a)t}\dd t=\frac1{s+a}$, valid for $\operatorname{Re}\{s\}>-a$.
+ For $a>0$ the ROC $\operatorname{Re}\{s\}>-a$ contains the $j\omega$-axis (stable, Fourier transform exists). For $a<0$ the ROC $\operatorname{Re}\{s\}>|a|$ excludes the $j\omega$-axis (growing exponential; no Fourier transform).
+
+(ii) $-\displaystyle\int_{-\infty}^0e^{-(s+a)t}\dd t=\frac1{s+a}$, valid for $\operatorname{Re}\{s\}<-a$. For $a<0$ this half-plane ($\operatorname{Re}s<|a|$) contains the $j\omega$-axis.
+
+Same algebraic expression, different ROC $\Rightarrow$ different signal: the ROC is part of the answer.
+\ans{(i) $\frac1{s+a}$, $\operatorname{Re}s>-a$. (ii) $\frac1{s+a}$, $\operatorname{Re}s<-a$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q1(b)}{CSE 219 \textbullet\ TF p.1}{10}
+For $x(t)=e^{-at}$, $0<t<T$ (zero otherwise), is $s=-a$ in the ROC? (Note the apparent pole there.)
+\end{qcard}
+\begin{solution}
+\[X(s)=\int_0^Te^{-(s+a)t}\dd t=\frac{1-e^{-(s+a)T}}{s+a}.\]
+At $s=-a$ the numerator and denominator both vanish, so the singularity is removable: using $1-e^{-\epsilon T}\approx\epsilon T$, $X(-a)=T$ (indeed $\int_0^T1\dd t=T$). The integral converges for every $s$ (finite-duration signal), so the ROC is the whole $s$-plane and $s=-a$ is in it. The zero of the numerator cancels the pole: no pole at $s=-a$.
+\ans{Yes: $X(s)=\frac{1-e^{-(s+a)T}}{s+a}$ has a removable singularity at $-a$ ($X(-a)=T$); ROC = all $s$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q2(a)}{CSE 219 \textbullet\ TF p.1}{10}
+State and prove the time-domain and $s$-domain differentiation properties of the Laplace transform.
+\end{qcard}
+\begin{solution}
+\step{Time differentiation:} $\mathcal L\{x'(t)\}=sX(s)-x(0^-)$.
+\emph{Proof} (integration by parts): $\displaystyle\int_{0^-}^\infty x'e^{-st}\dd t=\Big[x e^{-st}\Big]_{0^-}^\infty+s\int_{0^-}^\infty xe^{-st}\dd t=-x(0^-)+sX(s)$ (the boundary term vanishes at $\infty$ inside the ROC). Applying twice: $\mathcal L\{x''\}=s^2X-sx(0^-)-x'(0^-)$.
+
+\step{$s$-domain differentiation:} $\mathcal L\{tx(t)\}=-\dfrac{\dd X(s)}{\dd s}$.
+\emph{Proof:} $\dfrac{\dd}{\dd s}\displaystyle\int x(t)e^{-st}\dd t=\int(-t)x(t)e^{-st}\dd t=-\mathcal L\{tx(t)\}$.
+\ans{$x'\leftrightarrow sX-x(0^-)$; $\;tx(t)\leftrightarrow-X'(s)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q2(b)}{CSE 219 \textbullet\ TF p.1}{10}
+Find the inverse Laplace transform of $X(s)=\dfrac{s+2}{s^2+7s+12}$ with ROC $-4<\operatorname{Re}\{s\}<-3$.
+\end{qcard}
+\begin{solution}
+$X(s)=\dfrac{s+2}{(s+3)(s+4)}=\dfrac{A}{s+3}+\dfrac B{s+4}$ with $A=\dfrac{-1}{1}=-1$, $B=\dfrac{-2}{-1}=2$:
+\[X(s)=-\frac1{s+3}+\frac2{s+4}.\]
+The ROC lies to the \emph{left} of the pole $s=-3$ (left-sided term) and to the \emph{right} of $s=-4$ (right-sided term):
+\[-\frac1{s+3},\ \operatorname{Re}s<-3\ \longrightarrow\ e^{-3t}u(-t);\qquad\frac2{s+4},\ \operatorname{Re}s>-4\ \longrightarrow\ 2e^{-4t}u(t).\]
+\ans{$x(t)=2e^{-4t}u(t)+e^{-3t}u(-t)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q2(c)}{CSE 219 \textbullet\ TF p.1}{15}
+Find the Laplace transform and ROC of $x(t)=e^{-b|t-2|}$, $b>0$.
+\end{qcard}
+\begin{solution}
+Let $w(t)=e^{-b|t|}=e^{-bt}u(t)+e^{bt}u(-t)$. Then
+\[W(s)=\frac1{s+b}-\frac1{s-b}=\frac{2b}{b^2-s^2},\qquad -b<\operatorname{Re}\{s\}<b .\]
+Since $x(t)=w(t-2)$, the time-shift property gives
+\[X(s)=e^{-2s}\,\frac{2b}{b^2-s^2},\qquad -b<\operatorname{Re}\{s\}<b\ \text{(shift does not change the ROC)}.\]
+\ans{$X(s)=\dfrac{2b\,e^{-2s}}{b^2-s^2}$, ROC: $-b<\operatorname{Re}s<b$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q6(b)}{CSE 219 \textbullet\ 22 batch p.3}{13}
+Find the Laplace transform and ROC of $x(t)=|t|e^{-2|t|}-e^{-t}\cos3t\,u(t)+t^2e^{-4t}u(t)$ and sketch the ROC.
+\end{qcard}
+\begin{solution}
+\step{Term 1:} $|t|e^{-2|t|}=te^{-2t}u(t)+(-t)e^{2t}u(-t)$. The first part is $\frac1{(s+2)^2}$ for $\operatorname{Re}s>-2$. For the second, $e^{2t}u(-t)\leftrightarrow-\frac1{s-2}$ ($\operatorname{Re}s<2$) and $tx\leftrightarrow-X'$ give $te^{2t}u(-t)\leftrightarrow-\frac{1}{(s-2)^2}$, so $(-t)e^{2t}u(-t)\leftrightarrow\frac1{(s-2)^2}$.
+\[X_1=\frac1{(s+2)^2}+\frac1{(s-2)^2},\qquad-2<\operatorname{Re}s<2 .\]
+\step{Term 2:} $e^{-t}\cos3t\,u(t)\leftrightarrow\dfrac{s+1}{(s+1)^2+9}$, $\operatorname{Re}s>-1$.
+
+\step{Term 3:} $t^2e^{-4t}u(t)\leftrightarrow\dfrac{2}{(s+4)^3}$, $\operatorname{Re}s>-4$.
+
+\[X(s)=\frac1{(s+2)^2}+\frac1{(s-2)^2}-\frac{s+1}{(s+1)^2+9}+\frac2{(s+4)^3}.\]
+ROC = intersection $=\{-1<\operatorname{Re}s<2\}$.
+\begin{center}\begin{tikzpicture}[scale=0.7]
+\fill[navy!15](-1,-3.2)rectangle(2,3.2);
+\draw[->](-5,0)--(3.5,0)node[right]{\scriptsize$\sigma$};\draw[->](0,-3.4)--(0,3.4)node[above]{\scriptsize$j\omega$};
+\draw[navy,thick](-1,-3.2)--(-1,3.2)(2,-3.2)--(2,3.2);
+\foreach \x/\y in {-2/0,2/0,-4/0,-1/3,-1/-3}{\node[crimson]at(\x,\y){$\times$};}
+\node[font=\scriptsize]at(0.5,1.5){ROC};
+\node[font=\tiny,below]at(-1,-0.1){$-1$};\node[font=\tiny,below]at(2.35,0){$2$};\node[font=\tiny,below]at(-2,-0.1){$-2$};\node[font=\tiny,below]at(-4,-0.1){$-4$};
+\end{tikzpicture}\end{center}
+(Poles: double at $-2$, double at $2$, $-1\pm3j$, triple at $-4$; the strip lies between the right-sided boundary $-1$ and the left-sided boundary $2$.)
+\ans{ROC $-1<\operatorname{Re}\{s\}<2$ with $X(s)$ above.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q6(c)}{CSE 219 \textbullet\ 22 batch p.3}{10}
+Can a causal system be unstable? Can a stable system be non-causal? Explain with the ROC.
+\end{qcard}
+\begin{solution}
+Causal $\Leftrightarrow$ ROC is a right half-plane $\operatorname{Re}s>\sigma_{\max}$. Stable $\Leftrightarrow$ ROC contains the $j\omega$-axis. They are independent conditions.
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \emph{Causal but unstable:} $H(s)=\dfrac1{s-1}$, ROC $\operatorname{Re}s>1$, $h=e^{t}u(t)$. Right half-plane, but it does not include the $j\omega$-axis (pole in the right half of the plane).
+\item \emph{Stable but non-causal:} $H(s)=\dfrac1{s-1}$, ROC $\operatorname{Re}s<1$, $h=-e^{t}u(-t)$. ROC contains the $j\omega$-axis ($\int|h|=1<\infty$) but it is left-sided.
+\end{itemize}
+For a rational $H(s)$, causal \emph{and} stable $\Leftrightarrow$ all poles in the left half-plane.
+\ans{Yes to both: $\frac1{s-1}$ with ROC $\operatorname{Re}s>1$ (causal, unstable) or $\operatorname{Re}s<1$ (stable, non-causal).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q4(a)}{CSE 219 \textbullet\ TF p.2}{10}
+What is the relation between the Laplace transform and the Fourier transform?
+\end{qcard}
+\begin{solution}
+With $s=\sigma+j\omega$: $X(s)=\displaystyle\int\big[x(t)e^{-\sigma t}\big]e^{-j\omega t}\dd t=\mathcal F\{x(t)e^{-\sigma t}\}$. The Laplace transform is the Fourier transform of $x$ after multiplication by a decaying exponential, which makes more signals transformable. If the ROC contains the $j\omega$-axis ($\sigma=0$),
+\[X(j\omega)=X(s)\big|_{s=j\omega}.\]
+If the ROC does not include the axis, the Fourier transform does not exist (in the ordinary sense), although the Laplace transform does; e.g.\ $u(t)\to\frac1s$ but $\mathcal F\{u\}=\pi\delta(\omega)+\frac1{j\omega}$.
+\ans{$X(j\omega)=X(s)|_{s=j\omega}$ provided the ROC includes the $j\omega$-axis.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q7(b)}{EEE 211 \textbullet\ EEE p.15}{12}
+Using the convolution property, find the inverse Laplace transform of $\dfrac1{(s-a)^3}$ (right-sided).
+\end{qcard}
+\begin{solution}
+$\dfrac1{s-a}\leftrightarrow e^{at}u(t)$. Convolution in time is multiplication in $s$:
+\[\frac1{(s-a)^2}\leftrightarrow\int_0^te^{a\tau}e^{a(t-\tau)}\dd\tau=te^{at}u(t),\qquad
+\frac1{(s-a)^3}\leftrightarrow\int_0^t\tau e^{a\tau}e^{a(t-\tau)}\dd\tau=\frac{t^2}2e^{at}u(t).\]
+\ans{$\dfrac{t^2}{2}e^{at}u(t)$, ROC $\operatorname{Re}s>a$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q5(a)}{EEE 211 \textbullet\ EEE p.29}{15}
+A real signal $x(t)$ has Laplace transform $X(s)$ with two poles, no finite zeros, a pole at $s=-1+j$, such that $e^{2t}x(t)$ is not absolutely integrable, and $X(0)=5$. Find $X(s)$ and its ROC.
+\end{qcard}
+\begin{solution}
+$x$ real $\Rightarrow$ poles come in conjugate pairs: $-1\pm j$. Two poles and no zeros:
+\[X(s)=\frac K{(s+1-j)(s+1+j)}=\frac K{s^2+2s+2},\qquad X(0)=\frac K2=5\Rightarrow K=10 .\]
+$e^{2t}x(t)$ is not absolutely integrable $\Leftrightarrow\sigma=-2$ (the value that makes $e^{-\sigma t}=e^{2t}$) is outside the ROC. Both poles lie on $\operatorname{Re}s=-1$, so the ROC is either $\operatorname{Re}s>-1$ or $\operatorname{Re}s<-1$; since $\sigma=-2$ must be excluded, the ROC is $\operatorname{Re}s>-1$.
+\ans{$X(s)=\dfrac{10}{s^2+2s+2}$, ROC: $\operatorname{Re}\{s\}>-1$ (so $x(t)=10e^{-t}\sin t\,u(t)$).}
+\end{solution}

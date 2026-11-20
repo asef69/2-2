@@ -1,0 +1,47 @@
+
+===== page 1 =====
+ERD to Class
+
+===== page 2 =====
+Example Scenario
+The University of Toronto has several departments. Each 
+department is managed by a chair, and at least one 
+professor. Professors must be assigned to one, but 
+possibly more departments. At least one professor 
+teaches each course, but a professor may be on 
+sabbatical and not teach any course. Each course may be 
+taught more than once by different professors. We know 
+of the department name, the professor name, the 
+professor employee id, the course names, the course 
+schedule, the term/year that the course is taught, the 
+departments the professor is assigned to, the 
+department that offers the course.
+
+===== page 3 =====
+Entity/Class Candidates
+• departments, 
+• chair, 
+• professor, 
+• course, and 
+• course section
+
+===== page 4 =====
+Finding Relationship
+
+===== page 5 =====
+
+
+===== page 6 =====
+
+
+===== page 7 =====
+Finding Association
+
+===== page 8 =====
+Basic Class Diagram
+
+===== page 9 =====
+Adding Attributes
+
+===== page 10 =====
+Operations/behaviors of a class

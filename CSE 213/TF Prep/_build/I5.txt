@@ -1,0 +1,270 @@
+//// FILE: StudentRefactored.java
+// 2024-25 Q4(a) — Student / Scholarship after refactoring
+// Smells fixed: (1) type code + switch on type (UG/PG) -> Replace Conditional with Polymorphism;
+// (2) data clump street/postOffice/district -> Extract Class Address; (3) feature envy: Scholarship computes CGPA and
+// regularity from Student's data -> Move Method into Student; (4) duplicated code: CGPA loop in two places -> Extract Method
+// cgpa(); (5) long method / deep nesting in checkEligibility -> guard clauses; also temporary field isFulltime only for PG
+// -> moved into PostgraduateStudent; magic numbers -> named constants.
+class Address {
+    private final String street, postOffice, district;
+    Address(String street, String postOffice, String district) {
+        this.street = street; this.postOffice = postOffice; this.district = district;
+    }
+    public String toString() { return street + ", " + postOffice + ", " + district; }
+}
+abstract class Student {
+    final String name, id;
+    final int year;
+    final Address address;
+    private final float[] yearWiseGpa;
+    Student(String name, String id, int year, Address address, float[] yearWiseGpa) {
+        this.name = name; this.id = id; this.year = year; this.address = address; this.yearWiseGpa = yearWiseGpa;
+    }
+    float cgpa() {                                        // extracted once
+        float sum = 0;
+        for (float g : yearWiseGpa) sum += g;
+        return yearWiseGpa.length == 0 ? 0 : sum / yearWiseGpa.length;
+    }
+    boolean isRegular() { return yearWiseGpa.length == year; }    // moved from Scholarship
+    abstract float calculateFee();
+    void printDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Student ID: " + id);
+        System.out.println("Address: " + address);
+        printSpecificDetails();
+    }
+    protected abstract void printSpecificDetails();
+}
+class UndergraduateStudent extends Student {
+    private static final float UG_FEE = 50000;
+    UndergraduateStudent(String n, String id, int y, Address a, float[] g) { super(n, id, y, a, g); }
+    float calculateFee() { return UG_FEE; }
+    protected void printSpecificDetails() { System.out.println("Undergraduate, year " + year); }
+}
+class PostgraduateStudent extends Student {
+    private static final float HIGH_CGPA = 3.5f, PG_FEE_HIGH_CGPA = 40000, PG_FEE = 48000;
+    private final boolean fulltime;
+    PostgraduateStudent(String n, String id, int y, Address a, float[] g, boolean fulltime) {
+        super(n, id, y, a, g); this.fulltime = fulltime;
+    }
+    float calculateFee() { return cgpa() > HIGH_CGPA ? PG_FEE_HIGH_CGPA : PG_FEE; }
+    protected void printSpecificDetails() { System.out.println("Postgraduate, " + (fulltime ? "full-time" : "part-time")); }
+}
+class Scholarship {
+    private static final int MIN_YEAR = 2;
+    final String name; final int amount; final float cgpaThreshold;
+    Scholarship(String name, int amount, float cgpaThreshold) {
+        this.name = name; this.amount = amount; this.cgpaThreshold = cgpaThreshold;
+    }
+    boolean isEligible(Student s) {                       // guard clauses instead of nested ifs
+        if (!(s instanceof UndergraduateStudent)) return false;
+        if (!s.isRegular()) return false;
+        if (s.year < MIN_YEAR) return false;
+        return s.cgpa() >= cgpaThreshold;
+    }
+    void checkEligibility(Student s) {
+        System.out.println(s.name + (isEligible(s) ? " is awarded scholarship: " + amount : " is not eligible."));
+    }
+}
+public class StudentRefactored {
+    public static void main(String[] args) {
+        Address a = new Address("Road 3", "Palashi", "Dhaka");
+        Student ug = new UndergraduateStudent("Asef", "2205001", 3, a, new float[]{3.6f, 3.8f, 3.7f});
+        Student pg = new PostgraduateStudent("Nadia", "0423001", 1, a, new float[]{3.9f}, true);
+        ug.printDetails(); System.out.println("Fee: " + ug.calculateFee());
+        pg.printDetails(); System.out.println("Fee: " + pg.calculateFee());
+        Scholarship s = new Scholarship("Dean's", 20000, 3.5f);
+        s.checkEligibility(ug); s.checkEligibility(pg);
+    }
+}
+//// FILE: OrderRefactored.java
+// 2023-24 Q8(c) — DiscountCalculator / OrderProcessor after refactoring
+// Smells: long parameter list + data clump (customerName, customerId, customerType) -> Introduce Parameter Object Customer;
+// unused parameters (name, id in calculateDiscount); switch-like if-chain on type codes -> polymorphic CustomerType enum;
+// duplicated code (printing customer data twice, string comparisons repeated); magic numbers -> constants in the enum;
+// long method processOrder -> Extract Method; bug: discount == price*0.15 / 0.25 never match the rates (0.05, 0.1, 0.2)
+// and float comparison with == -> print the rate instead; feature envy on strings -> methods on Product/Customer.
+enum ProductType { ELECTRONICS, GROCERY, OTHER }
+enum CustomerType {
+    REGULAR(0.10, 0.05), PREMIUM(0.20, 0.10);
+    private final double electronicsRate, groceryRate;
+    CustomerType(double e, double g) { electronicsRate = e; groceryRate = g; }
+    double rateFor(ProductType p) {
+        switch (p) {
+            case ELECTRONICS: return electronicsRate;
+            case GROCERY:     return groceryRate;
+            default:          return 0;
+        }
+    }
+}
+class Customer {
+    final String name, id; final CustomerType type;
+    Customer(String name, String id, CustomerType type) { this.name = name; this.id = id; this.type = type; }
+}
+class Product {
+    final ProductType type; final double price;
+    Product(ProductType type, double price) { this.type = type; this.price = price; }
+}
+class DiscountCalculator {
+    double discountRate(Customer c, Product p) { return c.type.rateFor(p.type); }
+    double calculateDiscount(Customer c, Product p) { return p.price * discountRate(c, p); }
+}
+class OrderProcessor {
+    private final DiscountCalculator calculator = new DiscountCalculator();
+    void processOrder(Customer c, Product p) {
+        double rate = calculator.discountRate(c, p);
+        double discount = p.price * rate;
+        printCustomer(c);
+        printProduct(p);
+        printPrices(p.price, discount, rate);
+    }
+    private void printCustomer(Customer c) {
+        System.out.println("Processing order for " + c.name + " (" + c.id + "), " + c.type + " customer");
+    }
+    private void printProduct(Product p) { System.out.println(p.type + " item processed"); }
+    private void printPrices(double price, double discount, double rate) {
+        System.out.println("Original price: " + price);
+        System.out.println(rate == 0 ? "No discount applied" : Math.round(rate * 100) + "% discount applied: " + discount);
+        System.out.println("Final price: " + (price - discount));
+    }
+}
+public class OrderRefactored {
+    public static void main(String[] args) {
+        OrderProcessor op = new OrderProcessor();
+        op.processOrder(new Customer("Rina", "C-17", CustomerType.PREMIUM), new Product(ProductType.ELECTRONICS, 1000));
+        op.processOrder(new Customer("Karim", "C-18", CustomerType.REGULAR), new Product(ProductType.GROCERY, 200));
+        op.processOrder(new Customer("Karim", "C-18", CustomerType.REGULAR), new Product(ProductType.OTHER, 50));
+    }
+}
+//// FILE: Refactor2223.java
+// 2022-23 Q5(b) — (i) Decompose Conditional / Extract Variable, (ii) Replace Conditional with Polymorphism,
+// (iii) Replace Nested Conditional with Guard Clauses
+class Banner {
+    String platform = "MacOS", browser = "IE 11"; boolean initialized = true; int resize = 1;
+    boolean wasInitialized() { return initialized; }
+    void renderBanner() {
+        final boolean isMacOs = platform.toUpperCase().indexOf("MAC") > -1;
+        final boolean isIE = browser.toUpperCase().indexOf("IE") > -1;
+        final boolean wasResized = resize > 0;
+        if (isMacOs && isIE && wasInitialized() && wasResized) {
+            System.out.println("render banner for Mac + IE");    // do something
+        }
+    }
+}
+abstract class Player {                                    // (ii)
+    double baseSalary() { return 50000; }
+    abstract double getSalary();
+}
+class FootballPlayer extends Player {
+    double getWeeklyIncrement() { return 1000; }
+    double getSalary() { return baseSalary() + getWeeklyIncrement() * 4; }
+}
+class CricketPlayer extends Player {
+    double getMonthlyIncrement() { return 3000; }
+    double getSalary() { return baseSalary() + getMonthlyIncrement(); }
+}
+class BadmintonPlayer extends Player {
+    double getSalary() { return baseSalary(); }
+}
+class Payroll {                                            // (iii)
+    boolean isDead, isSeparated, isRetired;
+    double deadAmount() { return 1; } double separatedAmount() { return 2; }
+    double retiredAmount() { return 3; } double normalPayAmount() { return 4; }
+    double getPayAmount() {
+        if (isDead) return deadAmount();
+        if (isSeparated) return separatedAmount();
+        if (isRetired) return retiredAmount();
+        return normalPayAmount();
+    }
+}
+public class Refactor2223 {
+    public static void main(String[] args) {
+        new Banner().renderBanner();
+        for (Player p : new Player[]{new FootballPlayer(), new CricketPlayer(), new BadmintonPlayer()})
+            System.out.println(p.getClass().getSimpleName() + " " + p.getSalary());
+        Payroll pr = new Payroll(); pr.isRetired = true;
+        System.out.println("pay " + pr.getPayAmount());
+    }
+}
+//// FILE: SuperHeroItems.java
+// 2021-22 Q1(b) — if-else chain on names -> lookup table (HashMap): readable, O(1) amortised
+import java.util.HashMap;
+import java.util.Map;
+
+class SuperHeroItem {
+    final String name; SuperHeroItem(String n) { name = n; }
+    public String toString() { return name; }
+}
+class GetSuperHeroItem {
+    private final Map<String, SuperHeroItem> itemByHero = new HashMap<>();
+    GetSuperHeroItem() {
+        register("IronMan", new SuperHeroItem("suit"));
+        register("Thor", new SuperHeroItem("hammer"));
+        register("CaptainAmerica", new SuperHeroItem("shield"));
+        register("Hawkeye", new SuperHeroItem("arrow"));
+    }
+    void register(String hero, SuperHeroItem item) { itemByHero.put(hero.toLowerCase(), item); }  // new hero = one call
+    SuperHeroItem getItem(String heroName) {
+        return heroName == null ? null : itemByHero.get(heroName.toLowerCase());   // case-insensitive, O(1)
+    }
+}
+public class SuperHeroItems {
+    public static void main(String[] args) {
+        GetSuperHeroItem g = new GetSuperHeroItem();
+        System.out.println(g.getItem("thor") + " " + g.getItem("IRONMAN") + " " + g.getItem("Hulk"));
+    }
+}
+//// FILE: SmellExamples.java
+// 2019-20 Q6(a), 2022-23 Q5(a) — code smells with short examples and fixes (compile-checked)
+import java.util.ArrayList;
+import java.util.List;
+
+// DATA CLUMP: the same three fields travel together  ->  Extract Class / Introduce Parameter Object
+class MeetingBefore {
+    void schedule(int startDay, int startMonth, int startYear, int endDay, int endMonth, int endYear) { }
+}
+class SimpleDate { final int d, m, y; SimpleDate(int d, int m, int y) { this.d = d; this.m = m; this.y = y; } }
+class MeetingAfter { void schedule(SimpleDate start, SimpleDate end) { } }
+
+// REFUSED BEQUEST: subclass inherits methods it does not want  ->  Replace Inheritance with Delegation / push down
+class Bird { void fly() { System.out.println("flying"); } void eat() { } }
+class PenguinBefore extends Bird {
+    void fly() { throw new UnsupportedOperationException("penguins can't fly"); }   // refuses the bequest
+}
+abstract class Animal { void eat() { } }
+class FlyingBird extends Animal { void fly() { } }
+class Penguin extends Animal { void swim() { } }                                 // after: no unwanted method
+
+// FEATURE ENVY: a method uses another class's data more than its own -> Move Method
+class Customer2 { double totalSpent; int yearsAsMember;
+    double loyaltyDiscount() {                                                    // after: moved here
+        if (totalSpent > 1000 && yearsAsMember > 2) return totalSpent * 0.15;
+        if (totalSpent > 500) return totalSpent * 0.10;
+        return 0;
+    }
+}
+class Invoice2 { double discountFor(Customer2 c) { return c.loyaltyDiscount(); } }
+
+// SHOTGUN SURGERY: one rule copied into many classes -> Move Method / Extract Class to one place
+class AccountRules { static final double MIN_BALANCE = 500;
+    static void checkMinimum(double balanceAfter) {
+        if (balanceAfter < MIN_BALANCE) throw new IllegalStateException("Balance would fall below " + MIN_BALANCE);
+    }
+}
+class Debit    { void run(double bal, double amt) { AccountRules.checkMinimum(bal - amt); } }
+class Transfer { void run(double bal, double amt) { AccountRules.checkMinimum(bal - amt); } }
+
+// PARALLEL INHERITANCE HIERARCHIES: every new Employee subclass needs a new Printer subclass -> merge via polymorphism
+abstract class Employee2 { abstract String report(); }           // after: each employee reports itself
+class Engineer2 extends Employee2 { String report() { return "Engineer report"; } }
+class Salesman2 extends Employee2 { String report() { return "Salesman report"; } }
+// before: Engineer/EngineerPrinter, Salesman/SalesmanPrinter grew in parallel
+
+public class SmellExamples {
+    public static void main(String[] args) {
+        List<Employee2> staff = new ArrayList<>(List.of(new Engineer2(), new Salesman2()));
+        for (Employee2 e : staff) System.out.println(e.report());
+        Customer2 c = new Customer2(); c.totalSpent = 1200; c.yearsAsMember = 3;
+        System.out.println("discount " + new Invoice2().discountFor(c));
+    }
+}

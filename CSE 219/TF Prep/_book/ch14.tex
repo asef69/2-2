@@ -1,0 +1,116 @@
+\renewcommand{\teacherTag}{ASHRAF SIR \textbullet\ Z-TRANSFORM}
+\chapter{The $z$-Transform}
+
+\noindent{\sffamily\small\color{slate}$X(z)=\sum_nx[n]z^{-n}$. Right-sided $\Rightarrow$ ROC outside the outermost pole; left-sided $\Rightarrow$ inside the innermost pole; two-sided $\Rightarrow$ an annulus. Causal and stable $\Leftrightarrow$ all poles inside the unit circle.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q1(a)}{CSE 219 \textbullet\ TF p.1}{10}
+Find the $z$-transform and ROC of $x[n]=a^nu[n]$.
+\end{qcard}
+\begin{solution}
+\[X(z)=\sum_{n=0}^\infty(az^{-1})^n=\frac1{1-az^{-1}}=\frac z{z-a},\qquad |az^{-1}|<1\iff|z|>|a| .\]
+Pole at $z=a$, zero at $z=0$; the ROC is the exterior of the circle through the pole. It contains the unit circle iff $|a|<1$.
+\ans{$X(z)=\dfrac1{1-az^{-1}}$, ROC $|z|>|a|$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q3(a)}{CSE 219 \textbullet\ TF p.2}{10}
+For $x[n]=a^n$, $0\le n\le N-1$ (zero otherwise), show that the ROC excludes $z=0$.
+\end{qcard}
+\begin{solution}
+\[X(z)=\sum_{n=0}^{N-1}a^nz^{-n}=\frac{1-a^Nz^{-N}}{1-az^{-1}}=1+az^{-1}+\cdots+a^{N-1}z^{-(N-1)}.\]
+The sum is finite, so it converges for every $z$ where each term is finite. The terms $z^{-1},\dots,z^{-(N-1)}$ are infinite at $z=0$ (poles of order up to $N-1$ there), hence $z=0$ must be excluded. The apparent pole at $z=a$ cancels (numerator vanishes there), so
+\[\text{ROC: }0<|z|\le\infty\ \ (\text{all }z\ne0;\ \text{for }N=1\text{ the point }z=0\text{ is included}).\]
+\ans{Finite, right-sided with $n\ge0$ terms: ROC is the whole plane except $z=0$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q3(b)}{CSE 219 \textbullet\ TF p.2}{10}
+Derive the contour-integral formula for the inverse $z$-transform.
+\end{qcard}
+\begin{solution}
+Start from $X(z)=\sum_nx[n]z^{-n}$ in its ROC. Multiply by $z^{k-1}$ and integrate around a counter-clockwise closed contour $C$ inside the ROC encircling the origin:
+\[\oint_CX(z)z^{k-1}\dd z=\sum_nx[n]\oint_Cz^{k-n-1}\dd z .\]
+By Cauchy's integral theorem, $\oint_Cz^{m-1}\dd z=2\pi j$ for $m=0$ and $0$ for $m\ne0$. Only $n=k$ survives:
+\[\oint_CX(z)z^{k-1}\dd z=2\pi j\,x[k]\ \Rightarrow\ x[n]=\frac1{2\pi j}\oint_CX(z)z^{n-1}\dd z .\]
+In practice this is evaluated by residues at the poles inside $C$.
+\ans{$x[n]=\dfrac1{2\pi j}\oint_CX(z)z^{n-1}\dd z$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q3(c)}{CSE 219 \textbullet\ TF p.2}{15}
+Find the inverse $z$-transform of $X(z)=\log\big(1+az^{-1}\big)$, $|z|>|a|$.
+\end{qcard}
+\begin{solution}
+For $|u|<1$, $\log(1+u)=\sum_{n=1}^\infty\dfrac{(-1)^{n+1}}{n}u^n$. With $u=az^{-1}$, which satisfies $|u|<1$ exactly when $|z|>|a|$,
+\[X(z)=\sum_{n=1}^\infty\frac{(-1)^{n+1}a^n}{n}z^{-n}.\]
+Comparing with $\sum x[n]z^{-n}$:
+\[x[n]=\frac{(-1)^{n+1}a^n}{n}\,u[n-1].\]
+\ans{$x[n]=\dfrac{(-1)^{n+1}a^n}{n}u[n-1]$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q8(a)}{CSE 219 \textbullet\ 22 batch p.4}{12}
+Find all possible ROCs of $X(z)=\dfrac{1+2z^{-1}-z^{-2}}{1-\frac{11}6z^{-1}+z^{-2}-\frac16z^{-3}}$.
+\end{qcard}
+\begin{solution}
+Multiply by $z^3$: denominator $z^3-\frac{11}6z^2+z-\frac16=(z-1)(z-\frac12)(z-\frac13)$ (sum of roots $\frac{11}6$, product $\frac16$). Poles: $1,\ \frac12,\ \frac13$. Numerator: $z(z^2+2z-1)$ gives zeros at $0$ and $-1\pm\sqrt2$ (no cancellation).
+
+The ROC is bounded by pole circles and contains no pole, so there are four possibilities:
+\begin{center}\small\renewcommand{\arraystretch}{1.2}\begin{tabular}{@{}lll@{}}\toprule ROC&sequence type&unit circle?\\\midrule
+$|z|>1$&right-sided (causal)&no (unstable)\\
+$\frac12<|z|<1$&two-sided&no\\
+$\frac13<|z|<\frac12$&two-sided&no\\
+$|z|<\frac13$&left-sided&no\\\bottomrule\end{tabular}\end{center}
+(There is a pole on $|z|=1$, so no ROC contains the unit circle: the DTFT does not exist as an ordinary function.)
+\ans{Four ROCs: $|z|>1$, $\frac12<|z|<1$, $\frac13<|z|<\frac12$, $|z|<\frac13$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q8(b)}{CSE 219 \textbullet\ 22 batch p.5}{8}
+A system has poles at $z=\frac13,\ \frac23,\ 2$. State the ROC when the sequence is (i) right-sided, (ii) its Fourier transform converges, (iii) its Fourier transform diverges, (iv) left-sided.
+\end{qcard}
+\begin{solution}
+Pole magnitudes: $\frac13<\frac23<2$.
+\begin{enumerate}[label=(\roman*),leftmargin=2em,itemsep=2pt]
+\item Right-sided: outside the outermost pole, $|z|>2$.
+\item Fourier transform converges $\Leftrightarrow$ the ROC contains $|z|=1$: $\frac23<|z|<2$ (two-sided, not causal).
+\item Diverges: any ROC without the unit circle: $|z|>2$, $\frac13<|z|<\frac23$, or $|z|<\frac13$.
+\item Left-sided: inside the innermost pole, $|z|<\frac13$.
+\end{enumerate}
+\ans{(i) $|z|>2$; (ii) $\frac23<|z|<2$; (iii) $|z|>2$, $\frac13<|z|<\frac23$ or $|z|<\frac13$; (iv) $|z|<\frac13$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q8(c)}{CSE 219 \textbullet\ 22 batch p.5}{10}
+Find the $z$-transform of $x[n]=|n|\big(\tfrac12\big)^{|n|}$ and draw its pole-zero plot.
+\end{qcard}
+\begin{solution}
+Split: $x[n]=n(\tfrac12)^nu[n]+(-n)(\tfrac12)^{-n}u[-n-1]$. Using $na^nu[n]\leftrightarrow\dfrac{az^{-1}}{(1-az^{-1})^2}$, $|z|>|a|$:
+\[X_1(z)=\frac{\frac12z^{-1}}{(1-\frac12z^{-1})^2}=\frac{\frac12z}{(z-\frac12)^2},\quad|z|>\tfrac12 .\]
+The left part is $X_1$ with $z\to z^{-1}$ (time reversal; the $n=0$ term is zero):
+\[X_2(z)=X_1(1/z)=\frac{\frac12z}{(1-\frac12z)^2}=\frac{2z}{(z-2)^2},\quad|z|<2 .\]
+\[X(z)=\frac{\frac12z}{(z-\frac12)^2}+\frac{2z}{(z-2)^2},\qquad\tfrac12<|z|<2 .\]
+Numerator: $z\big[\tfrac12(z-2)^2+2(z-\tfrac12)^2\big]=\tfrac52z\big(z^2-\tfrac85z+1\big)$. Zeros: $z=0$ and $z=0.8\pm0.6j$ (on the unit circle). Poles: double at $\frac12$ and double at $2$.
+\begin{center}\begin{tikzpicture}[scale=1.3]
+\draw[->](-2.7,0)--(2.9,0)node[right]{\scriptsize Re};\draw[->](0,-1.4)--(0,1.4)node[above]{\scriptsize Im};
+\draw[navy](0,0)circle(1);
+\fill[navy!12](0,0)circle(0.5);
+\node[crimson]at(0.5,0){\Large$\times$};\node[crimson]at(2,0){\Large$\times$};
+\node[font=\scriptsize,above]at(0.5,0.05){2};\node[font=\scriptsize,above]at(2,0.05){2};
+\draw[teal,thick](0,0)circle(0.05);\draw[teal,thick](0.8,0.6)circle(0.05);\draw[teal,thick](0.8,-0.6)circle(0.05);
+\node[font=\scriptsize]at(1.2,1.1){ROC: $\frac12<|z|<2$};
+\end{tikzpicture}\end{center}
+\ans{$X(z)=\dfrac{\frac12z}{(z-\frac12)^2}+\dfrac{2z}{(z-2)^2}$, ROC $\frac12<|z|<2$; zeros $0,\,0.8\pm0.6j$; double poles at $\frac12$ and $2$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q8(d)}{CSE 219 \textbullet\ 22 batch p.5}{5}
+Compare the Laplace and $z$-transforms. Why is the $z$-transform used for discrete-time signals?
+\end{qcard}
+\begin{solution}
+Both are generalisations of the Fourier transform with a convergence factor; they are related by $z=e^{sT}$.
+\begin{center}\small\renewcommand{\arraystretch}{1.2}\begin{tabular}{@{}lll@{}}\toprule&Laplace&$z$-transform\\\midrule signal&continuous $x(t)$&discrete $x[n]$\\ variable&$s=\sigma+j\omega$&$z=re^{j\omega}$\\ Fourier axis&$j\omega$-axis&unit circle $|z|=1$\\ stability&poles in left half-plane&poles inside unit circle\\ derivative / delay&$s$ / $e^{-sT}$&delay $z^{-1}$ (algebraic)\\\bottomrule\end{tabular}\end{center}
+For sequences, $\sum x[n]e^{-sTn}$ is a function of $e^{sT}$ only; $z$ turns it into an ordinary power series (rational functions for difference equations), where a unit delay is simply multiplication by $z^{-1}$.
+\ans{$z=e^{sT}$ maps the $s$-plane's left half-plane onto the interior of the unit circle; $z$ gives rational transforms for difference equations.}
+\end{solution}

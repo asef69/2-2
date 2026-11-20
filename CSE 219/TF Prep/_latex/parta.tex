@@ -1,0 +1,366 @@
+\part{Anik Sir --- Signals, Systems, Fourier Series and Transform}
+
+%=====================================================================
+\chapter{Signals: Energy, Transformations, Even--Odd, Impulses, Periodicity}
+%=====================================================================
+\section{Energy and power}
+\begin{formula}
+\begin{align*}
+E_{[t_1,t_2]}&=\int_{t_1}^{t_2}\abs{x(t)}^2\dd t, & E_{[n_1,n_2]}&=\sum_{n=n_1}^{n_2}\abs{x[n]}^2,\\
+P_{[t_1,t_2]}&=\frac{E}{t_2-t_1}, & P_{[n_1,n_2]}&=\frac{E}{n_2-n_1+1},\\
+P_\infty&=\lim_{T\to\infty}\frac1{2T}\int_{-T}^{T}\abs{x}^2\dd t .
+\end{align*}
+\textbf{Energy signal:} $0<E_\infty<\infty$ (then $P_\infty=0$). \textbf{Power signal:} $0<P_\infty<\infty$ (then $E_\infty=\infty$). \textbf{Neither:} both infinite.\\
+Periodic signal: $P=\frac1{T_0}\int_{T_0}\abs{x}^2\dd t$. Sinusoid $A\cos(\wo t+\varphi)$: $P=A^2/2$. Complex exponential $Ae^{j\wo t}$: $P=\abs{A}^2$.
+\end{formula}
+\begin{method}
+\begin{steps}
+\item Decide the behaviour as $t\to\pm\infty$: decaying $\Rightarrow$ try energy; periodic or settling to a level $\Rightarrow$ power; growing $\Rightarrow$ neither.
+\item Energy: integrate $\abs x^2$ over the support, piece by piece.
+\item Power of a signal that settles to $c_-$ and $c_+$: $P_\infty=(c_-^2+c_+^2)/2$.
+\item Sum of sinusoids of different frequencies: powers add.
+\end{steps}
+\end{method}
+\begin{example}{half-sine, $x=\sin t$ on $[0,\pi]$}
+$E=\int_0^\pi\sin^2t\dd t=\pi/2$, $P_{[0,\pi]}=\tfrac12$. Repeated every $\pi$: $E_\infty=\infty$, $P=\tfrac12$; repeated every $2\pi$: $P=\tfrac14$. The signal $1$ for $\abs t\le1$, $1/\abs t$ beyond has $E=2+2\int_1^\infty t^{-2}\dd t=4$ and $P=0$.
+\end{example}
+
+\section{Time shifting, reversal and scaling}
+\begin{formula}
+$x(t-t_0)$: delay (right) by $t_0$. $x(t+t_0)$: advance (left). $x(-t)$: mirror. $x(\alpha t)$: compress by $\alpha>1$.\\[2pt]
+\[x(t)\;\xrightarrow{\text{shift by }\beta}\;x(t+\beta)\;\xrightarrow{\text{reverse if }\alpha<0}\;\;\xrightarrow{\text{scale by }|\alpha|}\;x(\alpha t+\beta)\]
+A feature of $x$ at $t=a$ appears in $x(\alpha t+\beta)$ at $\boxed{t=(a-\beta)/\alpha}$.
+\end{formula}
+\begin{method}
+\begin{steps}
+\item Write $x(t)$ piecewise with all break points and values.
+\item Rewrite the argument as $\alpha t+\beta$ (expand brackets: $-2(t-1)=-2t+2$).
+\item Apply shift, then reversal (only if $\alpha<0$), then scaling; \emph{name every intermediate signal}.
+\item Map every break point with $t=(a-\beta)/\alpha$ and keep the same shapes between them; check one interior point.
+\item A sum $x(\cdot)+x(\cdot)$: sketch each term separately, then add point by point.
+\end{steps}
+\end{method}
+\begin{pitfall}
+$x(2t+3)\neq x(2(t+3))$: a shift made \emph{after} scaling acts on $t$, not on $2t$. Vertical edges stay vertical; they only move.
+\end{pitfall}
+\begin{example}{CSE 219 2022--23 Q7: $x(-2t+2)$ and $x(-t/2+1)$}
+$x(t)=t+1\ (-2\le t<-1)$, $1\ (-1\le t\le0)$, $1-t/2\ (0<t\le2)$.\\
+$x(-2t+2)$: break points $a=-2,-1,0,2\mapsto t=2,\tfrac32,1,0$, so
+$x(-2t+2)=t\ (0\le t<1),\ 1\ (1\le t\le\tfrac32),\ 3-2t\ (\tfrac32<t\le2)$.\\
+$x(-t/2+1)$: $t=2(1-a)=6,4,2,-2$, so $x=\tfrac12+\tfrac t4\ (-2\le t<2),\ 1\ (2\le t\le4),\ 2-\tfrac t2\ (4<t\le6)$.
+\end{example}
+\begin{inexam}
+2023--24 Q1(a) (15): $y(t)=x(-2(t-1))+x\!\left(\tfrac{t+2}{2}\right)$, $x=1-\abs t$: two triangles, centres $t=1$ (half-width $\tfrac12$) and $t=-2$ (half-width 2), non-overlapping. 2022--23 Q7 (23). EEE: every year.
+\end{inexam}
+
+\section{Even and odd parts}
+\begin{formula}
+$x_e(t)=\tfrac12[x(t)+x(-t)]$, $x_o(t)=\tfrac12[x(t)-x(-t)]$, $x=x_e+x_o$. Even$\times$even=even, odd$\times$odd=even, even$\times$odd=odd; $\int_{-a}^{a}$odd$=0$; $x_o(0)=0$.
+\end{formula}
+\begin{method}
+\begin{steps}
+\item Write $x(t)$ and $x(-t)$ piecewise; the pieces of $x(-t)$ live on the mirrored intervals.
+\item Cut the axis at every break point of both and compute $\tfrac12(x\pm x(-t))$ on each piece.
+\item Check: $x_e$ is mirror symmetric, $x_o$ is point symmetric; their sum returns $x$.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2022--23 Q5(a)}
+$f=t+1\ (-2\le t\le0)$, $-\tfrac t2+1\ (0<t\le2)$. For $0<t\le2$: $f_e=\tfrac12[(1-\tfrac t2)+(1-t)]=1-\tfrac{3t}4$, $f_o=\tfrac12[(1-\tfrac t2)-(1-t)]=\tfrac t4$. Hence
+$f_e=1-\tfrac34\abs t$, $f_o=\tfrac t4$ for $\abs t\le2$ (zero elsewhere).
+\end{example}
+
+\section{Step, impulse and ramp}
+\begin{formula}
+\begin{align*}
+&\delta[n]=u[n]-u[n-1],\quad u[n]=\sum_{m=-\infty}^{n}\delta[m]=\sum_{k=0}^{\infty}\delta[n-k],\\
+&\delta(t)=\frac{\dd u}{\dd t},\quad u(t)=\int_{-\infty}^{t}\delta(\tau)\dd\tau,\quad r(t)=tu(t),\\
+&\text{Sifting: }\int_L^R x(t)\delta(t-a)\dd t=\begin{cases}x(a)&L<a<R\\0&\text{otherwise}\end{cases},\qquad x(t)\delta(t-a)=x(a)\delta(t-a),\\
+&\delta(at+b)=\tfrac1{\abs a}\delta\!\left(t+\tfrac ba\right),\qquad \int x(t)\delta'(t-a)\dd t=-x'(a),\qquad u(ct)=u(t)\ (c>0).
+\end{align*}
+\end{formula}
+\begin{method}[Piecewise signal $\to$ elementary signals, and its derivative]
+\begin{steps}
+\item Scan left to right. At each break point $a$ add (new slope $-$ old slope)$\,r(t-a)$ and (jump)$\,u(t-a)$.
+\item Derivative: replace $r\to u$ and $u\to\delta$. Slopes between jumps give rectangles; each jump $J$ gives $J\delta(t-a)$.
+\item Second derivative: impulses at the slope changes (and $\delta'$ at jumps).
+\end{steps}
+\end{method}
+\begin{example}{EEE 211 2022--23 Q5(c)}
+$x=5t$ on $(0,1)$, $-6$ on $(1,2)$, $5(t-2)$ on $(2,3)$. At $t=1$: slope $5\to0$, jump $5\to-6$ ($-11$); at $t=2$: jump $+6$, slope $0\to5$; at $t=3$: slope $5\to0$, jump $-5$.
+\[x=5r(t)-5r(t-1)-11u(t-1)+6u(t-2)+5r(t-2)-5r(t-3)-5u(t-3),\]
+\[x'=5[u(t)-u(t-1)]+5[u(t-2)-u(t-3)]-11\delta(t-1)+6\delta(t-2)-5\delta(t-3).\]
+\end{example}
+\begin{method}[Is $p_\epsilon(t)$ a model of $\delta(t)$?]
+Check three conditions: (i) area $=1$ for every $\epsilon$; (ii) $p_\epsilon(t)\to0$ for $t\neq0$; (iii) peak $\to\infty$. $p=\frac1{\epsilon\pi\cosh(t/\epsilon)}$ and $\frac1\pi\frac{\epsilon}{t^2+\epsilon^2}$ pass; $\frac1\pi\frac{\sin\epsilon t}{t}$ fails as $\epsilon\to0$ (it is a model as $\epsilon\to\infty$).
+\end{method}
+
+\section{Periodicity}
+\begin{formula}
+CT: $A\cos(\wo t+\varphi)$ has $T_0=2\pi/\abs{\wo}$. A sum is periodic iff the period ratio is rational; $T=\operatorname{lcm}(T_1,T_2)$.\\
+DT: $x[n]=\cos(\omega_0n+\varphi)$ is periodic iff $\dfrac{2\pi}{\omega_0}=\dfrac Nm$ is rational; fundamental period $N_0=N$ in lowest terms. The phase $\varphi$ never matters.
+\end{formula}
+\begin{example}{DT periodicity}
+$2\cos\!\left(\tfrac{16\pi}{63}n+\tfrac\pi3\right)$: $2\pi/\omega_0=63/8\Rightarrow N_0=63$. $\cos 2n$: $2\pi/2=\pi$ irrational, not periodic. $x[n]=(3-4j)e^{j13\pi n/7}$: $2\pi/\omega_0=14/13\Rightarrow N_0=14$ for both real and imaginary parts; the phase $\theta=\tan^{-1}\frac43$ is not a multiple of $\pi/7$, so it cannot be an integer time shift.
+\end{example}
+\begin{pitfall}
+Expand squares and products first ($\sin^2\theta=\tfrac12-\tfrac12\cos2\theta$). $\sqrt{e^{j5\pi t}}=e^{j5\pi t/2}$: halve the frequency. $\delta(\sin t)$ is a train of period $\pi$.
+\end{pitfall}
+
+%=====================================================================
+\chapter{LTI Systems, Convolution, Causality and Stability}
+%=====================================================================
+\section{System properties}
+\begin{formula}
+Linear: $ax_1+bx_2\mapsto ay_1+by_2$. Time-invariant: $x(t-t_0)\mapsto y(t-t_0)$. Memoryless: $y(t)$ uses only $x(t)$. Causal: $y(t)$ uses $x(\tau),\,\tau\le t$. BIBO stable: bounded in $\Rightarrow$ bounded out. Invertible: distinct inputs $\Rightarrow$ distinct outputs.
+\end{formula}
+\begin{method}
+\begin{steps}
+\item \textbf{Linear}: zero in must give zero out; apply $ax_1+bx_2$ and compare. An added constant, $\abs x$, $x^2$, $\log x$ break it.
+\item \textbf{Time-invariant}: compare $S\{x(t-t_0)\}$ with $y(t-t_0)$. Variable coefficients ($t\,x$, $t^2y$), $x(2t)$, $x(-t)$ give time-variant.
+\item \textbf{Causal / memory}: list which times of $x$ enter $y(t)$ ($x(t+a)$, $x(-t)$, upper limit $>t$ are non-causal).
+\item \textbf{Stable}: try $x=1$ or $x=u(t)$; counterexample, or bound $\abs y\le M B$.
+\end{steps}
+\end{method}
+\begin{example}{EEE 211 2019--20 Q1: $y=\tfrac13\!\int x(\tau)[\delta(t-\tau)+\delta(t-\tau+t_0)+\delta(t-\tau-t_0)]\dd\tau$}
+Sifting: $y=\tfrac13[x(t)+x(t+t_0)+x(t-t_0)]$, a three-point moving average. Linear, time-invariant, has memory, non-causal ($x(t+t_0)$), BIBO stable ($\abs y\le B$).
+\end{example}
+\begin{example}{$\dfrac{\dd y}{\dd t}+t^2y=(2t+3)x$}
+Linear (first power in $x,y$, zero initial state). With input $x(t-t_0)$ the coefficients $t^2$, $2t+3$ stay while $y(t-t_0)$ satisfies $(t-t_0)^2$, $2(t-t_0)+3$ --- not equal, so \mk{time-variant}.
+\end{example}
+
+\section{Impulse response and the convolution sum}
+\begin{formula}
+\[y[n]=\sum_{k=-\infty}^{\infty}x[k]\,h[n-k],\qquad y(t)=\int_{-\infty}^{\infty}x(\tau)h(t-\tau)\dd\tau,\qquad x*h=h*x.\]
+$x*(h_1+h_2)=x*h_1+x*h_2$; cascade $h=h_1*h_2$; parallel $h=h_1+h_2$; $x(t)*\delta(t-a)=x(t-a)$.\\
+Pure delay: $h[n]=\delta[n-n_0]$. Echo: $h=u[n]$ or $\alpha^nu[n]$ (larger $\alpha$, slower fade).
+\end{formula}
+\begin{proofbox}[Why $y=x*h$ (intuition, 4 lines)]
+$x[n]=\sum_kx[k]\delta[n-k]$. Time invariance: $\delta[n-k]\to h[n-k]$. Homogeneity: $x[k]\delta[n-k]\to x[k]h[n-k]$. Additivity: $y[n]=\sum_kx[k]h[n-k]$. CT: replace $\sum$ by $\int$ using sifting.
+\end{proofbox}
+\begin{formula}[Finite sequences]
+Length $=L+M-1$; start index $=$ sum of start indices; $\sum y=(\sum x)(\sum h)$; coefficient of $z^n$ in $A(z)B(z)$ is $\sum_ka[k]b[n-k]$.
+Example: $\{1,2,1,1\}*\{1,1,-1,2\}=\{1,3,2,2,4,1,2\}$.
+\end{formula}
+
+\section{Convolution procedures}
+\begin{method}[DT convolution of infinite sequences]
+\begin{steps}
+\item Fix $n$; $h[n-k]$ is $h$ reflected and shifted right by $n$.
+\item Write the support of $x[k]$ and of $h[n-k]$ in $k$; the overlap gives the summation limits (empty $\Rightarrow$ $y[n]=0$).
+\item Split into cases of $n$ where the limits change. Sum with
+\[\sum_{k=0}^{n}\alpha^k=\frac{1-\alpha^{n+1}}{1-\alpha},\qquad\sum_{k=-\infty}^{m}\beta^k=\frac{\beta^m}{1-\beta^{-1}}\ (\beta>1).\]
+\item Two-sided input: split $x=x_L+x_R$, convolve each, add.
+\item Check: support $=$ sum of supports, continuity of the closed form at case boundaries.
+\end{steps}
+\end{method}
+\begin{table}[h]\centering\small
+\begin{tabular}{@{}lll@{}}\toprule
+Pair & Result & Source\\\midrule
+$x=\{0.5,2\}$, $h=\{1,1,1\}$ & $\{0.5,2.5,2.5,2\}$ & Lec 4 Ex 2.2\\
+$\alpha^nu[n]*u[n]$ & $\dfrac{1-\alpha^{n+1}}{1-\alpha}u[n]$ & Ex 2.3\\
+$2^nu[-n]*u[n]$ & $2^{n+1}\ (n<0)$; $2\ (n\ge0)$ & Ex 2.5\\
+$\big[(\tfrac12)^nu[n]+2^nu[-n]\big]*u[n]$ & $2^{n+1}\ (n<0)$; $4-2^{-n}\ (n\ge0)$ & Ex 2.10\\
+$e^{-at}u*u$ & $\tfrac1a(1-e^{-at})u(t)$ & Ex 2.6\\
+$e^tu(-t)*e^{-t}u(t)$ & $\tfrac12e^{-\abs t}$ & sl.\,48--52\\
+$e^{-at}u*e^{-bt}u$ & $\dfrac{e^{-bt}-e^{-at}}{a-b}u(t)$ & textbook\\\bottomrule
+\end{tabular}\end{table}
+\begin{example}{CSE 219 2022--23 Q8(a), 20 marks}
+$x[n]=3^nu[-n-1]+(\tfrac13)^nu[n]$, $h[n]=(\tfrac14)^nu[n+3]$; $h[n-k]\ne0$ for $k\le n+3$. Left part: $\sum_{k\le\min(-1,n+3)}3^k4^{k-n}=4^{-n}\sum12^k$. Right part: $4^{-n}\sum_{k=0}^{n+3}(\tfrac43)^k$.
+\[y[n]=\begin{cases}\dfrac{256}{11}3^{\,n+4},&n\le-4,\\[6pt] 256\cdot3^{-(n+3)}-\dfrac{32}{11}4^{-n},&n\ge-3.\end{cases}\]
+Check: $y[-3]=69.82$ (peak), $y[0]=6.57$.
+\end{example}
+\begin{method}[Graphical CT convolution --- the interval table]
+\begin{steps}
+\item Flip the simpler signal (usually the rectangle); write its edges as functions of $t$.
+\item List the $t$-intervals where an edge of one signal passes an edge/break of the other.
+\item On each interval write the limits and integrate; if $x=\rect(a,b)$ then $y(t)=H(t-a)-H(t-b)$ with $H$ the running integral of $h$.
+\item Check continuity at interval ends, total support, and area $\int y=\int x\int h$.
+\end{steps}
+\end{method}
+\begin{example}{EEE 211 2023--24 Q2(a): $x=1$ on $(1,2)$, $h=$ triangle on $(-1,1)$}
+\begin{center}\small\begin{tabular}{@{}ll@{}}\toprule
+interval & $y(t)$\\\midrule
+$t<0$ & $0$\\ $0\le t\le1$ & $t^2/2$\\ $1\le t\le2$ & $-t^2+3t-\tfrac32$\\ $2\le t\le3$ & $(3-t)^2/2$\\ $t>3$ & $0$\\\bottomrule
+\end{tabular}\end{center}
+Area $=1\cdot1=1$; peak $\tfrac34$ at $t=\tfrac32$.
+\end{example}
+\begin{example}{2023--24 Q1(b): $(h_1+h_2)*h_3$ in DT}
+$h_1=\delta[n]-\delta[n-2]$, $h_2=u[n-1]$, $h_3=\delta[n]-\delta[n-1]$. $h_2*h_3=\delta[n-1]$, so $h_{eq}=\delta[n]-\delta[n-2]+\delta[n-3]$. For $x=u[n]$: $y=u[n]-u[n-2]+u[n-3]=\{1,1,0,1,1,1,\dots\}$.
+\end{example}
+\begin{example}{EEE 211 2023--24 Q1(c): five-system interconnection}
+Branches $h_1$, $h_2*h_3=(e^{-t}-e^{-2t})u$, $h_4=\delta$: sum $=\delta+e^{-t}u$. Then $h_{eq}=\tfrac12(e^{-t}+e^{-3t})u$; $\int\abs{h_{eq}}=\tfrac23<\infty$ (stable). $y=(\tfrac12te^{-t}+\tfrac14e^{-t}-\tfrac14e^{-3t})u$.
+\end{example}
+
+\section{Causality and stability}
+\begin{formula}
+Causal $\Leftrightarrow h(t)=0$ for $t<0$ ($h[n]=0$, $n<0$). Stable $\Leftrightarrow\int\abs{h}\dd t<\infty$ ($\sum\abs{h[n]}<\infty$). A nonzero periodic $h$ is neither causal nor stable.
+\end{formula}
+\begin{proofbox}[Stability, 3 lines]
+For $\abs x\le B$: $\abs{y(t)}\le\int\abs{h(\tau)}\abs{x(t-\tau)}\dd\tau\le B\int\abs h$. Conversely if $\int\abs h=\infty$ take $x(-\tau)=\sgn h(\tau)$, so $y(0)=\int\abs h=\infty$.
+\end{proofbox}
+\begin{example}{CSE 219 2022--23 Q8(b) and 2023--24 Q3(b)}
+$h_1=e^{2t}u(-2-t)$: nonzero for $t\le-2$, non-causal; $\int_{-\infty}^{-2}e^{2t}=\tfrac12e^{-4}$, stable. $h_2=te^{-t}u(t)$: causal, $\int=1$, stable. $e^{-4t}u(3-t)$: non-causal, $\int_{-\infty}^3e^{-4t}=\infty$, unstable. $e^{-6\abs t}$: non-causal, $\int=\tfrac13$, stable.
+\end{example}
+\begin{method}[Impulse response of a circuit / ODE]
+For $y'+ay=bx$: $h=be^{-at}u(t)$. Series RC: $h_C=\tfrac1{RC}e^{-t/RC}u$, $h_R=\delta-\tfrac1{RC}e^{-t/RC}u$. LC low-pass: $LC\,y''+y=x\Rightarrow h=\omega_0\sin(\omega_0t)u(t)$, $\omega_0=1/\sqrt{LC}$. General: solve the homogeneous equation for $t>0$; the impulse fixes $h^{(n-1)}(0^+)=1/a_n$.
+\end{method}
+
+%=====================================================================
+\chapter{Fourier Series}
+%=====================================================================
+\section{Definition and coefficients}
+\begin{formula}
+\[x(t)=\sum_{k=-\infty}^{\infty}a_ke^{jk\omega_0t},\qquad a_k=\frac1T\int_Tx(t)e^{-jk\omega_0t}\dd t,\qquad\omega_0=\frac{2\pi}T,\qquad a_0=\text{average of }x.\]
+Trigonometric: $x=a_0+\sum_{n\ge1}(a_n\cos n\omega_0t+b_n\sin n\omega_0t)$, $a_n=\frac2T\!\int x\cos$, $b_n=\frac2T\!\int x\sin$. Compact: $C_0+\sum C_n\cos(n\omega_0t+\theta_n)$, $C_n=2\abs{c_n}$, $c_n=\tfrac12(a_n-jb_n)$.
+\end{formula}
+\begin{proofbox}[Where $a_k$ comes from (idea)]
+$\frac1T\int_Te^{jn\omega_0t}\dd t=1$ if $n=0$, else $0$. Multiply $x$ by $e^{-jk\omega_0t}$ and average: only the $k$-th term survives.
+\end{proofbox}
+\begin{method}[By inspection (sum of sinusoids)]
+Write $\cos\theta=\frac{e^{j\theta}+e^{-j\theta}}2$, $\sin\theta=\frac{e^{j\theta}-e^{-j\theta}}{2j}$; collect equal $k$. Include the constant as $a_0$. Convert sine to cosine with phase before reading amplitude/phase spectra.
+\end{method}
+\begin{example}{$x=1+\sin\omega_0t+2\cos\omega_0t+\cos(2\omega_0t+\tfrac\pi4)$}
+$a_0=1$, $a_{\pm1}=1\mp\tfrac j2$, $a_{\pm2}=\tfrac12e^{\pm j\pi/4}$. $\abs{a_1}=\tfrac{\sqrt5}2$, $\angle a_1=-\tan^{-1}\tfrac12$.
+\end{example}
+\begin{formula}[Standard waveforms]
+Rectangular pulse train ($1$ on $\abs t<T_1$, period $T$): $a_0=\dfrac{2T_1}T$, $a_k=\dfrac{\sin(k\omega_0T_1)}{k\pi}$. With $T_1=T/4$: $a_{\pm1}=\tfrac1\pi$, $a_{\pm2}=0$, $a_{\pm3}=-\tfrac1{3\pi}$.\\
+Ramp $x=t$ on $[0,1)$, $T=1$: $a_0=\tfrac12$, $a_k=\dfrac{j}{2\pi k}$.\\
+Triangle ($0\to1$ on $[0,1]$, $1\to0$ over $[1,3]$, $T=3$): $a_0=\tfrac12$, $a_k=\dfrac{e^{-jk\omega_0}-1}{2k^2\omega_0^2}$ ($\omega_0=\tfrac{2\pi}3$).\\
+Impulse train $\sum\delta(t-mT)$: $a_k=\tfrac1T$ for all $k$ (flat); trig form $\tfrac1T+\tfrac2T\sum\cos\tfrac{2\pi nt}T$.
+\end{formula}
+\begin{pitfall}
+The slide prints $6k^2\omega_0^2$ for the triangle; the correct factor is $2k^2\omega_0^2$. $a_0$ is found separately (area/period).
+\end{pitfall}
+
+\section{Properties}
+\begin{formula}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}p{3.3cm}p{2.9cm}p{7.2cm}@{}}
+Linearity & $\alpha x+\beta y$ & $\alpha a_k+\beta b_k$\\
+Time shift & $x(t-t_0)$ & $a_ke^{-jk\omega_0t_0}$\\
+Reversal & $x(-t)$ & $a_{-k}$\\
+Scaling & $x(\alpha t)$ & $a_k$, but $\omega_0\to\alpha\omega_0$\\
+Differentiation & $\dfrac{\dd x}{\dd t}$ & $jk\omega_0a_k$\\
+Integration & $\int x\dd t$ & $\dfrac{a_k}{jk\omega_0}$ ($k\ne0$; find $a_0$ separately)\\
+Product & $x(t)y(t)$ & $c_k=\sum_pa_pb_{k-p}$\\
+Real $x$ & & $a_{-k}=a_k^*$\\
+Even $x$ / odd $x$ & & $a_k$ real (half-cycle: $\frac2T\!\int_0^{T/2}x\cos$) / imaginary ($-\frac{2j}T\!\int_0^{T/2}x\sin$, $a_0=0$)\\
+Half-wave symmetry $x(t+\tfrac T2)=-x(t)$ & & $a_k=0$ for even $k$
+\end{tabular}
+\end{formula}
+\begin{method}[Coefficients of a combined signal]
+Shift first, then reverse, then scale; update $\omega_0$ after scaling. Example: $x(4-3t)\leftrightarrow a_{-k}e^{-j4k\omega_0}$ with $\omega_0'=3\omega_0$; $\frac{\dd}{\dd t}x(4-3t)\leftrightarrow j(3k\omega_0)a_{-k}e^{-j4k\omega_0}$.
+\end{method}
+\begin{method}[Piecewise-linear / piecewise-constant waveform]
+Differentiate until only impulses remain; an impulse $A\delta(t-t_0)$ in one period contributes $\frac AT e^{-jk\omega_0t_0}$. Then $a_k=\dfrac{b_k}{(jk\omega_0)^m}$; get $a_0$ from the average.
+\end{method}
+\begin{example}{CSE 219 2023--24 Q4: odd square wave $\pm A$, $y(t)=x(t-T_0/6)$}
+$X_k=\dfrac{A}{jk\pi}\,[1-(-1)^k]=\dfrac{2A}{jk\pi}$ (odd $k$), $0$ (even $k$). Half-wave symmetry survives a shift. $Y_k=X_ke^{-jk\omega_0T_0/6}=\dfrac{2A}{jk\pi}e^{-jk\pi/3}$.
+$\abs{Y_k}=\dfrac{2A}{\pi\abs k}$; $\angle Y_k=-\dfrac\pi2-\dfrac{k\pi}3$ ($k>0$): $-\tfrac{5\pi}6,\ \tfrac\pi2,\ -\tfrac\pi6$ for $k=1,3,5$. Trig series: same amplitudes $\frac{4A}{\pi k}$, each harmonic delayed by $k\pi/3$.
+\end{example}
+\begin{example}{$p(t)=x^2(t)$, $x=1+\cos\omega_0t$}
+$a=\{\tfrac12,1,\tfrac12\}$, $a*a=\{\tfrac14,1,\tfrac32,1,\tfrac14\}$ for $k=-2,\dots,2$.
+\end{example}
+
+\section{Periodic input to an LTI system}
+\begin{formula}
+$e^{jk\omega_0t}\to H(jk\omega_0)e^{jk\omega_0t}$, so $y_k=H(jk\omega_0)\,a_k$ and $A\cos(\omega t+\theta)\to A\abs{H}\cos(\omega t+\theta+\angle H)$.\\
+Average power: $P=\sum_k\abs{a_k}^2$ (apply to the \emph{output} coefficients).
+\end{formula}
+\begin{method}
+\begin{steps}
+\item Find $a_k$ of the input. \item Find $H(j\omega)$ (circuit: divider with $j\omega L$, $1/j\omega C$; ODE: $\frac{\dd}{\dd t}\to j\omega$). \item Multiply harmonic by harmonic; list magnitude and phase. \item Ideal LPF with cutoff $\omega_c$ keeps harmonics with $\abs{k\omega_0}<\omega_c$.
+\end{steps}
+\end{method}
+\begin{example}{EEE 211 2020--21 Q7(b)}
+$y''+3y'+2y=x'+x$ gives $H=\dfrac1{j\omega+2}$. For $x=2\cos t+6\cos3t$: $y=\tfrac2{\sqrt5}\cos(t-26.57^\circ)+\tfrac6{\sqrt{13}}\cos(3t-56.31^\circ)$, average power $\tfrac12\!\left(\tfrac45+\tfrac{36}{13}\right)=1.785$.
+\end{example}
+\begin{inexam}
+2023--24 Q4 is a full 30-mark FS problem; EEE 211 asks FS of standard waveforms and `periodic input through a circuit' every year.
+\end{inexam}
+
+%=====================================================================
+\chapter{Fourier Transform}
+%=====================================================================
+\section{Definition and the key pairs}
+\begin{formula}
+\[X(j\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}\dd t,\qquad x(t)=\frac1{2\pi}\int_{-\infty}^{\infty}X(j\omega)e^{j\omega t}\dd\omega.\]
+From the FS: $T a_k=X(jk\omega_0)$ (one period of $x$), periodic $x$: $X=2\pi\sum a_k\delta(\omega-k\omega_0)$.
+\end{formula}
+\begin{formula}[Pair table]
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}p{4.6cm}p{4.8cm}p{3cm}@{}}
+$\delta(t)$ & $1$ & \\
+$1$ & $2\pi\delta(\omega)$ & \\
+$e^{-at}u(t),\ a>0$ & $\dfrac1{a+j\omega}$ & \\
+$e^{-a\abs t}$ & $\dfrac{2a}{a^2+\omega^2}$ & \\
+$te^{-at}u(t)$ & $\dfrac1{(a+j\omega)^2}$ & \\
+$\sgn(t)$ & $\dfrac2{j\omega}$ & \\
+$u(t)$ & $\pi\delta(\omega)+\dfrac1{j\omega}$ & \\
+$\rect$: $1$ for $\abs t<\tfrac T2$ & $\dfrac{2\sin(\omega T/2)}{\omega}$ & value $T$ at $0$\\
+$\dfrac{\sin Wt}{\pi t}$ & $1$ for $\abs\omega<W$ & \\
+triangle $1-\tfrac{\abs t}\tau$, $\abs t<\tau$ & $\tau\left[\dfrac{\sin(\omega\tau/2)}{\omega\tau/2}\right]^2$ & \\
+$\cos\omega_0t$ & $\pi[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)]$ & \\
+$\sin\omega_0t$ & $\tfrac\pi j[\delta(\omega-\omega_0)-\delta(\omega+\omega_0)]$ & \\
+$\sum\delta(t-nT)$ & $\dfrac{2\pi}T\sum\delta\!\left(\omega-\dfrac{2\pi k}T\right)$ & \\
+\end{tabular}
+\end{formula}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\begin{axis}[width=6.3cm,height=3.4cm,title={rect of width $T=2$},axis lines=middle,xlabel={$t$},ticks=none,ymax=1.5,ymin=-0.2,xmin=-3,xmax=3]\addplot[thick,navy,const plot]coordinates{(-3,0)(-1,0)(-1,1)(1,1)(1,0)(3,0)};\end{axis}
+\end{tikzpicture}\hspace{4mm}
+\begin{tikzpicture}
+\begin{axis}[width=7cm,height=3.4cm,title={$X(j\omega)=2\sin\omega/\omega$},axis lines=middle,xlabel={$\omega$},ticks=none,samples=200,domain=-15:15,ymin=-0.7,ymax=2.4]\addplot[thick,sky]{2*sin(deg(x))/x};\end{axis}
+\end{tikzpicture}\end{center}
+
+\section{Properties}
+\begin{formula}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}lll@{}}
+Time shift & $x(t-t_0)$ & $e^{-j\omega t_0}X$ (linear phase)\\
+Frequency shift & $x(t)e^{j\omega_0t}$ & $X(j(\omega-\omega_0))$\\
+Modulation & $x(t)\cos\omega_0t$ & $\tfrac12X(j(\omega-\omega_0))+\tfrac12X(j(\omega+\omega_0))$\\
+Scaling & $x(at)$ & $\tfrac1{\abs a}X(j\omega/a)$\\
+Reversal & $x(-t)$ & $X(-j\omega)$\\
+Duality & $X(jt)$ & $2\pi x(-\omega)$\\
+Differentiation & $\dfrac{\dd x}{\dd t}$ & $j\omega X$\\
+Frequency differentiation & $-jt\,x(t)$ & $\dfrac{\dd X}{\dd\omega}$\\
+Integration & $\int_{-\infty}^tx$ & $\dfrac{X}{j\omega}+\pi X(0)\delta(\omega)$\\
+Convolution & $x*h$ & $XH$\\
+Multiplication & $xy$ & $\tfrac1{2\pi}X*Y$\\
+Real $x$ & & $\abs X$ even, $\angle X$ odd; even $x\Rightarrow X$ real
+\end{tabular}
+\end{formula}
+\begin{proofbox}[Short proofs]
+\emph{Shift:} $\int x(t-t_0)e^{-j\omega t}\dd t$, $\tau=t-t_0$ gives $e^{-j\omega t_0}X$. \emph{Frequency shift:} $\int xe^{j\omega_0t}e^{-j\omega t}\dd t=X(j(\omega-\omega_0))$. \emph{Convolution:} swap integrals, substitute $s=t-\tau$. \emph{Duality:} $2\pi x(-t)=\int Xe^{-j\omega t}\dd\omega$; rename $t\leftrightarrow\omega$.
+\end{proofbox}
+\begin{method}[Finding the FT of a given signal]
+\begin{steps}
+\item Match the signal (or pieces of it) to a table pair. \item Reduce the rest with shift, scaling, modulation, differentiation or reversal; \emph{name each property}. \item Decompose composite shapes into rectangles/triangles centred at their own centres and multiply each by $e^{-j\omega t_c}$. \item Sketch spectra: modulation gives two half-height copies at $\pm\omega_0$.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2022--23 Q6: $f=e^{-at}u(t)$, $\sgn t$}
+$f(-t)=e^{at}u(-t)$. $F(j\omega)=\dfrac1{a+j\omega}$, $\F\{f(-t)\}=F(-j\omega)=\dfrac1{a-j\omega}$. $\sgn t=\lim_{a\to0}[f(t)-f(-t)]$, so by linearity and reversal
+\[\F\{\sgn t\}=\lim_{a\to0}\left(\frac1{a+j\omega}-\frac1{a-j\omega}\right)=\frac{2}{j\omega}.\]
+\end{example}
+\begin{example}{CSE 219 2023--24 Q1(c): $\rect\!\left(\tfrac{t-\tau}T\right)\cos2\pi f_0t$}
+$\rect(t)\leftrightarrow\sinc f=\frac{\sin\pi f}{\pi f}$; scaling: $\rect(t/T)\leftrightarrow T\sinc(fT)$; shift: $\times e^{-j2\pi f\tau}$; modulation:
+\[X_2(f)=\tfrac T2\big[\sinc((f-f_0)T)e^{-j2\pi(f-f_0)\tau}+\sinc((f+f_0)T)e^{-j2\pi(f+f_0)\tau}\big].\]
+\end{example}
+\begin{example}{2023--24 Q2: $x_1=e^{-at}u$, $x_2=e^{-a\abs t}$ and $I(a)=\int\frac{f^2\dd f}{(a^2+(2\pi f)^2)^2}$}
+$X_1=\frac1{a+j\omega}$; $x_2=x_1(t)+x_1(-t)\Rightarrow X_2=\frac{2a}{a^2+\omega^2}$. (The Parseval part $I(a)=\frac1{16\pi^2a}$ is outside Part-1 syllabus.)
+\end{example}
+\begin{example}{CSE 219 2022--23 Q5(b): inverse FT chain}
+$X=1$ on $\abs\omega<3\pi$ gives $x(t)=\dfrac{\sin3\pi t}{\pi t}$. $X_1=3j\omega X$ (magnitude $3\abs\omega$, phase $\pm\frac\pi2$) so $x_1=3\dfrac{\dd x}{\dd t}=\dfrac{3(3\pi t\cos3\pi t-\sin3\pi t)}{\pi t^2}$.
+\end{example}
+\begin{inexam}
+Spectrum sketches with modulation appear in every EEE paper (quadrature multiplexing 2023--24 Q5(a), AM with phase error: output $x(t)\cos\theta$). CSE 311: time delay $\Rightarrow$ linear phase, sampling spectra.
+\end{inexam}
+
+\section{Filters, distortionless systems, bandwidth}
+\begin{formula}
+$Y=HX$. Distortionless: $y=Kx(t-t_d)\Leftrightarrow H=Ke^{-j\omega t_d}$ ($\abs H$ constant, phase linear through the origin). All-pass: $\abs H$ constant but phase need not be linear. Ideal LPF with delay: $h=\dfrac{\sin\omega_c(t-t_d)}{\pi(t-t_d)}$ (non-causal, unrealizable). Compression in time $\Leftrightarrow$ expansion in frequency; derivative widens the spectrum. 3-dB bandwidth of $e^{-at}u$: $a$ rad/s.
+\end{formula}
+\begin{method}[Application sentences]
+\textbf{Convolution}: reverb (convolve with the hall's impulse response), echo $h=\delta[n]+a\delta[n-D]$, smoothing (moving average). \textbf{Fourier series}: harmonic analysis, response to periodic sources. \textbf{Fourier transform}: denoising, JPEG (drop small high-frequency coefficients), MRI (data in frequency domain), music fingerprinting, vibration diagnosis, ECG notch.
+\end{method}

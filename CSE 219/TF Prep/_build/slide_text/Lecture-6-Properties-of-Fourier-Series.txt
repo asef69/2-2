@@ -1,0 +1,1141 @@
+
+===== page 1 =====
+Lecture 6: Properties of Fourier Series
+CSE 219: Signals and Linear Systems
+Anik Saha
+Adjunct Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+Properties of Fourier Series
+What happens to the coefficients when we play with the signal?
+
+===== page 3 =====
+But why will we be learning these properties?
+x(t)
+←→
+ak
+Finding ak directly - needs an integral.
+Properties let us reuse a Fourier series we already know.
+known signal
+=⇒
+related signal
+Shift it, scale it, add it, differentiate it . . . and
+simply transfer the coefficients without starting from scratch.
+
+===== page 4 =====
+Under the hood: every signal is a stack of simple waves
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+k
+−3
+−2
+−1
+0
+1
+2
+3
+Fourier coordinates ak
+When we perform any operation on x(t), we are really
+operating on all these simple little waves underneath.
+
+===== page 5 =====
+Linearity
+
+===== page 6 =====
+Linearity: adding signals simply adds their ingredients
+x(t)
+x(t) =
+X
+k
+akejkω0t
+k
+−2
+−1
+0
+1
+2
+ak
+y(t)
+y(t) =
+X
+k
+bkejkω0t
+k
+−2
+−1
+0
+1
+2
+bk
+If they have the same period T, their Fourier axes line up exactly.
+
+===== page 7 =====
+Same frequency meets same frequency
+x(t) + y(t) =
+X
+k
+akejkω0t +
+X
+k
+bkejkω0t
+=
+X
+k
+(ak + bk)ejkω0t
+k
+−2
+−1
+0
+1
+2
+new coefficients: ak + bk
+
+===== page 8 =====
+Linearity of Fourier series
+x(t) ←→ak,
+y(t) ←→bk.
+αx(t) + βy(t)
+←→
+αak + βbk.
+mix in time
+⇐⇒
+mix the Fourier coefficients
+
+===== page 9 =====
+Time Shifting
+
+===== page 10 =====
+Time shift: what happens if the signal is delayed?
+Goal
+x(t)
+←→
+ak
+x(t −t0)
+←→
+?
+Think: if we delay a signal, does its frequency change?
+
+===== page 11 =====
+Simple! Just shift every simple wave underneath
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+x(t −t0) =
+∞
+X
+k=−∞
+akejkω0(t−t0)
+=
+∞
+X
+k=−∞
+ake−jkω0t0
+|
+{z
+}
+new coefficient
+ejkω0t
+
+===== page 12 =====
+Time-shifting property
+x(t)
+←→
+ak
+x(t −t0)
+←→
+ake−jkω0t0
+A delay in time becomes a phase shift in frequency.
+
+===== page 13 =====
+Multiplying by ejϕ means rotating
+Re
+Im
+z
+zejϕ
+θ
+θ + ϕ
+Multiplication by ejϕ keeps the radius of rotation same,
+but adds a phase-shift of ϕ to the angle.
+
+===== page 14 =====
+So what does the delay factor do?
+ake−jkω0t0
+Magnitude
+e−jkω0t0
+ = 1
+coefficient size unchanged
+Phase
+∠e−jkω0t0 = −kω0t0
+only phase changes
+Higher-frequency components rotate more . . .
+because their frequency is kω0.
+
+===== page 15 =====
+Shift in time →Rotation in frequency
+
+===== page 16 =====
+Problem: shift the signal, update the coefficients
+Suppose
+x(t)
+←→
+ak.
+Find the Fourier series coefficients of
+y(t) = x(t −3)
+in terms of ak.
+
+===== page 17 =====
+Answer: delay becomes a phase factor
+Use the time-shifting property
+x(t −t0)
+←→
+ake−jkω0t0
+For y(t)
+=
+x(t −3), we have t0
+=
+3. Therefore,
+p(t) = x(t −3)
+←→
+ake−j3kω0
+The magnitudes stay the same; only the phases rotate.
+
+===== page 18 =====
+Time Reversal
+
+===== page 19 =====
+Time reversal: playing the signal backward
+Goal
+x(t)
+←→
+ak
+x(−t)
+←→
+?
+Time reversal flips every simple rotating wave underneath.
+
+===== page 20 =====
+Let’s reverse each Fourier ingredient
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+x(−t) =
+∞
+X
+k=−∞
+akejkω0(−t) =
+∞
+X
+k=−∞
+akej(−kω0)t
+The term that used to live at +kω0 now lives at −kω0.
+x(−t)
+←→
+a−k
+
+===== page 21 =====
+Visual intuition: the direction of rotation simply flips!
+Original wave
+ejkω0t
+counterclockwise
+After t 7→−t
+e−jkω0t
+clockwise
+Imagine playing a video of the rotation backward in time.
++kω0 becomes −kω0.
+
+===== page 22 =====
+Time reversal property
+x(t)
+←→
+ak
+x(−t)
+←→
+a−k
+Time reversal in time becomes index reversal in frequency.
+
+===== page 23 =====
+Reversal in time →Reversal in frequency
+
+===== page 24 =====
+A Problem on everything so far!
+Suppose
+x(t)
+←→
+ak,
+y(t)
+←→
+bk.
+Find the Fourier series coefficients of
+x(4 −t) + y(t −3)
+in terms of ak and bk.
+
+===== page 25 =====
+Answer: First part →Shift then Reverse
+x(t)
+←→
+ak
+By time shifting, x(t + 4)
+←→
+akej4kω0.
+Now, by reversal on t, x(−t + 4)
+←→
+a−ke−j4kω0.
+x(4 −t)
+←→
+a−ke−j4kω0.
+
+===== page 26 =====
+Answer: now add the second part
+y(t)
+←→
+bk
+By time shifting, y(t −3)
+←→
+ake−j3kω0.
+Therefore,
+x(4 −t) + y(t −3)
+←→
+a−ke−j4kω0 + bke−j3kω0
+
+===== page 27 =====
+Time Scaling
+
+===== page 28 =====
+Time scaling: here we change the frequencies themselves
+Goal
+x(t)
+←→
+ak,
+ω0 = 2π
+T
+x(αt)
+←→
+?
+Time compression makes every hidden rotating wave rotate faster.
+
+===== page 29 =====
+Let’s scale every Fourier ingredient
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+x(αt) =
+∞
+X
+k=−∞
+akejkω0(αt) =
+∞
+X
+k=−∞
+akejk(αω0)t.
+The coefficients are still ak,
+but the new fundamental frequency is ω′
+0
+=
+αω0.
+
+===== page 30 =====
+Two views: coefficient index vs actual frequency
+Against index k
+bk = ak
+The coefficient attached to the
+k-th harmonic stays the same.
+Against frequency ω
+kω0
+−→
+kαω0
+The spectral lines move far-
+ther apart when α > 1.
+Time scaling is special: it changes the fundamental frequency itself.
+
+===== page 31 =====
+
+
+===== page 32 =====
+
+
+===== page 33 =====
+Time-scaling property
+x(t)
+←→
+ak
+with fundamental frequency ω0
+x(αt)
+←→
+ak
+with new fundamental frequency αω0
+The coefficient sequence does not change, but the frequency ruler changes.
+
+===== page 34 =====
+Practice: combine shift, reversal, and scaling
+Let, x(t)
+←→
+ak
+with fundamental frequency ω0.
+Find the Fourier series coefficients of p(t) = x(4 −3t) in terms of ak.
+Think in order:
+x(t) −→x(t + 4) −→x(4 −t) −→x(4 −3t).
+
+===== page 35 =====
+Answer: first shift, then reverse, then scale
+First shift left by 4:
+x(t + 4)
+←→
+akej4kω0.
+Then reverse:
+x(4 −t)
+←→
+a−ke−j4kω0.
+Finally scale time by 3:
+x(4 −3t)
+←→
+a−ke−j4kω0. (Yes, no change!)
+The new fundamental frequency becomes ω′
+0 = 3ω0.
+
+===== page 36 =====
+Differentiation
+
+===== page 37 =====
+Simple, every little wave gets differentiated!
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+d
+dt x(t) =
+∞
+X
+k=−∞
+ak
+d
+dt ejkω0t
+d
+dtejkω0t
+=
+jkω0ejkω0t
+d
+dt x(t)
+←→
+(jkω0) × ak
+
+===== page 38 =====
+But why does the multiplier look like jkω0?
+position
+velocity
+radius = |ak|
+speed = |kω0| |ak|
+Differentiation gives velocity.
+For circular motion, speed is ωr. Here ω = kω0 and r = |ak|.
+
+===== page 39 =====
+Well! But where does the j come from?
+position = akejkω0t
+velocity = (jkω0) × akejkω0t
+radius = |ak|
+speed = |kω0| |ak|
+We need to think in vectors, and therefore, direction matters!
+Velocity is tangent to position, and multiplying by j does exactly that!
+
+===== page 40 =====
+Problem: combine properties with differentiation
+x(t)
+←→
+ak
+with fundamental frequency ω0.
+Find the Fourier series coefficients of p(t) = d
+dtx(4 −3t) in terms of ak.
+Use the result from the previous practice:
+x(4 −3t)
+←→
+a−ke−j4kω0,
+ω′
+0 = 3ω0.
+
+===== page 41 =====
+Answer: differentiate using the current ω′
+0
+x(4 −3t)
+←→
+a−ke−j4kω0,
+ω′
+0 = 3ω0.
+Now differentiate:
+d
+dt x(4 −3t)
+←→
+jkω′
+0
+
+a−ke−j4kω0
+.
+Since ω′
+0
+=
+3ω0,
+p(t)
+←→
+j3kω0 a−ke−j4kω0
+
+===== page 42 =====
+Let’s draw derivatives of signals!
+For ordinary smooth parts, derivative means slope.
+At a jump, however, the derivative contains an impulse.
+jump of height A at t = t0
+=⇒
+A δ(t −t0)
+So the derivative has two parts:
+slope between jumps
++
+impulses at jumps.
+
+===== page 43 =====
+Practice: sketch the derivative
+t
+x(t)
+· · ·
+· · ·
+−2
+−1
+0
+1
+2
+3
+4
+1
+−1
+Find d
+dt x(t). Remember to include impulses at jumps.
+
+===== page 44 =====
+Answer: slopes plus impulses
+t
+d
+dt x(t)
+· · ·
+· · ·
+−1
+2
+−1
+2
+−1
+2
+−1
+−2
+−1
+0
+1
+2
+3
+4
+−1
+2
+Flat part →slope 0 (blue). Slanted part →slope −1 (orange).
+Each jump →an impulse equal to its jump height.
+
+===== page 45 =====
+A little detour: impulse as a value-picker
+Let’s sum up the product of an arbitrary signal x[n] and an impulse
+∞
+X
+n=−∞
+x[n]δ[n −a]
+δ[n −a] is zero everywhere except at n = a. So only one term survives.
+∞
+X
+n=−∞
+x[n]δ[n −a] = x[a]
+
+===== page 46 =====
+Continuous-time works the same way
+Z ∞
+−∞
+x(t)δ(t −a) dt
+t
+a
+x(t)
+δ(t −a)
+Z ∞
+−∞
+x(t)δ(t −a) dt = x(a)
+
+===== page 47 =====
+A giraffe only feels the height at the exact point it stands!
+
+===== page 48 =====
+A giraffe only feels the height at the exact point it stands!
+
+===== page 49 =====
+One caution: the impulse must be inside the interval
+Z R
+L
+x(t)δ(t −a) dt =
+
+
+
+x(a),
+L < a < R,
+0,
+a /∈[L, R].
+The impulse extracts x(a)
+but only if the integration window actually sees the impulse.
+
+===== page 50 =====
+Practice: use the sifting property
+Let x(t)
+=
+et. Find:
+(a)
+Z ∞
+−∞
+x(t)δ(t) dt
+(b)
+Z ∞
+1
+x(t)δ(t) dt
+(c)
+Z 5
+−5
+x(t) [δ(t + 1) + 2δ(t −2)] dt
+
+===== page 51 =====
+Answer: each impulse picks one value
+(a)
+Z ∞
+−∞
+etδ(t) dt = e0 = 1.
+(b)
+Z ∞
+1
+etδ(t) dt = 0,
+because the impulse at t
+=
+0 is outside the interval.
+(c)
+e−1 + 2e2.
+
+===== page 52 =====
+Problem: Let’s find the Fourier series of an impulse train
+x(t) =
+∞
+X
+m=−∞
+δ(t −mT)
+t
+· · ·
+· · ·
+−2T
+−T
+0
+T
+2T
+3T
+T
+Find the complex exponential Fourier series coefficients ak.
+
+===== page 53 =====
+Choose one period that contains exactly one impulse
+Choose the period
+−T
+2 < t < T
+2 .
+t
+−T/2
+T/2
+0
+δ(t)
+ak = 1
+T
+Z T/2
+−T/2
+δ(t)e−jkω0t dt.
+
+===== page 54 =====
+Now let’s use sifting to get the coefficients
+ak = 1
+T
+Z T/2
+−T/2
+δ(t)e−jkω0t dt
+By sifting, the impulse at t = 0 picks the value of e−jkω0t at t = 0.
+ak = 1
+T e−jkω0·0 =
+1
+T .
+Every Fourier coefficient has the same value:
+ak = 1
+T ,
+k = 0, ±1, ±2, . . .
+
+===== page 55 =====
+Frequency-domain picture
+x(t) =
+∞
+X
+m=−∞
+δ(t −mT)
+⇐⇒
+ak = 1
+T .
+k
+ak
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+1
+T
+· · ·
+· · ·
+The coefficient sequence is flat.
+As a line spectrum in ω, these lines sit at ω = kω0.
+
+===== page 56 =====
+A train remains a train!
+
+===== page 57 =====
+Problem: differentiate a periodic rectangular pulse
+x(t) =
+(
+1,
+|t| < T1,
+0,
+T1 < |t| < T/2,
+x(t + T) = x(t).
+t
+x(t)
+· · ·
+· · ·
+−T
+0
+T
+−T1
+T1
+1
+Differentiate x(t), find the Fourier series coefficients of d
+dt x(t),
+and match with the differentiation property.
+
+===== page 58 =====
+Known Fourier series of the original signal
+From previous slides, for the rectangular pulse,
+x(t)
+←→
+ak.
+a0 = 2T1
+T
+ak = sin(kω0T1)
+kπ
+,
+k̸ = 0,
+ω0 = 2π
+T .
+
+===== page 59 =====
+What does the derivative look like?
+t
+d
+dt x(t)
+· · ·
+· · ·
++1
+−1
++1
+−1
++1
+−1
+−T
+0
+T
+−T1
+T1
+Rising edge gives +δ. Falling edge gives −δ.
+
+===== page 60 =====
+Write the derivative using impulses
+In one period,
+d
+dt x(t) = δ(t + T1) −δ(t −T1).
+For the periodic signal,
+d
+dt x(t) =
+∞
+X
+m=−∞
+[δ(t + T1 −mT) −δ(t −T1 −mT)] .
+Now find its Fourier coefficients directly using sifting.
+
+===== page 61 =====
+Let’s first find the coefficients directly
+Let the coefficients of d
+dt x(t) be bk. Then
+bk = 1
+T
+Z T/2
+−T/2
+[δ(t + T1) −δ(t −T1)] e−jkω0t dt.
+Using sifting,
+bk = 1
+T
+h
+ejkω0T1 −e−jkω0T1i
+= 2j
+T sin(kω0T1) .
+
+===== page 62 =====
+Now match with the differentiation property
+Differentiation property says, d
+dt x(t)
+←→
+jkω0ak.
+For k̸ = 0,
+ak = sin(kω0T1)
+kπ
+.
+jkω0ak = jkω0
+sin(kω0T1)
+kπ
+= j ω0
+π sin(kω0T1).
+Since ω0
+=
+2π
+T ,
+jkω0ak
+=
+2j
+T sin(kω0T1) .
+
+===== page 63 =====
+Perfect match
+Direct calculation gave
+bk = 2j
+T sin(kω0T1). (this already also gives b0 = 0)
+Differentiation property gave
+jkω0ak = 2j
+T sin(kω0T1).
+bk
+=
+(jkω0) × ak
+
+===== page 64 =====
+Integration
+
+===== page 65 =====
+Integration: reverse of differentiation
+x(t)
+←→
+ak
+Differentiation says,
+d
+dt x(t)
+←→
+jkω0ak.
+So integration should divide by the same factor:
+Z
+x(t) dt
+←→
+ak
+jkω0
+,
+k̸ = 0.
+
+===== page 66 =====
+One important warning: the constant term
+Integration cannot recover the constant term.
+Why?
+d
+dt (x(t) + C) = d
+dt x(t).
+So after integrating, the a0 term must be determined separately.
+bk =
+ak
+jkω0
+,
+k̸ = 0
+
+===== page 67 =====
+Problem: use differentiation first, then integrate back
+x(t) = t,
+0 ≤t < 1,
+x(t + 1) = x(t).
+t
+x(t)
+· · ·
+· · ·
+−2
+−1
+0
+1
+2
+3
+4
+1
+Find the Fourier series coefficients of x(t)
+by first finding the series for the derivative.
+
+===== page 68 =====
+Derivative of the sawtooth
+Between jumps, the slope is 1. At each integer, the signal jumps down by 1.
+y(t) = d
+dt x(t) = 1 −
+∞
+X
+m=−∞
+δ(t −m).
+t
+y(t)
+1
+−1
+−2
+−1
+−1
+−1
+0
+−1
+1
+−1
+2
+−1
+3
+−1
+4
+
+===== page 69 =====
+Fourier coefficients of the derivative
+y(t) = 1 −
+∞
+X
+m=−∞
+δ(t −m).
+The constant part 1 has coefficients
+1
+←→
+
+
+
+1,
+k = 0,
+0,
+k̸ = 0.
+
+===== page 70 =====
+Fourier coefficients of the derivative
+y(t) = 1 −
+∞
+X
+m=−∞
+δ(t −m).
+The impulse train part has coefficients 1 for all k. ( 1
+T = 1
+1 = 1)
+Therefore, y(t)
+←→
+bk =
+
+
+
+
+
+0,
+k = 0,
+−1,
+k̸ = 0.
+
+===== page 71 =====
+Integrate back to get the coefficients of x(t)
+y(t) = d
+dt x(t)
+=⇒
+bk = jkω0ak.
+So, for k̸
+=
+0,
+ak =
+bk
+jkω0
+.
+Here bk
+=
+−1 and ω0
+=
+2π, so
+ak = −1
+j2πk =
+j
+2πk ,
+k̸ = 0.
+
+===== page 72 =====
+Do not forget a0
+Integration did not determine a0.
+Let’s just find it from the average value:
+a0 =
+Z 1
+0
+t dt = 1
+2.
+a0 = 1
+2,
+ak =
+j
+2πk ,
+k̸ = 0.
+
+===== page 73 =====
+Multiplication
+
+===== page 74 =====
+New goal: what about multiplying two signals?
+So far, if
+x(t) ←→ak,
+y(t) ←→bk,
+then linearity gives us
+x(t) + y(t)
+←→
+ak + bk.
+But what about multiplication?
+x(t)y(t)
+←→
+?
+
+===== page 75 =====
+Simple! Let’s multiply the two Fourier series
+x(t) =
+∞
+X
+p=−∞
+apejpω0t,
+y(t) =
+∞
+X
+q=−∞
+bqejqω0t.
+x(t)y(t) =
+
+
+∞
+X
+p=−∞
+apejpω0t
+
+
+
+
+∞
+X
+q=−∞
+bqejqω0t
+
+.
+We use p and q because the two sums need separate indices.
+
+===== page 76 =====
+This is nothing but polynomial multiplication!
+Let, z = ejω0t. Then,
+ejpω0t = zp,
+ejqω0t = zq.
+x(t) =
+X
+p
+apzp,
+y(t) =
+X
+q
+bqzq.
+It becomes becomes multiplying two coefficient-polynomials in z!
+
+===== page 77 =====
+Which terms create the k-th frequency?
+When we multiply one term from x(t) and one term from y(t),
+apejpω0t · bqejqω0t = apbqej(p+q)ω0t.
+To contribute to the k-th harmonic, we need
+p + q = k.
+So q
+=
+k −p, and the k-th coefficient becomes
+ck
+=
+P∞
+p=−∞apbk−p.
+
+===== page 78 =====
+Multiplication property: Convolution Returns, Again!!!
+x(t) ←→ak,
+y(t) ←→bk,
+x(t)y(t)
+←→
+ck = (a ∗b)k
+ck =
+∞
+X
+p=−∞
+apbk−p.
+Multiplication in time becomes convolution in frequency.
+
+===== page 79 =====
+Practice: square a simple signal
+Let, x(t) = 1 + cos(ω0t).
+Its nonzero Fourier coefficients are
+a−1 = 1
+2.
+a0 = 1,
+a1 = 1
+2,
+Find the Fourier series coefficients of
+p(t) = x 2(t).
+
+===== page 80 =====
+Answer: convolve the coefficient sequence with itself
+Since, p(t) = x(t)x(t),
+ck = (a ∗a)k =
+X
+p
+apak−p.
+Only a−1, a0, a1 are nonzero. So we compute the convolution:
+k
+−2
+−1
+0
+1
+2
+ck
+1
+4
+1
+3
+2
+1
+1
+4
+
+===== page 81 =====
+Let’s check using ordinary trigonometry
+x2(t) = (1 + cos(ω0t))2
+= 1 + 2 cos(ω0t) + cos2(ω0t)
+= 3
+2 + 2 cos(ω0t) + 1
+2 cos(2ω0t).
+Therefore,
+c0 = 3
+2,
+c±1 = 1,
+c±2 = 1
+4.
+
+===== page 82 =====
+Thank you!

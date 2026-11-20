@@ -1,0 +1,57 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURE 4}
+\chapter{Causality, Stability and Impulse Response}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q3(b)}{CSE 219 \textbullet\ 22 batch p.2}{15}
+The following are the impulse responses of continuous-time LTI systems. Determine whether each system is causal and/or stable. Justify your answers.
+(i) $h(t)=e^{-4t}u(3-t)$ \quad (ii) $h(t)=e^{-6|t|}$ \quad (iii) $h(t)=te^{-t}u(t)$
+\end{qcard}
+\begin{solution}
+Causal $\Leftrightarrow h(t)=0$ for $t<0$. Stable $\Leftrightarrow\int\abs{h}\dd t<\infty$.
+\begin{steps}
+\item $u(3-t)=1$ for $t\le3$, so $h\ne0$ for all $t\le3$, in particular for $t<0$: \emph{not causal}. $\int_{-\infty}^{3}e^{-4t}\dd t=\infty$ (the exponential grows as $t\to-\infty$): \emph{not stable}.
+\item $h\ne0$ for $t<0$: \emph{not causal}. $\int e^{-6|t|}\dd t=2\int_0^\infty e^{-6t}\dd t=\frac13<\infty$: \emph{stable}.
+\item $h=0$ for $t<0$: \emph{causal}. $\int_0^\infty te^{-t}\dd t=1<\infty$: \emph{stable}.
+\end{steps}
+\begin{center}\small\begin{tabular}{@{}lcc@{}}\toprule & causal & stable\\\midrule (i) $e^{-4t}u(3-t)$ & no & no\\ (ii) $e^{-6|t|}$ & no & yes\\ (iii) $te^{-t}u(t)$ & yes & yes\\\bottomrule\end{tabular}\end{center}
+\ans{(i) neither; (ii) stable but non-causal; (iii) causal and stable.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q2(b)}{EEE 211 \textbullet\ EEE p.2}{17}
+Using a time-domain technique, find the impulse response of the $LC$ circuit shown in the figure (input voltage $x(t)$ applied through the series inductor $L$ to the capacitor $C$, output $y(t)$ the capacitor voltage).
+\end{qcard}
+\begin{solution}
+KVL: $x=L\dfrac{\dd i}{\dd t}+y$, with $i=C\dfrac{\dd y}{\dd t}$, so
+\[LC\,y''+y=x,\qquad \omega_0=\frac1{\sqrt{LC}}.\]
+For $x=\delta(t)$ the system is initially relaxed, so $h(t)=0$ for $t<0$. For $t>0$: $LC\,h''+h=0\Rightarrow h=A\cos\omega_0t+B\sin\omega_0t$. Integrating the equation over $(0^-,0^+)$ gives the jump conditions
+\[h(0^+)=0,\qquad LC\,h'(0^+)=1\ \Rightarrow\ h'(0^+)=\omega_0^2 .\]
+Hence $A=0$ and $B\omega_0=\omega_0^2\Rightarrow B=\omega_0$.
+\ans{$h(t)=\dfrac{1}{\sqrt{LC}}\sin\!\Big(\dfrac{t}{\sqrt{LC}}\Big)u(t)$ --- an undamped oscillation (marginally stable: $\int|h|=\infty$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q8(b)}{CSE 219 \textbullet\ TF p.5}{10}
+Determine whether the continuous-time LTI systems with the following impulse responses are causal and/or stable: $h_1(t)=e^{2t}u(-2-t)$, \quad $h_2(t)=te^{-t}u(t)$.
+\end{qcard}
+\begin{solution}
+\step{$h_1$:} $u(-2-t)=1\Leftrightarrow t\le-2$, so $h_1\ne0$ for $t\le-2<0$: \emph{non-causal}. $\int_{-\infty}^{-2}e^{2t}\dd t=\tfrac12e^{-4}<\infty$: \emph{stable}.
+
+\step{$h_2$:} zero for $t<0$: \emph{causal}; $\int_0^\infty te^{-t}\dd t=1<\infty$: \emph{stable}.
+\ans{$h_1$: stable but not causal. $\;h_2$: causal and stable.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q6(c)}{EEE 211 \textbullet\ EEE p.20}{10}
+Consider a series $RC$ circuit as an LTI system with an input voltage $x(t)$. The voltage across the resistor, $v_R(t)$, is the output. Assume the circuit is initially relaxed. Using time-domain analysis, determine the impulse response $h(t)$ of the circuit.
+\end{qcard}
+\begin{solution}
+Let $v_C$ be the capacitor voltage: $x=v_R+v_C$, $i=C\dot v_C=v_R/R$, so $RC\,\dot v_C+v_C=x$ and $v_R=x-v_C$.
+
+For $x=\delta(t)$: $\dot v_C+\dfrac{v_C}{RC}=\dfrac1{RC}\delta(t)$ with $v_C(0^-)=0$, so $v_C$ jumps to $1/RC$ and decays:
+\[h_C(t)=\frac1{RC}e^{-t/RC}u(t).\]
+Hence
+\[h_R(t)=\delta(t)-h_C(t)=\delta(t)-\frac1{RC}e^{-t/RC}u(t).\]
+The resistor passes the impulse instantly, then the discharging capacitor drives a negative current: the circuit is a first-order high-pass filter. $\int|h_R|\dd t=1+1=2<\infty$ (stable), $h_R=0$ for $t<0$ (causal).
+\ans{$h(t)=\delta(t)-\dfrac1{RC}e^{-t/RC}u(t)$.}
+\end{solution}

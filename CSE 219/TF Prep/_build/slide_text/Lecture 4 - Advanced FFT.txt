@@ -1,0 +1,632 @@
+
+===== page 1 =====
+Advanced FFT Algorithms and Applications
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Recap of the Last Two Classes
+Lecture 3 — the FFT
+• Radix-2 DIT: split x[n] into evens and
+odds, combine with the butterfly
+X[k] = G[k] + W k
+NH[k]
+X[k + N/2] = G[k] −W k
+NH[k]
+• Cost drops from N2 to N log2 N.
+• But it needs N = 2m. Otherwise we
+zero-pad — which changes a periodic
+signal.
+Lecture 2 — filtering with the DFT
+• x ⊛h ↔X[k]H[k]; pad to
+N ≥L + M −1 and circular = linear.
+• The recipe: pad, transform, multiply,
+invert.
+• Honest accounting then: each DFT
+cost N2, so the recipe lost to the
+direct L · M sum.
+Today’s two questions
+1. Can we have an FFT for any N — powers of 3, mixed factors, even primes — without padding?
+2. With the FFT in hand, how fast does the filtering recipe become?
+1
+
+===== page 3 =====
+Outline
+• Advanced FFT Algorithms
+• Radix-2 and Radix-3 DIT: the tabular (matrix) interpretation
+• General Cooley–Tukey factorization N = N1N2 and Bailey’s four-step FFT
+• Application: Fast Convolution
+• The Lecture-2 filtering recipe, now with the FFT
+• Complexity: O(N log N) versus O(LM)
+• FFT for Prime N: Bluestein’s Algorithm
+• The chirp-z identity: a DFT is a linear convolution
+• Padding the chirp without breaking the wrap
+2
+
+===== page 4 =====
+Advanced Matrix Interpretations of the
+FFT
+
+===== page 5 =====
+Revisiting Radix-2: A Tabular View
+• Previously, we derived Radix-2 DIT purely algebraically.
+• We divided the input into even and odd indices and calculated their DFTs G[k] and H[k].
+• Then we combined them using the butterfly operation:
+X[k] = G[k] + W k
+NH[k]
+X[k + N/2] = G[k] −W k
+NH[k]
+• We can think about this in a different, more visual way—one that leads to an elegant generalization.
+• Key Idea: Reshape the 1D input x[n] into a 2D matrix, perform DFTs along rows and columns.
+3
+
+===== page 6 =====
+Radix-2 DIT: Column-Major Input & Row DFTs
+• Let us arrange x[n] into a 2 × N/2
+matrix in column-major order:
+n = 2n2 + n1
+Where,
+n1 = row index ∈{0, 1}
+n2 = column index ∈{0, 1, . . . , N/2 −1}
+• Row 0 (n1 =0): Even indices
+• Row 1 (n1 =1): Odd indices
+• 1st DFT: Then perform N2-point DFTs
+along each row (→).
+• Row 0 →G[k]
+• Row 1 →H[k]
+Column-Major Input x[n]
+n2 =0
+n2 =1
+n2 =2
+· · ·
+n1 =0
+(Even)
+n1 =1
+(Odd)
+x[0]
+x[2]
+x[4]
+· · ·
+x[1]
+x[3]
+x[5]
+· · ·
+DFT
+DFT
+After Row-wise DFT
+n2 =0
+n2 =1
+n2 =2
+· · ·
+n1 =0
+(Even)
+n1 =1
+(Odd)
+G[0]
+G[1]
+G[2]
+· · ·
+H[0]
+H[1]
+H[2]
+· · ·
+1st DFTs
+N/2-pt
+(row-wise)
+4
+
+===== page 7 =====
+Radix-2 DIT: Twiddle Factors & Column DFTs
+• After row DFTs, multiply row n1 by twiddle factors
+W n1k
+N
+.
+• Row 0: ×W 0
+N = 1
+• Row 1: ×W k
+N
+• 2nd DFT: Perform 2-point DFT down each column (↓).
+• This is exactly the butterfly!
+X[k] = G[k] + W k
+NH[k]
+X[k+ N
+2 ] = G[k] −W k
+NH[k]
+• We obtain the DFT of the original sequence x[n]!
+• Row 0 gives X[0 . . . N/2−1],
+row 1 gives X[N/2 . . . N −1].
+• But the output occurs in row-major order.
+After Twiddle Factors
+n2 =0
+n2 =1
+n2 =2
+· · ·
+n1 =0
+(Even)
+n1 =1
+(Odd)
+G[0]
+G[1]
+G[2]
+· · ·
+H[0]W 0
+N
+H[1]W 1
+N
+H[2]W 2
+N
+· · ·
+DFT
+DFT
+DFT
+DFT
+After Column-wise DFT
+n2 =0
+n2 =1
+n2 =2
+· · ·
+n1 =0
+(Even)
+n1 =1
+(Odd)
+X[0]
+X[1]
+X[2]
+· · ·
+X[N/2]
+X[1 + N/2] X[2 + N/2]
+· · ·
+5
+
+===== page 8 =====
+Radix-2 DIT: Reading the Output Row-Major
+• We want X[k] in the correct order. We want the
+transpose matrix.
+• Mathematically, for
+k1 = row index ∈{0, 1}
+k2 = column index ∈{0, . . . , N/2 −1}
+• We want the row-major indexing:
+k = (N/2)k1 + k2
+• Using this index, we can write:
+X[(N/2)k1 + k2] = G[k2] + W k1
+2
+
+W k2
+N H[k2]
+
+• Not the final form yet!
+• But key take away: We can visualize the Cooley–Tukey
+algorithm as arranging numbers on a matrix,
+performing DFTs on rows and columns!
+After Output Indexing
+k2 =0
+k2 =1
+k2 =2
+· · ·
+k1 =0
+k1 =1
+X[0]
+X[1]
+X[2]
+· · ·
+X[0 + N/2] X[1 + N/2] X[2 + N/2]
+· · ·
+6
+
+===== page 9 =====
+Radix-3 DIT DFT: Derivation
+• The same idea extends naturally. For N = 3N2, split x[n] into three subsequences by index modulo 3:
+X[k] =
+N/3−1
+X
+r=0
+x[3r] W rk
+N/3 + W k
+N
+N/3−1
+X
+r=0
+x[3r + 1] W rk
+N/3 + W 2k
+N
+N/3−1
+X
+r=0
+x[3r + 2] W rk
+N/3
+• Define three N/3-point DFTs:
+Gm[k] =
+N/3−1
+X
+r=0
+x[3r + m] W rk
+N/3
+m ∈{0, 1, 2}
+Radix-3 DIT Combination
+X[k] = G0[k] + (W k
+N G1[k]) + (W 2k
+N G2[k])
+X[k + N/3] = G0[k] + W 1
+3 (W k
+N G1[k]) + W 2
+3 (W 2k
+N G2[k])
+X[k + 2N/3] = G0[k] + W 2
+3 (W k
+N G1[k]) + W 4
+3 (W 2k
+N G2[k])
+• The above 3 equations are also a 3-point DFT!
+7
+
+===== page 10 =====
+Radix-3 DIT: Tabular Interpretation (N1 = 3, N2 = N/3)
+• Load x[n] into a 3 × N/3 matrix,
+column-major: n = 3n2 + n1.
+• Row 0: n ≡0 (mod 3)
+• Row 1: n ≡1 (mod 3)
+• Row 2: n ≡2 (mod 3)
+1. 1st DFTs: N/3-point DFT along each
+row (→).
+2. Multiply by twiddle W n1k2
+N
+.
+3. 2nd DFTs: 3-point DFT down each
+column (↓).
+• Take output row-major:
+k = (N/3) k1 + k2.
+Column-Major Input
+n2 =0
+n2 =1
+n2 =2
+· · ·
+n1 =0
+n1 =1
+n1 =2
+x[0]
+x[3]
+x[6]
+· · ·
+x[1]
+x[4]
+x[7]
+· · ·
+x[2]
+x[5]
+x[8]
+· · ·
+G0
+G1
+G2
+1st DFTs
+N/3-pt
+(→)
+2nd DFTs: 3-pt (↓) + twiddle
+8
+
+===== page 11 =====
+General Cooley–Tukey Factorization (N = N1N2)
+• Having seen the tabular view for Radix-2 and Radix-3, let’s formalize the general N1 × N2 factorization.
+• Re-index the input n as an N1 × N2 matrix in column-major order:
+n = N1n2 + n1
+(
+n1 ∈{0, 1, . . . , N1 −1}
+n2 ∈{0, 1, . . . , N2 −1}
+Substituting this into the DFT definition yields a 2D sum:
+X[k] =
+N1−1
+X
+n1=0
+N2−1
+X
+n2=0
+x[N1n2 + n1] W (N1n2+n1)k
+N
+• Re-index the output k as an N1 × N2 matrix in row-major order:
+k = N2k1 + k2
+(
+k1 ∈{0, 1, . . . , N1 −1}
+k2 ∈{0, 1, . . . , N2 −1}
+9
+
+===== page 12 =====
+General Cooley–Tukey Factorization (N = N1N2)
+• Substitute k = N2k1 + k2 into the exponent (N1n2 + n1)k:
+(N1n2 + n1)(N2k1 + k2) = N1N2n2k1 + N1n2k2 + N2n1k1 + n1k2
+= Nn2k1 + N1n2k2 + N2n1k1 + n1k2
+• The first term is a full turn: W Nn2k1
+N
+= e−j2πn2k1 = 1, so this cross term vanishes.
+• The remaining three factors are each a root of unity of a different order:
+W N1n2k2
+N
+= W n2k2
+N2
+,
+W N2n1k1
+N
+= W n1k1
+N1
+,
+W n1k2
+N
+(stays as it is)
+since W N1m
+N
+= e
+−j
+2π
+N1N2 N1m = e
+−j 2π
+N2 m = W m
+N2.
+• Hence
+W (N1n2+n1)(N2k1+k2)
+N
+= W n2k2
+N2
+· W n1k2
+N
+· W n1k1
+N1
+• Substituting this back into the double sum and rearranging:
+10
+
+===== page 13 =====
+General Cooley–Tukey Factorization (N = N1N2)
+Cooley–Tukey 2D Matrix Formulation
+X[N2k1 + k2] =
+N1−1
+X
+n1=0
+W n1k2
+N
+| {z }
+twiddle
+
+
+N2−1
+X
+n2=0
+x[N1n2 + n1] W n2k2
+N2
+
+
+|
+{z
+}
+N2-point DFT of row n1
+W n1k1
+N1
+• Inner sum: an N2-point DFT along each row of the N1 × N2 input matrix (over n2, indexed by k2).
+• Twiddle factors: the entry at (n1, k2) is scaled by W n1k2
+N
+.
+• Outer sum: an N1-point DFT down each column of the intermediate matrix (over n1, indexed by k1).
+• Read the result row-major: k = N2k1 + k2.
+11
+
+===== page 14 =====
+Bailey’s FFT Algorithm
+• The Cooley–Tukey matrix formulation directly yields Bailey’s FFT (a.k.a. the Four-Step FFT):
+Bailey’s FFT
+1. Arrange input x[n] in an N1 × N2 matrix (column-major).
+2. Compute N2-point DFT of each row (→).
+3. Multiply entry (n1, k2) by twiddle factor W n1k2
+N
+.
+4. Compute N1-point DFT of each column (↓).
+• How to compute the N1- and N2-point DFTs? Apply the same algorithm recursively!
+• If N = pa1
+1 pa2
+2 · · · , we recursively factor until only small primes remain ⇒O(N log N) for any composite
+N.
+• This handles powers of 2, powers of 3, mixed radices—any N with small prime factors.
+• But what if N itself is a large prime? Hold that question: the answer needs a tool we can now build — fast
+convolution.
+12
+
+===== page 15 =====
+Application: Fast Convolution
+
+===== page 16 =====
+The Filtering Recipe, Now With the FFT
+• Lecture 2: LTI filtering is the linear convolution y = x ∗h (L input samples, M taps), costing L · M
+multiplications directly.
+• Multiplying DFTs gives circular convolution; zero-padding to N ≥L + M −1 parks the wrapped taps on
+zeros, so circular = linear.
+• The transform was the bottleneck: N2 per DFT. Replace every DFT by an FFT.
+Fast Convolution (input length L, filter length M)
+1. Choose N ≥L + M −1 — the next power of 2, so Radix-2 applies.
+2. Zero-pad x and h to length N.
+3. X[k] = FFT{x} and H[k] = FFT{h}.
+4. Multiply bin by bin: Y [k] = X[k] H[k].
+5. y[n] = IFFT{Y }; keep the first L + M −1 samples.
+• Padding beyond L + M −1 is harmless: the extra room only appends trailing zeros to y. (Contrast Lecture
+3, where padding a periodic signal changed its period — here nothing is periodic, so nothing breaks.)
+13
+
+===== page 17 =====
+Fast Convolution: Complexity Analysis
+• How much faster is this really?
+• Direct Linear Convolution: takes O(L · M) operations. If L ≈M ≈N/2, naive convolution takes roughly
+O(N2) steps.
+• Fast Convolution (using Radix-2 FFT):
+• 2 forward FFTs: 2 × O(N log N)
+• 1 element-wise multiplication: O(N)
+• 1 inverse FFT: O(N log N)
+Total time: O(N log N) complex multiplications.
+Real-world magnitude
+Applying a 1-second reverb filter (L = 44,100) to 1 second of audio (M = 44,100):
+• Naive: L × M ≈1.94 × 109 operations.
+• Fast Convolution: padding to N = 131,072 = 217, taking 3 × (N log2 N) ≈6.7 × 106 operations.
+• Roughly a 300× speedup of purely algorithmic origin — what makes real-time, high-fidelity audio
+processing possible.
+14
+
+===== page 18 =====
+FFT for Prime Lengths
+
+===== page 19 =====
+What if N is Prime? Bluestein’s Algorithm
+• Cooley–Tukey yields O(N log N) performance for powers of 2, or for any composite N = N1N2. But what
+if N is a large prime number (e.g., N = 1,000,003)?
+• Then N1 = 1, and Cooley–Tukey devolves right back to O(N2).
+• Bluestein’s Algorithm brings any DFT length to O(N log N) by cleverly expressing the DFT as a linear
+convolution — which we now know how to compute fast.
+The Chirp-Z Identity
+Start with the algebraic identity for squares:
+(k −n)2 = k2 −2kn + n2 =⇒kn = −(k −n)2
+2
++ k2
+2 + n2
+2
+Using this, we can substitute kn in the twiddle factor W kn
+N
+= W 2kn
+2N
+giving:
+W kn
+N
+= W −(k−n)2
+2N
+W k2
+2NW n2
+2N
+15
+
+===== page 20 =====
+Bluestein’s Algorithm: Derivation
+• Applying the Chirp-Z Identity to the DFT definition:
+X[k] =
+N−1
+X
+n=0
+x[n]W kn
+N
+=
+N−1
+X
+n=0
+x[n]
+
+W −(k−n)2
+2N
+W k2
+2NW n2
+2N
+
+= W k2
+2N
+N−1
+X
+n=0
+
+x[n]W n2
+2N
+
+|
+{z
+}
+a[n]
+W −(k−n)2
+2N
+|
+{z
+}
+b[k−n]
+• The summation is precisely a linear convolution evaluated at index k!
+X[k] = W k2
+2N · (a ∗b)[k]
+where a[n] = x[n]W n2
+2N for n ∈[0, N −1] and the chirp filter b[n] = W −n2
+2N
+for n ∈[−(N −1), N −1].
+• We can evaluate this convolution using fast convolution!
+• But in this case we need to handle the padding of b[n] with care, as n can be negative.
+16
+
+===== page 21 =====
+Visualizing Zero-Padding for Bluestein’s Algorithm
+x[n]W n2
+2N
+Zero Pad
+M = 64
+15
+63
+n
+a[n]: Padded Data Sequence (N = 16, Pad M = 64)
+Positive n: W −n2
+2N
+Zero Pad void
+Wrapped negative n: b[((n))M ]
+15
+49
+63
+n
+b[n]: Wrapped & Zero-Padded Chirp
+• Linear convolution evaluates b[k −n] for n = 0, . . . , N −1, so the index k −n runs from k −(N −1) to k:
+it can be negative.
+• In a length-M circular buffer a negative index n lands at ((n))M = M + n — Lecture 2’s wrap, now used
+on purpose.
+• So the positive indices of b[n] go at the start of the size-M array, the negative indices at the end, and
+zeros in between so the two never overlap: M ≥2N −1.
+17
+
+===== page 22 =====
+Bluestein’s Fast Convolution
+• How does turning a multiplication into a convolution help?
+• Because we can compute a linear convolution with fast convolution: zero-pad, FFT, multiply, IFFT.
+• Sequence a[n] has length N. Sequence b[n] is needed for n ∈−(N −1) . . . (N −1), so its support length
+is 2N −1.
+• We can pick any M ≥2N −1 and zero-pad both sequences. We intentionally choose M = 2m so we can
+use the highly efficient Radix-2 DIT FFT — the prime N never touches the transform length.
+Bluestein’s FFT Algorithm
+1. Form a[n] = x[n]W n2
+2N and the wrapped chirp b[((n))M], both of size M = 2⌈log2(2N−1)⌉.
+2. Compute A = FFT(a, M) and B = FFT(b, M) using Radix-2.
+3. Compute Y [k] = A[k]B[k].
+4. Compute y[n] = IFFT(Y, M).
+5. Multiply by W k2
+2N: X[k] = y[k]W k2
+2N for k = 0 . . . N −1.
+18
+
+===== page 23 =====
+The Big Picture
+
+===== page 24 =====
+Summary
+FFT for any composite N = N1N2
+• Load x[n] column-major into N1 × N2;
+DFT the rows; twiddle by W n1k2
+N
+; DFT the
+columns; read row-major.
+• Radix-2 and Radix-3 are the N1 = 2, 3
+cases. Recurse on the factors:
+O(N log N) whenever the prime factors
+are small.
+FFT for prime N: Bluestein
+kn =
+1
+2
+(
+k2 + n2 −(k −n)2)
+turns the DFT into
+a linear convolution with the chirp W −n2
+2N
+; run it as
+a padded fast convolution of any convenient length
+M ≥2N −1.
+Fast convolution
+Pad to N ≥L+M−1 →FFT both →multiply →
+IFFT. O(N log N) against O(LM): about 300×
+for one second of audio.
+Today in one sentence
+Every N has an O(N log N) transform — factor
+it if you can, chirp it if you cannot — and with it,
+the fastest known way to filter.
+19

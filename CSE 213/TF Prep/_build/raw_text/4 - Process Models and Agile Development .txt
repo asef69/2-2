@@ -1,0 +1,1016 @@
+
+===== page 1 =====
+Process Models and Agile Development
+CSE 213: Software Engineering
+
+===== page 2 =====
+Process Models
+2
+Prepared by AYAS
+
+===== page 3 =====
+Software Development - Social Learning Process
+Prepared by AYAS
+3
+●
+A software is basically an embodied knowledge that is
+initially scattered and incomplete.
+●
+We need to follow a step-by-step process to bring
+knowledge into a software.
+●
+Software development is essentially an iterative social
+learning process.
+
+===== page 4 =====
+What is Process Model?
+Prepared by AYAS
+4
+●
+Software development is a collection of diﬀerent activities.
+●
+A process model basically is a technique to divide these
+software development works into distinct phases.
+●
+It provides a visual road map to organize and improve both
+software project and software product management.
+
+===== page 5 =====
+What is Process Model?
+Prepared by AYAS
+5
+
+===== page 6 =====
+Generic Process Models
+Prepared by AYAS
+6
+●
+Generic process model provides deﬁnitive description of
+process in a software project.
+●
+There are 5 (ﬁve) core activities (aka framework activities)
+deﬁned in a generic process model.
+1. Communication: Project team communicates with client.
+
+===== page 7 =====
+Generic Process Models
+Prepared by AYAS
+7
+●
+There are 5 (ﬁve) core activities (aka framework activities)
+deﬁned in a generic process model.
+2. Planning: Project team schedules the project development
+and estimates the project cost.
+3. Modeling: Project team analyzes the client requirements and
+designs the algorithm and ﬂowchart of diﬀerent software
+components.
+
+===== page 8 =====
+Generic Process Models
+Prepared by AYAS
+8
+●
+There are 5 (ﬁve) core activities (aka framework activities)
+deﬁned in a generic process model.
+4. Construction: Project team implements and tests diﬀerent
+software components.
+5. Deployment: Project team delivers the software product to
+client and takes feedback to improve the quality of the
+product if required.
+
+===== page 9 =====
+Generic Process Models
+Prepared by AYAS
+9
+●
+There are 4 (four) unique process ﬂows in generic process model.
+1.
+Linear Process Flow
+2.
+Iterative Process Flow
+3.
+Evolutionary Process Flow
+4.
+Parallel Process Flow
+
+===== page 10 =====
+Linear Process Flow
+Prepared by AYAS
+10
+Communication
+Deployment
+Planning
+Construction
+Modeling
+●
+Linear process ﬂow executes each of the 5 (ﬁve) activities
+sequentially.
+
+===== page 11 =====
+Iterative Process Flow
+Prepared by AYAS
+11
+Communication
+Deployment
+Planning
+Construction
+Modeling
+●
+Iterative process ﬂow repeats one or more activities before
+proceeding to the next activity.
+
+===== page 12 =====
+Evolutionary Process Flow
+Prepared by AYAS
+12
+Communication
+Planning
+Construction
+Modeling
+Incremental
+Release
+Deployment
+●
+Evolutionary process ﬂow executes activities in a circular fashion.
+
+===== page 13 =====
+Evolutionary Process Flow
+Prepared by AYAS
+13
+●
+Each cycle leads to a more complete version of the software.
+Communication
+Planning
+Construction
+Modeling
+Incremental
+Release
+Deployment
+
+===== page 14 =====
+Parallel Process Flow
+Prepared by AYAS
+14
+Communication
+Planning
+Modeling
+Deployment
+Construction
+●
+Parallel process ﬂow executes one or more activities in parallel
+with other activities.
+
+===== page 15 =====
+Prescriptive Process Models
+Prepared by AYAS
+15
+●
+Prescriptive process models prescribe diﬀerent workﬂows
+among the framework and other activities in a software
+engineering project.
+●
+These workﬂows, based on generic process models, guide a
+software project from its inception to its end.
+
+===== page 16 =====
+Prescriptive Process Models
+Prepared by AYAS
+16
+●
+In this course, we will discuss the following prescriptive process models.
+1.
+Waterfall Process Model
+2.
+Incremental Process Model
+3.
+Evolutionary Process Model
+a.
+Prototyping Model
+b.
+Spiral Model
+
+===== page 17 =====
+Waterfall Process Model
+Prepared by AYAS
+17
+
+===== page 18 =====
+Waterfall Process Model
+Prepared by AYAS
+18
+●
+The waterfall process model is normally used in small projects in
+which requirements from clients are well-deﬁned and known
+before the starting of the project.
+●
+Diﬀerent activities are executed in a sequential and systematic
+manner.
+
+===== page 19 =====
+Waterfall Process Model
+Prepared by AYAS
+19
+●
+The process begins with communication, where requirements are
+collected from the client and documented.
+●
+In planning phase, the time and ﬁnancial constraints of the
+project are estimated, resulting in a schedule and a budget.
+●
+Then, a design of the software product is crafted in modeling
+phase based on gathered requirements and keeping project
+constraints in mind.
+
+===== page 20 =====
+Waterfall Process Model
+Prepared by AYAS
+20
+●
+In construction phase, essential code is generated and tested to
+build the ﬁnal product.
+●
+Finally, in deployment phase, the product is delivered to the
+client and necessary maintenance is provided based on the client
+feedback.
+
+===== page 21 =====
+Waterfall Process Model
+Prepared by AYAS
+21
+●
+Advantages of the waterfall model are as follows.
+○
+Simple model to use and implement.
+○
+Easily understandable workﬂow.
+○
+Easily manageable as requirements are known before the starting
+of the project.
+
+===== page 22 =====
+Waterfall Process Model
+Prepared by AYAS
+22
+●
+Disadvantages of the waterfall model are as follows.
+○
+It may become tough for the client to provide all the requirements
+beforehand.
+○
+Testing and client evaluation are carried out in the last phases
+resulting in high risk.
+○
+Iteration of activities is not promoted which may be crucial for
+some projects.
+
+===== page 23 =====
+Incremental Process Model
+Prepared by AYAS
+23
+
+===== page 24 =====
+Incremental Process Model
+Prepared by AYAS
+24
+●
+The incremental process model involves development and
+deployment of a series of versions of the software product,
+known as increments.
+●
+A simple functioning system, known as core product, which
+handles basic requirements is ﬁrst developed and delivered.
+●
+Client feedback is collected after each incremental delivery to
+incorporate in the next increment.
+
+===== page 25 =====
+Incremental Process Model
+Prepared by AYAS
+25
+●
+Multiple increments are delivered by adding more functionalities,
+as per the client requirements, until the ﬁnal version of the
+product is released.
+●
+This process model is normally used when client demands a
+model of the product with primitive functionalities quickly.
+
+===== page 26 =====
+Incremental Process Model
+Prepared by AYAS
+26
+●
+Advantages of the incremental model are as follows.
+○
+Flexible to changing requirements.
+○
+Modiﬁcations can be made throughout the process
+○
+Errors are mitigated as the product is assessed by the client after
+each incremental delivery.
+
+===== page 27 =====
+Incremental Process Model
+Prepared by AYAS
+27
+●
+Advantages of the incremental model are as follows.
+○
+Functioning software product is available at the early stage of the
+process.
+○
+Product can easily be tested because of multiple iterations.
+○
+The initial project cost is lower.
+
+===== page 28 =====
+Incremental Process Model
+Prepared by AYAS
+28
+●
+Disadvantages of the incremental model are as follows.
+○
+Breaking the problem into increments is diﬃcult.
+○
+Total project cost is high.
+○
+A complete planning of the project is required before committing.
+○
+Reﬁning requirements in each iteration may aﬀect the software
+architecture.
+
+===== page 29 =====
+Evolutionary Process Model
+Prepared by AYAS
+29
+●
+The evolutionary process model is suitable when the client
+requirements may change and the deployment of a complete
+software product can not be done before the project deadline,
+but the delivery of a limited version of the product is possible
+beforehand.
+●
+In the incremental process model, client requirements are
+speciﬁed beforehand and these requirements get reﬁned in each
+increment.
+
+===== page 30 =====
+Evolutionary Process Model
+Prepared by AYAS
+30
+●
+On the other hand, the evolutionary model allows client
+requirements to evolve over time.
+●
+In this course, we will discuss the following evolutionary models.
+1.
+Prototyping Model
+2.
+Spiral Model
+
+===== page 31 =====
+Prototyping Model
+Prepared by AYAS
+31
+
+===== page 32 =====
+Prototyping Model
+Prepared by AYAS
+32
+●
+When the client requirements are vague and likely to change or
+there are confusion about working of a module of software
+product, a possible solution is to build a prototype of the product
+and then, assess that prototype.
+●
+In the prototyping model, one or more prototypes of the
+software product are built with currently known client
+requirements before the development of ﬁnal product.
+
+===== page 33 =====
+Prototyping Model
+Prepared by AYAS
+33
+●
+The client evaluates the prototype and provides feedback as well
+as additional requirements which get incorporated in next
+prototype.
+●
+This workﬂow is repeated until the prototype evolves into a
+complete product, acceptable to the client.
+
+===== page 34 =====
+Prototyping Model
+Prepared by AYAS
+34
+●
+Advantages of the prototyping model are as follows.
+○
+Promotes active involvement of the client.
+○
+Client feedback helps to better understand the product and
+facilitates early detection of error in the product.
+○
+Detailed client requirements are not needed to start the project.
+
+===== page 35 =====
+Prototyping Model
+Prepared by AYAS
+35
+●
+Disadvantages of the prototyping model are as follows.
+○
+Prototyping can slow down the process.
+○
+Frequent changes may increase complexity of the system.
+○
+Client dissatisfaction may lead to scrapping of multiple prototypes.
+
+===== page 36 =====
+Spiral Model
+Prepared by AYAS
+36
+
+===== page 37 =====
+Spiral Model
+Prepared by AYAS
+37
+●
+Just like incremental process model, the spiral model refers to
+the development of the software product through a series of
+versions of that product.
+●
+But, unlike incremental process model as well as prototyping
+model, this model deals with the uncertainties in software project
+by incorporating diﬀerent risk analysis techniques throughout the
+process.
+
+===== page 38 =====
+Spiral Model
+Prepared by AYAS
+38
+●
+The ﬁrst loop may result in the development of a basic prototype
+of the ﬁnal product.
+●
+The subsequent loops may result in the gradual development of
+more mature versions of the product.
+●
+This spiral continues until an acceptable software product is built
+and delivered to the client.
+
+===== page 39 =====
+Spiral Model
+Prepared by AYAS
+39
+●
+Advantages of the spiral model are as follows.
+○
+Rigorously tackles risks associated with a project.
+○
+Any type of changes can be incorporated even at a later stage
+of the process.
+
+===== page 40 =====
+Spiral Model
+Prepared by AYAS
+40
+●
+Disadvantages of the spiral model are as follows.
+○
+Process gets costly and complicated.
+○
+Requires risk assessment expertise.
+
+===== page 41 =====
+Food for Thought
+Prepared by AYAS
+41
+●
+Prescriptive process models are originally introduced to bring
+order and structure to a software process.
+●
+But, won’t some extent of chaos and randomness beneﬁcial to
+bring about creativity?
+
+===== page 42 =====
+Food for Thought
+Prepared by AYAS
+42
+●
+Are order and structure imposed by prescriptive models
+inappropriate for a software industry thriving on rapid changes?
+●
+But, will the replacement of the traditional process models with
+something a bit chaotic make it impossible to coordinate the
+activities in a software project?
+
+===== page 43 =====
+Agile Development
+Prepared by AYAS
+43
+
+===== page 44 =====
+Why Agile?
+Prepared by AYAS
+44
+●
+Process models that we have discussed so far are slow, extremely
+slow.
+●
+But, the modern business environment is fast-paced and
+ever-changing.
+●
+So, in software development, we need a process model that is
+faster.
+
+===== page 45 =====
+What is Agile?
+Prepared by AYAS
+45
+
+===== page 46 =====
+Prepared by AYAS
+46
+●
+Agile means “moving quickly”.
+●
+In Agile, the focus is on rapid and incremental delivery of
+software product.
+●
+The development guideline emphasizes on delivery over analysis
+and design, as well as active and continuous communication
+between project team and client.
+What is Agile?
+
+===== page 47 =====
+Prepared by AYAS
+47
+What is Agile?
+Project Team
+Client
+Incremental
+Delivery
+Feedback
+
+===== page 48 =====
+Agile Software Development
+Prepared by AYAS
+48
+
+===== page 49 =====
+Agile Software Development
+Prepared by AYAS
+49
+●
+Agile process models put focus on quick, frequent, and incremental
+release of a software product.
+●
+These process models also encourage more involvement of client in a
+software project.
+●
+But, they discourage detailed analysis, planning, and documentation in a
+project.
+●
+Agile software process is more ﬂexible to changes both in project team
+and product.
+
+===== page 50 =====
+Agile Process
+Prepared by AYAS
+50
+●
+Agile process is driven by client requirements for the software product.
+●
+These requirements tend to change quite frequently.
+●
+The project team needs to recognize that the plans made are short-lived.
+○
+Some features may persist.
+○
+Some features may change.
+○
+Some features may no longer be required.
+
+===== page 51 =====
+Agile Process
+Prepared by AYAS
+51
+●
+This uncertainty enforces the software process to adapt to
+unpredictable changes.
+●
+To do this, project team puts more focus on the construction
+phase than planning and modeling phases.
+●
+Software product is made iteratively with multiple increments
+based on client feedback for adaptation.
+
+===== page 52 =====
+12 Agile Principles
+Prepared by AYAS
+52
+According to the Agile Manifesto (Kent Beck et al., 2001), there are 12 
+principles that guide a software project in agile manner.
+1. Our highest priority is to satisfy the customer through early and continuous
+delivery of valuable software.
+2. We welcome the changing requirements, even late in the development, to
+harness changes for the client’s competitive advantage.
+3. We deliver working software frequently, from a couple of weeks to a couple of
+months, with a preference for the shorter timescale.
+
+===== page 53 =====
+12 Agile Principles
+Prepared by AYAS
+53
+According to the Agile Manifesto (Kent Beck et al., 2001), there are 12 
+principles that guide a software project in agile manner.
+4. Client and developers must work together regularly throughout the project.
+5. We conduct projects around motivated individuals by giving them the
+environment and support they need, and trusting them to get the job done.
+6. The most eﬃcient and eﬀective method of conveying information to and within a
+project team is face-to-face conversation.
+
+===== page 54 =====
+12 Agile Principles
+Prepared by AYAS
+54
+According to the Agile Manifesto (Kent Beck et al., 2001), there are 12 
+principles that guide a software project in agile manner.
+7. Working software is the primary measure of progress.
+8. Agile process promotes sustainable development through maintaining a constant
+pace indeﬁnitely.
+9. Continuous attention to technical excellence and good design enhance agility.
+
+===== page 55 =====
+12 Agile Principles
+Prepared by AYAS
+55
+According to the Agile Manifesto (Kent Beck et al., 2001), there are 12 
+principles that guide a software project in agile manner.
+10. Simplicity - the art of maximizing the amount of work not done - is essential.
+11. The best architectures, requirements, and designs emerge from self-organizing
+project teams.
+12. At regular intervals, the project team reﬂects on how to become more eﬀective,
+then tunes and adjusts its behavior accordingly.
+
+===== page 56 =====
+Human Factors in Agile Process
+Prepared by AYAS
+56
+●
+The software process reshapes according to the need of people
+and teams involved in a project, not the other way around.
+●
+But, in order to lead a software process to a success, people
+involved must grow some traits.
+●
+In agile process, people need to be competent, skillful,
+knowledgeable, committed, collaborative, decisive, faithful,
+respectful, and self-organized.
+
+===== page 57 =====
+Agile Process Models
+Prepared by AYAS
+57
+●
+In this course, we will discuss the following agile process models.
+1.
+Extreme Programming (XP)
+2.
+Scrum
+3.
+Kanban (看板)
+
+===== page 58 =====
+Extreme Programming (XP)
+Prepared by AYAS
+58
+●
+Extreme programming (XP), developed by Kent Beck, gets its name
+from the concept that whatever the beneﬁcial software engineering
+practices are, they should be taken to extreme levels, from day one.
+●
+XP is lightweight because it is based on the idea of exploring the
+simplest thing that will work without putting too much weights on the
+long-term view of software product.
+●
+This process model values communication with clients, simplicity of
+project, feedbacks from the client, and mutual respect between project
+team and client.
+
+===== page 59 =====
+Extreme Programming (XP)
+Prepared by AYAS
+59
+●
+And, this model prioritizes customer satisfaction over everything
+else.
+●
+Teamwork is extremely important in XP since the problems,
+associated with a project, are solved by the whole team.
+●
+XP promotes pair programming in which two software developers
+team together on one computer and work together to design,
+code as well as test client requirements, also known as user
+stories.
+
+===== page 60 =====
+Extreme Programming (XP)
+Prepared by AYAS
+60
+
+===== page 61 =====
+Extreme Programming (XP)
+Prepared by AYAS
+61
+The advantages of XP are as follows.
+●
+XP encourages simple code which allows modiﬁcation at any
+given time.
+●
+This process model promotes testing codes from day one,
+resulting in more agile software development.
+●
+XP maintains an energizing and uplifting environment for
+developers within a project team.
+
+===== page 62 =====
+Extreme Programming (XP)
+Prepared by AYAS
+62
+The disadvantages of XP are as follows.
+●
+The extreme focus on coding can lead to neglecting design,
+resulting in degradation of software product quality.
+●
+Lack of documentation and monitoring may lead to repetition of
+similar error in the future.
+
+===== page 63 =====
+Extreme Programming (XP)
+Prepared by AYAS
+63
+Source: Wikipedia
+
+===== page 64 =====
+Scrum
+Prepared by AYAS
+64
+Source: Wikipedia
+
+===== page 65 =====
+Prepared by AYAS
+65
+●
+Scrum is a position in rugby in which players from two competing teams
+pack together closely to gain control of the rugby ball.
+●
+In project management, however, scrum is a lightweight, iterative, and
+incremental agile process model.
+●
+That means, scrum prioritizes simplicity in a project and develops
+product in a gradual manner with frequent delivery.
+●
+Currently, scrum is one of the widely used process models in software
+industry.
+Scrum
+
+===== page 66 =====
+Prepared by AYAS
+66
+●
+There are some keywords associated with scrum.
+○
+Sprint is the unitary cycle or iteration of project development phases. It
+usually lasts from 2 weeks to 1 month during which participants work on
+certain aspects of a project.
+○
+Backlog means the requirements from client for the product. There are 2
+(two) types of backlog including product backlog and sprint backlog.
+Product backlog means the overall client requirements in a project. On the
+other hand, Sprint backlog means the client requirements that will be
+addressed in a particular sprint.
+Scrum
+
+===== page 67 =====
+Prepared by AYAS
+67
+●
+There are some keywords associated with scrum.
+○
+Daily scrum means a meeting conducted, on a daily basis, within a project
+team for synchronization. In it, plans and progress of the project are
+discussed.
+○
+Scrum master is usually the project manager and Product owner basically
+means the client.
+○
+Tickets are subtasks in a project and Scrum board is maintained to keep
+track of them.
+Scrum
+
+===== page 68 =====
+Scrum
+Prepared by AYAS
+68
+Source: https://www.wrike.com/scrum-guide/scrum-sprints/
+
+===== page 69 =====
+Prepared by AYAS
+69
+●
+A particular sprint, in scrum, starts by analyzing the product backlog and
+deciding on which requirements to implement in the current sprint.
+Then, the selected requirements are added to the sprint backlog.
+●
+After that, the project team starts working on the sprint backlog in 4
+(four) phases including planning, implementation, product review, and
+process review (aka retrospective).
+●
+Finally, the completed portion of the product is delivered to the client
+for feedback. The unﬁnished sprint backlogs are sent back to the
+product backlog for the next sprint.
+Scrum
+
+===== page 70 =====
+Prepared by AYAS
+70
+●
+The advantages of scrum are as follows.
+○
+Scrum encourages less authority and hierarchy in a project team,
+thus, giving developers more freedom to express themselves and
+work.
+○
+This process model focuses on adaptability to tackle rapid changes
+in client requirements.
+○
+In scrum, the products usually take less time to become deliverable.
+Scrum
+
+===== page 71 =====
+Prepared by AYAS
+71
+●
+The advantages of scrum are as follows.
+○
+Scrum enforces more client involvement in a project.
+○
+In scrum, diﬀerent aspects of current sprint is reviewed in
+retrospective phase, thus, ensuring less mistakes in next sprint.
+Scrum
+
+===== page 72 =====
+Prepared by AYAS
+72
+●
+The disadvantage of scrum is as follows.
+○
+Scrum usually works well with small project team.
+Scrum
+
+===== page 73 =====
+Kanban
+Prepared by AYAS
+74
+To-Do
+In Progress
+Done!
+Introduction
+Details
+Goods & Bads
+
+===== page 74 =====
+Kanban
+Prepared by AYAS
+75
+Source: https://abandonedkansai.com/2017/02/14/wakayama-mountain-hotel/handwritten-japanese-drink-menu/
+
+===== page 75 =====
+Kanban
+Prepared by AYAS
+76
+●
+In Japanese, the word Kanban (看板) means signboard which is
+visible to everyone around it.
+●
+In project management, however, Kanban is another agile
+process model.
+●
+Kanban puts heavy focus on the visualization of diﬀerent aspects
+of a project so that everyone involved in a project is kept
+up-to-date all the time.
+
+===== page 76 =====
+Kanban
+Prepared by AYAS
+77
+To-Do
+In Progress
+Done!
+Introduction
+Details
+Goods & Bads
+
+===== page 77 =====
+Kanban
+Prepared by AYAS
+78
+●
+In kanban, just like scrum, diﬀerent tasks in a project are further
+divided into modular subtasks.
+●
+Each of such subtasks is, then, assigned to a Kanban card which
+contains details on that particular subtask as well as associated
+user story (aka client requirement).
+●
+A Kanban board is maintained to keep track of kanban cards.
+
+===== page 78 =====
+Kanban
+Prepared by AYAS
+79
+●
+Like scrum, kanban follows pull system, that is, whenever a
+participant is available, he/she attempts to pull a kanban card
+from left to right by working on the subtask assigned.
+●
+Similar to scrum, there is an Agile coach in a project team in
+kanban and the team conducts Daily stand-up meeting and
+retrospectives during a project.
+●
+But, unlike scrum, kanban is a continuous process, that is, there is
+no such thing as sprint or iteration.
+
+===== page 79 =====
+Kanban
+Prepared by AYAS
+80
+To-Do
+In Progress
+Done!
+Introduction
+Details
+Goods & Bads
+
+===== page 80 =====
+Kanban
+Prepared by AYAS
+81
+●
+The advantages of kanban are as follows.
+○
+Kanban encourages leadership from every participant in a project,
+thus, creating a free environment in which everyone can express
+his/her opinion about project and take decisions rapidly in the
+process.
+○
+This process model can adapt to diﬀerent natures of a project team.
+○
+Developers can adjust workload per kanban card by analyzing the
+kanban board to maintain a decent lead time in workﬂow.
+
+===== page 81 =====
+Kanban
+Prepared by AYAS
+82
+To-Do
+In Progress
+Done!
+To-Do
+In Progress
+Done!
+You probably should reduce the workload 
+per kanban card to speed up the process :(
+You can now increase the workload per 
+kanban card to ﬁnish the process :)
+
+===== page 82 =====
+Kanban
+Prepared by AYAS
+83
+●
+The disadvantage of kanban is as follows.
+○
+In kanban, there is no particular timeframe which may result in
+delay of the project.
+
+===== page 83 =====
+Kanban
+Prepared by AYAS
+84
+To-Do
+In Progress
+Done!
+Introduction
+Details
+Goods & Bads
+
+===== page 84 =====
+Jira
+Prepared by AYAS
+85
+●
+Jira, developed by Atlassian, is a widely used issue tracking
+product in agile project development.

@@ -1,0 +1,79 @@
+\documentclass[11pt,a4paper,oneside,openany]{book}
+\input{preamble}
+\begin{document}
+\frontmatter
+%==================================================== COVER
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+ \fill[navy](current page.north west) rectangle ($(current page.north east)+(0,-15.2cm)$);
+ \fill[coral]($(current page.north west)+(0,-15.2cm)$) rectangle ($(current page.north east)+(0,-15.55cm)$);
+ % decorative signal traces
+ \begin{scope}[shift={($(current page.north west)+(0,-11.6cm)$)}]
+  \draw[white!25!navy,line width=1.2pt,domain=0:21,samples=300] plot (\x,{0.9*sin(70*\x)*exp(-0.08*\x)});
+  \draw[teal!70,line width=1.2pt,domain=0:21,samples=300] plot (\x,{0.55*cos(140*\x+40)});
+  \foreach \x in {1.5,3,...,21}{\draw[gold,line width=1pt,-{Stealth[length=2mm]}] (\x,-1.9)--(\x,-1.2);}
+ \end{scope}
+ \node[anchor=north west,text=gold,font=\sffamily\bfseries\large] at ($(current page.north west)+(2.2cm,-2.4cm)$) {BUET \textbullet\ L-2/T-II \textbullet\ B.Sc.\ Engineering Examinations 2024--2025};
+ \node[anchor=north west,text=white,font=\sffamily\bfseries\fontsize{40}{44}\selectfont] at ($(current page.north west)+(2.2cm,-3.6cm)$) {CSE 219};
+ \node[anchor=north west,text=white,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ($(current page.north west)+(2.2cm,-5.4cm)$) {Signals and};
+ \node[anchor=north west,text=white,font=\sffamily\bfseries\fontsize{28}{32}\selectfont] at ($(current page.north west)+(2.2cm,-6.7cm)$) {Linear Systems};
+ \node[anchor=north west,text=white!80!navy,font=\sffamily\Large] at ($(current page.north west)+(2.2cm,-8.5cm)$) {Term Final 2024--25 \textbullet\ Complete Worked Solutions};
+\end{tikzpicture}
+\vspace*{14.6cm}
+
+{\sffamily\color{navy}
+\begin{tabular}{@{}p{3.3cm}p{3.3cm}p{3.3cm}p{3.6cm}@{}}
+{\bfseries\fontsize{26}{28}\selectfont\color{coral}8}&{\bfseries\fontsize{26}{28}\selectfont\color{coral}31}&{\bfseries\fontsize{26}{28}\selectfont\color{coral}210}&{\bfseries\fontsize{26}{28}\selectfont\color{coral}34}\\
+{\small questions}&{\small parts solved}&{\small full marks}&{\small figures \& graphs}
+\end{tabular}}
+
+\vspace{1.0cm}
+{\sffamily\small\color{slate}Question paper dated 02/11/2026, Sub: CSE 219 (Signals and Linear Systems), Full Marks 210, Time 3 hours. Section~A (Questions 1--4): sampling, DFT/FFT, $z$- and Laplace transforms built around real devices. Section~B (Questions 5--8): signals, convolution, Fourier series and Fourier transform.\par}
+\vfill
+{\sffamily\scriptsize\color{slate}Every number in this book was re-derived independently and checked numerically. Wherever the question leaves a choice open, the choice is stated in a note box.}
+\clearpage
+
+%==================================================== CONTENTS
+\pagestyle{plain}
+\chapter*{Contents}
+\renewcommand{\contentsname}{}
+\vspace{-1.6cm}
+\tableofcontents
+\clearpage
+
+\chapter*{How to read this book}
+\begin{tabularx}{\textwidth}{@{}>{\sffamily\bfseries\small}p{3.2cm}X@{}}
+\textcolor{navy}{The setting} & The story or background shared by all parts of a question, copied from the paper.\\[3pt]
+\textcolor{coral}{Question card} & Each sub-question with its marks badge, exactly as set.\\[3pt]
+\textcolor{teal}{Solution} & Step-by-step working: the idea first, then the calculation, then a check.\\[3pt]
+\textcolor{plum}{Key idea} & The one principle the examiner is testing --- worth remembering for other papers.\\[3pt]
+\textcolor{notebd}{Note} & Where the question allows a choice (a sketch parameter, a convention), the choice is stated here.\\[3pt]
+\colorbox{ansbg}{\textcolor{teal}{Answer}} & The final result, boxed, ready to copy into a script.\\
+\end{tabularx}
+
+\medskip
+\begin{keyidea}Section~A questions are long ``application'' stories. Read the setting once, translate every sentence into a signal-and-system statement (input, system, output, sampling rate, transform), and the sub-questions become routine.\end{keyidea}
+
+\medskip
+{\sffamily\small\bfseries\color{navy}Conventions used throughout}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt]
+\item $\omega=2\pi f$; $W_N=e^{-j2\pi/N}$; $X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn}$.
+\item Fourier series $x(t)=\sum_k a_ke^{jk\omega_0t}$, $a_k=\frac1T\int_Tx(t)e^{-jk\omega_0t}\dd t$.
+\item Fourier transform $X(j\omega)=\int x(t)e^{-j\omega t}\dd t$; Laplace $X(s)=\int x(t)e^{-st}\dd t$; $z$-transform $X(z)=\sum x[n]z^{-n}$.
+\end{itemize}
+
+\mainmatter
+\pagestyle{fancy}
+\addcontentsline{toc}{chapter}{\textcolor{navy}{\bfseries Section A}}
+\sectionpart{Section A}{Questions 1--4\\[4pt]\large Sampling \textbullet\ DFT \& FFT \textbullet\ $z$-transform \textbullet\ Laplace transform}
+\input{q1}
+\input{q2}
+\input{q3}
+\input{q4}
+\addcontentsline{toc}{chapter}{\textcolor{navy}{\bfseries Section B}}
+\sectionpart{Section B}{Questions 5--8\\[4pt]\large Signals \textbullet\ Convolution \textbullet\ Fourier series \textbullet\ Fourier transform}
+\input{q5}
+\input{q6}
+\input{q7}
+\input{q8}
+\end{document}

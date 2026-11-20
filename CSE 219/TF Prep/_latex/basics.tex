@@ -1,0 +1,184 @@
+\part{Foundations --- the Basics You Need First}
+
+%=====================================================================
+\chapter{Mathematical Basics for Signals and Systems}
+%=====================================================================
+Every method in this handbook rests on a short list of tools. If a step in a later solution feels like a ``trick'', it is almost certainly one of the items below.
+
+\section{Complex numbers and Euler's formula}
+\begin{formula}
+\begin{align*}
+z&=a+jb=re^{j\theta},\qquad r=\abs z=\sqrt{a^2+b^2},\ \ \theta=\operatorname{atan2}(b,a),\qquad j^2=-1,\\
+e^{j\theta}&=\cos\theta+j\sin\theta,\qquad \cos\theta=\frac{e^{j\theta}+e^{-j\theta}}2,\qquad \sin\theta=\frac{e^{j\theta}-e^{-j\theta}}{2j},\\
+z^*&=a-jb=re^{-j\theta},\qquad zz^*=\abs z^2,\qquad \frac1z=\frac{z^*}{\abs z^2},\\
+\abs{z_1z_2}&=\abs{z_1}\abs{z_2},\quad \angle(z_1z_2)=\angle z_1+\angle z_2,\qquad \operatorname{Re}z=\frac{z+z^*}2,\ \ \operatorname{Im}z=\frac{z-z^*}{2j}.
+\end{align*}
+\end{formula}
+\begin{formula}[Special values to memorise]
+\[e^{j0}=1,\ e^{j\pi/2}=j,\ e^{j\pi}=-1,\ e^{-j\pi/2}=-j,\ e^{j2\pi k}=1,\ e^{j\pi k}=(-1)^k,\ j=e^{j\pi/2},\ \tfrac1j=-j.\]
+\[\frac{1-j}{\sqrt2}=e^{-j\pi/4},\qquad \frac{1+j}{\sqrt2}=e^{j\pi/4},\qquad \sqrt{2}\,e^{j\pi/4}=1+j.\]
+\end{formula}
+\begin{method}[Rectangular $\leftrightarrow$ polar]
+\begin{steps}
+\item Magnitude $r=\sqrt{a^2+b^2}$. Angle: look at the quadrant first (a calculator's $\tan^{-1}$ only gives $-90^\circ..90^\circ$). If $a<0$ add $\pm\pi$.
+\item To \emph{multiply or divide} use polar form; to \emph{add or subtract} use rectangular form.
+\item A complex number with $\theta=0$ or $\pi$ is real; $\pm\pi/2$ is purely imaginary.
+\end{steps}
+\end{method}
+\begin{example}{amplitude and phase of a ratio}
+$H(j\omega)=\dfrac1{2+j\omega}$ at $\omega=3$: $\abs H=\dfrac1{\sqrt{13}}=0.277$, $\angle H=-\tan^{-1}\frac32=-56.3^\circ$. (The phase of a ratio is $\angle\text{num}-\angle\text{den}$.)
+\end{example}
+
+\section{Trigonometric identities}
+\begin{formula}
+\begin{align*}
+\sin^2\theta+\cos^2\theta&=1, & \cos^2\theta&=\tfrac12(1+\cos2\theta), & \sin^2\theta&=\tfrac12(1-\cos2\theta),\\
+\sin2\theta&=2\sin\theta\cos\theta, & \cos(A\pm B)&=\cos A\cos B\mp\sin A\sin B, & \sin(A\pm B)&=\sin A\cos B\pm\cos A\sin B,\\
+\cos A\cos B&=\tfrac12[\cos(A-B)+\cos(A+B)], & \sin A\sin B&=\tfrac12[\cos(A-B)-\cos(A+B)], & \sin A\cos B&=\tfrac12[\sin(A+B)+\sin(A-B)].
+\end{align*}
+\[\sin\theta=\cos(\theta-90^\circ),\qquad -\cos\theta=\cos(\theta\pm180^\circ),\qquad -\sin\theta=\cos(\theta+90^\circ).\]
+\end{formula}
+\begin{formula}[Combining sine and cosine of the same frequency]
+\[A\cos\omega t+B\sin\omega t=R\cos(\omega t-\phi),\qquad R=\sqrt{A^2+B^2},\ \ \phi=\operatorname{atan2}(B,A).\]
+Example: $3\cos2t+4\sin2t=5\cos(2t-53.13^\circ)$.
+\end{formula}
+\begin{pitfall}
+Do not mix radians and degrees: the phase in $\cos(\omega t+\theta)$ must be in the same unit as $\omega t$. Write $30^\circ=\pi/6$ before substituting numbers into a formula that also has $\pi$.
+\end{pitfall}
+
+\section{Series and sums}
+\begin{formula}
+\begin{align*}
+\sum_{n=0}^{N-1}r^n&=\frac{1-r^N}{1-r}\ (r\ne1),\qquad \sum_{n=0}^{\infty}r^n=\frac1{1-r}\ (\abs r<1),\qquad \sum_{n=n_0}^{\infty}r^n=\frac{r^{n_0}}{1-r},\\
+\sum_{n=0}^{\infty}nr^n&=\frac r{(1-r)^2},\qquad \sum_{n=1}^N n=\frac{N(N+1)}2,\qquad \sum_{n=1}^N n^2=\frac{N(N+1)(2N+1)}6,\\
+\sum_{n=0}^{N-1}e^{j2\pi kn/N}&=\begin{cases}N,&k\equiv0\pmod N\\0,&\text{otherwise}\end{cases}\qquad(\text{roots-of-unity sum: the heart of the DFT}).
+\end{align*}
+\end{formula}
+\begin{method}[Evaluating a convolution or $z$-sum with limits]
+\begin{steps}
+\item Find the range of the summation index where the integrand/sequence is non-zero (draw $x[k]$ and $h[n-k]$ as step functions in $k$).
+\item Pull out factors independent of $k$; what remains is a geometric sum $\sum r^k$.
+\item Apply $\frac{r^{\text{first}}-r^{\text{last}+1}}{1-r}$; check at one small $n$ by hand.
+\end{steps}
+\end{method}
+\begin{example}{limits of a geometric sum}
+$\sum_{k=-\infty}^{-1}12^k=\dfrac{12^{-1}}{1-12^{-1}}=\dfrac1{11}$ (first term $12^{-1}$, ratio $\frac1{12}$ going \emph{downwards}). Always ask: ``which end of the sum converges?''
+\end{example}
+
+\section{Calculus you actually use}
+\begin{formula}
+\begin{align*}
+\int e^{at}\dd t&=\frac{e^{at}}a,\qquad \int te^{at}\dd t=\frac{e^{at}(at-1)}{a^2},\qquad \int_0^\infty t^ne^{-at}\dd t=\frac{n!}{a^{n+1}}\ (a>0),\\
+\int e^{at}\cos bt\dd t&=\frac{e^{at}(a\cos bt+b\sin bt)}{a^2+b^2},\qquad \int e^{at}\sin bt\dd t=\frac{e^{at}(a\sin bt-b\cos bt)}{a^2+b^2},\\
+\int_{-\infty}^{\infty}\frac{\dd x}{a^2+x^2}&=\frac\pi a,\qquad \int_{-\infty}^\infty\frac{\sin x}{x}\dd x=\pi,\qquad \int_{-\infty}^\infty\Big(\frac{\sin x}x\Big)^2\dd x=\pi,\\
+\int_a^b u\dd v&=\big[uv\big]_a^b-\int_a^b v\dd u\qquad(\text{integration by parts: choose $u$ = the polynomial}).
+\end{align*}
+\end{formula}
+\begin{formula}[Symmetric intervals]
+\[\int_{-a}^{a}f_{\text{even}}\dd t=2\int_0^af\dd t,\qquad \int_{-a}^{a}f_{\text{odd}}\dd t=0.\]
+Even$\times$even = even, odd$\times$odd = even, even$\times$odd = odd. This is why even signals have only cosine/real Fourier coefficients and odd signals only sines/imaginary coefficients.
+\end{formula}
+\begin{method}[Limits and removable singularities]
+\begin{steps}
+\item $0/0$: factor and cancel, or use L'H\^opital (differentiate top and bottom). Famous limits: $\frac{\sin x}x\to1$, $\frac{1-e^{-\epsilon T}}{\epsilon}\to T$, $\frac{\sin(x)}{x}$ at $x=0$ is $1$, not $0$.
+\item $\operatorname{sinc}(0)=1$ and $X(s)=\frac{1-e^{-(s+a)T}}{s+a}$ is finite at $s=-a$ (value $T$).
+\end{steps}
+\end{method}
+
+\section{Partial fractions}
+\begin{formula}
+\[\frac{N(s)}{(s-p_1)(s-p_2)}=\frac{A_1}{s-p_1}+\frac{A_2}{s-p_2},\qquad A_i=\big[(s-p_i)X(s)\big]_{s=p_i}\quad(\text{cover-up rule}).\]
+\[\text{Repeated pole }p\text{ (order }m):\ \ \frac{A_1}{s-p}+\cdots+\frac{A_m}{(s-p)^m},\ \ A_{m-r}=\frac1{r!}\frac{\dd^r}{\dd s^r}\big[(s-p)^mX(s)\big]_{s=p}.\]
+\end{formula}
+\begin{method}[Procedure]
+\begin{steps}
+\item If $\deg N\ge\deg D$, divide first (the quotient is a polynomial: $\delta(t)$ terms for Laplace, a constant/delay for $z$).
+\item Factor the denominator; a quadratic with complex roots stays as $\dfrac{Bs+C}{(s+\sigma)^2+\omega^2}$.
+\item Find the constants by the cover-up rule; \emph{check} by evaluating both sides at one convenient value (e.g.\ $s=0$).
+\item For the $z$-transform, expand $X(z)/z$ (or write in $z^{-1}$ with unit constant term) so that each term is $\frac A{1-pz^{-1}}$.
+\end{steps}
+\end{method}
+\begin{example}{cover-up}
+$\dfrac{s+2}{(s+3)(s+4)}$: at $s=-3$, $A=\frac{-1}{1}=-1$; at $s=-4$, $B=\frac{-2}{-1}=2$. Check at $s=0$: $\frac{2}{12}=\frac{-1}3+\frac24=\frac16$, correct.
+\end{example}
+
+\section{Standard signals: definitions and conventions}
+\begin{formula}
+\[u(t)=\begin{cases}1,&t>0\\0,&t<0\end{cases},\qquad r(t)=tu(t),\qquad \delta(t)=\frac{\dd u}{\dd t},\quad\int\delta(t)\dd t=1,\qquad \sgn t=2u(t)-1,\]
+\[\rect(t)=\begin{cases}1,&\abs t<\frac12\\0,&\text{else}\end{cases},\qquad \operatorname{tri}(t)=\max(0,\,1-\abs t),\]
+\[\sinc x=\frac{\sin\pi x}{\pi x}\ \text{(normalised; used with $f$ in Hz)}\qquad\text{or}\qquad \frac{\sin x}x\ \text{(unnormalised; used with $\omega$)}.\]
+\end{formula}
+\begin{pitfall}
+Always check which \emph{sinc} convention a question uses; the two differ by a factor of $\pi$ inside the argument, and the energy $\int\sinc^2$ is $1$ (normalised) or $\pi$ (unnormalised). Also $u[n]$ equals $1$ at $n=0$, while $u(0)$ is undefined/$\frac12$ in continuous time.
+\end{pitfall}
+
+\section{The impulse: rules of the game}
+\begin{formula}
+\begin{align*}
+\int x(t)\delta(t-t_0)\dd t&=x(t_0)\quad(\text{sifting}), & x(t)\delta(t-t_0)&=x(t_0)\delta(t-t_0),\\
+\delta(at)&=\frac1{\abs a}\delta(t), & \delta(-t)&=\delta(t),\\
+x(t)*\delta(t-t_0)&=x(t-t_0), & \delta[n]&=u[n]-u[n-1],\qquad x[n]=\sum_kx[k]\delta[n-k].
+\end{align*}
+\end{formula}
+\begin{method}[Integrals containing $\delta$]
+\begin{steps}
+\item Find where the argument of $\delta$ vanishes ($t_0$): is $t_0$ \emph{inside} the integration limits? If not, the integral is $0$; if it sits on a limit, the problem usually says how to treat it.
+\item Replace everything else by its value at $t_0$ (and divide by $\abs a$ for $\delta(at)$).
+\item If $\delta$ is multiplied by a function of $t$, use $x(t)\delta(t-t_0)=x(t_0)\delta(t-t_0)$ before integrating or transforming.
+\end{steps}
+\end{method}
+
+\section{Orthogonality and the idea behind Fourier analysis}
+\begin{formula}
+\begin{align*}
+\text{inner product: }\ \langle x,z\rangle&=\int_{t_1}^{t_2}x(t)z^*(t)\dd t,\qquad \text{orthogonal}\iff\langle x,z\rangle=0,\\
+\text{projection/coefficient: }\ c&=\frac{\langle x,\phi\rangle}{\langle\phi,\phi\rangle},\qquad \text{orthonormal}\iff\langle\phi_i,\phi_j\rangle=\delta_{ij},\\
+\frac1T\int_Te^{j(k-m)\omega_0t}\dd t&=\begin{cases}1,&k=m\\0,&k\ne m\end{cases}\quad\Rightarrow\quad a_k=\frac1T\int_Tx(t)e^{-jk\omega_0t}\dd t .
+\end{align*}
+\end{formula}
+Picture: in vector algebra a coordinate is a dot product with a unit axis. Fourier analysis is the same idea with the axes $e^{jk\omega_0t}$; a signal is a point with coordinates $a_k$.
+
+\section{Systems: what the words mean}
+\begin{formula}[One-line tests]
+\begin{center}\small\renewcommand{\arraystretch}{1.3}\begin{tabular}{@{}lp{9cm}@{}}\toprule
+linear&$T\{a x_1+bx_2\}=aT\{x_1\}+bT\{x_2\}$ (additivity + homogeneity; zero input $\Rightarrow$ zero output)\\
+time-invariant&delaying the input by $t_0$ delays the output by $t_0$: $x(t-t_0)\to y(t-t_0)$\\
+causal&output at $t$ depends on inputs at $\tau\le t$; for LTI, $h(t)=0$ for $t<0$\\
+stable (BIBO)&bounded input $\Rightarrow$ bounded output; for LTI, $\int\abs{h}\dd t<\infty$ ($\sum\abs{h[n]}<\infty$)\\
+memoryless&output at $t$ depends only on $x(t)$; for LTI, $h=K\delta(t)$\\
+invertible&distinct inputs give distinct outputs\\\bottomrule\end{tabular}\end{center}
+\end{formula}
+\begin{formula}[LTI systems: three equivalent descriptions]
+\[y=x*h\ \ \longleftrightarrow\ \ Y(\omega)=X(\omega)H(\omega)\ \ \longleftrightarrow\ \ Y(s)=X(s)H(s)\ (Y(z)=X(z)H(z)).\]
+Complex exponentials are eigenfunctions: $e^{j\omega t}\to H(j\omega)e^{j\omega t}$. Cascade: $h_1*h_2$ ($H_1H_2$); parallel: $h_1+h_2$; feedback: $\frac{G}{1+GH}$.
+\end{formula}
+
+\section{Energy, power, periodicity in one glance}
+\begin{formula}
+\begin{align*}
+E&=\int\abs{x}^2\dd t\ \ \Big(\sum\abs{x[n]}^2\Big),\qquad P=\lim\frac1{2T}\int_{-T}^{T}\abs x^2\dd t,\\
+\text{periodic }T_0\ \Rightarrow\ P&=\frac1{T_0}\int_{T_0}\abs x^2\dd t\ \ (E=\infty),\qquad \text{sinusoid }A\cos(\omega t+\theta):\ P=\frac{A^2}2,\\
+\text{sum of sinusoids of distinct }\omega:\ P&=\sum\frac{A_k^2}2\ \ (\text{powers add}),\qquad \text{DC }c:\ P=c^2 .
+\end{align*}
+\end{formula}
+\begin{method}[Periodicity test]
+\begin{steps}
+\item Continuous time: $\cos(\omega_0t)$ has $T_0=2\pi/\omega_0$; a sum is periodic iff all ratios $\omega_i/\omega_j$ are rational; $T=$ lcm of the periods ($\omega_0=\gcd$ of the frequencies).
+\item Discrete time: $e^{j\omega_0n}$ is periodic iff $\omega_0/2\pi=m/N$ is rational; $N_0=N/\gcd(m,N)$.
+\end{steps}
+\end{method}
+
+\section{Logarithms, decibels and units}
+\begin{formula}
+\[\text{dB}=20\log_{10}\abs{H}=10\log_{10}\abs H^2,\qquad -3\text{ dB}\iff\abs H=\tfrac1{\sqrt2}\iff\text{half power},\qquad \omega=2\pi f,\ \ T=\frac1f .\]
+\[e^{-1}=0.368,\ \ e^{-2}=0.135,\ \ \ln2=0.693,\ \ \pi=3.1416,\ \ \sqrt2=1.4142,\ \ \sqrt3=1.7321 .\]
+\end{formula}
+
+\section{Which transform for which problem?}
+\begin{center}\small\renewcommand{\arraystretch}{1.3}\begin{tabular}{@{}p{3.6cm}p{5.4cm}p{5.2cm}@{}}\toprule
+signal type&tool&use for\\\midrule
+periodic, continuous&Fourier series $a_k$, $\omega_0=2\pi/T$&line spectra, power, response through a filter ($a_kH(jk\omega_0)$)\\
+aperiodic, continuous&Fourier transform $X(\omega)$&bandwidth, modulation, energy, filtering\\
+finite, discrete&DFT / FFT&numerical spectra, fast circular/linear convolution\\
+discrete, any&DTFT, $z$-transform&frequency response, difference equations, stability\\
+continuous with initial conditions&Laplace transform&circuits, ODEs, feedback and stability\\\bottomrule\end{tabular}\end{center}

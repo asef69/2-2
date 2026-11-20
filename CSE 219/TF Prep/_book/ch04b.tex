@@ -1,0 +1,108 @@
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q7(b)}{EEE 211 \textbullet\ EEE p.11}{15}
+Consider an LTI system where $x(t)=h(t)=t\,[u(t)-u(t-1)]$. Find the expression of the output $y(t)$ of the system for all $t$.
+\end{qcard}
+\begin{solution}
+Both signals are the ramp $t$ on $(0,1)$. $y(t)=\int x(\tau)h(t-\tau)\dd\tau$ with $0<\tau<1$ and $0<t-\tau<1$, i.e.\ $\max(0,t-1)<\tau<\min(1,t)$.
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $0\le t\le1$ (limits $0$ to $t$): $y=\int_0^t\tau(t-\tau)\dd\tau=\dfrac{t^3}{6}$.
+\item $1\le t\le2$ (limits $t-1$ to $1$): $y=\int_{t-1}^{1}\tau(t-\tau)\dd\tau=-\dfrac{t^3}{6}+t-\dfrac23$.
+\item otherwise $0$.
+\end{itemize}
+Check: both formulas give $\frac16$ at $t=1$; the second gives $0$ at $t=2$; the area of $y$ is $\frac12\cdot\frac12=\frac14$.
+\begin{center}\begin{tikzpicture}\begin{axis}[sig,width=8cm,height=3.4cm,title={$y(t)$},xmin=-0.5,xmax=2.5,ymin=-0.03,ymax=0.25,xtick={1,2}]
+\addplot[thick,navy,domain=0:1]{x^3/6};\addplot[thick,navy,domain=1:2]{-x^3/6+x-2/3};\end{axis}\end{tikzpicture}\end{center}
+\ans{$y(t)=\frac{t^3}{6}$ for $0\le t\le1$; $\;-\frac{t^3}{6}+t-\frac23$ for $1\le t\le2$; $0$ otherwise.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q2(a)}{EEE 211 \textbullet\ EEE p.12}{17}
+The input $x(t)$ and the impulse response $h(t)$ of an LTI system are shown in the figure: $x(t)$ is a triangle on $(0,2)$ with peak 1 at $t=1$; $h(t)$ is a rectangle of height 2 on $(0,1)$ together with a unit impulse at $t=3$. Compute the output $y(t)$ using the graphical method. Also write the analytical expression of $y(t)$.
+\end{qcard}
+\begin{solution}
+$h(t)=2[u(t)-u(t-1)]+\delta(t-3)$, so $y=2\int_{t-1}^{t}x(s)\dd s+x(t-3)$. The running integral of the triangle is $X(s)=\frac{s^2}{2}$ ($0\le s\le1$), $1-\frac{(2-s)^2}{2}$ ($1\le s\le2$), $1$ ($s\ge2$).
+\begin{center}\small\begin{tabular}{@{}ll@{}}\toprule interval & rectangular part $2[X(t)-X(t-1)]$\\\midrule
+$0\le t\le1$ & $t^2$\\
+$1\le t\le2$ & $2-(2-t)^2-(t-1)^2=-2t^2+6t-3$\\
+$2\le t\le3$ & $(3-t)^2$\\\bottomrule\end{tabular}\end{center}
+The impulse produces the delayed triangle $x(t-3)$: $t-3$ on $(3,4)$ and $5-t$ on $(4,5)$.
+\begin{center}\begin{tikzpicture}\begin{axis}[sig,width=9cm,height=3.6cm,title={$y(t)$},xmin=-0.5,xmax=5.5,ymin=-0.1,ymax=1.7,xtick={1,2,3,4,5}]
+\addplot[thick,navy,domain=0:1]{x^2};\addplot[thick,navy,domain=1:2]{-2*x^2+6*x-3};\addplot[thick,navy,domain=2:3]{(3-x)^2};
+\addplot[thick,navy]coordinates{(3,0)(4,1)(5,0)};\end{axis}\end{tikzpicture}\end{center}
+\ans{$y=t^2$ ($0\le t\le1$); $-2t^2+6t-3$ ($1\le t\le2$); $(3-t)^2$ ($2\le t\le3$); then the triangle $x(t-3)$ on $(3,5)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q6(b)}{EEE 211 \textbullet\ EEE p.20}{10}
+Using graphical convolution, determine the output $y(t)$ of an LTI system if the input is $x(t)=\operatorname{rect}(t/2)$ and the system impulse response is $h(t)=r(t)\,u(-t+1)$. Also write the analytical expression of $y(t)$ and draw it.
+\end{qcard}
+\begin{solution}
+$x=1$ on $(-1,1)$ and $h(t)=t$ on $(0,1)$. With $x$ a rectangle, $y(t)=\int_{t-1}^{t+1}h(s)\dd s$.
+\begin{center}\small\begin{tabular}{@{}lll@{}}\toprule interval & overlap of $(t-1,t+1)$ with $(0,1)$ & $y(t)$\\\midrule
+$-1\le t\le0$ & $(0,t+1)$ & $\frac{(t+1)^2}{2}$\\
+$0\le t\le1$ & the whole $(0,1)$ & $\frac12$\\
+$1\le t\le2$ & $(t-1,1)$ & $\frac12-\frac{(t-1)^2}{2}$\\
+else & none & $0$\\\bottomrule\end{tabular}\end{center}
+\begin{center}\begin{tikzpicture}\begin{axis}[sig,width=8cm,height=3.2cm,title={$y(t)$},xmin=-2,xmax=3,ymin=-0.1,ymax=0.7,xtick={-1,1,2}]
+\addplot[thick,navy,domain=-1:0]{(x+1)^2/2};\addplot[thick,navy,domain=0:1]{0.5};\addplot[thick,navy,domain=1:2]{0.5-(x-1)^2/2};\end{axis}\end{tikzpicture}\end{center}
+\ans{$y=\frac{(t+1)^2}{2}$ ($-1\le t\le0$), $\frac12$ ($0\le t\le1$), $\frac{1-(t-1)^2}{2}$ ($1\le t\le2$), $0$ otherwise.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q2}{EEE 211 \textbullet\ EEE p.22--23}{35}
+Suppose an LTI system has impulse response $h(t)$ and input $x(t)$. The figure shows $x(t)$ (a rectangle of height 1 on $(0,2)$) and $h(t+1)$ (a triangle of height 1 on $(-1,1)$).
+(i) Is the system causal? (ii) Use the graphical convolution technique to determine $y(t)=x(t)*h(t)$. (iii) Compare $x(t)$ and $y(t)$, and explain what this system does. (iv) Sketch the output of the system for a different input $z(t)=x(t)-x(t-4)$.
+\end{qcard}
+\begin{solution}
+\step{(i)} $h(t+1)$ is a triangle on $(-1,1)$, so $h(t)$ is a triangle on $(0,2)$ with peak at $t=1$: $h(t)=0$ for $t<0$ --- \emph{causal}.
+
+\step{(ii)} $x$ is a rectangle on $(0,2)$: $y(t)=\int_{t-2}^{t}h(s)\dd s=H(t)-H(t-2)$ with $H(s)=\frac{s^2}2$ ($0\le s\le1$), $1-\frac{(2-s)^2}{2}$ ($1\le s\le2$), $1$ ($s\ge2$):
+\[
+y(t)=\begin{cases}\frac{t^2}2,&0\le t\le1,\\1-\frac{(2-t)^2}2,&1\le t\le2,\\1-\frac{(t-2)^2}2,&2\le t\le3,\\\frac{(4-t)^2}2,&3\le t\le4,\\0,&\text{otherwise.}\end{cases}
+\]
+\step{(iii)} $y$ is a smoothed copy of $x$: the sharp edges become S-shaped curves, the duration grows from 2 to 4 (sum of the durations), the peak is $y(2)=1$ and the area is preserved ($\int y=\int x\int h=2\cdot1=2$). The system is a causal smoothing (low-pass) filter: a triangular-weighted moving average over 2 seconds with a delay of 1.
+
+\step{(iv)} $z=x(t)-x(t-4)$, so the output is $y(t)-y(t-4)$: the smooth pulse on $(0,4)$ followed by its negative on $(4,8)$.
+\begin{center}
+\begin{tikzpicture}\begin{axis}[sig,width=7.5cm,height=3.2cm,title={$y(t)=x*h$},xmin=-0.5,xmax=4.5,ymin=-0.1,ymax=1.3,xtick={1,2,3,4}]
+\addplot[thick,navy,domain=0:1]{x^2/2};\addplot[thick,navy,domain=1:2]{1-(2-x)^2/2};\addplot[thick,navy,domain=2:3]{1-(x-2)^2/2};\addplot[thick,navy,domain=3:4]{(4-x)^2/2};\end{axis}\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}\begin{axis}[sig,width=7.5cm,height=3.2cm,title={output for $z(t)$},xmin=-0.5,xmax=8.5,ymin=-1.3,ymax=1.3,xtick={2,4,6,8}]
+\addplot[thick,navy,domain=0:1]{x^2/2};\addplot[thick,navy,domain=1:2]{1-(2-x)^2/2};\addplot[thick,navy,domain=2:3]{1-(x-2)^2/2};\addplot[thick,navy,domain=3:4]{(4-x)^2/2};
+\addplot[thick,crimson,domain=4:5]{-(x-4)^2/2};\addplot[thick,crimson,domain=5:6]{-(1-(2-(x-4))^2/2)};\addplot[thick,crimson,domain=6:7]{-(1-((x-4)-2)^2/2)};\addplot[thick,crimson,domain=7:8]{-(8-x)^2/2};\end{axis}\end{tikzpicture}
+\end{center}
+\ans{Causal; $y$ is a 4-second smooth pulse (peak 1 at $t=2$), i.e.\ a smoothing low-pass system; for $z$ the output is $y(t)-y(t-4)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q7(b)}{EEE 211 \textbullet\ EEE p.31}{15}
+Let $h(t)=u(t)-u(t-1)$ and $x(t)=t^2\,[u(t)-u(t-3)]$. Using graphical convolution compute the output $y(t)$ and write its analytical expression.
+\end{qcard}
+\begin{solution}
+$h$ is a rectangle of width 1, so $y(t)=\int_{t-1}^{t}x(s)\dd s$ with $x=s^2$ on $(0,3)$:
+\begin{center}\small\begin{tabular}{@{}lll@{}}\toprule interval & window $(t-1,t)$ & $y(t)$\\\midrule
+$0\le t\le1$ & $(0,t)$ & $\dfrac{t^3}{3}$\\
+$1\le t\le3$ & inside $(0,3)$ & $\dfrac{t^3-(t-1)^3}{3}=t^2-t+\dfrac13$\\
+$3\le t\le4$ & $(t-1,3)$ & $\dfrac{27-(t-1)^3}{3}$\\
+else & none & $0$\\\bottomrule\end{tabular}\end{center}
+Check: continuity at $t=1$ ($\frac13$) and $t=3$ ($\frac{19}{3}$), $y(4)=0$, area $=9\cdot1=9$.
+\begin{center}\begin{tikzpicture}\begin{axis}[sig,width=8cm,height=3.4cm,title={$y(t)$},xmin=-0.5,xmax=4.5,ymin=-0.5,ymax=8,xtick={1,3,4}]
+\addplot[thick,navy,domain=0:1]{x^3/3};\addplot[thick,navy,domain=1:3]{x^2-x+1/3};\addplot[thick,navy,domain=3:4]{(27-(x-1)^3)/3};\end{axis}\end{tikzpicture}\end{center}
+\ans{$y=\frac{t^3}3$ ($0\le t\le1$); $t^2-t+\frac13$ ($1\le t\le3$); $\frac{27-(t-1)^3}{3}$ ($3\le t\le4$); $0$ otherwise.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q4(b)}{CSE 311 \textbullet\ TF p.18}{17}
+Prove that for an input signal $x(t)$, the output of a linear time-invariant system with impulse response $h(t)$ is given by $y(t)=x(t)*h(t)$. Use \emph{only} time-domain variables and equations.
+\end{qcard}
+\begin{solution}
+Let $S$ denote the system and $h(t)=S\{\delta(t)\}$ (definition of the impulse response).
+\begin{steps}
+\item \emph{Sifting.} Any input is a continuum of impulses: $x(t)=\displaystyle\int_{-\infty}^{\infty}x(\tau)\,\delta(t-\tau)\dd\tau$.
+\item \emph{Time invariance.} $S\{\delta(t-\tau)\}=h(t-\tau)$.
+\item \emph{Homogeneity.} The weight $x(\tau)\dd\tau$ does not depend on $t$, so $S\{x(\tau)\dd\tau\,\delta(t-\tau)\}=x(\tau)\dd\tau\,h(t-\tau)$.
+\item \emph{Additivity (the integral is a limit of sums).}
+\[y(t)=S\{x(t)\}=\int_{-\infty}^{\infty}x(\tau)\,h(t-\tau)\dd\tau=(x*h)(t).\]
+\end{steps}
+Only linearity (steps 3--4) and time invariance (step 2) were used, so the result holds for every LTI system. (Discrete time: $x[n]=\sum_kx[k]\delta[n-k]\Rightarrow y[n]=\sum_kx[k]h[n-k]$.)
+\ans{$y(t)=\int x(\tau)h(t-\tau)\dd\tau=x*h$, from sifting, time invariance and linearity.}
+\end{solution}

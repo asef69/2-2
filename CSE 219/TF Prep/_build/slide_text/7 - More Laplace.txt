@@ -1,0 +1,859 @@
+
+===== page 1 =====
+More Laplace Transform
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Outline
+• Properties of the Laplace Transform
+• Algebraic rules, ROC behavior, and quick examples
+• A compact summary table
+• Some Laplace Transform Pairs
+• Common right-sided, left-sided, and oscillatory signals
+• Analysis and Characterization of LTI Systems Using LT
+• System function, causality, and stability
+• Differential Equations and System Models
+• Converting differential equations into algebra
+• Solving a zero-state response and analyzing an RLC circuit
+1
+
+===== page 3 =====
+Properties of the Laplace Transform
+
+===== page 4 =====
+Linearity
+Linearity
+If x1(t)
+L
+←→X1(s) with ROC R1 and x2(t)
+L
+←→X2(s) with ROC R2, then
+ax1(t) + bx2(t)
+L
+←→aX1(s) + bX2(s)
+with ROC containing at least R1 ∩R2.
+Proof sketch:
+L{ax1(t) + bx2(t)} = a
+∫∞
+0
+e−stx1(t)dt + b
+∫∞
+0
+e−stx2(t)dt = aX1(s) + bX2(s)
+so convergence is guaranteed wherever both original transforms converge.
+Example
+x(t) = e−tu(t) + 2e−2tu(t)
+L
+←→
+1
+s + 1 +
+2
+s + 2 ,
+Re{s} > −1
+Important caution
+The intersection ROC is a guaranteed starting point, not always the final answer.
+2
+
+===== page 5 =====
+Example 9.13: Cancellation Can Extend the ROC
+• Let
+X1(s) =
+1
+s + 1 ,
+Re{s} > −1
+and
+X2(s) =
+1
+(s + 1)(s + 2) ,
+Re{s} > −1
+• By linearity, the ROC of X1(s) −X2(s) must contain
+at least
+Re{s} > −1
+• Form the difference:
+X(s) = X1(s)−X2(s) =
+1
+s + 1 −
+1
+(s + 1)(s + 2) =
+1
+s + 2
+• The pole at s = −1 disappears after cancellation, so
+the actual ROC expands to
+Re{s} > −2
+Takeaway: the intersection ROC is only the guaranteed
+part. If poles cancel, the actual ROC can extend further.
+−1
+X1(s)
+−2
+−1
+X2(s)
+−2
+X(s)
+3
+
+===== page 6 =====
+Time Shifting
+Time Shifting
+x(t −t0)
+L
+←→e−st0X(s),
+ROC = R
+Proof sketch: Using the substitution τ = t −t0,
+L{x(t −t0)} =
+∫∞
+−∞
+x(t −t0)e−stdt
+=
+∫∞
+−∞
+x(τ)e−s(τ+t0)dτ
+= e−st0
+∫∞
+−∞
+x(τ)e−sτ dτ
+= e−st0X(s)
+Example
+u(t −2)
+L
+←→e−2s
+s
+,
+Re{s} > 0
+The delay changes the transform, not the ROC.
+2
+1
+u(t)
+u(t −2)
+t
+x(t)
+4
+
+===== page 7 =====
+Shifting in the s-Domain
+Shifting in the s-Domain
+If x(t)
+L
+←→X(s) with ROC R, then
+es0tx(t)
+L
+←→X(s −s0)
+with ROC = R + Re{s0}.
+Proof sketch:
+Using the substitution s′ = s −s0,
+L{es0tx(t)} =
+∫∞
+−∞
+es0tx(t)e−stdt
+=
+∫∞
+−∞
+x(t)e−s′tdt
+= X(s′) = X(s −s0)
+so the ROC becomes R + Re{s0} (right shifted by Re{s0}).
+Example: from u(t)
+L
+←→1
+s ,
+e−2tu(t)
+L
+←→
+1
+s + 2 ,
+Re{s} > −2
+ROC Shift
+r2
+r1
+R
+Re{s}
+Im{s}
+r2 + Re{s0}
+r1 + Re{s0}Re{s}
+Im{s}
+5
+
+===== page 8 =====
+Time Scaling
+Time Scaling
+x(at)
+L
+←→1
+|a| X
+( s
+a
+)
+with ROC = aR.
+Proof sketch: Let λ = at, so dt = dλ/a.
+L{x(at)} =
+∫∞
+−∞
+x(at)e−stdt
+=
+∫∞
+−∞
+x(λ)e−sλ/a dλ
+a
+=
+{
+1
+a
+∫∞
+−∞x(λ)e−λ(s/a)dλ = 1
+a X
+( s
+a
+)
+,
+a > 0
+1
+a
+∫−∞
+∞
+x(λ)e−λ(s/a)dλ = −1
+a X
+( s
+a
+)
+,
+a < 0
+=
+1
+|a| X
+( s
+a
+)
+Note that:
+• If 0 < a < 1, the signal is compressed in time.
+• If a > 1, the signal is stretched in time.
+• If a < 0, the signal is flipped in time and scaled.
+Scaling example:
+x(t) = e−tu(t) =⇒X(s) =
+1
+s + 1
+Hence,
+x(2t) = e−2tu(t)
+L
+←→1
+2 X
+( s
+2
+)
+=
+1
+s + 2
+ROC Under Scaling
+r2
+r1
+R
+r2
+2
+r1
+2
+0 < a < 1
+6
+
+===== page 9 =====
+Time Reversal
+Time Reversal
+Time reversal is the special case a = −1:
+x(−t)
+L
+←→X(−s),
+ROC = −R
+Example:
+e−tu(t)
+L
+←→
+1
+s + 1,
+Re{s} > −1
+hence
+etu(−t)
+L
+←→
+1
+1 −s,
+Re{s} < 1
+ROC Flip in the s-Plane
+−1
+original ROC
+1
+reversed ROC
+7
+
+===== page 10 =====
+Conjugation
+Conjugation
+x∗(t)
+L
+←→X∗(s∗)
+with ROC = R.
+Proof sketch:
+L{x∗(t)} =
+∫∞
+−∞
+x∗(t)e−stdt =
+(∫∞
+−∞
+x(t)e−s∗tdt
+)∗
+= X∗(s∗)
+Special case: Note x(t) is real, then x∗(t) = x(t), so X∗(s∗) = X(s). So, if X(s) = 0 or X(s) = ±∞at some
+s0, then X(s∗
+0) must also be zero or ±∞.
+Pole-Zero Symmetry for Real Signals
+If x(t) is real and X(s) is rational, its poles and zeros are either real or form complex conjugate pairs.
+Example: In example 9.4 the transform of real x(t) has poles at s = 1 ± 3j that are complex conjugates.
+8
+
+===== page 11 =====
+Convolution
+Convolution
+x1(t) ∗x2(t)
+L
+←→X1(s)X2(s)
+with ROC containing at least R1 ∩R2.
+Proof sketch:
+L{x1(t) ∗x2(t)} =
+∫∞
+−∞
+(∫∞
+−∞
+x1(τ)x2(t −τ)dτ
+)
+e−stdt =
+∫∞
+−∞
+x1(τ)
+(∫∞
+−∞
+x2(t −τ)e−stdt
+)
+dτ
+=
+∫∞
+−∞
+x1(τ)e−sτ dτ
+∫∞
+−∞
+x2(λ)e−sλdλ
+substituting λ = t −τ
+= X1(s)X2(s),
+ROC ⊇R1 ∩R2 as both integrals converge in this region
+Important caution
+The intersection ROC is only the guaranteed part, not always the final answer. If poles cancel, the actual
+ROC can extend further.
+Example:
+If X1(s) = s+1
+s+2 with Re{s} > −2 and X2(s) = s+2
+s+1 with Re{s} > −1, then X1(s)X2(s) = 1 and ROC is the entire s-plane.
+9
+
+===== page 12 =====
+Differentiation in Time
+Differentiation in Time
+d
+dt x(t)
+L
+←→sX(s)
+with ROC containing R.
+Proof sketch: Taking the inverse transform,
+x(t) =
+1
+2πj
+∫c+j∞
+c−j∞
+X(s)estds = L−1{X(s)}
+d
+dt x(t) =
+1
+2πj
+∫c+j∞
+c−j∞
+sX(s)estds = L−1{sX(s)}
+Therefore,
+L
+{ d
+dt x(t)
+}
+= sX(s)
+which converges in R, so the ROC of the derivative contains R.
+Why it matters
+Differential equations become algebraic equations because every derivative contributes a factor of s.
+10
+
+===== page 13 =====
+Differentiation in Time
+Example:
+u(t)
+L
+←→1
+s ,
+Re{s} > 0
+d
+dt u(t) = δ(t)
+L
+←→s · 1
+s = 1,
+Re{s} > −∞
+Note again that the ROC of the derivative is larger than that of the original signal. X(s) = 1
+s had a
+single-order pole at s = 0, but multiplication with s cancelled the pole.
+If X(s) has a first-order pole at s = 0, then multiplication by s cancels the pole, so the ROC of sX(s) extends.
+Important caution
+The ROC of the derivative can be larger than that of the original signal. If X(s) has a pole at s = 0,
+then multiplication by s cancels the pole, so the ROC of sX(s) extends to include s = 0.
+11
+
+===== page 14 =====
+Differentiation in the s-Domain
+Differentiation in the s-Domain
+−t x(t)
+L
+←→dX(s)
+ds
+with ROC = R.
+Proof sketch:
+dX(s)
+ds
+= d
+ds
+∫∞
+−∞
+x(t)e−stdt =
+∫∞
+−∞
+(−t)x(t)e−stdt = L{−tx(t)}
+• As for every s ∈R differentiation is valid, the ROC contains R.
+• If
+∫∞
+−∞|t||x(t)|e−σtdt converges for some σ, then
+∫∞
+−∞|x(t)|e−σtdt also converges.
+So, the ROC of dX(s)
+ds
+is exactly R.
+12
+
+===== page 15 =====
+Example 9.14: Differentiation in the s-Domain
+Example: since
+e−atu(t)
+L
+←→
+1
+s + a,
+Re{s} > −a
+we get
+te−atu(t)
+L
+←→−d
+ds
+(
+1
+s + a
+)
+=
+1
+(s + a)2 ,
+Re{s} > −a
+We can continue to differentiate to get,
+t2
+2 e−atu(t)
+L
+←→
+1
+(s + a)3 ,
+Re{s} > −a
+More generally, for n = 0, 1, 2, . . .,
+tn−1
+(n −1)!e−atu(t)
+L
+←→
+1
+(s + a)n ,
+Re{s} > −a
+13
+
+===== page 16 =====
+Example 9.15: Differentiation in the s-Domain
+Example: Consider the Laplace transform
+X(s) =
+2s2 + 5s + 5
+(s + 1)2(s + 2),
+Re{s} > −1
+Applying partial fraction expansion, we can write
+X(s) =
+2
+(s + 1)2 −
+1
+s + 1 +
+3
+s + 2,
+Re{s} > −1
+Sincce the ROC is right of the poles, each signal must be right-sided. Hence, using that
+e−atu(t)
+L
+←→
+1
+s + a,
+Re{s} > −a
+te−atu(t)
+L
+←→
+1
+(s + a)2 ,
+Re{s} > −a
+we get
+x(t) = 2te−tu(t) −e−tu(t) + 3e−2tu(t)
+=
+(
+2te−t −e−t + 3e−2t)
+u(t)
+14
+
+===== page 17 =====
+Integration in Time
+Integration in Time
+∫t
+−∞
+x(τ)dτ
+L
+←→1
+s X(s)
+with ROC containing R ∩{Re{s} > 0}.
+Proof sketch:
+∫t
+−∞
+x(τ)dτ =
+∫∞
+−∞
+x(τ)u(t −τ)dτ = x(t) ∗u(t)
+So,
+L
+{∫t
+−∞
+x(τ)dτ
+}
+= L{x(t) ∗u(t)} = X(s) · 1
+s
+The ROC of the integral contains R ∩{Re{s} > 0} because the convolution integral converges in this region.
+Example:
+∫t
+−∞
+u(τ)dτ = tu(t)
+⇐⇒
+1
+s · 1
+s = 1
+s2 ,
+Re{s} > 0
+15
+
+===== page 18 =====
+Summary Table of LT Properties
+Property
+Signal Relation
+Laplace Transform
+ROC Note
+Linearity
+ax1(t) + bx2(t)
+aX1(s) + bX2(s)
+Contains at least R1 ∩R2
+Time shifting
+x(t −t0)
+e−st0X(s)
+Same ROC
+Shifting in s
+es0tx(t)
+X(s −s0)
+Shifts by Re{s0}
+Time scaling
+x(at)
+1
+|a|X
+( s
+a
+)
+ROC becomes the scaled set
+aR
+Time reversal
+x(−t)
+X(−s)
+ROC becomes −R
+Conjugation
+x∗(t)
+X∗(s∗)
+Same ROC
+Convolution
+x1(t) ∗x2(t)
+X1(s)X2(s)
+Contains at least R1 ∩R2
+Time differentiation
+d
+dtx(t)
+sX(s)
+ROC contains R
+s-differentiation
+−tx(t)
+dX(s)
+ds
+Same ROC
+Time integration
+∫t
+−∞x(τ)dτ
+1
+sX(s)
+Contains R ∩{Re{s} > 0}
+16
+
+===== page 19 =====
+Analysis and Characterization of LTI
+Systems Using LT
+
+===== page 20 =====
+Transform-Domain View of an LTI System
+• For an LTI system with impulse response h(t),
+Y (s) = H(s)X(s)
+where H(s) = L{h(t)} is the system function.
+• Laplace transforms convert convolution in time into
+multiplication in the s-domain.
+• If the ROC of H(s) includes the jω-axis, then
+H(jω)
+is the frequency response.
+• This is why poles, zeros, and the ROC are so valuable:
+they reveal causality, stability, and the shape of the
+response.
+Main payoff
+We often learn a lot about the system just by in-
+specting H(s).
+x(t)
+H(s)
+y(t)
+X(s)
+Y (s) = H(s)X(s)
+Y (s)
+Eigenfunction Reminder
+For x(t) = est,
+y(t) = H(s)est
+whenever s lies in the ROC of H(s).
+17
+
+===== page 21 =====
+Causality from the ROC
+Causality Tests
+• If a system is causal, then h(t) = 0 for t < 0, so
+the ROC of H(s) is a right-half plane.
+• If H(s) is rational, causality is equivalent to
+the ROC being to the right of the rightmost
+pole.
+Example 9.17
+h(t) = e−tu(t) =⇒H(s) =
+1
+s + 1 ,
+Re{s} > −1
+Right-sided impulse response, so the system is causal.
+Example 9.18
+h(t) = e−|t| =⇒H(s) =
+−2
+s2 −1 ,
+−1 < Re{s} < 1
+Two-sided impulse response, so the system is not causal.
+−1
+causal
+−1
+1
+not causal
+18
+
+===== page 22 =====
+Stability from the ROC: Example 9.20
+Stability Test
+An LTI system is stable iff the ROC of H(s)
+includes the entire jω-axis.
+Consider
+H(s) =
+s −1
+(s + 1)(s −2)
+The poles are at s = −1 and s = 2, so there are three
+possible ROCs:
+• Re{s} > 2: causal, but unstable
+• −1 < Re{s} < 2: noncausal, but stable
+• Re{s} < −1: anticausal, and unstable
+Only the middle ROC contains the jω-axis.
+−1
+1
+2
+causal, unstable
+−1
+1
+2
+stable
+−1
+1
+2
+anticausal, unstable
+19
+
+===== page 23 =====
+Rational Causal Stability and Pole Locations
+Pole Test for Rational Causal Systems
+A causal system with rational H(s) is stable iff all
+poles of H(s) lie in the left half-plane.
+Example 9.21
+H(s) =
+1
+s −2 ,
+ROC : Re{s} > 2
+The ROC is causal, but the pole is at s = 2 in the right
+half-plane, so the system is unstable.
+Fig. 9.26: Unstable Causal Second-Order
+ROC
+Re{s}
+Im{s}
+20
+
+===== page 24 =====
+Differential Equations
+
+===== page 25 =====
+Obtain the System Function from a Differential Equation
+• Instead of starting with a given impulse response h(t), we often are given a differential equation that
+describes the system.
+• From the DE, we can find the quotient Y (s)
+X(s) of the output and input transforms.
+• For example, if the DE is
+dy(t)
+dt
++ 3y(t) = x(t)
+L
+←→sY (s) + 3Y (s) = X(s)
+then
+Y (s)
+X(s) =
+1
+s + 3
+• Remember H(s) = Y (s)
+X(s) is the system function, so we have obtained H(s) from the DE.
+• Thus,
+H(s) =
+1
+s + 3
+and we can analyze the system using H(s).
+• We can also find the impulse response h(t) by taking the inverse Laplace transform of H(s), but we need
+to be careful about the ROC.
+21
+
+===== page 26 =====
+Example 9.23: Obtain the System Function from a Differential Equation
+Consider the system again
+dy(t)
+dt
++ 3y(t) = x(t)
+Taking Laplace transforms under zero initial conditions:
+sY (s) + 3Y (s) = X(s)
+Hence
+H(s) = Y (s)
+X(s) =
+1
+s + 3
+Two possible impulse responses
+h(t) = e−3tu(t),
+Re{s} > −3
+or
+h(t) = −e−3tu(−t),
+Re{s} < −3
+The DE fixes the algebraic form; causality selects the ROC.
+−3
+causal ROC
+−3
+anticausal ROC
+22
+
+===== page 27 =====
+Solving a Differential Equation with LT
+Use the causal system from Example 9.23:
+H(s) =
+1
+s + 3 ,
+h(t) = e−3tu(t)
+Let the input be
+x(t) = e−2tu(t) ⇐⇒X(s) =
+1
+s + 2
+Then
+Y (s) = H(s)X(s) =
+1
+(s + 2)(s + 3)
+Partial fractions give
+Y (s) =
+1
+s + 2 −
+1
+s + 3
+so
+y(t) =
+(
+e−2t −e−3t)
+u(t)
+The transform method solved the DE by turning it into algebra
+and then using known inverse LT pairs.
+System Classification
+• Pole at s = −3
+• ROC is Re{s} > −3
+• Causal: 
+• Stable: 
+0.3
+t
+y(t)
+23
+
+===== page 28 =====
+LCCDEs Become Algebra in the Laplace Domain
+Suppose the input and output satisfy the linear
+constant-coefficient differential equation
+N
+∑
+k=0
+ak
+dky(t)
+dtk
+=
+M
+∑
+k=0
+bk
+dkx(t)
+dtk
+Under zero initial conditions, the differentiation property gives
+( N
+∑
+k=0
+aksk
+)
+Y (s) =
+( M
+∑
+k=0
+bksk
+)
+X(s)
+System Function from an LCCDE
+H(s) ≜Y (s)
+X(s) =
+∑M
+k=0 bksk
+∑N
+k=0 aksk
+Zeros come from the numerator, poles from the denominator,
+and the ROC still depends on causality or other side
+information.
+LCCDE
+Algebra in s
+H(s) = Y (s)/X(s)
+A differential equation in time becomes a
+polynomial ratio in s, which makes solving and
+classifying systems much easier.
+24

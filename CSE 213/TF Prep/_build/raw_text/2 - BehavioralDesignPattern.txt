@@ -1,0 +1,1843 @@
+
+===== page 1 =====
+Nafis Tahmid, Lecturer, CSE
+CSE 213: Software Engineering
+Behavioral Design Patterns
+Nafis Tahmid
+Lecturer, CSE, BUET
+
+===== page 2 =====
+Nafis Tahmid, Lecturer, CSE
+What are behavioral design patterns?
+❏
+Behavioral patterns deal with how objects behave 
+and interact; defining communication, 
+responsibility flow and how tasks are carried out 
+between objects etc.
+❏
+Concerned with algorithms and assignment of 
+responsibilities between objects.
+2
+
+===== page 3 =====
+Nafis Tahmid, Lecturer, CSE
+What are behavioral design patterns?
+❏
+Behavioral patterns deal with how objects behave 
+and interact; defining communication, 
+responsibility flow and how tasks are carried out 
+between objects etc.
+❏
+Concerned with algorithms and assignment of 
+responsibilities between objects.
+3
+
+===== page 4 =====
+Nafis Tahmid, Lecturer, CSE
+Simple Duck Simulator
+4
+Duck species can -
+-
+Swim
+-
+Quack
+They quack & swim the same way!
+But look different!!
+
+===== page 5 =====
+Nafis Tahmid, Lecturer, CSE
+Simple Duck Simulator
+5
+Duck species can -
+-
+Swim
+-
+Quack
+They quack & swim the same way!
+But look different!!
+
+===== page 6 =====
+Nafis Tahmid, Lecturer, CSE
+Simple Duck Simulator
+6
+Duck species can -
+-
+Swim
+-
+Quack
+They quack & swim the same way!
+But look different!!
+Now we need to make the ducks fly!
+
+===== page 7 =====
+Nafis Tahmid, Lecturer, CSE
+Simple Duck Simulator
+7
+Duck species can -
+-
+Swim
+-
+Quack
+They quack & swim the same way!
+But look different!!
+Now we need to make the ducks fly!
+
+===== page 8 =====
+Nafis Tahmid, Lecturer, CSE
+Simple Duck Simulator
+8
+At the project show, RUBBER DUCK starts flying!
+
+===== page 9 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+9
+Override the ones that don’t fly?
+
+===== page 10 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+10
+What if we add a wooden decoy duck which 
+doesn’t squeak either?
+Override the ones that don’t fly?
+
+===== page 11 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+11
+What if we add a wooden decoy duck which 
+doesn’t squeak either?
+
+===== page 12 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+12
+What if we add a wooden decoy duck which 
+doesn’t squeak either?
+Bad design
+
+===== page 13 =====
+Nafis Tahmid, Lecturer, CSE
+Another Approach?
+13
+Now we know that new features will be added/updated every six months
+Obviously, adding new ducks and overriding fly(), quack() for each is not an option
+What to do…
+
+===== page 14 =====
+Nafis Tahmid, Lecturer, CSE
+Another Approach - Using Interfaces?
+14
+Flyable and Quackable are interfaces
+Those who fly and/or quack, implement those.
+
+===== page 15 =====
+Nafis Tahmid, Lecturer, CSE
+Another Approach - Using Interfaces?
+15
+Flyable and Quackable are interfaces
+Those who fly and/or quack, implement those.
+
+===== page 16 =====
+Nafis Tahmid, Lecturer, CSE
+Another Approach - Using Interfaces?
+16
+Flyable and Quackable are interfaces
+Those who fly and/or quack, implement those.
+Is it good enough?
+
+===== page 17 =====
+Nafis Tahmid, Lecturer, CSE
+Another Approach - Using Interfaces?
+17
+Flyable and Quackable are interfaces
+Those who fly and/or quack, implement those.
+What if we have to change fly behavior slightly?
+Say wingbeat rate, angle etc.
+
+===== page 18 =====
+Nafis Tahmid, Lecturer, CSE
+Another Approach - Using Interfaces?
+18
+Flyable and Quackable are interfaces
+Those who fly and/or quack, implement those.
+What if we have to change fly behavior slightly? CHANGE ALL IMPLEMENTATIONS!!!
+Say wingbeat rate, angle etc.
+
+===== page 19 =====
+Nafis Tahmid, Lecturer, CSE
+Another Principle
+19
+
+===== page 20 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s follow the principle
+20
+
+===== page 21 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s follow the principle
+21
+
+===== page 22 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s follow the principle
+22
+
+===== page 23 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s follow the principle
+23
+
+===== page 24 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+24
+
+===== page 25 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+25
+
+===== page 26 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+26
+
+===== page 27 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+27
+
+===== page 28 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+28
+
+===== page 29 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+29
+
+===== page 30 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+30
+
+===== page 31 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have done
+31
+
+===== page 32 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+32
+
+===== page 33 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+33
+can’t fly
+new duck
+
+===== page 34 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+34
+
+===== page 35 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+35
+
+===== page 36 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+36
+
+===== page 37 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+37
+
+===== page 38 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+38
+
+===== page 39 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make behavior “DYNAMIC”
+39
+
+===== page 40 =====
+Nafis Tahmid, Lecturer, CSE
+40
+Birds Eye View
+
+===== page 41 =====
+Nafis Tahmid, Lecturer, CSE
+41
+Birds Eye View
+
+===== page 42 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example
+42
+
+===== page 43 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example
+43
+In map app, you can change different strategies in real-time between two different points!
+
+===== page 44 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example
+44
+In map app, you can change different strategies in real-time between two different points!
+
+===== page 45 =====
+Nafis Tahmid, Lecturer, CSE
+Strategy Pattern Deﬁned
+45
+Define a family of algorithms, encapsulate each 
+one, and make them interchangeable. Strategy 
+lets the algorithm vary independently from the 
+clients that use it.
+
+===== page 46 =====
+Nafis Tahmid, Lecturer, CSE
+Strategy Pattern Deﬁned
+46
+
+===== page 47 =====
+Nafis Tahmid, Lecturer, CSE
+47
+
+===== page 48 =====
+Nafis Tahmid, Lecturer, CSE
+There are no DUMB Questions
+48
+
+===== page 49 =====
+Nafis Tahmid, Lecturer, CSE
+It’s time for some caﬀeine
+49
+
+===== page 50 =====
+Nafis Tahmid, Lecturer, CSE
+50
+Let’s see some details…
+
+===== page 51 =====
+Nafis Tahmid, Lecturer, CSE
+51
+Let’s see some details…
+
+===== page 52 =====
+Nafis Tahmid, Lecturer, CSE
+52
+Let’s see some details…
+exactly same!
+
+===== page 53 =====
+Nafis Tahmid, Lecturer, CSE
+53
+Let’s see some details…
+Some steps vary!
+
+===== page 54 =====
+Nafis Tahmid, Lecturer, CSE
+Doing simple abstractions? [keeping what is unchanged in abstract class]
+54
+
+===== page 55 =====
+Nafis Tahmid, Lecturer, CSE
+Doing simple abstractions? [keeping what is unchanged in abstract class]
+55
+
+===== page 56 =====
+Nafis Tahmid, Lecturer, CSE
+56
+Doing simple abstractions…; is it a good design?
+
+===== page 57 =====
+Nafis Tahmid, Lecturer, CSE
+Don’t they have the same “skeleton”?
+57
+
+===== page 58 =====
+Nafis Tahmid, Lecturer, CSE
+Don’t they have the same “skeleton”?
+58
+
+===== page 59 =====
+Nafis Tahmid, Lecturer, CSE
+Don’t they have the same “skeleton”?
+59
+
+===== page 60 =====
+Nafis Tahmid, Lecturer, CSE
+Don’t they have the same “skeleton”?
+60
+Make prepareRecipe() abstract?
+
+===== page 61 =====
+Nafis Tahmid, Lecturer, CSE
+61
+Keep the common steps in abstract class…
+
+===== page 62 =====
+Nafis Tahmid, Lecturer, CSE
+62
+Let subclasses worry about the steps that diﬀer…
+
+===== page 63 =====
+Nafis Tahmid, Lecturer, CSE
+63
+What have we done?
+
+===== page 64 =====
+Nafis Tahmid, Lecturer, CSE
+64
+Template Method
+
+===== page 65 =====
+Nafis Tahmid, Lecturer, CSE
+65
+Template Method
+
+===== page 66 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make some tea!
+66
+
+===== page 67 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make some tea!
+67
+Common
+Different
+
+===== page 68 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make some tea!
+68
+Common
+Different
+
+===== page 69 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make some tea!
+69
+Common
+Different
+
+===== page 70 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make some tea!
+70
+Common
+Different
+
+===== page 71 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s make some tea!
+71
+Common
+Different
+
+===== page 72 =====
+Nafis Tahmid, Lecturer, CSE
+Adding conditional executions with if-else
+72
+
+===== page 73 =====
+Nafis Tahmid, Lecturer, CSE
+73
+Template Method Pattern Deﬁned
+Template Method pattern defines the skeleton of 
+an algorithm in the superclass but lets subclasses 
+override specific steps of the algorithm without 
+changing its structure.
+
+===== page 74 =====
+Nafis Tahmid, Lecturer, CSE
+The generalized structure
+74
+It is final method
+
+===== page 75 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example: Data Mining
+75
+
+===== page 76 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example: Data Mining
+76
+only these vary
+
+===== page 77 =====
+Nafis Tahmid, Lecturer, CSE
+Solution…
+77
+
+===== page 78 =====
+Nafis Tahmid, Lecturer, CSE
+Diﬀerence between Strategy and Template
+78
+➢
+Template Method based on inheritance
+-
+Alter parts of an algorithm by extending those parts in subclasses. 
+➢
+Strategy is based on composition
+-
+Alter parts of the object’s behavior by supplying it with different strategies 
+that correspond to that behavior. 
+➢
+Template Method works at the class level, so it’s static. 
+➢
+Strategy works on the object level, letting you switch behaviors at runtime.
+
+===== page 79 =====
+Nafis Tahmid, Lecturer, CSE
+79
+
+===== page 80 =====
+Nafis Tahmid, Lecturer, CSE
+80
+
+===== page 81 =====
+Nafis Tahmid, Lecturer, CSE
+81
+
+===== page 82 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s talk about weather monitoring system
+82
+
+===== page 83 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s talk about weather monitoring system
+83
+Physical device that acquires actual weather data
+
+===== page 84 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s talk about weather monitoring system
+84
+Tracks data coming from weather station & updates displays
+
+===== page 85 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s talk about weather monitoring system
+85
+Show current weather conditions
+
+===== page 86 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have got from Weather-o-Rama
+86
+
+===== page 87 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see what we have got from Weather-o-Rama
+87
+Change triggers it
+
+===== page 88 =====
+Nafis Tahmid, Lecturer, CSE
+What we need to do?
+88
+Implement three displays
+❏
+One: current conditions
+❏
+Two: statistics
+❏
+Three: forecast
+
+===== page 89 =====
+Nafis Tahmid, Lecturer, CSE
+What we need to do?
+89
+Implement three displays
+❏
+One: current conditions
+❏
+Two: statistics
+❏
+Three: forecast
+Remember expandability; display can be added/removed
+
+===== page 90 =====
+Nafis Tahmid, Lecturer, CSE
+Misguided implementation…
+90
+
+===== page 91 =====
+Nafis Tahmid, Lecturer, CSE
+Misguided implementation…
+91
+get results
+
+===== page 92 =====
+Nafis Tahmid, Lecturer, CSE
+Misguided implementation…
+92
+update displays
+
+===== page 93 =====
+Nafis Tahmid, Lecturer, CSE
+Misguided implementation…
+93
+
+===== page 94 =====
+Nafis Tahmid, Lecturer, CSE
+Misguided implementation…
+94
+
+===== page 95 =====
+Nafis Tahmid, Lecturer, CSE
+How magazine subscriptions work?
+95
+
+===== page 96 =====
+Nafis Tahmid, Lecturer, CSE
+How magazine subscriptions work?
+96
+
+===== page 97 =====
+Nafis Tahmid, Lecturer, CSE
+How magazine subscriptions work?
+97
+
+===== page 98 =====
+Nafis Tahmid, Lecturer, CSE
+How magazine subscriptions work?
+98
+
+===== page 99 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s take a closer look
+99
+
+===== page 100 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s take a closer look
+100
+observers interested in it
+
+===== page 101 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s take a closer look
+101
+observers interested in it
+
+===== page 102 =====
+Nafis Tahmid, Lecturer, CSE
+102
+Let’s take a closer look
+
+===== page 103 =====
+Nafis Tahmid, Lecturer, CSE
+103
+Let’s take a closer look
+
+===== page 104 =====
+Nafis Tahmid, Lecturer, CSE
+104
+Let’s take a closer look
+
+===== page 105 =====
+Nafis Tahmid, Lecturer, CSE
+105
+Let’s take a closer look
+
+===== page 106 =====
+Nafis Tahmid, Lecturer, CSE
+106
+Let’s take a closer look
+
+===== page 107 =====
+Nafis Tahmid, Lecturer, CSE
+107
+Let’s take a closer look
+
+===== page 108 =====
+Nafis Tahmid, Lecturer, CSE
+108
+subject
+observers
+
+===== page 109 =====
+Nafis Tahmid, Lecturer, CSE
+So in weather station…
+109
+
+===== page 110 =====
+Nafis Tahmid, Lecturer, CSE
+Our new design
+110
+
+===== page 111 =====
+Nafis Tahmid, Lecturer, CSE
+Our new design
+111
+list of observers
+ Interface referencing WeatherData  object
+
+===== page 112 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+112
+
+===== page 113 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+113
+
+===== page 114 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+114
+
+===== page 115 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+115
+
+===== page 116 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+116
+
+===== page 117 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+117
+
+===== page 118 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+118
+passed in constructor
+
+===== page 119 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+119
+How it registers itself
+
+===== page 120 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+120
+display() called
+
+===== page 121 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+121
+Define a one-to-many dependency between objects 
+so that when one object changes state, all its 
+dependents are notified and updated automatically.
+
+===== page 122 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+122
+Define a one-to-many dependency between objects 
+so that when one object changes state, all its 
+dependents are notified and updated automatically.
+
+===== page 123 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+123
+Publisher == Subject
+Subscriber == Observer
+
+===== page 124 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+124
+Publisher == Subject
+Subscriber == Observer
+
+===== page 125 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+125
+Publisher == Subject
+Subscriber == Observer
+
+===== page 126 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+126
+Publisher == Subject
+Subscriber == Observer
+
+===== page 127 =====
+Nafis Tahmid, Lecturer, CSE
+Observer Pattern Deﬁned
+127
+Publisher == Subject
+Subscriber == Observer
+
+===== page 128 =====
+Nafis Tahmid, Lecturer, CSE
+128
+
+===== page 129 =====
+Nafis Tahmid, Lecturer, CSE
+Air traﬃc control
+129
+During the landing of aircrafts - 
+❏
+Aircraft pilots don’t talk to each other directly
+❏
+All communication goes through the control tower.
+
+===== page 130 =====
+Nafis Tahmid, Lecturer, CSE
+Air traﬃc control
+130
+During the landing of aircrafts - 
+❏
+Aircraft pilots don’t talk to each other directly
+❏
+All communication goes through the control tower.
+Without control tower -
+❖
+Pilots need to be aware of every other aircrafts
+❖
+Airplane crash statistics would probably skyrocket
+
+===== page 131 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s discuss UI design for a customer proﬁle management
+A dialog for creating and editing 
+customer profiles.
+131
+Generated using LaTeX. Thanks to Claude
+
+===== page 132 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s discuss UI design for a customer proﬁle management
+A dialog for creating and editing 
+customer profiles.
+-
+Various form controls such 
+as text fields, checkboxes, 
+buttons etc.
+-
+Some interact with others
+132
+Generated using LaTeX. Thanks to Claude
+
+===== page 133 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s discuss UI design for a customer proﬁle management
+A dialog for creating and editing 
+customer profiles.
+-
+Various form controls such 
+as text fields, checkboxes, 
+buttons etc.
+-
+Some interact with others
+-
+Ex: selecting “Business” 
+enables company name
+133
+Generated using LaTeX. Thanks to Claude
+
+===== page 134 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s discuss UI design for a customer proﬁle management
+A dialog for creating and editing 
+customer profiles.
+-
+Various form controls such 
+as text fields, checkboxes, 
+buttons etc.
+-
+Some interact with others
+-
+Ex: “Apply” validates 
+everything
+134
+Generated using LaTeX. Thanks to Claude
+
+===== page 135 =====
+Nafis Tahmid, Lecturer, CSE
+Now let’s discuss UI design for a customer proﬁle management
+A dialog for creating and editing 
+customer profiles.
+-
+Various form controls such 
+as text fields, checkboxes, 
+buttons etc.
+-
+Some interact with others
+135
+Generated using LaTeX. Thanks to Claude
+
+===== page 136 =====
+Nafis Tahmid, Lecturer, CSE
+What we may think of doing initially…
+Inside the elements (i.e in their class) implement interaction the logics directly.
+136
+
+===== page 137 =====
+Nafis Tahmid, Lecturer, CSE
+What we may think of doing initially…
+Inside the elements (i.e in their class) implement interaction the logics directly.
+Example:
+In the checkbox - 
+●
+Logic 1 for interaction with the button
+●
+Logic 2 for interaction with the textfield
+137
+
+===== page 138 =====
+Nafis Tahmid, Lecturer, CSE
+What we may think of doing initially…
+Inside the elements (i.e in their class) implement interaction the logics directly.
+Example:
+In the checkbox - 
+●
+Logic 1 for interaction with the button
+●
+Logic 2 for interaction with the textfield
+Problem - 
+Can we use the checkbox class in another form?
+138
+
+===== page 139 =====
+Nafis Tahmid, Lecturer, CSE
+What we may think of doing initially…
+Inside the elements (i.e in their class) implement interaction the logics directly.
+Example:
+In the checkbox - 
+●
+Logic 1 for interaction with the button
+●
+Logic 2 for interaction with the textfield
+Problem - 
+Can we use the checkbox class in another form?
+-
+NO. As it uses 1 button, 1 textfield, 1 dialogue 
+139
+
+===== page 140 =====
+Nafis Tahmid, Lecturer, CSE
+What we may think of doing initially…
+Inside the elements (i.e in their class) implement interaction the logics directly.
+Example:
+In the checkbox - 
+●
+Logic 1 for interaction with the button
+●
+Logic 2 for interaction with the textfield
+Problem - 
+Can we use the checkbox class in another form?
+-
+NO. As it uses 1 button, 1 textfield, 1 dialogue 
+(coupling)
+140
+
+===== page 141 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+❏
+Cease all direct communication between the components
+141
+
+===== page 142 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+❏
+Cease all direct communication between the components
+❏
+Must collaborate indirectly, through a mediator, who redirects call to appropriate 
+components
+142
+
+===== page 143 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+❏
+Cease all direct communication between the components
+❏
+Must collaborate indirectly, through a mediator, who redirects call to appropriate 
+components
+143
+Dialog is mediator
+
+===== page 144 =====
+Nafis Tahmid, Lecturer, CSE
+Solution?
+❏
+Cease all direct communication between the components
+❏
+Must collaborate indirectly, through a mediator, who redirects call to appropriate 
+components
+144
+Dialog is mediator
+Components depend only on a single mediator class instead of being coupled to dozens of their colleagues.
+
+===== page 145 =====
+Nafis Tahmid, Lecturer, CSE
+So, in UI design…
+❏
+Dialogue class is the mediator.
+145
+
+===== page 146 =====
+Nafis Tahmid, Lecturer, CSE
+So, in UI design…
+❏
+Dialogue class is the mediator.
+❏
+Dialogue should know all of its sub-elements 
+(components)
+146
+
+===== page 147 =====
+Nafis Tahmid, Lecturer, CSE
+So, in UI design…
+❏
+Dialogue class is the mediator.
+❏
+Dialogue should know all of its sub-elements 
+(components)
+-
+No new dependency
+147
+
+===== page 148 =====
+Nafis Tahmid, Lecturer, CSE
+So, in UI design…
+❏
+Dialogue class is the mediator.
+❏
+Dialogue should know all of its sub-elements 
+(components)
+-
+No new dependency
+❏
+Previously, “apply” button had to know all 
+the other elements. 
+148
+
+===== page 149 =====
+Nafis Tahmid, Lecturer, CSE
+So, in UI design…
+❏
+Dialogue class is the mediator.
+❏
+Dialogue should know all of its sub-elements 
+(components)
+-
+No new dependency
+❏
+Now, “apply” just notifies mediator (i.e the 
+dialogue box)
+149
+
+===== page 150 =====
+Nafis Tahmid, Lecturer, CSE
+So, in UI design…
+❏
+Dialogue class is the mediator.
+❏
+Dialogue should know all of its sub-elements 
+(components)
+-
+No new dependency
+❏
+Now, “apply” just notifies mediator (i.e the 
+dialogue box). “Apply” needs to know who it 
+is notifying…
+150
+
+===== page 151 =====
+Nafis Tahmid, Lecturer, CSE
+Birds Eye View
+151
+
+===== page 152 =====
+Nafis Tahmid, Lecturer, CSE
+Birds Eye View
+152
+Dialog needs to know who are there
+
+===== page 153 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+153
+
+===== page 154 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+154
+
+===== page 155 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+155
+
+===== page 156 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s see some code…
+156
+
+===== page 157 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+157
+Mediator pattern restricts direct communications between 
+objects and forces them to collaborate only via a mediator. 
+Lets you reduce chaotic dependencies between objects.
+
+===== page 158 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+158
+
+===== page 159 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+159
+
+===== page 160 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+160
+
+===== page 161 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+161
+
+===== page 162 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+162
+
+===== page 163 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+163
+
+===== page 164 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+164
+
+===== page 165 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+165
+
+===== page 166 =====
+Nafis Tahmid, Lecturer, CSE
+The Mediator Pattern Deﬁned
+166
+
+===== page 167 =====
+Nafis Tahmid, Lecturer, CSE
+Diﬀerence between Mediator and Observer
+167
+Primary goal:
+-
+Mediator eliminates mutual dependencies. Instead, objects depend on single 
+mediator object.
+-
+Observer establishes dynamic (can subscribe, unsubscribe) one-way one-to-many 
+connection between objects.
+
+===== page 168 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s design a simple text-editor
+168
+Generated using LaTeX. Thanks to Claude
+
+===== page 169 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s design a simple text-editor
+169
+Generated using LaTeX. Thanks to Claude
+Create a toolbar with a bunch of buttons for various 
+operations of the editor
+
+===== page 170 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s design a simple text-editor
+170
+Generated using LaTeX. Thanks to Claude
+Create a toolbar with a bunch of buttons for various 
+operations of the editor
+How to design buttons?
+
+===== page 171 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s design a simple text-editor
+171
+Generated using LaTeX. Thanks to Claude
+Create a toolbar with a bunch of buttons for various 
+operations of the editor
+A neat button class used for toolbar buttons? [look 
+same]
+
+===== page 172 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s design a simple text-editor
+172
+Generated using LaTeX. Thanks to Claude
+Create a toolbar with a bunch of buttons for various 
+operations of the editor
+But they do different things…
+
+===== page 173 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s design a simple text-editor
+173
+Generated using LaTeX. Thanks to Claude
+Create a toolbar with a bunch of buttons for various 
+operations of the editor
+But they do different things…
+Subclasses to do different things when clicked?
+
+===== page 174 =====
+Nafis Tahmid, Lecturer, CSE
+Subclasses Issues…
+174
+Enormous number of subclasses
+-
+Modifying Button class risks breaking code!
+
+===== page 175 =====
+Nafis Tahmid, Lecturer, CSE
+Subclasses Issues…
+175
+Enormous number of subclasses
+-
+Modifying Button class risks breaking code!
+Ugliest part
+-
+Save can be done by Ctrl+S (shortcut) too.
+-
+From menu (File -> Save) also.
+
+===== page 176 =====
+Nafis Tahmid, Lecturer, CSE
+Subclasses Issues…
+176
+Enormous number of subclasses
+-
+Modifying Button class risks breaking code!
+Ugliest part
+-
+Save can be done by Ctrl+S (shortcut) too.
+-
+From menu (File -> Save) also.
+-
+Code duplication!! (write same operations multiple times)
+
+===== page 177 =====
+Nafis Tahmid, Lecturer, CSE
+Subclasses Issues…
+177
+Enormous number of subclasses
+-
+Modifying Button class risks breaking code!
+Ugliest part
+-
+Save can be done by Ctrl+S (shortcut) too.
+-
+From menu (File -> Save) also.
+-
+Code duplication!! (write same operations multiple times)
+Solution?
+-
+Invoke button click handler from shortcut or save menu?
+
+===== page 178 =====
+Nafis Tahmid, Lecturer, CSE
+Subclasses Issues…
+178
+Enormous number of subclasses
+-
+Modifying Button class risks breaking code!
+Ugliest part
+-
+Save can be done by Ctrl+S (shortcut) too.
+-
+From menu (File -> Save) also.
+-
+Code duplication!! (write same operations multiple times)
+Solution?
+-
+Invoke button click handler from shortcut or save menu?
+-
+Menu (& shortcut) dependent on buttons. Too ugly
+
+===== page 179 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+A layer for the GUI and another layer for the business logic.
+179
+
+===== page 180 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+A layer for the GUI and another layer for the business logic.
+-
+GUI does the job of rendering pictures, capturing input
+180
+
+===== page 181 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+A layer for the GUI and another layer for the business logic.
+-
+GUI does the job of rendering pictures, capturing input
+-
+Calculating, data loading stuffs done by underlying business logic
+181
+
+===== page 182 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+A layer for the GUI and another layer for the business logic.
+-
+GUI does the job of rendering pictures, capturing input
+-
+Calculating, data loading stuffs done by underlying business logic
+-
+GUI delegates by requesting with arguments
+182
+
+===== page 183 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+A layer for the GUI and another layer for the business logic.
+-
+GUI does the job of rendering pictures, capturing input
+-
+Calculating, data loading stuffs done by underlying business logic
+-
+GUI delegates by requesting with arguments
+183
+
+===== page 184 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+●
+GUI objects shouldn’t send these requests directly either
+184
+
+===== page 185 =====
+Nafis Tahmid, Lecturer, CSE
+Separation of concerns…
+●
+GUI objects shouldn’t send these requests directly either
+●
+Rather the save operation should be in a single “Command” class
+185
+
+===== page 186 =====
+Nafis Tahmid, Lecturer, CSE
+Again that “Code to interface…”
+●
+Commands implement the same interface
+●
+A single execute() method
+186
+
+===== page 187 =====
+Nafis Tahmid, Lecturer, CSE
+Again that “Code to interface…”
+●
+Commands implement the same interface
+●
+A single execute() method
+●
+Command parameters? Should be pre-configured, they know what to do!
+187
+
+===== page 188 =====
+Nafis Tahmid, Lecturer, CSE
+188
+Again that “Code to interface…”
+●
+Commands implement the same interface
+●
+A single execute() method
+●
+Command parameters? Should be pre-configured, they know what to do!
+
+===== page 189 =====
+Nafis Tahmid, Lecturer, CSE
+Birds eye view
+189
+
+===== page 190 =====
+Nafis Tahmid, Lecturer, CSE
+Birds eye view
+190
+Commands know editor
+
+===== page 191 =====
+Nafis Tahmid, Lecturer, CSE
+Birds eye view
+191
+Undo operation:
+Commands that change editor state
+-
+Push a backup copy in stack
+-
+Undo pops the state and 
+restore it
+
+===== page 192 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+192
+Command pattern that turns a request into a stand-alone 
+object that contains all information about the request. 
+This transformation lets you parameterize methods with 
+different requests, delay or queue a request’s execution, 
+and support undoable operations.
+
+===== page 193 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+193
+Command pattern that turns a request into a stand-alone 
+object that contains all information about the request. 
+This transformation lets you parameterize methods with 
+different requests, delay or queue a request’s execution, 
+and support undoable operations.
+passing a request as an argument
+
+===== page 194 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+194
+
+===== page 195 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+195
+
+===== page 196 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+196
+
+===== page 197 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+197
+
+===== page 198 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+198
+ operating system?
+
+===== page 199 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+199
+
+===== page 200 =====
+Nafis Tahmid, Lecturer, CSE
+Command Pattern Deﬁned
+200
+
+===== page 201 =====
+Nafis Tahmid, Lecturer, CSE
+201
+Queuing request in Command Pattern
+
+===== page 202 =====
+Nafis Tahmid, Lecturer, CSE
+Diﬀerence Between Command and Mediator
+●
+Command establishes unidirectional connections between senders and receivers.
+●
+Mediator eliminates direct connections between senders and receivers, forcing them to 
+communicate indirectly via a mediator object.
+202
+
+===== page 203 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine
+203
+
+===== page 204 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine Workﬂow
+204
+>
+
+===== page 205 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s try to write code…
+205
+
+===== page 206 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s try to write code…
+206
+
+===== page 207 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s try to write code…
+207
+Current State
+
+===== page 208 =====
+Nafis Tahmid, Lecturer, CSE
+Let’s try to write code…
+208
+
+===== page 209 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, how states are managed?
+209
+
+===== page 210 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, how states are managed?
+210
+Start at no quarter state
+
+===== page 211 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, action codes…
+211
+
+===== page 212 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, action codes…
+212
+Problems?
+
+===== page 213 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, action codes…
+213
+Problems?
+The nightmare of change!!
+
+===== page 214 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, action codes…
+214
+Problems?
+The nightmare of change!!
+To scale the sales, new policy:
+10% of the time, customer 
+wins a free gumball! (Buy one, 
+get one!)
+
+===== page 215 =====
+Nafis Tahmid, Lecturer, CSE
+Updated State Diagram
+215
+
+===== page 216 =====
+Nafis Tahmid, Lecturer, CSE
+The Gumball Machine, action codes…
+216
+Problems?
+The nightmare of change!!
+To scale the sales, new policy:
+10% of the time, customer 
+wins a free gumball! (Buy one, 
+get one!)
+Rewrite all action functions?
+insertQuarter()
+ejectQuarter()
+turnCrank()
+dispense()
+
+===== page 217 =====
+Nafis Tahmid, Lecturer, CSE
+The new design
+217
+
+===== page 218 =====
+Nafis Tahmid, Lecturer, CSE
+The new design
+218
+
+===== page 219 =====
+Nafis Tahmid, Lecturer, CSE
+The new design
+219
+
+===== page 220 =====
+Nafis Tahmid, Lecturer, CSE
+State classes…
+220
+
+===== page 221 =====
+Nafis Tahmid, Lecturer, CSE
+State classes…
+221
+
+===== page 222 =====
+Nafis Tahmid, Lecturer, CSE
+State classes…
+222
+Machine ref. passed
+
+===== page 223 =====
+Nafis Tahmid, Lecturer, CSE
+State classes…
+223
+Knows who’s next
+
+===== page 224 =====
+Nafis Tahmid, Lecturer, CSE
+State classes…
+224
+Invalid Ops.
+
+===== page 225 =====
+Nafis Tahmid, Lecturer, CSE
+The change in the machine
+225
+
+===== page 226 =====
+Nafis Tahmid, Lecturer, CSE
+The change in the machine
+226
+
+===== page 227 =====
+Nafis Tahmid, Lecturer, CSE
+The change in the machine
+227
+
+===== page 228 =====
+Nafis Tahmid, Lecturer, CSE
+The change in the machine action functions…
+228
+
+===== page 229 =====
+Nafis Tahmid, Lecturer, CSE
+The change in the machine action functions…
+229
+No change when new 
+state is added
+
+===== page 230 =====
+Nafis Tahmid, Lecturer, CSE
+What we have done so far…
+230
+state.
+
+===== page 231 =====
+Nafis Tahmid, Lecturer, CSE
+What we have done so far…
+231
+state.
+state.
+
+===== page 232 =====
+Nafis Tahmid, Lecturer, CSE
+What we have done so far…
+232
+state.
+state.
+
+===== page 233 =====
+Nafis Tahmid, Lecturer, CSE
+What we have done so far…
+233
+state.
+
+===== page 234 =====
+Nafis Tahmid, Lecturer, CSE
+What we have done so far…
+234
+state.
+
+===== page 235 =====
+Nafis Tahmid, Lecturer, CSE
+What we have done so far…
+235
+
+===== page 236 =====
+Nafis Tahmid, Lecturer, CSE
+Winner State…
+236
+
+===== page 237 =====
+Nafis Tahmid, Lecturer, CSE
+Change in GumballMachine
+237
+
+===== page 238 =====
+Nafis Tahmid, Lecturer, CSE
+Winner State
+238
+
+===== page 239 =====
+Nafis Tahmid, Lecturer, CSE
+Winner State…
+239
+
+===== page 240 =====
+Nafis Tahmid, Lecturer, CSE
+Winner State
+240
+
+===== page 241 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+241
+Allow an object to alter its behavior when 
+its internal state changes. The object will 
+appear to change its class.
+
+===== page 242 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+242
+
+===== page 243 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+243
+
+===== page 244 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+244
+
+===== page 245 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+245
+
+===== page 246 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+246
+
+===== page 247 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+247
+
+===== page 248 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+248
+
+===== page 249 =====
+Nafis Tahmid, Lecturer, CSE
+The State Pattern Deﬁned
+249
+
+===== page 250 =====
+Nafis Tahmid, Lecturer, CSE
+There are no DUMB Questions
+250
+
+===== page 251 =====
+Nafis Tahmid, Lecturer, CSE
+There are no DUMB Questions
+251
+
+===== page 252 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example
+252
+The publish method of the document works a 
+little bit differently in each state
+
+===== page 253 =====
+Nafis Tahmid, Lecturer, CSE
+Yet another example
+253
+
+===== page 254 =====
+Nafis Tahmid, Lecturer, CSE
+Diﬀerence between State and Strategy
+●
+They are twins separated at birth
+●
+Both based on composition 
+●
+Change the behavior of the context by delegating some work to helper objects. 
+254
+
+===== page 255 =====
+Nafis Tahmid, Lecturer, CSE
+Diﬀerence between State and Strategy
+●
+They are twins separated at birth
+●
+Both based on composition 
+●
+Change the behavior of the context by delegating some work to helper objects. 
+●
+Strategy makes these objects completely independent and unaware of each other. 
+255
+
+===== page 256 =====
+Nafis Tahmid, Lecturer, CSE
+Diﬀerence between State and Strategy
+●
+They are twins separated at birth
+●
+Both based on composition 
+●
+Change the behavior of the context by delegating some work to helper objects. 
+●
+Strategy makes these objects completely independent and unaware of each other. 
+●
+State doesn’t restrict dependencies between concrete states, letting them alter the state of 
+the context at will.
+256
+
+===== page 257 =====
+Nafis Tahmid, Lecturer, CSE
+257
+
+===== page 258 =====
+Nafis Tahmid, Lecturer, CSE
+258
+
+===== page 259 =====
+Nafis Tahmid, Lecturer, CSE
+259
+
+===== page 260 =====
+Nafis Tahmid, Lecturer, CSE
+260
+
+===== page 261 =====
+Nafis Tahmid, Lecturer, CSE
+Acknowledgement
+261
+❏
+Dive Into Design Patterns - Alexander Shvets
+❏
+Head First Design Patterns, 2nd Edition - Eric Freeman, Elisabeth Robson

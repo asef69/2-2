@@ -1,0 +1,311 @@
+//// FILE: StarbuzzCoffee.java
+// Slides 33-46 — Decorator: Starbuzz beverages and condiments (Head First)
+abstract class Beverage {
+    String description = "Unknown Beverage";
+    public String getDescription() { return description; }
+    public abstract double cost();
+}
+abstract class CondimentDecorator extends Beverage {
+    Beverage beverage;                                   // the wrapped component
+    public abstract String getDescription();
+}
+class Espresso extends Beverage {
+    Espresso() { description = "Espresso"; }
+    public double cost() { return 1.99; }
+}
+class DarkRoast extends Beverage {
+    DarkRoast() { description = "Dark Roast Coffee"; }
+    public double cost() { return .99; }
+}
+class HouseBlend extends Beverage {
+    HouseBlend() { description = "House Blend Coffee"; }
+    public double cost() { return .89; }
+}
+class Mocha extends CondimentDecorator {
+    Mocha(Beverage b) { beverage = b; }
+    public String getDescription() { return beverage.getDescription() + ", Mocha"; }
+    public double cost() { return .20 + beverage.cost(); }
+}
+class Whip extends CondimentDecorator {
+    Whip(Beverage b) { beverage = b; }
+    public String getDescription() { return beverage.getDescription() + ", Whip"; }
+    public double cost() { return .10 + beverage.cost(); }
+}
+class Soy extends CondimentDecorator {
+    Soy(Beverage b) { beverage = b; }
+    public String getDescription() { return beverage.getDescription() + ", Soy"; }
+    public double cost() { return .15 + beverage.cost(); }
+}
+public class StarbuzzCoffee {
+    public static void main(String[] args) {
+        Beverage b1 = new Espresso();
+        System.out.printf("%s $%.2f%n", b1.getDescription(), b1.cost());
+        Beverage b2 = new Whip(new Mocha(new Mocha(new DarkRoast())));
+        System.out.printf("%s $%.2f%n", b2.getDescription(), b2.cost());
+        Beverage b3 = new Whip(new Mocha(new Soy(new HouseBlend())));
+        System.out.printf("%s $%.2f%n", b3.getDescription(), b3.cost());
+    }
+}
+//// FILE: NetworkStack.java
+// 2021-22 Q2(a) — Decorator: each layer wraps the packet and adds its header (data-link also a trailer)
+class Packet {
+    final String message;
+    Packet(String m) { message = m; }
+    int length() { return message.length(); }
+    public String toString() { return "message: " + message + ", length: " + length(); }
+}
+interface Layer { Packet send(String msg); }                 // component
+
+class RawPacket implements Layer {                            // concrete component: user's Packet
+    public Packet send(String msg) { return new Packet(msg); }
+}
+abstract class LayerDecorator implements Layer {              // base decorator
+    protected final Layer inner;
+    LayerDecorator(Layer inner) { this.inner = inner; }
+}
+class ApplicationLayer extends LayerDecorator {
+    ApplicationLayer(Layer l) { super(l); }
+    public Packet send(String m) { return new Packet("APPHEADER_" + inner.send(m).message); }
+}
+class TransportLayer extends LayerDecorator {
+    TransportLayer(Layer l) { super(l); }
+    public Packet send(String m) { return new Packet("TRHEADER_" + inner.send(m).message); }
+}
+class NetworkLayer extends LayerDecorator {
+    NetworkLayer(Layer l) { super(l); }
+    public Packet send(String m) { return new Packet("NETHEADER_" + inner.send(m).message); }
+}
+class DataLinkLayer extends LayerDecorator {
+    DataLinkLayer(Layer l) { super(l); }
+    public Packet send(String m) { return new Packet("DHEADER_" + inner.send(m).message + "_DTRAILER"); }
+}
+class PhysicalLayer extends LayerDecorator {
+    PhysicalLayer(Layer l) { super(l); }
+    public Packet send(String m) { return new Packet("PHEADER_" + inner.send(m).message); }
+}
+public class NetworkStack {
+    public static void main(String[] args) {
+        Layer stack = new PhysicalLayer(new DataLinkLayer(new NetworkLayer(
+                      new TransportLayer(new ApplicationLayer(new RawPacket())))));
+        System.out.println(new RawPacket().send("hello"));
+        System.out.println(new ApplicationLayer(new RawPacket()).send("hello"));
+        System.out.println(stack.send("hello"));
+    }
+}
+//// FILE: CompanyHierarchy.java
+// 2019-20 Q2(a), 2020-21 Q3(a) — Composite: employees and their (direct + indirect) subordinates
+import java.util.ArrayList;
+import java.util.List;
+
+abstract class Employee {                                     // component
+    protected final String name, designation;
+    Employee(String n, String d) { name = n; designation = d; }
+    void add(Employee e)    { throw new UnsupportedOperationException(); }
+    void remove(Employee e) { throw new UnsupportedOperationException(); }
+    List<Employee> getSubordinates() { return new ArrayList<>(); }
+    abstract void showAll(String indent);                     // shows this employee and everyone below
+    public String toString() { return designation + ": " + name; }
+}
+class Worker extends Employee {                               // leaf
+    Worker(String n, String d) { super(n, d); }
+    void showAll(String indent) { System.out.println(indent + this); }
+}
+class Manager extends Employee {                              // composite
+    private final List<Employee> subordinates = new ArrayList<>();
+    Manager(String n, String d) { super(n, d); }
+    void add(Employee e)    { subordinates.add(e); }
+    void remove(Employee e) { subordinates.remove(e); }
+    List<Employee> getSubordinates() { return subordinates; }
+    void showAll(String indent) {
+        System.out.println(indent + this);
+        for (Employee e : subordinates) e.showAll(indent + "   ");
+    }
+    int countAll() {                                         // direct + indirect
+        int c = 0;
+        for (Employee e : subordinates) c += 1 + (e instanceof Manager ? ((Manager) e).countAll() : 0);
+        return c;
+    }
+}
+public class CompanyHierarchy {
+    public static void main(String[] args) {
+        Manager md = new Manager("Karim", "Managing Director");
+        Manager tech = new Manager("Rahim", "Technical Manager");
+        Manager admin = new Manager("Salma", "Admin Manager");
+        Manager fin = new Manager("Nabil", "Finance Manager");
+        md.add(tech); md.add(admin); md.add(fin);
+        for (int i = 1; i <= 5; i++) tech.add(new Worker("Dev" + i, "Developer"));
+        for (int i = 1; i <= 3; i++) admin.add(new Worker("Exec" + i, "Executive"));
+        for (int i = 1; i <= 2; i++) fin.add(new Worker("Officer" + i, "Officer"));
+        md.showAll("");
+        System.out.println("Under MD: " + md.countAll() + ", under Technical Manager: " + tech.countAll());
+    }
+}
+//// FILE: FinCorpReports.java
+// 2024-25 Q2(a) — Composite (city/state/country/global) + Decorator (optional report sections)
+import java.util.ArrayList;
+import java.util.List;
+
+interface ReportUnit {                                 // the one consistent reporting interface
+    String name();
+    double expenditure();
+    String report();
+}
+class CityOffice implements ReportUnit {               // leaf
+    private final String name; private final double exp;
+    CityOffice(String n, double e) { name = n; exp = e; }
+    public String name() { return name; }
+    public double expenditure() { return exp; }
+    public String report() { return name + " expenditure = " + exp; }
+}
+abstract class Region implements ReportUnit {          // composite
+    private final String name; private final double ownExpenditure;
+    protected final List<ReportUnit> children = new ArrayList<>();
+    Region(String n, double own) { name = n; ownExpenditure = own; }
+    Region add(ReportUnit u) { children.add(u); return this; }
+    public String name() { return name; }
+    public double expenditure() {                      // aggregates subordinate units
+        double s = ownExpenditure;
+        for (ReportUnit u : children) s += u.expenditure();
+        return s;
+    }
+    protected abstract String analysis();              // varies by level
+    public String report() {
+        return name + " total = " + expenditure() + " [" + analysis() + "]";
+    }
+}
+class State extends Region {
+    State(String n, double own) { super(n, own); }
+    protected String analysis() {
+        double max = 0; String top = "";
+        for (ReportUnit u : children) if (u.expenditure() > max) { max = u.expenditure(); top = u.name(); }
+        return "highest-spending city: " + top;
+    }
+}
+class Country extends Region {
+    Country(String n, double own) { super(n, own); }
+    protected String analysis() { return "average per state: " + expenditure() / Math.max(1, children.size()); }
+}
+class Global extends Region {
+    Global(String n) { super(n, 0); }
+    protected String analysis() {
+        StringBuilder sb = new StringBuilder("share:");
+        for (ReportUnit u : children) sb.append(String.format(" %s %.0f%%", u.name(), 100 * u.expenditure() / expenditure()));
+        return sb.toString();
+    }
+}
+abstract class ReportSection implements ReportUnit {   // decorator: same interface, wraps any unit
+    protected final ReportUnit inner;
+    ReportSection(ReportUnit u) { inner = u; }
+    public String name() { return inner.name(); }
+    public double expenditure() { return inner.expenditure(); }
+}
+class TaxSection extends ReportSection {
+    TaxSection(ReportUnit u) { super(u); }
+    public String report() { return inner.report() + "\n  + Tax details: 15% = " + 0.15 * expenditure(); }
+}
+class InvestmentSection extends ReportSection {
+    InvestmentSection(ReportUnit u) { super(u); }
+    public String report() { return inner.report() + "\n  + Investment summary attached"; }
+}
+class ComplianceSection extends ReportSection {
+    ComplianceSection(ReportUnit u) { super(u); }
+    public String report() { return inner.report() + "\n  + Government compliance report attached"; }
+}
+public class FinCorpReports {
+    public static void main(String[] args) {
+        State ny = (State) new State("New York", 0).add(new CityOffice("NYC", 500)).add(new CityOffice("Buffalo", 200));
+        State ca = (State) new State("California", 50).add(new CityOffice("LA", 400));
+        Country usa = (Country) new Country("USA", 100).add(ny).add(ca);
+        Country de = (Country) new Country("Germany", 0).add(new State("Bavaria", 0).add(new CityOffice("Munich", 300)));
+        Global world = (Global) new Global("FinCorp Global").add(usa).add(de);
+        System.out.println(ny.report());                                   // State Director
+        System.out.println(new TaxSection(usa).report());                  // Country Head + tax
+        System.out.println(new ComplianceSection(new InvestmentSection(world)).report());  // CFO + 2 sections
+    }
+}
+//// FILE: WeatherAdapter.java
+// 2022-23 Q1(a) — Object Adapter: clients pass a zip code; the existing service needs a city name
+import java.util.HashMap;
+import java.util.Map;
+
+class CityWeatherService {                                     // adaptee (existing, unchanged)
+    double getTemperature(String city) {
+        switch (city) { case "Dhaka": return 31.5; case "Chittagong": return 29.0; default: return Double.NaN; }
+    }
+}
+interface ZipWeatherService { double getTemperature(int zipCode); }   // target expected by the client
+
+class ZipToCityAdapter implements ZipWeatherService {           // adapter
+    private final CityWeatherService service;
+    private final Map<Integer, String> zipToCity = new HashMap<>();
+    ZipToCityAdapter(CityWeatherService s) {
+        service = s;
+        zipToCity.put(1000, "Dhaka");
+        zipToCity.put(4000, "Chittagong");
+    }
+    public double getTemperature(int zipCode) {
+        String city = zipToCity.get(zipCode);
+        if (city == null) throw new IllegalArgumentException("Unknown zip " + zipCode);
+        return service.getTemperature(city);                    // translate, then delegate
+    }
+}
+public class WeatherAdapter {
+    public static void main(String[] args) {
+        ZipWeatherService ws = new ZipToCityAdapter(new CityWeatherService());
+        System.out.println("1000 -> " + ws.getTemperature(1000) + " C");
+        System.out.println("4000 -> " + ws.getTemperature(4000) + " C");
+    }
+}
+//// FILE: BirdAdapterDemo.java
+// 2018-19 Q4(b) — Adapter: use Bird objects where ToyDuck objects are expected
+interface Bird { void fly(); void makeSound(); }
+class Sparrow implements Bird {
+    public void fly() { System.out.println("Flying"); }
+    public void makeSound() { System.out.println("Chirp Chirp"); }
+}
+interface ToyDuck { void squeak(); }                         // target
+class PlasticToyDuck implements ToyDuck {
+    public void squeak() { System.out.println("Squeak"); }
+}
+class BirdAdapter implements ToyDuck {                       // adapter
+    private final Bird bird;                                 // adaptee
+    BirdAdapter(Bird bird) { this.bird = bird; }
+    public void squeak() { bird.makeSound(); }               // translate the call
+}
+public class BirdAdapterDemo {
+    public static void main(String[] args) {
+        ToyDuck[] ducks = { new PlasticToyDuck(), new BirdAdapter(new Sparrow()) };
+        for (ToyDuck d : ducks) d.squeak();                  // client sees only ToyDuck
+    }
+}
+//// FILE: NotificationBridge.java
+// IJ Misc deck p7-8 — Bridge: notification kind x sending channel
+interface MessageSender { void send(String msg); }                    // implementation hierarchy
+class EmailSender implements MessageSender { public void send(String m) { System.out.println("Email: " + m); } }
+class SmsSender   implements MessageSender { public void send(String m) { System.out.println("SMS: " + m); } }
+class PushSender  implements MessageSender { public void send(String m) { System.out.println("Push: " + m); } }
+
+abstract class Notification {                                         // abstraction
+    protected final MessageSender sender;                             // the bridge
+    Notification(MessageSender s) { sender = s; }
+    abstract void notifyUser();
+}
+class AlertNotification extends Notification {
+    AlertNotification(MessageSender s) { super(s); }
+    void notifyUser() { sender.send("Server is down!"); }
+}
+class OtpNotification extends Notification {
+    OtpNotification(MessageSender s) { super(s); }
+    void notifyUser() { sender.send("Your OTP is 482913"); }
+}
+class PromotionNotification extends Notification {
+    PromotionNotification(MessageSender s) { super(s); }
+    void notifyUser() { sender.send("50% off this weekend"); }
+}
+public class NotificationBridge {
+    public static void main(String[] args) {
+        new AlertNotification(new SmsSender()).notifyUser();
+        new OtpNotification(new EmailSender()).notifyUser();
+        new PromotionNotification(new PushSender()).notifyUser();
+    }
+}

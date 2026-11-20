@@ -1,0 +1,167 @@
+
+===== slide 1 =====
+What is UML?
+An international industry standard graphical notation for describing software analysis and design. 
+pictures or views of an OO system
+helps better understanding
+a picture is worth a thousand words
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_Use case\s001_4.gif]
+
+===== slide 2 =====
+UML diagrams
+UML = Unified Modeling Language
+Use case diagrams
+Class diagrams
+Sequence diagrams
+Collaboration diagrams
+Statechart diagrams
+Object diagrams
+Activity diagrams
+Component diagrams
+Deployment diagrams
+…
+
+===== slide 3 =====
+Use Cases
+What is a Use Case?
+A formal way of representing how a business system interacts with its environment
+Illustrates the activities that are performed by the users of the system
+A scenario-based technique in the UML
+A sequence of actions a system performs that yields a valuable result for a particular actor.
+
+===== slide 4 =====
+Actors and stakeholders
+What is an actor?  A primary actor?
+
+
+
+
+What is the difference between an actor and a stakeholder?
+4
+actor: anything with behavior that acts on the system
+primary actor: initiates interaction to achieve goal(when system is a software product, primary actor is often the computer user)
+supporting actor: performs sub-goals to help use case
+stakeholder: anyone interested in the system
+examples: supplier, stock agency, vendor
+
+the difference: stakeholder might not "act" in any scenario
+
+===== slide 5 =====
+How to identify actors?
+Who is interested in the scenario/system?
+Where in the organization is the scenario/system be used?
+Who will benefit from the use of the scenario/system?
+Who will supply the scenario/system with this information, use this information, and remove this information?
+Does one person play several different roles?
+Do several people play the same role?
+[notes] Actors
+7) Does one person play several different roles?
+May have an actor for each role
+8) Do several people play the same role?
+Only use one actor per role (no matter how many people play that role)
+
+Identifying actors is an iterative process
+Defining how an actor interacts with the system may clarify whether there are duplicate actors or not
+
+===== slide 6 =====
+Use Case Diagrams
+Use case diagrams describe what a system does from the standpoint of an external observer. The emphasis is on what a system does rather than how.
+
+Use case diagrams are closely connected to scenarios. A scenario is an example of what happens when someone interacts with the system.
+
+===== slide 7 =====
+Actors
+An Actor is outside or external the system.
+It can be a:
+Human
+Peripheral device (hardware)
+External system or subsystem
+Time or time-based event
+
+Represented by stick figure with name below
+Patient
+[notes] Actors
+Are NOT a part of the system (external to the system)
+A single actor may represent multiple physical users
+Whether human or not, represented by stick figure
+MUST label stick figure with the name of the actor
+
+===== slide 8 =====
+Use Cases
+Each use case in a use case diagram describes one and only one function in which users interact with the system
+May contain several “paths” that a user can take while interacting with the system
+Each path is referred to as a scenario
+
+Represents an activity of an actor
+Use cases as ellipses with their names below or inside
+Actors are stick figures. Use cases are ovals. Communications are lines that link actors to use cases.
+Make appointment
+
+===== slide 9 =====
+Use Case  - Relationships
+Relationships
+Represent communication between actor and use case
+Depicted by line or double-headed arrow line
+Also called association relationship
+Make 
+Appointment
+Make appointment
+
+===== slide 10 =====
+Use Case  - Relationships
+Boundary
+A boundary rectangle is placed around the perimeter of the system to show how the actors communicate with the system.
+Make 
+Appointment
+[notes] System boundary: A system boundary defines the scope of what a system will be. A system cannot have infinite functionality. So, it follows that use cases also need to have definitive limits defined. A system boundary of a use case diagram defines the limits of the system. The system boundary is shown as a rectangle spanning all the use cases in the system. 
+Other use cases in this lecture also show the system boundary of the clinic application. The use cases of this system are enclosed in a rectangle. Note that the actors in the system are outside the system boundary.
+The system boundary is potentially the entire system as defined in the problem statement. But this is not always the case. For large and complex systems, each of the modules may be the system boundary. For example, for an ERP system for an organization, each of the modules such as personnel, payroll, accounting, and so forth, can form the system boundary for use cases specific to each of these business functions. The entire system can span all of these modules depicting the overall system boundary.
+
+===== slide 11 =====
+Sample use case diagram: Hospital
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_Use case\s011_4.jpg]
+
+===== slide 12 =====
+Use Case relationship: Generalization
+Generalization
+From child to parent
+Represented by a line and a hollow arrow
+[notes] Inheritance
+
+===== slide 13 =====
+Use case relationships: Extend
+Extend
+Represents the extension of the use case to include optional functionality 
+Arrow is drawn from the extension use case to the base use case
+Write << extend >> above arrowhead line
+Make appointment
+Update patient information
+<<extend>>
+
+===== slide 14 =====
+Use case relationship: Include
+Include
+Represents the inclusion of the functionality of one use case within another 
+Arrow is drawn from the base use case to the used use case
+Write << include >> above arrowhead line
+Manage schedule
+Record availability
+<<include>>
+
+===== slide 15 =====
+Use case with relationships
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_Use case\s015_4.jpg]
+
+===== slide 16 =====
+UML editors
+Rational Rose (commercial): http://www-03.ibm.com/software/products/en/ratirosefami 
+
+ArgoUML: http://argouml.tigris.org/ 
+
+Violet: http://alexdp.free.fr/violetumleditor/page.php 
+
+Visual Pardigm (commercial): http://www.visual-paradigm.com/solution/freeumltool/ 
+
+StarUML: http://staruml.io/ 
+
+UMLet: http://www.umlet.com/

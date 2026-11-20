@@ -1,0 +1,906 @@
+
+===== page 1 =====
+Lecture 1: A Little Introduction to Signals
+CSE 219: Signals and Linear Systems
+Anik Saha
+Adjunct Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+A signal is a pattern of change
+that carries information
+Variation across time (voice, voltage) or space (image brightness)
+
+===== page 3 =====
+Continuous signals are smooth
+▶Signals that are smooth, defined at every instant
+▶Examples: microphone voltage, car velocity, temperature over time
+x(t)
+t
+x(t)
+value exists
+at every t
+
+===== page 4 =====
+Discrete signals have gaps between values
+▶Signals that are defined only at separated instants
+▶Digital audio samples, daily temperature log, weekly stock index
+x[n]
+n
+x[n]
+-5
+-4
+-3
+-2
+-1
+1
+2
+3
+4
+5
+0
+
+===== page 5 =====
+A little convention tells us which time points are allowed
+Continuous signal
+x(t)
+Here, t can be any real value.
+✓x(1)
+✓x(2)
+✓x(0.5)
+✓x(π)
+Discrete signal
+x[n]
+Here, n is an integer index.
+✓x[1]
+✓x[2]
+× x[0.5]
+× x[π]
+
+===== page 6 =====
+Energy is simply a sum of squares
+To measure how “large” a signal is, we square its values and add them up.
+Continuous signal
+E[t1,t2] =
+Z t2
+t1
+|x(t)|2 dt
+Discrete signal
+E[n1,n2] =
+n2
+X
+n=n1
+|x[n]|2
+The absolute value lets the formula work for both real and complex signals.
+
+===== page 7 =====
+Power is energy averaged over the interval
+Continuous signal
+P[t1,t2] =
+1
+t2 −t1
+Z t2
+t1
+|x(t)|2 dt
+Divide the energy by the
+length of the time interval.
+Discrete signal
+P[n1,n2] =
+1
+n2 −n1 + 1
+n2
+X
+n=n1
+|x[n]|2
+Divide the energy by
+the number of samples.
+
+===== page 8 =====
+Continuous example: one half-sine has energy π/2
+Signal
+x(t) =
+
+
+
+sin t,
+0 ≤t ≤π,
+0,
+otherwise.
+t
+x(t)
+0
+π
+1
+Energy
+E =
+Z π
+0
+| sin t|2 dt
+=
+Z π
+0
+sin2 t dt
+= π
+2 .
+The signal is nonzero only from 0
+to π, so we only integrate there.
+
+===== page 9 =====
+Average power: let’s divide by the interval length
+Energy, we already found
+E
+=
+π
+2
+Total squared size over 0 ≤t ≤π.
+Average power
+P[0,π] =
+E
+π −0 = π/2
+π
+= 1
+2.
+Average squared size
+over this interval.
+
+===== page 10 =====
+Discrete example: we start from the samples
+Suppose a discrete-time signal has four samples:
+x[0] = 1,
+x[1] = −2,
+x[2] = 2,
+x[3] = −1.
+Table of values
+n
+0
+1
+2
+3
+x[n]
+1
+−2
+2
+−1
+n
+x[n]
+0
+1
+2
+3
+2
+1
+−1
+−2
+
+===== page 11 =====
+Discrete example: square, add, then average
+Energy
+E =
+3
+X
+n=0
+|x[n]|2
+= |1|2 + | −2|2 + |2|2 + | −1|2
+= 1 + 4 + 4 + 1
+= 10.
+Average power
+P[0,3] = 1
+4
+3
+X
+n=0
+|x[n]|2
+= 10
+4
+= 2.5.
+
+===== page 12 =====
+Question: what happens if the half-sine repeats forever?
+Previously, one half-sine over 0 ≤t
+≤π had energy π
+2.
+Now suppose the same half-sine keeps repeating.
+Periodic half-sine signal
+t
+x(t)
+−2π
+−π
+0
+π
+2π
+1
+period = π
+· · ·
+· · ·
+
+===== page 13 =====
+Answer: infinite energy, but finite average power
+Total energy
+E = π
+2 + π
+2 + π
+2 + · · ·
+= ∞.
+Each period contributes
+the same positive energy.
+Average power
+P = 1
+π
+Z π
+0 sin2 t dt
+= 1
+π · π
+2
+= 1
+2.
+Average over one period is enough.
+
+===== page 14 =====
+Question: what if the half-sine rests for half the period?
+Same lobe, but period 2π
+t
+x(t)
+−2π
+−π
+0
+π
+2π
+3π
+4π
+1
+period = 2π
+· · ·
+· · ·
+Answer:
+E = ∞,
+P = 1
+2π
+Z π
+0 sin2 t dt = 1
+4.
+
+===== page 15 =====
+Can an infinite-range signal have finite energy?
+Signal
+x(t) =
+
+
+
+
+
+
+
+
+
+
+
+1,
+|t| ≤1,
+1
+|t|,
+|t| > 1.
+Graph of x(t)
+t
+x(t)
+−4
+−2
+−1
+0
+1
+2
+4
+1
+1
+|t|
+Thanks to Dibyo and Mumtahina (CSE 23) for proposing this problem!
+
+===== page 16 =====
+This infinite-range signal has energy 4
+Energy
+E =
+Z ∞
+−∞|x(t)|2 dt
+=
+Z 1
+−1 12 dt + 2
+Z ∞
+1
+1
+t
+2
+dt
+= 2 + 2
+
+−1
+t
+∞
+1
+= 2 + 2
+= 4.
+Average power
+P = 0
+Finite total energy spread
+over infinite time gives
+zero average power.
+
+===== page 17 =====
+Transforming Signals
+Signals feel nicer once we are able to move, flip, or stretch them as we wish.
+
+===== page 18 =====
+A signal can change both horizontally and/or vertically
+x(t)
+t
+a
+A
+value A occurs at t = a
+x(2t)
+t
+a
+2
+A
+Same value A
+arrives at t =
+a
+2
+2x(t)
+t
+a
+2A
+At same time t = a;
+value becomes 2A
+x(2t): time is compressed, so a
+7→
+a/2.
+2x(t): amplitude is doubled, so A
+7→
+2A.
+
+===== page 19 =====
+Time shift: the whole signal moves left/right
+When t0 > 0
+x(t −t0) is a delay to the right, while x(t + t0) is an advance to the left.
+t
+x(t)
+x(t −t0)
+delay by t0
+a
+a + t0
+Same height, same shape but every value simply occurs t0 later.
+
+===== page 20 =====
+Shifting shifting: when right and when left?
+Delay (shift right): x(t) −→x(t −2)
+x(t)
+t
+a
+x(t −2)
+t
+a + 2
+Advance (shift left): x(t) −→x(t + 3)
+x(t)
+t
+a
+x(t + 3)
+t
+a −3
+
+===== page 21 =====
+Shifting discrete signals: every value moves to a new index
+Original: x[n]
+n
+0
+delay by
+4 samples
+Delayed: x[n −4]
+n
+0
+
+===== page 22 =====
+Time reversal: mirroring a signal with respect to the origin
+
+===== page 23 =====
+Time reversal: mirroring a signal with respect to the origin
+Replace t by −t. A feature at t
+= a appears at t
+= −a.
+Original signal: x(t)
+t
+0
+Reversed signal: x(-t)
+t
+0
+
+===== page 24 =====
+Time scaling: compress or stretch?
+
+===== page 25 =====
+Time scaling: compress or stretch?
+Time scaling changes along the horizontal axis, not the signal height.
+Original: x(t)
+t
+Compressed: x(2t)
+t
+Stretched: x( t
+2)
+t
+
+===== page 26 =====
+Can we combine transformations? Yes, sure!
+Goal: obtain x(2t
++
+3)
+x(t)
+shift left by 3
+−−−−−−−→
+x(t+3)
+compress along time by 2
+−−−−−−−−−−−−−−→
+x(2t+3)
+First create x(t + 3). Then replace its time variable t by 2t.
+The second operation acts on the entire intermediate signal x(t + 3).
+
+===== page 27 =====
+Changing the order gives a different answer
+x(t)
+shift left by 3
+−−−−−−−→
+x(t +3)
+compress time by 2
+−−−−−−−−−−−→
+x(2t + 3)
+Reverse order
+x(t)
+compress time by 2
+−−−−−−−−−−−→
+x(2t)
+shift left by 3
+−−−−−−−→
+x(2(t + 3))
+The shift is now also multiplied by 2, so the result is different.
+
+===== page 28 =====
+A simple recipe to obtain
+x(αt + β) from x(t)
+
+===== page 29 =====
+Step 1
+Apply the left/right shift part first:
+g1(t) = x(t + β)
+Step 2
+Apply time reversal only when α < 0:
+g2(t) =
+
+
+
+g1(t),
+α > 0,
+g1(−t),
+α < 0.
+Step 3
+Finally, scale time by |α|:
+g3(t) = g2
+
+|α|t
+
+= x(αt + β)
+
+===== page 30 =====
+A simple recipe to obtain x(αt + β) from x(t)
+x(t) −→x(t + β) −→x(αt + β)
+β > 0
+⇒
+shift left in 1st step
+β < 0
+⇒
+shift right in 1st step
+α > 1
+⇒
+time compression in 2nd step
+0 < α < 1
+⇒
+time stretching in 2nd step
+α < 0
+⇒
+need to do time reversal before scaling
+Please write the intermediate signal before applying the next operation.
+
+===== page 31 =====
+Example: obtain x(−3t + 2) from x(t)
+Step 1
+Shift left by 2:
+g1(t) = x(t + 2)
+Step 2
+Apply time reversal (since −3 < 0):
+g2(t) = g1(−t) = x(−t + 2)
+Step 3
+Compress time by 3:
+g3(t) = g2(3t) = x(−3t + 2)
+
+===== page 32 =====
+Visual example: begin with a piecewise signal
+We will transform one simple piecewise signal step by step.
+Original signal
+x(t) =
+
+
+
+
+
+
+
+
+
+1,
+0 ≤t < 1,
+2 −t,
+1 ≤t ≤2,
+0,
+otherwise.
+Graph of x(t)
+t
+0
+1
+2
+1
+x(t)
+
+===== page 33 =====
+Step 1: shifting left by 2 gives x(t + 2)
+Replace t by t + 2. Every feature moves 2 units to the left.
+Shifted signal
+x(t+2) =
+
+
+
+
+
+
+
+
+
+1,
+−2 ≤t < −1,
+−t,
+−1 ≤t ≤0,
+0,
+otherwise.
+Graph of x(t + 2)
+t
+−2
+−1
+0
+1
+x(t + 2)
+
+===== page 34 =====
+Step 2: reversing time gives x(−t + 2)
+Now replace t by −t in the shifted signal x(t + 2).
+Reversed signal
+x(−t+2) =
+
+
+
+
+
+
+
+
+
+t,
+0 ≤t < 1,
+1,
+1 ≤t ≤2,
+0,
+otherwise.
+Graph of x(−t + 2)
+t
+0
+1
+2
+1
+x(−t + 2)
+
+===== page 35 =====
+Step 3: compressing by 3 gives x(−3t + 2)
+Finally, replace t by 3t. The reversed signal becomes three times narrower.
+Final signal
+x(−3t+2) =
+
+
+
+
+
+
+
+
+
+
+
+3t,
+0 ≤t < 1
+3,
+1,
+1
+3 ≤t ≤2
+3,
+0,
+otherwise.
+Graph of x(−3t + 2)
+t
+0 1
+3
+2
+3
+1
+x(−3t + 2)
+
+===== page 36 =====
+Practice 1
+Starting from x(t), how can we obtain
+y(t) = x
+
+3
+
+2 −t
+2
+
+?
+Hint: simplify the argument first, then work from the inside outward.
+
+===== page 37 =====
+Practice 1: solution
+First simplify: x
+
+3
+
+2 −t
+2
+
+=
+x
+
+6 −3t
+2
+
+▶Shift left by 6:
+x(t) −→x(t + 6)
+▶Reverse time:
+x(t + 6) −→x(−t + 6)
+▶Compress time by 3
+2:
+x(−t + 6) −→x
+
+−3
+2t + 6
+
+
+===== page 38 =====
+Practice 2
+Start with
+y0(t) = x(t)
+Apply the following operations in the given order and obtain the final signal.
+1. Stretch time by a factor of 2.
+2. Shift left by 3.
+3. Compress time by a factor of 4.
+4. Reverse time.
+
+===== page 39 =====
+Practice 2: solution
+▶Stretch by 2:
+y1(t) = x
+t
+2
+
+▶Shift left by 3:
+y2(t) = y1(t + 3) = x
+t + 3
+2
+
+▶Compress by 4:
+y3(t) = y2(4t) = x
+4t + 3
+2
+
+= x
+
+2t + 3
+2
+
+▶Reverse time:
+y4(t) = y3(−t) = x
+
+−2t + 3
+2
+
+
+===== page 40 =====
+Even and Odd Signals
+
+===== page 41 =====
+Even signals are mirror-symmetric about the vertical axis
+Property: x(−t) = x(t),
+Example: x(t) = cos(t)
+
+===== page 42 =====
+Odd signals flip sign across the origin
+Property: x(−t) = −x(t),
+Example: x(t) = sin(t)
+
+===== page 43 =====
+Every signal has an even part and an odd part. Really!
+Even part
+xe(t) = 1
+2
+h
+x(t) + x(−t)
+i
+Odd part
+xo(t) = 1
+2
+h
+x(t) −x(−t)
+i
+
+===== page 44 =====
+Quick check: does it really work?
+Check 1
+Show that the even part is truly even:
+xe(−t) = xe(t)
+Check 2
+Show that the odd part is truly odd:
+xo(−t) = −xo(t)
+Check 3
+Show that, x(t) = xe(t) + xo(t)
+
+===== page 45 =====
+Example: begin with a signal that is neither even nor odd
+Original signal
+x(t) =
+
+
+
+t + 1,
+−1 ≤t ≤1,
+0,
+otherwise.
+This signal is nei-
+ther even nor odd.
+Graph of x(t)
+t
+−1
+0
+1
+1
+2
+x(t)
+
+===== page 46 =====
+We first reflect the signal to obtain x(−t)
+Time-reversed signal
+For −1 ≤t ≤1,
+x(−t) = 1 −t
+The graph of x(−t) is
+obtained by reflecting
+x(t) about t = 0.
+x(t) and x(−t)
+t
+−1
+0
+1
+1
+2
+x(t)
+x(−t)
+
+===== page 47 =====
+Adding and averaging extracts the even part
+Add, then average
+xe(t) = 1
+2
+h
+x(t) + x(−t)
+i
+= 1
+2
+
+(t + 1) + (1 −t)
+
+= 1
+Even part: xe(t)
+t
+−1
+0
+1
+1
+xe(t)
+
+===== page 48 =====
+Subtracting and averaging extracts the odd part
+Subtract, then average
+xo(t) = 1
+2
+h
+x(t) −x(−t)
+i
+= 1
+2
+
+(t + 1) −(1 −t)
+
+= t
+Odd part: xo(t)
+t
+−1
+0
+1
+−1
+1
+xo(t)
+
+===== page 49 =====
+Another Example: Discrete-Time Signal
+Original signal x[n]
+x[n] =
+(
+1,
+n ≥0
+0,
+n < 0
+Graph of x[n]
+n
+−3
+0
+3
+
+===== page 50 =====
+Step 1: Time Reversal x[−n]
+Time-reversed signal
+x[−n] =
+(
+1,
+n ≤0
+0,
+n > 0
+x[n] and x[−n]
+n
+x[n]
+x[−n]
+
+===== page 51 =====
+Step 2: Even Component
+Even part
+xe[n] = 1
+2(x[n] + x[−n])
+xe[n] =
+(1
+2,
+n̸ = 0
+1,
+n = 0
+Even part
+
+===== page 52 =====
+Step 3: Odd Component
+Odd part
+xo[n] = 1
+2(x[n] −x[−n])
+xo[n] =
+
+
+
+
+
+
+
+−1
+2,
+n < 0
+0,
+n = 0
+1
+2,
+n > 0
+Odd part
+
+===== page 53 =====
+Thank you!

@@ -1,0 +1,163 @@
+\renewcommand{\teacherTag}{ASHRAF SIR \textbullet\ SAMPLING}
+\chapter{Sampling and Reconstruction}
+
+\noindent{\sffamily\small\color{slate}Impulse sampling: $x_p(t)=x(t)\sum\delta(t-nT)\ \Rightarrow\ X_p(\omega)=\frac1T\sum_kX(\omega-k\omega_s)$, $\omega_s=2\pi/T$. No aliasing iff $\omega_s>2\omega_M$.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q1(c)}{CSE 219 \textbullet\ TF p.1}{15}
+Let $x(t)$ be band-limited ($X(\omega)=0$ for $|\omega|>\omega_M$). Show that if $\omega_s>2\omega_M$, $x(t)$ is uniquely determined by its samples $x(nT)$.
+\end{qcard}
+\begin{solution}
+Sample with the impulse train $p(t)=\sum_n\delta(t-nT)$: $x_p(t)=\sum_nx(nT)\delta(t-nT)$. Since $P(\omega)=\omega_s\sum_k\delta(\omega-k\omega_s)$,
+\[X_p(\omega)=\frac1{2\pi}X*P=\frac1T\sum_{k=-\infty}^{\infty}X(\omega-k\omega_s).\]
+These are copies of $X$ centred at multiples of $\omega_s$, each of width $2\omega_M$. If $\omega_s-\omega_M>\omega_M$, i.e.\ $\omega_s>2\omega_M$, the copies do not overlap, so the copy at $k=0$ is intact, equal to $X(\omega)/T$.
+
+An ideal low-pass filter with gain $T$ and cutoff $\omega_c$, $\omega_M<\omega_c<\omega_s-\omega_M$, returns exactly $X(\omega)$. Its impulse response $h(t)=\dfrac{T\sin\omega_ct}{\pi t}$ gives the interpolation formula
+\[x(t)=\sum_nx(nT)\,\frac{\sin\omega_c(t-nT)}{\omega_c(t-nT)}\cdot\frac{T\omega_c}{\pi}\quad\Big(\omega_c=\tfrac{\omega_s}2:\ x(t)=\sum_nx(nT)\operatorname{sinc}\tfrac{\pi(t-nT)}T\Big).\]
+Because $X$ is recovered uniquely from the samples, so is $x(t)$.
+\ans{No overlap when $\omega_s>2\omega_M$; the $k=0$ copy is isolated by a low-pass filter, so the samples determine $x(t)$ uniquely.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q7(c)}{CSE 219 \textbullet\ 22 batch p.4}{10}
+State the Nyquist--Shannon sampling theorem. Illustrate $X_p(j\omega)$ when it is satisfied and when it is violated, and explain why aliasing cannot be undone after sampling.
+\end{qcard}
+\begin{solution}
+\emph{Theorem.} A signal band-limited to $\omega_M$ can be recovered exactly from samples taken at rate $\omega_s>2\omega_M$ (the Nyquist rate is $2\omega_M$).
+
+\begin{center}
+\begin{tikzpicture}[x=0.55cm,y=0.9cm]
+\draw[->](-7.5,0)--(7.8,0)node[right]{\scriptsize$\omega$};
+\foreach \c in {-6,0,6}{\draw[navy,thick](\c-1,0)--(\c,1)--(\c+1,0);}
+\node[font=\scriptsize,above]at(0,1){$\omega_s>2\omega_M$: copies separate};
+\begin{scope}[yshift=-2.2cm]
+\draw[->](-7.5,0)--(7.8,0)node[right]{\scriptsize$\omega$};
+\foreach \c in {-3,0,3}{\draw[crimson,thick](\c-1,0)--(\c,1)--(\c+1,0);}
+\node[font=\scriptsize,above]at(0,1.05){$\omega_s<2\omega_M$: copies overlap (aliasing)};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+Aliasing is irreversible because in the overlap region the sum $X(\omega)+X(\omega-\omega_s)$ is all that survives; many different pairs of spectra produce the same sum, and a frequency $\omega_0+\omega_s$ produces exactly the same samples as $\omega_0$. Nothing in the samples tells them apart, so no filter can restore the original.
+\ans{Sample at $\omega_s>2\omega_M$. Below that, shifted copies overlap and the added spectra cannot be separated.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q4(b)}{CSE 219 \textbullet\ TF p.2}{10}
+Let $x[n]$ be a signal whose DTFT satisfies $X(e^{j\omega})=0$ for $\frac{2\pi}9\le|\omega|\le\pi$. What is the lowest rate at which $x[n]$ can be sampled (decimated) without aliasing?
+\end{qcard}
+\begin{solution}
+The spectrum is non-zero only for $|\omega|<\omega_M=\frac{2\pi}9$. Keeping every $M$-th sample, $y[n]=x[Mn]$, puts copies of the spectrum (stretched by $M$) at spacing $2\pi$; the spectrum of $y$ is $\frac1M\sum_kX\big(e^{j(\omega-2\pi k)/M}\big)$, whose occupied width is $2M\omega_M$. No overlap requires
+\[2M\omega_M\le2\pi\ \Rightarrow\ M\le\frac{\pi}{\omega_M}=\frac92 .\]
+The largest integer is $M=4$.
+\ans{Keep every 4th sample ($M=4$): the lowest rate is $\frac14$ of the original sampling rate.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q5(c)}{CSE 219 \textbullet\ 22 batch p.3}{10}
+Compare ideal (sinc) reconstruction, zero-order hold and linear interpolation. Which would you choose for a real-time DAC, and why?
+\end{qcard}
+\begin{solution}
+\begin{center}\small\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}p{2.6cm}p{3.4cm}p{3.4cm}p{3.6cm}@{}}\toprule&ideal (sinc)&zero-order hold&linear interpolation\\\midrule
+$h(t)$&$\operatorname{sinc}(\pi t/T)$&rectangle of width $T$&triangle of width $2T$\\
+$|H(\omega)|$&ideal brick wall&$T\,|\operatorname{sinc}(\omega T/2)|$ (droop, images remain)&$T\operatorname{sinc}^2(\omega T/2)$ (better image rejection, more droop)\\
+causal?&no, infinite&yes&no (needs the next sample; causal if delayed by $T$)\\
+exact?&yes (band-limited)&staircase, error&piecewise-linear, smaller error\\\bottomrule\end{tabular}\end{center}
+\emph{Real-time DAC:} a zero-order hold, followed by an analog low-pass (reconstruction) filter and, if needed, a $1/\operatorname{sinc}$ droop compensator. It is causal, needs only the current sample and no look-ahead, and is simple to implement; the sinc is non-causal and linear interpolation requires the next sample (one-sample delay).
+\ans{Choose the zero-order hold plus an analog smoothing filter (causal, cheap); ideal sinc is unrealisable and linear interpolation needs look-ahead.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q1(b) --- CSE 311}{CSE 311 \textbullet\ TF p.12}{10}
+Can the past samples of a band-limited signal foretell its future?
+\end{qcard}
+\begin{solution}
+In principle, yes: a band-limited signal is fully described by its samples, $x(t)=\sum x(nT)\operatorname{sinc}\frac{\pi(t-nT)}{T}$, and such a signal is analytic (infinitely smooth), so a complete record of its past determines the future. In practice, no: the formula needs infinitely many samples, the interpolation weights decay only like $1/t$, and any noise or truncation makes extrapolation hopelessly unstable.
+\ans{Theoretically yes (band-limited $\Rightarrow$ analytic); practically no, because of noise, finite records and ill-conditioning.}
+\end{solution}
+
+%------------------------------------------------------------------
+\repeated{2}
+\begin{qcard}{2020--2021 \textbullet\ Q3(a) --- CSE 311}{CSE 311 \textbullet\ TF p.12}{24}
+Why can practical signals not be fully recovered after sampling? Explain aliasing and how to minimise its effect.
+\end{qcard}
+\begin{qcard}{2018--2019 \textbullet\ Q3(b) --- CSE 311}{CSE 311 \textbullet\ TF p.18}{20}
+What causes aliasing, what problems does it create and how is it compensated?
+\end{qcard}
+\begin{solution}
+\emph{Cause.} Practical signals are time-limited, hence never strictly band-limited; their spectra have tails beyond $\omega_s/2$. Also, the reconstruction filter is not ideal. When $\omega_s<2\omega_M$ (or because of the tails) the shifted copies of the spectrum overlap, and high-frequency content appears as a lower frequency: $f\to|f-kf_s|$.
+
+\emph{Problem.} The overlap adds energy to the wanted band and cannot be removed afterwards (the same samples describe many signals); it causes distortion and spurious tones (e.g.\ the wheel that seems to turn backwards).
+
+\emph{Remedy.}
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt]
+\item Pass the signal through an \textbf{anti-aliasing low-pass filter} (cutoff $\le f_s/2$) before sampling.
+\item Sample above the Nyquist rate (oversampling) so that a filter with a gradual transition band suffices.
+\item Use a good reconstruction filter after the DAC.
+\end{itemize}
+\ans{Aliasing = overlap of spectral copies when $f_s<2f_M$ (or from signal tails); minimise with an anti-aliasing filter and oversampling.}
+\end{solution}
+
+%------------------------------------------------------------------
+\repeated{2}
+\begin{qcard}{2021--2022 \textbullet\ Q3(b) --- CSE 311}{CSE 311 \textbullet\ TF p.8}{15}
+The Nyquist-rate samples of a band-limited signal $g(t)$ are all zero except $g(0)=A$. Find $g(t)$.
+\end{qcard}
+\begin{qcard}{2018--2019 \textbullet\ Q1(a) --- CSE 311}{CSE 311 \textbullet\ TF p.18}{21}
+A signal $g(t)$ is band-limited to 50 Hz and its samples, 0.01 s apart, are all 0 except $g(0)=1$. Find $g(t)$ and $G(f)$. Also state the Fourier transform of $\delta(t)$.
+\end{qcard}
+\begin{solution}
+Interpolation formula: $g(t)=\sum_ng(nT)\operatorname{sinc}\dfrac{\pi(t-nT)}T$, with only $n=0$ non-zero:
+\[g(t)=A\,\frac{\sin(\pi t/T)}{\pi t/T}=A\operatorname{sinc}\Big(\frac{\pi t}{T}\Big),\qquad T=\frac1{2B}.\]
+For $B=50$ Hz, $T=0.01$ s (exactly the Nyquist interval) and $A=1$:
+\[g(t)=\frac{\sin100\pi t}{100\pi t},\qquad G(f)=0.01\operatorname{rect}\Big(\frac f{100}\Big)\ (=0.01\text{ for }|f|<50\text{ Hz, else }0).\]
+Also $\delta(t)\leftrightarrow1$.
+\ans{$g(t)=A\operatorname{sinc}(2\pi Bt)$; for 50 Hz, $g(t)=\frac{\sin100\pi t}{100\pi t}$, $G(f)=0.01\operatorname{rect}(f/100)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q3(b)}{EEE 211 \textbullet\ EEE p.28}{10}
+Find the Fourier transform of $x(t)=\sin1000\pi t+\cos1200\pi t$. Find the sampling period such that no aliasing occurs.
+\end{qcard}
+\begin{solution}
+\[X(\omega)=\frac\pi j\big[\delta(\omega-1000\pi)-\delta(\omega+1000\pi)\big]+\pi\big[\delta(\omega-1200\pi)+\delta(\omega+1200\pi)\big].\]
+The highest frequency is $\omega_M=1200\pi$ rad/s ($600$ Hz), so the Nyquist rate is $2\omega_M=2400\pi$ rad/s ($1200$ Hz):
+\[T<\frac{2\pi}{2\omega_M}=\frac1{1200}\text{ s}\approx0.833\text{ ms}.\]
+\ans{Impulses at $\pm1000\pi$, $\pm1200\pi$; sample faster than 1200 Hz, i.e.\ $T<\frac1{1200}$ s.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q3 --- CSE 311}{CSE 311 \textbullet\ TF p.15}{35}
+Find the Fourier transforms of $2B\operatorname{sinc}(2\pi Bt)$ and $B\operatorname{sinc}^2(\pi Bt)$. Sketch the spectrum of each when sampled at 1.5 times the Nyquist rate, and write the general expression for the sampled spectrum.
+\end{qcard}
+\begin{solution}
+With $\operatorname{sinc}x=\frac{\sin x}x$: $2B\operatorname{sinc}(2\pi Bt)=\dfrac{\sin2\pi Bt}{\pi t}\leftrightarrow\operatorname{rect}\Big(\dfrac f{2B}\Big)$ (height 1, $|f|<B$), and
+$B\operatorname{sinc}^2(\pi Bt)\leftrightarrow\Lambda\big(\tfrac fB\big)=\max(0,1-|f|/B)$.
+
+Both are band-limited to $B$ (Nyquist rate $2B$). At $f_s=1.5(2B)=3B$ the copies are centred at multiples of $3B$:
+\[G_s(f)=f_s\sum_{n=-\infty}^{\infty}G(f-nf_s)\quad\text{with ideal impulse sampling at }T=\tfrac1{f_s}.\]
+\begin{center}
+\begin{tikzpicture}[x=0.38cm,y=0.9cm]
+\draw[->](-10,0)--(10.5,0)node[right]{\scriptsize$f$};
+\foreach \c in {-9,-6,-3,0,3,6,9}{\draw[navy,thick](\c-1.5,0)--(\c-1.5,1)--(\c+1.5,1)--(\c+1.5,0);}
+\node[font=\scriptsize]at(0,-0.5){rect: copies at $0,\pm3B,\pm6B,\dots$ with gaps of width $B$};
+\begin{scope}[yshift=-2.6cm]
+\draw[->](-10,0)--(10.5,0)node[right]{\scriptsize$f$};
+\foreach \c in {-9,-6,-3,0,3,6,9}{\draw[crimson,thick](\c-1.5,0)--(\c,1)--(\c+1.5,0);}
+\node[font=\scriptsize]at(0,-0.5){triangle: copies at multiples of $3B$, no overlap};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\ans{$\operatorname{rect}(f/2B)$ and $\Lambda(f/B)$; sampled spectra are copies repeated every $3B$ (gaps of width $B$), scaled by $f_s$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q7(b)}{EEE 211 \textbullet\ EEE p.25}{20}
+Let $x(t)=\dfrac{\sin(\omega_Bt/2)}{\pi t}\sum_n\delta\big(t-\frac{n\pi}{\omega_B}\big)$ be applied to an LTI system with $h(t)=\dfrac{\sin(3\omega_Bt/2)}{\pi t}$. Find the output $y(t)$.
+\end{qcard}
+\begin{solution}
+Let $x_0(t)=\dfrac{\sin(\omega_Bt/2)}{\pi t}\leftrightarrow X_0=\operatorname{rect}\dfrac{\omega}{\omega_B}$ (1 for $|\omega|<\omega_B/2$). The impulse train has $T=\pi/\omega_B$, so $\omega_s=2\pi/T=2\omega_B$, and
+\[X(\omega)=\frac{\omega_B}{\pi}\sum_kX_0(\omega-2k\omega_B).\]
+The copies sit at $0,\pm2\omega_B,\dots$ with half-width $\omega_B/2$ (no aliasing: $\omega_s=2\omega_B>2\cdot\frac{\omega_B}{2}$). The system is an ideal low-pass filter with cutoff $\frac32\omega_B$, which passes the $k=0$ copy ($|\omega|<\omega_B/2$) and rejects the copies at $\pm2\omega_B$, which start at $1.5\omega_B$ (the edge, of measure zero). Hence
+\[Y(\omega)=\frac{\omega_B}{\pi}X_0(\omega),\qquad y(t)=\frac{\omega_B}{\pi}\cdot\frac{\sin(\omega_Bt/2)}{\pi t}.\]
+\ans{$y(t)=\dfrac{\omega_B}{\pi^2}\,\dfrac{\sin(\omega_Bt/2)}{t}$.}
+\end{solution}

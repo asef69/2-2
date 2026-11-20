@@ -1,0 +1,134 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 8--10}
+\chapter{Fourier Transform: Pairs and Properties}
+
+\noindent{\sffamily\small\color{slate}$X(\omega)=\int x(t)e^{-j\omega t}\dd t$, \ $x(t)=\frac1{2\pi}\int X(\omega)e^{j\omega t}\dd\omega$. Key pairs: $e^{-at}u(t)\leftrightarrow\frac1{a+j\omega}$, \ $1\leftrightarrow2\pi\delta(\omega)$, \ $\delta(t)\leftrightarrow1$.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q2(a)}{CSE 219 \textbullet\ 22 batch p.2}{10}
+Find the Fourier transform of $x_1(t)=e^{-at}u(t)$, and then of $x_2(t)=e^{-a|t|}$ ($a>0$).
+\end{qcard}
+\begin{solution}
+\[X_1(\omega)=\int_0^\infty e^{-(a+j\omega)t}\dd t=\frac1{a+j\omega}.\]
+Write $x_2(t)=e^{-at}u(t)+e^{at}u(-t)=x_1(t)+x_1(-t)$. Time reversal gives $x_1(-t)\leftrightarrow X_1(-\omega)=\frac1{a-j\omega}$:
+\[X_2(\omega)=\frac1{a+j\omega}+\frac1{a-j\omega}=\frac{2a}{a^2+\omega^2}.\]
+\ans{$X_1=\dfrac1{a+j\omega}$; $\;X_2=\dfrac{2a}{a^2+\omega^2}$ (real and even, as $x_2$ is real and even).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q6(a)--(b)}{CSE 219 \textbullet\ TF p.3}{15}
+Let $f(t)=e^{-at}u(t)$, $a>0$. Define $f(-t)$, and find the Fourier transforms of $f(t)$ and $f(-t)$.
+\end{qcard}
+\begin{solution}
+$f(-t)=e^{at}u(-t)$: it equals $e^{at}$ for $t<0$ and $0$ for $t>0$ (the mirror image of $f$).
+\[F(\omega)=\frac1{a+j\omega},\qquad \mathcal F\{f(-t)\}=\int_{-\infty}^0e^{(a-j\omega)t}\dd t=\frac1{a-j\omega}=F(-\omega).\]
+\ans{$F(\omega)=\frac1{a+j\omega}$; $\;\mathcal F\{f(-t)\}=\frac1{a-j\omega}$.}
+\end{solution}
+
+\begin{qcard}{2022--2023 \textbullet\ Q6(c)--(d)}{CSE 219 \textbullet\ TF p.3}{15}
+Write $\operatorname{sign}(t)$ in terms of $f(t)$ and $f(-t)$, and find its Fourier transform using the properties of the Fourier transform.
+\end{qcard}
+\begin{solution}
+$\operatorname{sign}(t)=\lim_{a\to0}\big[f(t)-f(-t)\big]$ since $e^{-a|t|}\to1$ and the two halves carry opposite signs. By linearity,
+\[\mathcal F\{\operatorname{sign}t\}=\lim_{a\to0}\Big[\frac1{a+j\omega}-\frac1{a-j\omega}\Big]=\lim_{a\to0}\frac{-2j\omega}{a^2+\omega^2}=\frac{-2j}{\omega}=\frac{2}{j\omega}.\]
+(Check: $\operatorname{sign}$ is real and odd $\Rightarrow$ purely imaginary, odd transform.) With $u(t)=\frac12[1+\operatorname{sign}t]$ this gives $u(t)\leftrightarrow\pi\delta(\omega)+\frac1{j\omega}$.
+\ans{$\operatorname{sign}(t)\leftrightarrow\dfrac{2}{j\omega}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q1(b) --- CSE 311}{CSE 311 \textbullet\ TF p.15}{18}
+Find the Fourier transform of $\cos2\pi f_0t$ and $\sin2\pi f_0t$. Are the Dirichlet conditions necessary for the existence of the Fourier transform?
+\end{qcard}
+\begin{solution}
+Use $\mathcal F\{e^{j2\pi f_0t}\}=\delta(f-f_0)$ (from $\int e^{-j2\pi(f-f_0)t}\dd t=\delta(f-f_0)$) and Euler's formula:
+\[\cos2\pi f_0t\ \leftrightarrow\ \tfrac12\big[\delta(f-f_0)+\delta(f+f_0)\big],\qquad \sin2\pi f_0t\ \leftrightarrow\ \tfrac1{2j}\big[\delta(f-f_0)-\delta(f+f_0)\big].\]
+Neither signal is absolutely integrable, so the Dirichlet condition $\int|x|\dd t<\infty$ fails; yet the transform exists as impulses. The conditions are \emph{sufficient, not necessary}: the transform of a periodic or constant signal exists in the generalised (distribution) sense.
+\ans{$\cos$: impulses of weight $\frac12$ at $\pm f_0$ (real, even). $\sin$: $\pm\frac1{2j}$ at $\pm f_0$ (imaginary, odd). Dirichlet conditions are sufficient only.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q2(a) --- CSE 311}{CSE 311 \textbullet\ TF p.15}{24}
+Show that a time delay of a signal corresponds to a linear phase shift in its spectrum. What happens if a voice signal loses the linear phase in its spectrum?
+\end{qcard}
+\begin{solution}
+\[\mathcal F\{x(t-t_0)\}=\int x(t-t_0)e^{-j\omega t}\dd t\overset{s=t-t_0}{=}e^{-j\omega t_0}\int x(s)e^{-j\omega s}\dd s=X(\omega)e^{-j\omega t_0}.\]
+The magnitude is unchanged, and the phase gets the extra term $-\omega t_0$, a straight line in $\omega$ with slope $-t_0$ (the group delay).
+
+\emph{Loss of linear phase.} Suppose the phase is no longer proportional to $\omega$ (for instance a phase that is constant or curved). Then different frequency components are delayed by different amounts, so the waveform is distorted in shape: sharp onsets smear and the peaks move. For a voice signal the ear is fairly insensitive to modest phase distortion, so intelligibility is largely retained but the waveform changes; for images and data pulses the effect is severe.
+\ans{$x(t-t_0)\leftrightarrow X(\omega)e^{-j\omega t_0}$. Without linear phase the components arrive at different times (phase/dispersion distortion), though speech is mostly still intelligible.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q6(c)}{EEE 211 \textbullet\ EEE p.4}{10}
+Find the Fourier transform of the unit step $u(t)$. Prove the integration property of the Fourier transform.
+\end{qcard}
+\begin{solution}
+\step{Step.} $u(t)=\frac12+\frac12\operatorname{sign}(t)$, with $1\leftrightarrow2\pi\delta(\omega)$ and $\operatorname{sign}\leftrightarrow\frac2{j\omega}$:
+\[U(\omega)=\pi\delta(\omega)+\frac1{j\omega}.\]
+\step{Integration property.} $y(t)=\int_{-\infty}^tx(\tau)\dd\tau=x(t)*u(t)$. Convolution in time is multiplication in frequency:
+\[Y(\omega)=X(\omega)U(\omega)=\frac{X(\omega)}{j\omega}+\pi X(0)\delta(\omega),\]
+because $X(\omega)\delta(\omega)=X(0)\delta(\omega)$. If $X(0)=0$ the second term vanishes.
+\ans{$u(t)\leftrightarrow\pi\delta(\omega)+\frac1{j\omega}$; $\;\int_{-\infty}^tx\leftrightarrow\frac{X(\omega)}{j\omega}+\pi X(0)\delta(\omega)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q1(a)}{EEE 211 \textbullet\ EEE p.17}{15}
+Let $X(\omega)=\dfrac{j\omega}{\omega^2-3j\omega-2}$ be the Fourier transform of $x(t)$. Find the Fourier transform of $\dfrac{\dd x}{\dd t}\cos t$.
+\end{qcard}
+\begin{solution}
+Factor the denominator: $\omega^2-3j\omega-2=-\big[(j\omega)^2+3j\omega+2\big]=-(j\omega+1)(j\omega+2)$, so $X=-\dfrac{j\omega}{(1+j\omega)(2+j\omega)}$.
+
+\step{Differentiation:} $x'\leftrightarrow Z(\omega)=j\omega X(\omega)=\dfrac{\omega^2}{(1+j\omega)(2+j\omega)}$ (since $-(j\omega)^2=\omega^2$).
+
+\step{Modulation:} $z(t)\cos t\leftrightarrow\frac12\big[Z(\omega-1)+Z(\omega+1)\big]$.
+\[
+\mathcal F\{x'\cos t\}=\frac12\Big[\frac{(\omega-1)^2}{(1+j(\omega-1))(2+j(\omega-1))}+\frac{(\omega+1)^2}{(1+j(\omega+1))(2+j(\omega+1))}\Big].
+\]
+\ans{$\tfrac12\big[Z(\omega-1)+Z(\omega+1)\big]$ with $Z(\omega)=\dfrac{\omega^2}{(1+j\omega)(2+j\omega)}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q6(b)}{EEE 211 \textbullet\ EEE p.25}{20}
+State and prove the duality property of the Fourier transform.
+\end{qcard}
+\begin{solution}
+\emph{Statement.} If $x(t)\leftrightarrow X(\omega)$ then $X(t)\leftrightarrow2\pi\,x(-\omega)$.
+
+\emph{Proof.} From the inverse transform, $x(t)=\frac1{2\pi}\int X(\omega)e^{j\omega t}\dd\omega$. Replace $t\to-t$:
+\[2\pi x(-t)=\int_{-\infty}^\infty X(\omega)e^{-j\omega t}\dd\omega .\]
+Now rename the variables, $t\leftrightarrow\omega$: $2\pi x(-\omega)=\int X(t)e^{-j\omega t}\dd t=\mathcal F\{X(t)\}$. $\blacksquare$
+
+\emph{Example.} $\delta(t)\leftrightarrow1$ gives $1\leftrightarrow2\pi\delta(-\omega)=2\pi\delta(\omega)$; $\operatorname{rect}\leftrightarrow\operatorname{sinc}$ gives $\operatorname{sinc}\leftrightarrow\operatorname{rect}$.
+\ans{$X(t)\leftrightarrow2\pi x(-\omega)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q8(a)}{EEE 211 \textbullet\ EEE p.25--26}{15}
+Show that the Fourier transform of an impulse train is again an impulse train.
+\end{qcard}
+\begin{qcard}{2018--2019 \textbullet\ Q3(a)}{EEE 211 \textbullet\ EEE p.28}{10}
+Show that the Fourier transform of an impulse train is an impulse train; sketch both.
+\end{qcard}
+\begin{solution}
+Let $\delta_T(t)=\sum_n\delta(t-nT)$, $\omega_0=2\pi/T$. Its Fourier-series coefficients are $a_k=\frac1T\int_{-T/2}^{T/2}\delta(t)e^{-jk\omega_0t}\dd t=\frac1T$, so $\delta_T(t)=\frac1T\sum_ke^{jk\omega_0t}$. Using $e^{jk\omega_0t}\leftrightarrow2\pi\delta(\omega-k\omega_0)$:
+\[\Delta(\omega)=\frac{2\pi}T\sum_{k=-\infty}^{\infty}\delta(\omega-k\omega_0)=\omega_0\,\delta_{\omega_0}(\omega).\]
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=6.6cm,height=3.3cm,axis lines=middle,xlabel={$t$},title={$\delta_T(t)$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-2,-1,0,1,2},xticklabels={$-2T$,$-T$,0,$T$,$2T$},ytick={1},yticklabels={1},ymin=0,ymax=1.3,xmin=-2.6,xmax=2.6]
+\addplot+[ycomb,navy,mark=triangle*,mark size=2pt]coordinates{(-2,1)(-1,1)(0,1)(1,1)(2,1)};\end{axis}\end{tikzpicture}\hspace{3mm}
+\begin{tikzpicture}\begin{axis}[width=6.6cm,height=3.3cm,axis lines=middle,xlabel={$\omega$},title={$\Delta(\omega)$},ticklabel style={font=\scriptsize},title style={font=\scriptsize},xtick={-2,-1,0,1,2},xticklabels={$-2\omega_0$,$-\omega_0$,0,$\omega_0$,$2\omega_0$},ytick={1},yticklabels={$\frac{2\pi}{T}$},ymin=0,ymax=1.3,xmin=-2.6,xmax=2.6]
+\addplot+[ycomb,crimson,mark=triangle*,mark size=2pt]coordinates{(-2,1)(-1,1)(0,1)(1,1)(2,1)};\end{axis}\end{tikzpicture}
+\end{center}
+Spacing $T$ in time becomes spacing $2\pi/T$ in frequency: a narrow train gives a wide spectral spacing and vice versa.
+\ans{$\sum\delta(t-nT)\ \leftrightarrow\ \dfrac{2\pi}T\sum\delta(\omega-k\dfrac{2\pi}T)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q2(a) --- CSE 311}{CSE 311 \textbullet\ TF p.6}{20}
+Prove that $g(t)*h(t)\leftrightarrow G(f)H(f)$. Show that the output of an LTI system is the convolution of the input and its impulse response.
+\end{qcard}
+\begin{solution}
+\[\mathcal F\{g*h\}=\int\!\!\int g(\tau)h(t-\tau)e^{-j2\pi ft}\dd\tau\dd t=\int g(\tau)\Big[\int h(t-\tau)e^{-j2\pi ft}\dd t\Big]\dd\tau .\]
+Inner integral with $s=t-\tau$: $e^{-j2\pi f\tau}H(f)$. Hence
+\[\mathcal F\{g*h\}=H(f)\int g(\tau)e^{-j2\pi f\tau}\dd\tau=G(f)H(f).\ \blacksquare\]
+\emph{LTI output.} Write $x(t)=\int x(\tau)\delta(t-\tau)\dd\tau$. By time invariance the response to $\delta(t-\tau)$ is $h(t-\tau)$; by linearity (superposition of the integral) $y(t)=\int x(\tau)h(t-\tau)\dd\tau=x*h$.
+\ans{$g*h\leftrightarrow GH$; $y=x*h$ from sifting + linearity + time invariance.}
+\end{solution}

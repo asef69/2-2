@@ -1,0 +1,264 @@
+
+===== page 1 =====
+Code Review Example: 1 
+1 
+Style Inconsistency!
+
+===== page 2 =====
+Code Review Example: 2 
+2 
+ Silly mistake!
+
+===== page 3 =====
+Code Review example: 3 
+3 
+Buffer Overflow!
+
+===== page 4 =====
+Code Review Example: 4 
+4 
+XSS Vulnerability!
+
+===== page 5 =====
+Proofreading 
+“The process of analyzing code written by a teammate (i.e. a 
+peer) to judge whether it is of sufficient quality to be integrated 
+into the main project codebase.” 
+5
+
+===== page 6 =====
+Code Review Workflow 
+6 
+Writes  
+Code 
+Reviews 
+Code 
+Edits 
+Code 
+Reviews 
+Code 
+Approval 
+Merge 
+Abandon 
+Review  
+Request 
+Accept 
+Accepted? 
+Yes 
+No 
+… 
+Author 
+Reviewer
+
+===== page 7 =====
+History 
+• Code Inspection  
+ꟷA.k.a. Fagan Inspection 
+ꟷImproves software quality 
+ 
+ 
+7 
+Fagan’s “snail curve” (Advances in Software 
+Inspection, Fagan 2001), image (adapted color 
+version) taken from 
+(http://www.embedded.com/design/prototyping-and-
+development/4023337/Verification-and-Validation)
+
+===== page 8 =====
+Software Inspection 
+Planning 
+Overview 
+Preparation 
+Meeting 
+Rework 
+Follow Up 
+8 
+• Problems  
+– Process heavy 
+– Arranging meetings difficult 
+– High cost 
+– Low adoption
+
+===== page 9 =====
+Code Review Tools 
+9 
+Gerrit: https://code.google.com/p/gerrit/  
+Review Board: https://www.reviewboard.org/  
+Phabricator: https://phabricator.org/  
+Crucible:  
+https://www.atlassian.com/software/crucible
+
+===== page 10 =====
+X 6 hours/ week X $50 /hour 
+Avg. 6 hours / week 
+10%~15% of developer times 
+Code Review Efforts 
+10 
+= $15,000,000 / Week 
+: 50,000 developers
+
+===== page 11 =====
+Simplified code review workflow 
+11 
+No 
+Developer’s 
+Local 
+Branch 
+Code review repository 
+Main project 
+ branch 
+Reviewer 
+Approved 
+Developer 
+Yes 
+Push to main 
+Pull to local branch 
+Push to Gerrit/github 
+Notifies developer 
+Reviews 
+Code 
+Notifies
+
+===== page 12 =====
+Issues identified during code reviews 
+12 
+Coding style 
+Redundant 
+checks 
+Project design 
+violation 
+Unsafe 
+methods 
+Critical security 
+defects 
+Malicious code 
+Inadequate 
+input validation 
+Misunderstood 
+requirements 
+Lack of exception 
+handling
+
+===== page 13 =====
+Issues identified during code reviews 
+13 
+Coding style 
+Redundant 
+checks 
+Project design 
+violation 
+Unsafe 
+methods 
+Critical security 
+defects 
+Malicious code 
+Inadequate 
+input validation 
+Misunderstood 
+requirements 
+Lack of exception 
+handling
+
+===== page 14 =====
+Best practices for code reviews 
+14 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 15 =====
+1. Review fewer than 200–400 lines of 
+code at a time 
+15 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 16 =====
+Be sure that authors annotate source code 
+before the review begins. 
+• Annotations guide the reviewer through the changes 
+ 
+• Showing which files to look at first and defending the reason behind 
+each code modification. 
+ 
+• Annotations should be directed at other reviewers to ease the 
+process and provide more depth in context. 
+16 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 17 =====
+Establish quantifiable goals for code review and 
+capture metrics so you can improve your processes. 
+• Set a few tangible goals 
+ꟷreduce support calls by 15%, 
+ꟷcut the percentage of defects injected by development in half. 
+ 
+• Collect process metrics 
+ꟷInspection rate: the speed with which a review is performed 
+ꟷDefect rate: the number of bugs found per hour of review 
+ꟷDefect density: the average number of bugs found per line of code 
+ 
+17 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 18 =====
+Use checklists, because they substantially improve 
+results for both authors and reviewers. 
+• Developers often make the same 
+mistakes over and over 
+ 
+• Omissions in particular are the hardest 
+defects to find because it´s difficult to 
+review something that isn´t there. 
+ 
+• Checklists are the most effective way to 
+eliminate frequently made errors and 
+to combat the challenges of omission 
+finding. 
+18 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 19 =====
+Verify that the defects are actually fixed. 
+• How will the bugs be fixed? 
+ 
+• Many teams do not have a systematic method for fixing the bugs 
+they´ve worked so hard to find. 
+ 
+• Reviewers should log bugs, discuss them with the author, and 
+approve changes in the code. 
+ 
+19 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 20 =====
+Foster a good code review culture in which finding 
+defects is viewed positively. 
+• Peer review can put strain on interpersonal team relationships.  
+ 
+• It´s difficult to have every piece of work critiqued by peers and to 
+have management evaluating and measuring defect density in your 
+code. 
+ 
+• It´s extremely important that mangers create a culture of 
+collaboration and learning in peer review. 
+ 
+• While it´s easy to see defects as purely negative, each bug is actually 
+an opportunity for the team to improve code quality.  
+ 
+• Defects found in peer review are not an acceptable rubric by which to 
+evaluate team members.  
+20 
+Source: https://smartbear.com/learn/code-review/best-practices-for-peer-code-review/
+
+===== page 21 =====
+Other benefits of Code review 
+• Project awareness 
+ 
+• Peer impression formation 
+ 
+• Consistent coding style 
+ 
+• Design discussion 
+ 
+• Knowledge dissemination  
+ 
+ 
+21

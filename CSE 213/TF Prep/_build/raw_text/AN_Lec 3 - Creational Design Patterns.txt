@@ -1,0 +1,432 @@
+
+===== page 1 =====
+1
+Creational Patterns
+
+===== page 2 =====
+2
+UML Revisited
+Generalization
+Dependency: “uses” 
+Composition: “is entirely made of”
+Aggregation: “is part of”
+
+===== page 3 =====
+3
+Creational Patterns to be Covered
+ꟷFactory method
+ꟷAbstract factory
+ꟷBuilder
+ꟷSingleton
+Examples taken from:
+https://refactoring.guru/design-patterns
+https://javatechonline.com/java-design-patterns-java/
+https://www.tutorialspoint.com/design_pattern/
+https://www.javatpoint.com/design-patterns-in-java
+
+===== page 4 =====
+4
+Factory Method
+Intent
+• Define an interface for creating an object, but 
+let subclasses decide which class to instantiate. 
+Factory Method lets a class defer instantiation 
+to subclasses.
+Problem
+• A framework needs to standardize the 
+architectural model for a range of applications, 
+but allow for individual applications to define 
+their own domain objects and provide for their 
+instantiation.
+• Enable the creator to defer product creation to 
+sub-class.
+
+===== page 5 =====
+5
+Solution
+
+===== page 6 =====
+6
+Example: Drawing
+<<interface>>
+Shape
++ draw()
+Circle
++ draw()
+Rectangle
++ draw()
+ShapeFactory
++drawShape(type):Shape
+Client
+Square
++ draw()
+
+===== page 7 =====
+7
+public interface Shape { 
+void draw(); 
+}
+public class Rectangle implements Shape {
+@Override
+public void draw() {
+System.out.println("Inside Rectangle::draw() method."); 
+}
+}
+Similar implementation for Square and Circle
+
+===== page 8 =====
+8
+Example: Kiosk
+<<interface>>
+PaymentProcessor
++ processPayment()
+Cash
++ prcessPayment()
+Coupon
++ prcessPayment()
+GetPayment
++getProcessor(type):
+PaymentProcessor
+Kiosk
+CreditCard
++ prcessPayment()
+
+===== page 9 =====
+9
+Factory
+
+===== page 10 =====
+10
+
+===== page 11 =====
+11
+
+===== page 12 =====
+12
+Another Example Usecase
+• Imagine that you’re creating a logistics management application. The 
+first version of your app can only handle transportation by trucks, so 
+the bulk of your code lives inside the Truck class.
+• After a while, your app becomes pretty popular. Each day you receive 
+dozens of requests from sea transportation companies to incorporate 
+sea logistics into the app.
+• Great news, right? But how about the code? At present, most of your 
+code is coupled to the Truck class. Adding Ships into the app would 
+require making changes to the entire codebase. Moreover, if later 
+you decide to add another type of transportation to the app, you will 
+probably need to make all of these changes again.
+• As a result, you will end up with pretty nasty code, riddled with 
+conditionals that switch the app’s behavior depending on the class of 
+transportation objects.
+• Solution: https://refactoring.guru/design-patterns/factory-method
+
+===== page 13 =====
+13
+Another Example
+https://refactoring.guru/design-patterns/factory-method
+
+===== page 14 =====
+14
+Use the Factory Method when you want to provide 
+users of your library or framework with a way to 
+extend its internal components
+• Imagine that you write an app using an open source UI 
+framework.
+• Your app should have round buttons, but the framework only 
+provides square ones. 
+• You extend the standard Button class with a 
+glorious RoundButton subclass. 
+• But now you need to tell the main UIFramework class to use the 
+new button subclass instead of a default one.
+• To achieve this, you create a subclass UIWithRoundButtons from a 
+base framework class and override its createButton method. 
+• While this method returns Button objects in the base class, you 
+make your subclass return RoundButton objects. 
+• Now use the UIWithRoundButtons class instead of UIFramework.
+
+===== page 15 =====
+15
+Consequences/Benefits
+• Factory design pattern provides approach to code for interface rather 
+than implementation.
+• Factory pattern removes the instantiation of actual implementation 
+classes from client code. Factory pattern makes our code more 
+robust, less coupled and easy to extend. For example, we can easily 
+change lower class implementation because client program is 
+unaware of this.
+• Factory pattern provides abstraction between implementation and 
+client classes through inheritance.
+
+===== page 16 =====
+16
+
+===== page 17 =====
+17
+Abstract Factory
+Intent
+• Provide an interface for creating families of 
+related or dependent objects without 
+specifying their concrete classes.
+Problem
+• A portable application needs to encapsulate 
+platform dependencies
+• Consider an application that support multiple 
+look and feels.
+• An application need to work with multiple 
+types of DBMS
+
+===== page 18 =====
+18
+Solution
+
+===== page 19 =====
+19
+Problem
+• Imagine that you’re creating a furniture shop simulator. Your 
+code consists of classes that represent a family of products 
+and their variants.
+https://refactoring.guru
+/design-
+patterns/abstract-
+factory
+
+===== page 20 =====
+20
+Abstract Factory
+• You need a way to create individual furniture objects so that they 
+match other objects of the same family. 
+• Customers get quite mad when they receive non-matching furniture.
+• Also, you don’t want to change existing code when adding new 
+products or families of products to the program. 
+• Furniture vendors update their catalogs very often, and you wouldn’t 
+want to change the core code each time it happens.
+
+===== page 21 =====
+21
+Solution
+• The first thing the Abstract Factory pattern suggests is to explicitly 
+declare interfaces for each distinct product of the product family (e.g., 
+chair, sofa or coffee table). 
+• Then you can make all variants of products follow those interfaces. For 
+example, all chair variants can implement the Chair interface; all coffee 
+table variants can implement the CoffeeTable interface, and so on.
+
+===== page 22 =====
+22
+• The next move is to declare the Abstract Factory—an interface
+with a list of creation methods for all products that are part
+of the product family (for example, createChair). 
+• For each variant of a product family, we create a separate factory 
+class based on the AbstractFactory interface. 
+• A factory is a class that returns products of a particular kind. For 
+example, the ModernFactory can only create ModernChair , 
+ModernSofa and ModernCoffeeTable objects.
+
+===== page 23 =====
+23
+Another Example
+
+===== page 24 =====
+24
+Another Example
+• When an application launches, it checks the type of the 
+current operating system. 
+• The app uses this information to create a factory object from 
+a class that matches the operating system. 
+• The rest of the code uses this factory to create UI elements.
+• With this approach, the client code doesn’t depend on 
+concrete classes of factories and UI elements as long as it 
+works with these objects via their abstract interfaces. 
+• This also lets the client code support other factories or UI 
+elements that you might add in the future.
+
+===== page 25 =====
+25
+
+===== page 26 =====
+26
+
+===== page 27 =====
+27
+
+===== page 28 =====
+28
+
+===== page 29 =====
+29
+
+===== page 30 =====
+30
+Example: Car Factory
+<<interface>>
+HondaFactory
++ createEngine()
++ createTrans()
+CivicFactory
++ createEngine()
++ createTrans()
+AccordFactory
++ createEngine()
++ createTrans()
+Engine
+CivicEngine
+AccordEngine
+Transmission
+CivicTrans
+AccordTrans
+Client
+
+===== page 31 =====
+31
+https://www.tutorialspoint.com/design_pattern/design_pattern
+_quick_guide.htm
+
+===== page 32 =====
+32
+
+===== page 33 =====
+33
+
+===== page 34 =====
+34
+Consequences
+• Isolates the concrete class
+• Makes exchanging product family easy
+• Promotes consistency among products
+• Abstract Factory design pattern provides approach to code for 
+interface rather than implementation.
+• Abstract Factory pattern is “factory of factories” and can be easily 
+extended to accommodate more products.
+• Abstract Factory pattern is robust and avoid conditional logic of 
+Factory pattern.
+• Supporting new types of products is difficult
+• Use the Abstract Factory when your code needs to work with
+various families of related products, but you don’t want it to
+depend on the concrete classes of those products—they might
+be unknown beforehand or you simply want to allow for future
+extensibility
+
+===== page 35 =====
+35
+
+===== page 36 =====
+36
+Singleton
+Intent
+• Ensure a class has only one instance, and 
+provide a global point of access to it.
+• Encapsulated "just-in-time initialization" or 
+"initialization on first use".
+Problem
+• Application needs one, and only one, instance 
+of an object. Additionally, lazy initialization and 
+global access are necessary.
+
+===== page 37 =====
+37
+Solution
+SingletonClass
+- instance: SingletonClass
+- SingletonClass()
++ getInstance(): SingletonClass
+
+===== page 38 =====
+38
+Example: DB Connection Manger
+public class DbConnection{
+private static DbConnection instance=null;
+private SQLConnection connection;
+private DbConnection() { 
+connection = connectToDatabase(dbUser,dbPassword,dbName);
+}
+public static getDbConnection() {
+if (instance== null ) 
+instance = new DbConnection() ;                           
+return instance;
+}
+}
+DbConnection connection=DbConnection.getDbConnection();
+
+===== page 39 =====
+39
+
+===== page 40 =====
+40
+Applicability
+
+===== page 41 =====
+41
+Applicability
+Unlike global variables, the Singleton pattern guarantees that there’s just one instance of 
+a class. Nothing, except for the Singleton class itself, can replace the cached instance
+
+===== page 42 =====
+42
+Consequences
+• Controlled access to sole instance
+• Reduced namespace
+• Permits variable number of instances
+
+===== page 43 =====
+43
+Builder
+Intent
+• Separate the construction of a complex object 
+from its representation so that the same 
+construction process can create different 
+representations.
+• Parse a complex representation, create one of 
+several targets.
+Problem
+• An application needs to create the elements of 
+a complex aggregate. The specification for the 
+aggregate exists on secondary storage and one 
+of many representations needs to be built in 
+primary storage.
+
+===== page 44 =====
+44
+Solution
+
+===== page 45 =====
+45
+Examples
+To create a computer, 
+different parts are assembled 
+depending upon the order 
+received by the customer
+(e.g., a customer can demand 
+a 500 GB hard disk with an 
+Intel processor; another 
+customer can choose a 250
+GB hard disk with an AMD 
+processor).
+
+===== page 46 =====
+46
+Consequences
+• Lets you vary a product’s internal representation
+• Isolates construction and representation
+• Gives you finer control over the construction process
+
+===== page 47 =====
+47
+
+===== page 48 =====
+48
+
+===== page 49 =====
+49
+
+===== page 50 =====
+50
+Builder
+
+===== page 51 =====
+51
+
+===== page 52 =====
+52
+
+===== page 53 =====
+53

@@ -1,0 +1,188 @@
+\part{Ashraf Sir --- DFT, FFT and Sampling}
+
+%=====================================================================
+\chapter{DTFT, DFT and Circular Convolution}
+%=====================================================================
+\section{The four Fourier transforms and the DFT pair}
+\begin{center}\small\begin{tabular}{@{}lll@{}}\toprule
+ & continuous time & discrete time\\\midrule
+periodic & CTFS: discrete, aperiodic $a_k$ & DFS/DFT: discrete, periodic $X[k]$\\
+aperiodic & CTFT: continuous, aperiodic $X(j\omega)$ & DTFT: continuous, $2\pi$-periodic $X(e^{j\omega})$\\\bottomrule
+\end{tabular}\end{center}
+Rule: \emph{discrete in one domain $\Leftrightarrow$ periodic in the other.}
+\begin{formula}
+\begin{align*}
+&W_N=e^{-j2\pi/N},\quad W_N^N=1,\quad W_N^{k+N/2}=-W_N^k,\\
+&X[k]=\sum_{n=0}^{N-1}x[n]W_N^{kn},\qquad x[n]=\frac1N\sum_{k=0}^{N-1}X[k]W_N^{-kn},\\
+&X(e^{j\omega})=\sum_nx[n]e^{-j\omega n}\ (2\pi\text{-periodic}),\qquad X[k]=X(e^{j\omega})\big|_{\omega=2\pi k/N},\\
+&X[k]=Na_k\ (\text{DFS}),\qquad c_k=X[k]/T_0\ (\text{CTFS of the sampled signal}).
+\end{align*}
+Bins: $k=0..N/2$ positive frequencies (low$\to$high), $k=N/2..N-1$ negative (high$\to$low). $f_k=kf_s/N$ ($k\le N/2$), $(k-N)f_s/N$ above; resolution $\Delta f=f_s/N=1/T_0$.\\
+Zero-padding to $M\ge N$: the same DTFT sampled every $2\pi/M$ (finer picture, no new information).
+\end{formula}
+\begin{center}\small
+\begin{tabular}{@{}c|cccc|c@{}}
+$W_4^{kn}$ & $n=0$ & 1 & 2 & 3 & \\\hline
+$k=0$ & 1 & 1 & 1 & 1 & $W_4=-j$\\ $k=1$ & 1 & $-j$ & $-1$ & $j$ &\\ $k=2$ & 1 & $-1$ & 1 & $-1$ &\\ $k=3$ & 1 & $j$ & $-1$ & $-j$ &
+\end{tabular}\qquad
+\begin{tabular}{@{}c|cccc@{}}
+$W_8^m$ & $m=0$ & 1 & 2 & 3\\\hline value & $1$ & $\tfrac{1-j}{\sqrt2}$ & $-j$ & $-\tfrac{1+j}{\sqrt2}$
+\end{tabular}\end{center}
+\begin{example}{$x=\{1,2,3,4\}$}
+$X=\{10,\,-2+2j,\,-2,\,-2-2j\}$; check $X[0]=\sum x$, $X[3]=X^*[1]$; $\sum\abs x^2=30=\tfrac14(100+8+4+8)$.
+\end{example}
+
+\section{DFT properties}
+\begin{formula}
+\begin{tabular}{@{}lll@{}}
+Circular shift & $x[((n-m))_N]$ & $W_N^{km}X[k]$\\
+Modulation & $W_N^{-k_0n}x[n]$ & $X[((k-k_0))_N]$; $(-1)^nx\leftrightarrow X[k-N/2]$\\
+Reversal / conjugation & $x[((-n))_N]$, $x^*[n]$ & $X[((-k))_N]$, $X^*[((-k))_N]$\\
+Real $x$ & & $X[N-k]=X^*[k]$\\
+Circular convolution & $x\circledast h$ & $X[k]H[k]$\\
+Product & $x[n]h[n]$ & $\tfrac1NX\circledast H$\\
+Parseval & $\sum\abs{x[n]}^2$ & $\tfrac1N\sum\abs{X[k]}^2$
+\end{tabular}
+\end{formula}
+
+\section{Circular convolution and filtering with the DFT}
+\begin{formula}
+$(x\circledast h)[n]=\sum_{m=0}^{N-1}x[m]\,h[((n-m))_N]\ \Longleftrightarrow\ X[k]H[k]$. Linear convolution has length $L+M-1$; \textbf{circular $=$ linear iff $N\ge L+M-1$} (zero-pad both).
+\end{formula}
+\begin{method}[Linear convolution through the DFT]
+\begin{steps}
+\item Choose $N\ge L+M-1$ (power of 2 if an FFT is asked); zero-pad $x,h$.
+\item Compute $X[k],H[k]$ (use the $W_N$ table).
+\item $Y[k]=X[k]H[k]$ bin by bin.
+\item $y[n]=\frac1N\sum Y[k]W_N^{-kn}$; check against the direct convolution.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2023--24 Q5(b): $\{1,2\}*\{1,1\}$ with $N=4$}
+$X=\{3,\,1-2j,\,-1,\,1+2j\}$, $H=\{2,\,1-j,\,0,\,1+j\}$, $Y=\{6,\,-1-3j,\,0,\,-1+3j\}$. $y[n]=\tfrac14\sum Y[k]j^{kn}$ gives $y=\{1,3,2,0\}$.
+\end{example}
+\begin{example}{wrap-around}
+$x=\{2,4,5,6,5,3,2,1\}$, $h=\{1,2,1\}$: linear $\{2,8,15,20,22,19,13,8,4,1\}$; circular ($N=8$) $\{6,9,15,20,22,19,13,8\}$ --- the tail $\{4,1\}$ folds onto the first two samples.
+\end{example}
+
+%=====================================================================
+\chapter{Fast Fourier Transform}
+%=====================================================================
+\section{Radix-2 decimation in time (DIT)}
+\begin{formula}
+$X[k]=G[k]+W_N^kH[k]$, $X[k+\tfrac N2]=G[k]-W_N^kH[k]$ for $0\le k<\tfrac N2$, where $G,H$ are the $N/2$-point DFTs of the even and odd samples. Inputs in \textbf{bit-reversed} order, outputs natural.\\
+Cost: direct $N^2$ multiplications vs FFT $\tfrac N2\log_2N$ (additions $N\log_2N$); $N=8$: $64$ vs $12$; $N=1024$: $1.05\times10^6$ vs $5120$.\\
+Bit reversal, $N=8$: $x_0,x_4,x_2,x_6,x_1,x_5,x_3,x_7$.
+\end{formula}
+\begin{method}[Radix-2 DIT, every butterfly]
+\begin{steps}
+\item Zero-pad to $N=2^m$; write the bit-reversed input.
+\item Stage 1: $(a,b)\mapsto(a+b,\,a-b)$ on adjacent pairs.
+\item Stage 2: combine 2-point results with $W_4^0=1$, $W_4^1=-j$.
+\item Stage 3: combine with $W_8^0\ldots W_8^3$: $X[k]=G[k]+W_8^kH[k]$, $X[k+4]=G[k]-W_8^kH[k]$.
+\item Checks: $X[0]=\sum x$, $X[4]=\sum(-1)^nx[n]$, $X[8-k]=X^*[k]$.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2023--24 Q5(a): $x=\{1,2,3,4,3,2\}$, 8-point}
+Pad: $\{1,2,3,4,3,2,0,0\}$; bit-reversed: $1,3,3,0,2,2,4,0$.\\
+Stage 1: $4,-2\ |\ 3,3\ |\ 4,0\ |\ 4,4$.\\
+Stage 2: $G=(7,\,-2-3j,\,1,\,-2+3j)$, $H=(8,\,-4j,\,0,\,4j)$.\\
+Stage 3: $W_8^kH[k]=(8,\,-2.828-2.828j,\,0,\,2.828-2.828j)$.
+\[X=\{15,\ -4.828-5.828j,\ 1,\ 0.828+0.172j,\ -1,\ 0.828-0.172j,\ 1,\ -4.828+5.828j\}.\]
+\end{example}
+
+\section{Decimation in frequency (DIF)}
+\begin{formula}
+$X[2m]=\mathrm{DFT}_{N/2}\{x[n]+x[n+\tfrac N2]\}$, $\;X[2m+1]=\mathrm{DFT}_{N/2}\{(x[n]-x[n+\tfrac N2])W_N^n\}$.\\
+Butterfly: \emph{add/subtract first, then twiddle}. Inputs natural, outputs bit-reversed. Same cost as DIT.
+\end{formula}
+
+\section{Matrix (Cooley--Tukey / Bailey) FFT}
+\begin{formula}
+$N=N_1N_2$, $n=N_1n_2+n_1$ (column-major), $k=N_2k_1+k_2$ (row-major):
+\[X[N_2k_1+k_2]=\sum_{n_1=0}^{N_1-1}W_N^{n_1k_2}\Big[\sum_{n_2=0}^{N_2-1}x[N_1n_2+n_1]W_{N_2}^{n_2k_2}\Big]W_{N_1}^{n_1k_1}.\]
+\end{formula}
+\begin{method}[Four-step FFT]
+\begin{steps}
+\item Arrange $x$ column-major in an $N_1\times N_2$ matrix (radix-2: row 0 = evens, row 1 = odds).
+\item $N_2$-point DFT of every row $\to G$.
+\item Multiply entry $(n_1,k_2)$ by $W_N^{n_1k_2}\to H$.
+\item $N_1$-point DFT of every column; read the result \emph{row-major}.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2023--24 Q7(a): $x=\{1,2,3,4,9,0,7,8\}$}
+Rows: $\{1,3,9,7\}$, $\{2,4,0,8\}$. $G=\begin{bmatrix}20&-8+4j&0&-8-4j\\14&2+4j&-10&2-4j\end{bmatrix}$. Twiddles of row 1: $1,\ 0.7071-0.7071j,\ -j,\ -0.7071-0.7071j$, so row 1 of $H$ is $14,\ 4.2426+1.4142j,\ 10j,\ -4.2426+1.4142j$. Column sums and differences give
+\[X=\{34,\ -3.757+5.414j,\ 10j,\ -12.243-2.586j,\ 6,\ -12.243+2.586j,\ -10j,\ -3.757-5.414j\}.\]
+\end{example}
+
+\section{Fast convolution and Bluestein}
+\begin{formula}
+Fast convolution: pad to $N\ge L+M-1$, FFT both, multiply, IFFT: $O(N\log N)$ vs $O(LM)$.\\
+Bluestein (any $N$, even prime): $kn=\tfrac12[n^2+k^2-(k-n)^2]$ gives
+\[X[k]=W_{2N}^{k^2}\,(a*b)[k],\quad a[n]=x[n]W_{2N}^{n^2},\quad b[n]=W_{2N}^{-n^2},\ n=-(N-1)..(N-1),\]
+$W_{2N}=e^{-j\pi/N}$. Pad to $M\ge2N-1$ (power of 2), with the negative-index chirp wrapped to the end so the two ends do not overlap.
+\end{formula}
+\begin{example}{3-point DFT of $\{2,-1,3\}$ by Bluestein}
+$a=\{2,\,-0.5+0.866j,\,-1.5+2.598j\}$, $M=8$; result $X=\{4,\,1+3.464j,\,1-3.464j\}$, equal to the direct DFT.
+\end{example}
+\begin{inexam}
+2023--24: Q5(a) 15 marks (8-point DIT), Q7(a) 15 (matrix FFT), Q7(b) 10 (Bluestein derivation); 2022--23 Q4(c) 15 (DFT vs FFT complexity: $N^2$ vs $\frac N2\log_2N$, speed-up $2N/\log_2N$).
+\end{inexam}
+
+%=====================================================================
+\chapter{Sampling and Reconstruction}
+%=====================================================================
+\section{Spectrum of the sampled signal}
+\begin{formula}
+$x_p(t)=x(t)p(t)=\sum x(nT)\delta(t-nT)$, $\omega_s=2\pi/T$. $\;P(j\omega)=\dfrac{2\pi}T\sum_k\delta(\omega-k\omega_s)$ (impulse train $\to$ impulse train), and
+\[\boxed{X_p(j\omega)=\frac1{2\pi}X*P=\frac1T\sum_{k=-\infty}^{\infty}X\big(j(\omega-k\omega_s)\big)}\]
+Duality: $X(jt)\leftrightarrow2\pi x(-\omega)$; product $\leftrightarrow\frac1{2\pi}$ convolution. $\delta(\omega-k\omega_s)*X=X(j(\omega-k\omega_s))$.
+\end{formula}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=12cm,height=3.8cm,axis lines=middle,xlabel={$\omega$},ticks=none,ymin=-0.1,ymax=1.35,xmin=-9.5,xmax=9.5,title={$X_p(j\omega)$ for $\omega_s>2\omega_M$: separated copies of height $1/T$}]
+\addplot[thick,navy,domain=-8:-4]{max(0,1-abs(x+6)/2)};
+\addplot[thick,navy,domain=-2:2]{max(0,1-abs(x)/2)};
+\addplot[thick,navy,domain=4:8]{max(0,1-abs(x-6)/2)};
+\end{axis}
+\end{tikzpicture}\end{center}
+
+\section{Sampling theorem and aliasing}
+\begin{formula}
+Band-limited $X(j\omega)=0$ for $\abs\omega>\omega_M$ is uniquely determined by $x(nT)$ iff $\omega_s>2\omega_M$ (Nyquist rate $2\omega_M$; $T<\pi/\omega_M$). Product $xy$: bandwidths add. Aliasing: $f\to\abs{f-kf_s}$.\\
+DT decimation: $X(e^{j\omega})=0$ for $W\le\abs\omega\le\pi$ allows keeping every $M$-th sample iff $M\le\pi/W$ (e.g.\ $W=2\pi/9\Rightarrow M=4$).
+\end{formula}
+\begin{proofbox}[Sampling theorem]
+$X_p$ is $X/T$ repeated every $\omega_s$; copies of width $2\omega_M$ stay apart iff $\omega_M<\omega_s-\omega_M$, i.e.\ $\omega_s>2\omega_M$. Then an ideal LPF (gain $T$, $\omega_M<\omega_c<\omega_s-\omega_M$) isolates $X$. If $\omega_s<2\omega_M$ the copies overlap and add; the sum cannot be un-mixed, so $x$ is not recoverable.
+\end{proofbox}
+\begin{method}[Spectrum-sketch questions]
+\begin{steps}
+\item Sketch $X(j\omega)$; mark $\omega_M$. \item Compute $\omega_s=2\pi/T$ and compare with $2\omega_M$. \item Draw copies at $\pm k\omega_s$ with height $\times\frac1T$ (natural sampling: copies weighted by $c_k=\frac\tau T\sinc(\frac{k\tau}T)$). \item Overlap $\Rightarrow$ aliasing; cure: anti-aliasing LPF before sampling, higher rate, guard band.
+\end{steps}
+\end{method}
+\begin{example}{EEE 301 2015-16 Q6(b): $z=xy$, 150 Hz and 350 Hz}
+$z$ is band-limited to $500$ Hz, so $T_{s,\max}=1/(2\cdot500)=1$ ms. $T_s=0.5$ ms: copies every 2 kHz, no overlap; $T_s=2$ ms ($f_s=500$ Hz): copies of width 1 kHz overlap.
+\end{example}
+\begin{example}{EEE 211 2019--20 Q7(b)}
+$x=\frac{\sin(\omega_Bt/2)}{\pi t}$ ($X=1$ on $\abs\omega<\omega_B/2$), $p=\sum\delta(t-n\pi/\omega_B)$ ($\omega_s=2\omega_B$). $Z=\frac{\omega_B}\pi\sum X(\omega-2k\omega_B)$; $h=\frac{\sin(3\omega_Bt/2)}{\pi t}$ passes $\abs\omega<1.5\omega_B$, i.e.\ only the centre copy: $y=\frac{\omega_B}\pi x(t)$.
+\end{example}
+
+\section{Reconstruction: sinc, zero-order hold, linear interpolation}
+\begin{formula}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}llll@{}}\toprule
+ & $h(t)$ & $H(j\omega)$ & properties\\\midrule
+Ideal & $\sinc(t/T)=\frac{\sin(\pi t/T)}{\pi t/T}$ & $T$ for $\abs\omega<\omega_s/2$ & non-causal, infinite\\
+ZOH & rect on $[0,T]$ & $Te^{-j\omega T/2}\sinc\!\big(\frac{\omega T}{2\pi}\big)$ & causal; droop, leakage\\
+Linear & triangle on $[-T,T]$ & $T\sinc^2\!\big(\frac{\omega T}{2\pi}\big)$ & non-causal; less leakage\\\bottomrule
+\end{tabular}
+\end{formula}
+Ideal reconstruction: $x_r(t)=\sum x(nT)\sinc\!\big(\tfrac{t-nT}T\big)$. Triangle $=\frac1T\,h_0(t+\tfrac T2)*h_0(t+\tfrac T2)$. At $\omega_s/4$ ($T=1$): $\abs{H_0}=0.90$, $\abs{H_1}=0.81$.
+\begin{inexam}
+2023--24 Q5(c): which method for a real-time DAC with no non-causal filtering and no delay buffer? \mk{Zero-order hold}: causal, needs only the current sample; compensate the sinc droop with an analog low-pass.
+\end{inexam}
+\begin{example}{CSE 311 2018--19 Q1(a)}
+Samples $g(0.01k)=\delta[k]$, $g$ band-limited to 50 Hz ($f_s=100$ Hz $=$ Nyquist): $g(t)=\dfrac{\sin100\pi t}{100\pi t}$, $G(f)=0.01\,\mathrm{rect}(f/100)$. As the band widens $g\to\delta(t)$ and $G\to1$.
+\end{example}
+\begin{pitfall}
+Time-limited signals are never exactly band-limited, so some aliasing is unavoidable. For a periodic signal $X[k]=Na_k$ holds only if $a_k=0$ for $\abs k\ge N/2$.
+\end{pitfall}

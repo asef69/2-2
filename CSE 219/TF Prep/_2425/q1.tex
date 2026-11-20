@@ -1,0 +1,171 @@
+\renewcommand{\teacherTag}{QUESTION 1 \textbullet\ COMPULSORY \textbullet\ 35 MARKS}
+\chapter{The USB Microphone: Filter, Sampler and FFT Equaliser}
+
+\begin{scenario}
+A USB microphone has three stages: an analogue circuit containing an $RC$ (resistor--capacitor) low-pass filter; an analogue-to-digital converter (ADC) that samples at $f_s=8$ kHz; and a digital equaliser in software.
+\end{scenario}
+
+\begin{center}
+\begin{tikzpicture}[blk/.style={draw=navy,thick,fill=scenbg,rounded corners=2pt,minimum height=9mm,minimum width=26mm,font=\sffamily\small,align=center},>=Stealth]
+\node[blk](f){RC low-pass\\$y'+2y=2x$};
+\node[blk,right=13mm of f](a){ADC\\$f_s=8$ kHz};
+\node[blk,right=13mm of a](e){FFT equaliser\\$N=8$};
+\draw[->,thick](f.west)++(-14mm,0)node[left,font=\small]{voice}--(f.west);
+\draw[->,thick](f)--node[above,font=\scriptsize]{$y(t)$}(a);
+\draw[->,thick](a)--node[above,font=\scriptsize]{$x[n]$}(e);
+\draw[->,thick](e.east)--++(12mm,0)node[right,font=\small]{out};
+\end{tikzpicture}
+\end{center}
+
+%------------------------------------------------------------------ 1(a)
+\begin{qcard}{Q1(a)}{Impulse and step response}{11}
+The analogue filter obeys
+\[\frac{\dd y(t)}{\dd t}+2y(t)=2x(t).\]
+\textbf{Solve} for the impulse response $h(t)$ of the filter and for its output when the input is the unit step $u(t)$.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Transfer function.} Take the Laplace transform with zero initial conditions (the filter starts at rest):
+\[sY(s)+2Y(s)=2X(s)\quad\Longrightarrow\quad H(s)=\frac{Y(s)}{X(s)}=\frac{2}{s+2}.\]
+
+\step{Step 2 --- Impulse response.} For $x(t)=\delta(t)$, $X(s)=1$, so $Y(s)=H(s)$. Using $e^{-at}u(t)\pair\frac1{s+a}$:
+\[\boxed{h(t)=2e^{-2t}u(t)}\]
+\emph{Time-domain check.} For $t>0$ the input is zero, so $h'+2h=0\Rightarrow h=Ce^{-2t}$. Integrating the equation from $0^-$ to $0^+$: $h(0^+)-h(0^-)=2\int\delta=2$, so $C=2$. \checkmark
+
+\step{Step 3 --- Step response.} $X(s)=\frac1s$, so
+\[Y(s)=\frac{2}{s(s+2)}=\frac{A}{s}+\frac{B}{s+2},\qquad A=\Big[\frac2{s+2}\Big]_{s=0}=1,\quad B=\Big[\frac2s\Big]_{s=-2}=-1 .\]
+\[\boxed{y_{\text{step}}(t)=\big(1-e^{-2t}\big)u(t)}\]
+Equivalently $y_{\text{step}}(t)=\int_0^th(\tau)\dd\tau=\int_0^t2e^{-2\tau}\dd\tau=1-e^{-2t}$.
+
+\step{Step 4 --- Interpretation.} The time constant is $\tau=RC=\frac12$ (in the units of the question), the d.c.\ gain is $H(0)=1$ (a slow input passes unchanged) and the $-3$ dB cutoff is $\omega_c=2$ rad/s: $\abs{H(j\omega)}=\frac{2}{\sqrt{4+\omega^2}}$ falls to $\frac1{\sqrt2}$ at $\omega=2$.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=7.6cm,height=4.6cm,axis lines=left,xlabel={$t$},ylabel={},xmin=-0.3,xmax=3.2,ymin=0,ymax=2.2,ticklabel style={font=\scriptsize},label style={font=\scriptsize},legend style={font=\scriptsize,draw=none,fill=none,at={(0.97,0.97)},anchor=north east},grid=major,grid style={gray!20}]
+\addplot[very thick,crimson,domain=0:3.2,samples=100]{2*exp(-2*x)};\addlegendentry{$h(t)=2e^{-2t}$}
+\addplot[very thick,navy,domain=0:3.2,samples=100]{1-exp(-2*x)};\addlegendentry{$y_{\text{step}}=1-e^{-2t}$}
+\addplot[dashed,slate,domain=-0.3:3.2]{1};
+\addplot[only marks,mark=*,mark size=1.3pt,navy]coordinates{(0.5,0.632)};
+\node[font=\scriptsize,anchor=west]at(axis cs:0.55,0.55){$63.2\%$ at $t=\tau=0.5$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\ans{$H(s)=\dfrac2{s+2}$, $\;h(t)=2e^{-2t}u(t)$; step response $y(t)=(1-e^{-2t})u(t)$, rising to 1 with time constant $0.5$.}
+\end{solution}
+
+%------------------------------------------------------------------ 1(b)
+\begin{qcard}{Q1(b)}{Aliasing of the noise tone}{11}
+The microphone picks up a voice, band-limited to 3.4 kHz, together with a 7 kHz noise tone from a laptop power supply, which the analogue filter does not remove. \textbf{Explain}, with a sketch of the spectrum of the sampled signal showing the voice and the noise tone, whether aliasing has occurred and how it can be removed.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- What sampling does to a spectrum.} Sampling at $f_s$ repeats the analogue spectrum at every multiple of $f_s$:
+\[X_s(f)=f_s\sum_{k=-\infty}^{\infty}X(f-kf_s),\qquad f_s=8\text{ kHz},\qquad\text{usable band }\abs f<\tfrac{f_s}2=4\text{ kHz}.\]
+
+\step{Step 2 --- The voice.} The voice occupies $\abs f\le3.4$ kHz $<4$ kHz. Its copies sit at $0,\pm8,\pm16,\dots$ kHz and are separated by gaps of $8-2(3.4)=1.2$ kHz. \emph{No aliasing for the voice.}
+
+\step{Step 3 --- The 7 kHz tone.} $7$ kHz $>4$ kHz, so it violates the Nyquist condition. Its images lie at $\pm7+8k$ kHz:
+\[\dots,\ -9,\ \underbrace{-1,\ +1}_{\text{inside }\abs f<4},\ 9,\ 15,\ \dots\text{ kHz}.\]
+The copy shifted by $-f_s$ lands at $7-8=-1$ kHz, and its mirror at $+1$ kHz. So after sampling, the tone \emph{looks exactly like a 1 kHz tone} --- right in the middle of the voice band.
+
+\begin{center}
+\begin{tikzpicture}[x=0.37cm,y=1.1cm,>=Stealth]
+% analogue spectrum
+\node[font=\sffamily\scriptsize\bfseries,anchor=west,navy]at(-20,1.85){(i) Before sampling};
+\draw[->](-20,0)--(21,0)node[right,font=\scriptsize]{$f$ (kHz)};
+\fill[navy!25](-3.4,0)--(-3.4,0.55)--(0,1.15)--(3.4,0.55)--(3.4,0)--cycle;\draw[navy,thick](-3.4,0)--(-3.4,0.55)--(0,1.15)--(3.4,0.55)--(3.4,0);
+\draw[->,very thick,crimson](7,0)--(7,1.3);\draw[->,very thick,crimson](-7,0)--(-7,1.3);
+\foreach \x in {-7,-3.4,3.4,7}{\draw(\x,0.06)--(\x,-0.06)node[below,font=\tiny]{$\x$};}
+\node[font=\tiny,navy]at(0,1.35){voice};\node[font=\tiny,crimson,right]at(7,1.2){7 kHz tone};
+\begin{scope}[yshift=-2.9cm]
+\node[font=\sffamily\scriptsize\bfseries,anchor=west,navy]at(-20,1.85){(ii) After sampling at $f_s=8$ kHz};
+\fill[gold!25](-4,0)rectangle(4,1.55);\node[font=\tiny,anchor=north]at(0,1.75){$\abs f<4$ kHz};
+\draw[->](-20,0)--(21,0)node[right,font=\scriptsize]{$f$ (kHz)};
+\foreach \c in {-16,-8,0,8,16}{
+ \fill[navy!25](\c-3.4,0)--(\c-3.4,0.55)--(\c,1.15)--(\c+3.4,0.55)--(\c+3.4,0)--cycle;
+ \draw[navy,thick](\c-3.4,0)--(\c-3.4,0.55)--(\c,1.15)--(\c+3.4,0.55)--(\c+3.4,0);}
+\foreach \t in {-15,-9,-7,-1,1,7,9,15}{\draw[->,very thick,crimson](\t,0)--(\t,1.3);}
+\foreach \x in {-16,-8,-4,4,8,16}{\draw(\x,0.06)--(\x,-0.06)node[below,font=\tiny]{$\x$};}
+\draw(1,-0.06)node[below,font=\tiny,crimson]{$1$};\draw(-1,-0.06)node[below,font=\tiny,crimson]{$-1$};
+\draw[<-,crimson](1.2,1.0)--(4.6,2.25)node[right,font=\tiny,align=left]{alias of 7 kHz\\at $\abs{7-8}=1$ kHz};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\step{Step 4 --- Has aliasing occurred?} \textbf{Yes, for the noise tone.} The voice is reproduced faithfully, but the 7 kHz tone has folded to 1 kHz and is now indistinguishable from a genuine 1 kHz voice component: any sample sequence produced by $\cos(2\pi\cdot7000\,n/8000)$ is identical to that of $\cos(2\pi\cdot1000\,n/8000)$, since $\cos\!\big(2\pi\tfrac{7}{8}n\big)=\cos\!\big(2\pi n-2\pi\tfrac18n\big)=\cos\!\big(2\pi\tfrac18n\big)$.
+
+\step{Step 5 --- How to remove it.}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Before the ADC (the correct cure):} an \emph{anti-aliasing} analogue low-pass filter with its passband up to 3.4 kHz and strong attenuation by $f_s/2=4$ kHz (certainly at 7 kHz). The first-order $RC$ stage clearly is not enough; a sharper, higher-order filter (or a higher cutoff ratio) is needed.
+\item \textbf{Alternatively, raise the sampling rate} above $2\times7=14$ kHz (e.g.\ 16 kHz): the tone then stays at 7 kHz, outside the voice band, and a digital low-pass filter at 3.4 kHz removes it before decimating back to 8 kHz.
+\item \textbf{After sampling} it can only be \emph{patched}: a narrow digital notch at 1 kHz removes the alias but also removes the genuine voice content at 1 kHz. Aliasing cannot be undone, because the samples no longer carry the information that the tone was at 7 kHz.
+\end{itemize}
+\begin{keyidea}A frequency $f_0$ sampled at $f_s$ appears at $\abs{f_0-kf_s}$ for the integer $k$ that brings it into $[0,f_s/2]$. Filter \emph{before} you sample.\end{keyidea}
+\ans{The voice ($\le3.4$ kHz $<4$ kHz) is not aliased, but the 7 kHz tone aliases to $\abs{7-8}=1$ kHz, inside the voice band. It must be removed by an anti-aliasing low-pass filter (cutoff $\approx3.4$--4 kHz) before the ADC, or by sampling faster than 14 kHz and filtering digitally.}
+\end{solution}
+
+%------------------------------------------------------------------ 1(c)
+\begin{qcard}{Q1(c)}{8-point radix-2 DIT FFT and the equaliser bins}{13}
+The equaliser works on blocks of $N=8$ samples: it computes their DFT with the radix-2 decimation-in-time FFT, scales the bins it wants louder, and sends the result back through the inverse FFT. \textbf{Examine}, by computing the 8-point radix-2 decimation-in-time FFT of the test block
+\[x[n]=\{1,2,1,0,1,2,1,0\}\]
+with its butterfly diagram, which bins the equaliser must scale to boost the vocal range, 300 Hz to 3 kHz.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Twiddle factors and input order.} $W_8=e^{-j\pi/4}$: $W_8^0=1$, $W_8^1=\frac{1-j}{\sqrt2}$, $W_8^2=-j$, $W_8^3=\frac{-1-j}{\sqrt2}$. Decimation in time feeds the inputs in \emph{bit-reversed} order:
+\begin{center}\small\begin{tabular}{@{}c|cccccccc@{}}
+$n$ (binary)&000&100&010&110&001&101&011&111\\\hline
+input&$x[0]$&$x[4]$&$x[2]$&$x[6]$&$x[1]$&$x[5]$&$x[3]$&$x[7]$\\
+value&1&1&1&1&2&2&0&0\end{tabular}\end{center}
+
+\step{Step 2 --- The three butterfly stages.} Each butterfly computes $(a,b)\mapsto(a+W b,\ a-W b)$.
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Stage 1} (2-point DFTs, $W=1$): $(1,1)\to(2,0)$, $(1,1)\to(2,0)$, $(2,2)\to(4,0)$, $(0,0)\to(0,0)$.
+\item \textbf{Stage 2} (4-point, $W_4^0=1$, $W_4^1=W_8^2=-j$): top half $[2,0,2,0]\to[4,\ 0,\ 0,\ 0]$; bottom half $[4,0,0,0]\to[4,\ 0,\ 4,\ 0]$.
+\item \textbf{Stage 3} (8-point, $W_8^0..W_8^3$): $X[k]=G[k]+W_8^kH[k]$, $X[k+4]=G[k]-W_8^kH[k]$ with $G=[4,0,0,0]$, $H=[4,0,4,0]$:
+\begin{align*}
+X[0]&=G[0]+H[0]=4+4=8, & X[4]&=4-4=0,\\
+X[1]&=0+W_8^1(0)=0, & X[5]&=0,\\
+X[2]&=0+(-j)(4)=-4j, & X[6]&=0-(-j)(4)=4j,\\
+X[3]&=0+W_8^3(0)=0, & X[7]&=0.
+\end{align*}
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[x=3.55cm,y=-0.78cm,dot/.style={circle,fill=navy,inner sep=1.1pt}]
+\foreach \s in {1,2,3}{
+ \pgfmathtruncatemacro{\h}{2^(\s-1)}
+ \foreach \i in {0,...,7}{
+  \pgfmathtruncatemacro{\r}{mod(\i,2*\h)}
+  \ifnum\r<\h
+   \pgfmathtruncatemacro{\p}{\i+\h}
+   \pgfmathtruncatemacro{\tw}{\r*4/\h}
+   \draw[navy!70,thick](\s-1,\i)--(\s,\i);
+   \draw[navy!70,thick](\s-1,\p)--(\s,\p);
+   \draw[teal,thick](\s-1,\p)--(\s,\i);
+   \draw[teal,thick](\s-1,\i)--(\s,\p);
+   \node[font=\tiny,fill=white,inner sep=0.5pt,text=crimson] at (\s-0.82,\p) {$W_8^{\tw}$};
+   \node[font=\tiny,below,crimson] at (\s-0.12,\p) {$-1$};
+  \fi}}
+\foreach \c in {0,1,2,3}{\foreach \i in {0,...,7}{\node[dot] at (\c,\i){};}}
+\foreach \v [count=\i from 0] in {x[0]=1,x[4]=1,x[2]=1,x[6]=1,x[1]=2,x[5]=2,x[3]=0,x[7]=0}{\node[left,font=\scriptsize] at (-0.03,\i){$\v$};}
+\foreach \v [count=\i from 0] in {2,0,2,0,4,0,0,0}{\node[above,font=\scriptsize\bfseries,navy] at (1,\i){$\v$};}
+\foreach \v [count=\i from 0] in {4,0,0,0,4,0,4,0}{\node[above,font=\scriptsize\bfseries,navy] at (2,\i){$\v$};}
+\foreach \v [count=\i from 0] in {8,0,-4j,0,0,0,4j,0}{\node[right,font=\scriptsize] at (3.03,\i){$X[\the\numexpr\i\relax]=\v$};}
+\foreach \c/\t in {0.5/Stage 1,1.5/Stage 2,2.5/Stage 3}{\node[font=\sffamily\scriptsize\bfseries,slate] at (\c,-0.9){\t};}
+\end{tikzpicture}
+\end{center}
+{\small(Upper branch of every butterfly: plain addition; lower branch: multiplied by the twiddle $W_8^r$ shown in red, then subtracted. Bold numbers are intermediate values.)}
+
+\[\boxed{X[k]=\{8,\ 0,\ -4j,\ 0,\ 0,\ 0,\ 4j,\ 0\}}\]
+
+\step{Step 3 --- Check.} The block is $\{1,2,1,0\}$ repeated, i.e.\ $x[n]=1+\sin\!\big(\tfrac{\pi n}2\big)$: a d.c.\ value 1 plus a sinusoid at $\frac{f_s}4=2$ kHz. The DFT of $1$ is $N\delta[k]=8\delta[k]$; the DFT of $\sin(2\pi\cdot2n/8)$ is $\frac N{2j}$ at $k=2$ and $-\frac N{2j}$ at $k=6$, i.e.\ $-4j$ and $+4j$. \checkmark\ Also $X[0]=\sum x[n]=8$ and $X[8-k]=X^*[k]$ (real input).
+
+\step{Step 4 --- Which bins carry the vocal range?} Bin $k$ corresponds to frequency
+\[f_k=k\,\frac{f_s}{N}=k\cdot1\text{ kHz}\quad(k=0..4),\qquad f_k=(k-8)\text{ kHz}\quad(k=5..7,\ \text{negative frequencies}).\]
+\begin{center}\small\renewcommand{\arraystretch}{1.25}\begin{tabular}{@{}c|cccccccc@{}}
+$k$&0&1&2&3&4&5&6&7\\\hline
+$f_k$ (kHz)&0&1&2&3&$\pm4$&$-3$&$-2$&$-1$\\
+in 0.3--3 kHz?&no (d.c.)&\textbf{yes}&\textbf{yes}&\textbf{yes}&no&\textbf{yes}&\textbf{yes}&\textbf{yes}\\
+$X[k]$&8&0&$-4j$&0&0&0&$4j$&0\end{tabular}\end{center}
+With a resolution of $f_s/N=1$ kHz the vocal range 0.3--3 kHz is represented by bins $k=1,2,3$; because the signal is real, their negative-frequency partners $k=7,6,5$ must be scaled by the \emph{same} real gain, otherwise $X[8-k]=X^*[k]$ breaks and the inverse FFT returns a complex signal. Bin 0 (d.c.) and bin 4 (the Nyquist frequency, 4 kHz) are left alone. (The part 300 Hz--1 kHz falls between bins 0 and 1; with only 8 points the resolution cannot separate it more finely.)
+
+For this particular test block, only $X[2]=-4j$ and $X[6]=4j$ are non-zero in that range: the 2 kHz tone is the only vocal-range content, so boosting by $G$ gives $x_{\text{out}}[n]=1+G\sin(\pi n/2)$.
+\ans{$X=\{8,0,-4j,0,0,0,4j,0\}$. The equaliser must scale bins $k=1,2,3$ and their mirror bins $k=5,6,7$ (1, 2, 3 kHz) by the same gain; for this block only bins 2 and 6 (the 2 kHz component) are non-zero.}
+\end{solution}

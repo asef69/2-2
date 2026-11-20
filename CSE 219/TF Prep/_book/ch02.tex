@@ -1,0 +1,339 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 1--2}
+\chapter{Signal Transformations, Even--Odd Parts and Elementary Signals}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q1(a)}{CSE 219 \textbullet\ 22 batch p.1}{15}
+Let $x(t)=\begin{cases}1-|t|,&|t|\le1,\\0,&\text{otherwise.}\end{cases}$ Sketch the signal $y(t)=x\big(-2(t-1)\big)+x\!\big(\tfrac{t+2}{2}\big)$. Clearly show the effect of each signal operation on the two component signals before obtaining the final sketch of $y(t)$. Label both axes properly.
+\end{qcard}
+\begin{solution}
+Recipe for $x(\alpha t+\beta)$: shift by $\beta$, reverse if $\alpha<0$, then scale by $|\alpha|$. A feature of $x$ at $t=a$ appears at $t=(a-\beta)/\alpha$.
+
+\step{Component 1: $x(-2(t-1))=x(-2t+2)$, $\alpha=-2$, $\beta=2$.}
+\begin{steps}
+\item Shift left by 2: $x(t+2)$ --- triangle centred at $t=-2$.
+\item Reverse: $x(-t+2)$ --- triangle centred at $t=+2$.
+\item Compress by 2: $x(-2t+2)$ --- triangle centred at $t=1$, half-width $\tfrac12$.
+\end{steps}
+Check: $a=0\mapsto t=1$, $a=\pm1\mapsto t=\tfrac12,\tfrac32$.
+
+\step{Component 2: $x\big(\tfrac{t+2}{2}\big)=x(\tfrac t2+1)$, $\alpha=\tfrac12$, $\beta=1$.}
+\begin{steps}
+\item Shift left by 1: $x(t+1)$ --- centred at $t=-1$.
+\item Stretch by 2: $x(\tfrac t2+1)$ --- centred at $t=-2$, half-width 2.
+\end{steps}
+Check: $a=0\mapsto t=-2$, $a=\pm1\mapsto t=0,-4$.
+
+\begin{center}
+\plotsig[title={$x(-2(t-1))$},xmin=-5,xmax=3,ymin=-0.2,ymax=1.3,xtick={-4,-2,0.5,1,1.5}]{(-5,0)(0.5,0)(1,1)(1.5,0)(3,0)}\hspace{2mm}
+\plotsig[title={$x((t+2)/2)$},xmin=-5,xmax=3,ymin=-0.2,ymax=1.3,xtick={-4,-2,0,1}]{(-5,0)(-4,0)(-2,1)(0,0)(3,0)}\hspace{2mm}
+\plotsig[title={$y(t)$ (sum)},xmin=-5,xmax=3,ymin=-0.2,ymax=1.3,xtick={-4,-2,0,0.5,1,1.5}]{(-5,0)(-4,0)(-2,1)(0,0)(0.5,0)(1,1)(1.5,0)(3,0)}
+\end{center}
+The two triangles do not overlap (the first starts at $t=\frac12$, the second ends at $t=0$), so
+\[
+y(t)=\begin{cases}\frac{t+4}{2},&-4\le t\le-2,\\[2pt]-\frac t2,&-2<t\le0,\\[2pt]2t-1,&\frac12\le t\le1,\\[2pt]3-2t,&1<t\le\frac32,\\[2pt]0,&\text{otherwise.}\end{cases}
+\]
+\ans{$y(t)$ is the sum of a triangle of height 1 centred at $t=-2$ (base from $-4$ to $0$) and a narrower triangle of height 1 centred at $t=1$ (base from $\frac12$ to $\frac32$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q1(a)}{EEE 211 \textbullet\ EEE p.1}{11}
+Consider the signal $x(t)$ shown in the figure (a triangle on $[-2,0]$ with peak 1 at $t=-1$, then a ramp up to 2 at $t=2$, flat at 2 until $t=3$, and a line down to 0 at $t=4$).
+(i) Draw $x(-3t+2)$, $x'(t)$ and $x''(t)$. \quad (ii) Express $x'(t)$ using elementary signals such as $\delta(t)$, $u(t)$, $r(t)$.
+\end{qcard}
+\begin{solution}
+Piecewise: $x=t+2$ on $[-2,-1]$; $-t$ on $[-1,0]$; $t$ on $[0,2]$; $2$ on $[2,3]$; $8-2t$ on $[3,4]$; $0$ otherwise. The signal is continuous.
+
+\step{(i) $x(-3t+2)$.} $\alpha=-3$, $\beta=2$: shift left by 2, reverse, compress by 3. A feature at $a$ moves to $t=(2-a)/3$:
+\[
+a=4,3,2,0,-1,-2\ \longmapsto\ t=-\tfrac23,-\tfrac13,0,\tfrac23,1,\tfrac43,\qquad\text{values }0,2,2,0,1,0 .
+\]
+\[
+x(-3t+2)=\begin{cases}6t+4,&-\frac23\le t\le-\frac13,\\2,&-\frac13\le t\le0,\\2-3t,&0\le t\le\frac23,\\3t-2,&\frac23\le t\le1,\\4-3t,&1\le t\le\frac43.\end{cases}
+\]
+\step{Derivatives.} Since $x$ is continuous there are no impulses in $x'$; slopes are $+1,-1,+1,0,-2$ on the five pieces:
+\[x'(t)=\begin{cases}1,&-2<t<-1\\-1,&-1<t<0\\1,&0<t<2\\0,&2<t<3\\-2,&3<t<4\end{cases}\]
+The slope changes by $+2$ at $t=-1$, $+2$ at $0$, $-1$ at $2$, $-2$ at $3$, $+2$ at $4$ (and $+1$ at $-2$, from slope 0 to 1), so
+\[x''(t)=\delta(t+2)-2\delta(t+1)+2\delta(t)-\delta(t-2)-2\delta(t-3)+2\delta(t-4).\]
+\begin{center}
+\plotsig[title={$x(t)$},xmin=-3,xmax=5,ymin=-0.3,ymax=2.5,xtick={-2,-1,0,1,2,3,4}]{(-3,0)(-2,0)(-1,1)(0,0)(2,2)(3,2)(4,0)(5,0)}\hspace{1mm}
+\plotsig[title={$x(-3t+2)$},xmin=-1.2,xmax=1.8,ymin=-0.3,ymax=2.5,xtick={-0.6667,-0.3333,0.6667,1.3333},xticklabels={$-\frac23$,$-\frac13$,$\frac23$,$\frac43$}]{(-1.2,0)(-0.6667,0)(-0.3333,2)(0,2)(0.6667,0)(1,1)(1.3333,0)(1.8,0)}\hspace{1mm}
+\plotsig[title={$x'(t)$},xmin=-3,xmax=5,ymin=-2.6,ymax=1.6,xtick={-2,-1,0,2,3,4}]{(-3,0)(-2,0)(-2,1)(-1,1)(-1,-1)(0,-1)(0,1)(2,1)(2,0)(3,0)(3,-2)(4,-2)(4,0)(5,0)}
+\end{center}
+\step{(ii)} $x'(t)=u(t+2)-2u(t+1)+2u(t)-u(t-2)-2u(t-3)+2u(t-4)$, equivalently $x(t)=r(t+2)-2r(t+1)+2r(t)-r(t-2)-2r(t-3)+2r(t-4)$.
+\ans{$x'=u(t+2)-2u(t+1)+2u(t)-u(t-2)-2u(t-3)+2u(t-4)$; $x''=\delta(t+2)-2\delta(t+1)+2\delta(t)-\delta(t-2)-2\delta(t-3)+2\delta(t-4)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q5(a)}{CSE 219 \textbullet\ TF p.2}{15}
+A signal $f(t)$ is defined as $f(t)=\begin{cases}t+1,&-2\le t\le0,\\-\frac t2+1,&0<t\le2,\\0,&\text{elsewhere.}\end{cases}$
+(i) Draw the graph of $f(t)$. (ii) Determine the even--odd decomposition of $f(t)$; apply the definitions of both the even and the odd function. (iii) Draw the graphs of the even and odd functions of the decomposition.
+\end{qcard}
+\begin{solution}
+$f(-t)=-t+1$ for $0\le t\le2$ and $\frac t2+1$ for $-2\le t<0$.
+\[
+f_e(t)=\tfrac12[f(t)+f(-t)],\qquad f_o(t)=\tfrac12[f(t)-f(-t)].
+\]
+\step{$0<t\le2$:} $f_e=\tfrac12\big[(1-\tfrac t2)+(1-t)\big]=1-\tfrac{3t}{4}$, \quad $f_o=\tfrac12\big[(1-\tfrac t2)-(1-t)\big]=\tfrac t4$.
+
+\step{$-2\le t<0$:} $f_e=\tfrac12\big[(t+1)+(\tfrac t2+1)\big]=1+\tfrac{3t}{4}$, \quad $f_o=\tfrac12\big[(t+1)-(\tfrac t2+1)\big]=\tfrac t4$.
+
+Hence
+\[
+f_e(t)=1-\tfrac34|t|,\qquad f_o(t)=\tfrac t4,\qquad |t|\le2\quad(0\text{ elsewhere}).
+\]
+Check: $f_e(t)=f_e(-t)$ (a ``tent''), $f_o(-t)=-f_o(t)$ (a straight line through the origin), and at $t=1$: $\frac14+\frac14=\frac12=f(1)$; at $t=-1$: $\frac14-\frac14=0=f(-1)$.
+\begin{center}
+\plotsig[title={$f(t)$},xmin=-3,xmax=3,ymin=-0.7,ymax=1.5,xtick={-2,-1,1,2}]{(-3,0)(-2,0)(-2,-1)(0,1)(2,0)(3,0)}\hspace{1mm}
+\plotsig[title={$f_e(t)$},xmin=-3,xmax=3,ymin=-0.7,ymax=1.5,xtick={-2,-1,1,2}]{(-3,0)(-2,0)(-2,-0.5)(0,1)(2,-0.5)(2,0)(3,0)}\hspace{1mm}
+\plotsig[title={$f_o(t)$},xmin=-3,xmax=3,ymin=-0.7,ymax=1.5,xtick={-2,-1,1,2}]{(-3,0)(-2,0)(-2,-0.5)(2,0.5)(2,0)(3,0)}
+\end{center}
+\begin{notebox}$f(t)$ as printed is $f(-2)=-1$ and $f(2)=0$; the end values give the jumps of $f_e$ and $f_o$ at $|t|=2$ (the drawing shows the jump values).\end{notebox}
+\ans{$f_e(t)=1-\frac34|t|$ and $f_o(t)=\frac t4$ for $|t|\le2$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q7(a)--(c)}{CSE 219 \textbullet\ TF p.4}{23}
+The graph of a signal $x(t)$ is shown in Figure 2 (it is $0$ for $t<-2$ or $t>2$). It rises linearly from $-1$ at $t=-2$ to $0$ at $t=-1$, jumps to $1$ and stays at $1$ up to $t=0$, then falls linearly to $0$ at $t=2$.
+(a) Write down the piece-wise definition of $x(t)$. (b) Determine $x(-2t+2)$ using the properties of signals, explicitly mentioning the properties used, and draw its graph. (c) Determine $x\big(-\tfrac t2+1\big)$ in the same way and draw its graph.
+\end{qcard}
+\begin{solution}
+\step{(a)} $x(t)=\begin{cases}t+1,&-2\le t<-1,\\1,&-1\le t\le0,\\1-\frac t2,&0<t\le2,\\0,&\text{otherwise.}\end{cases}$
+
+\step{(b) $x(-2t+2)$} ($\alpha=-2,\ \beta=2$): time shift, time reversal, time scaling.
+\begin{steps}
+\item Time shift left by 2: $g_1(t)=x(t+2)=t+3$ on $[-4,-3)$; $1$ on $[-3,-2]$; $-\frac t2$ on $(-2,0]$.
+\item Time reversal: $g_2(t)=g_1(-t)=x(-t+2)=\frac t2$ on $[0,2)$; $1$ on $[2,3]$; $3-t$ on $(3,4]$.
+\item Time compression by 2: $g_2(2t)=x(-2t+2)$:
+\[x(-2t+2)=\begin{cases}t,&0\le t<1,\\1,&1\le t\le\frac32,\\3-2t,&\frac32<t\le2,\\0,&\text{otherwise.}\end{cases}\]
+\end{steps}
+Check: $t=2\Rightarrow x(-2)=-1$ and $3-4=-1$; $t=1\Rightarrow x(0)=1$.
+
+\step{(c) $x(-\frac t2+1)$} ($\alpha=-\tfrac12,\ \beta=1$): shift left by 1, reverse, stretch by 2.
+\begin{steps}
+\item $x(t+1)=t+2$ on $[-3,-2)$; $1$ on $[-2,-1]$; $\frac{1-t}{2}$ on $(-1,1]$.
+\item $x(-t+1)=\frac{1+t}{2}$ on $[-1,1)$; $1$ on $[1,2]$; $2-t$ on $(2,3]$.
+\item Stretch by 2:
+\[x(-\tfrac t2+1)=\begin{cases}\frac12+\frac t4,&-2\le t<2,\\1,&2\le t\le4,\\2-\frac t2,&4<t\le6,\\0,&\text{otherwise.}\end{cases}\]
+\end{steps}
+Check: $t=6\Rightarrow x(-2)=-1$ and $2-3=-1$; $t=-2\Rightarrow x(2)=0$.
+\begin{center}
+\plotsig[title={$x(t)$},xmin=-3,xmax=3,ymin=-1.3,ymax=1.5,xtick={-2,-1,1,2}]{(-3,0)(-2,0)(-2,-1)(-1,0)(-1,1)(0,1)(2,0)(3,0)}\hspace{1mm}
+\plotsig[title={$x(-2t+2)$},xmin=-1,xmax=3,ymin=-1.3,ymax=1.5,xtick={0.5,1,1.5,2}]{(-1,0)(0,0)(1,1)(1.5,1)(1.5,0)(2,-1)(2,0)(3,0)}\hspace{1mm}
+\plotsig[title={$x(-t/2+1)$},xmin=-3,xmax=7,ymin=-1.3,ymax=1.5,xtick={-2,2,4,6}]{(-3,0)(-2,0)(2,1)(4,1)(4,0)(6,-1)(6,0)(7,0)}
+\end{center}
+\ans{$x(-2t+2)=t\ (0\le t<1),\ 1\ (1\le t\le\frac32),\ 3-2t\ (\frac32<t\le2)$; \quad $x(-\frac t2+1)=\frac12+\frac t4\ (-2\le t<2),\ 1\ (2\le t\le4),\ 2-\frac t2\ (4<t\le6)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q7(d)}{CSE 219 \textbullet\ TF p.4}{7}
+Discrete signals have many properties. Suppose you have an image that you are using as an example of a discrete signal. Mention the specific signal properties that could be useful in accomplishing each task (no details needed): image compression, blurring the image, sharpening the image, flipping the image, zooming in or out, determining the image contrast, detecting edges in the image.
+\end{qcard}
+\begin{solution}
+\begin{center}\small\begin{tabular}{@{}p{3.2cm}p{11cm}@{}}\toprule
+Task & Signal property / operation\\\midrule
+Compression & Frequency-domain representation (Fourier/DCT): keep large low-frequency coefficients, drop small high-frequency ones\\
+Blurring & Convolution with a low-pass (averaging) kernel; removes high frequencies\\
+Sharpening & High-pass filtering / adding back the difference (derivative) image; boosts high frequencies\\
+Flipping & Time (index) reversal $x[-n]$ (mirror about the axis)\\
+Zooming & Time (index) scaling $x[\alpha n]$ with up-/down-sampling and interpolation\\
+Contrast & Amplitude scaling (and shifting) of pixel values; the spread (variance/power) of the values measures it\\
+Edge detection & First difference $x[n]-x[n-1]$ (derivative): large values where the signal jumps; high-frequency content\\\bottomrule
+\end{tabular}\end{center}
+\ans{Compression: frequency content; blur/sharpen: convolution (low/high-pass); flip: reversal; zoom: scaling; contrast: amplitude scaling/power; edges: difference/derivative.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q5(c)}{EEE 211 \textbullet\ EEE p.10}{10}
+For the signal $x(t)$ shown in the figure ($5t$ on $(0,1)$, then $-6$ on $(1,2)$, then $5(t-2)$ on $(2,3)$, zero elsewhere), write the signal as a linear combination of elementary signals. Sketch $\frac{\dd x(t)}{\dd t}$ with proper labels on the $x$- and $y$-axes.
+\end{qcard}
+\begin{solution}
+Scan from left to right, adding (new slope $-$ old slope)$\,r(t-a)$ and (jump)$\,u(t-a)$ at every break point.
+\begin{center}\small\begin{tabular}{@{}cll@{}}\toprule
+$t$ & event & term\\\midrule
+0 & slope $0\to5$ & $5r(t)$\\
+1 & slope $5\to0$; jump $5\to-6$ ($-11$) & $-5r(t-1)-11u(t-1)$\\
+2 & jump $-6\to0$ ($+6$); slope $0\to5$ & $6u(t-2)+5r(t-2)$\\
+3 & slope $5\to0$; jump $5\to0$ ($-5$) & $-5r(t-3)-5u(t-3)$\\\bottomrule
+\end{tabular}\end{center}
+\[
+x(t)=5r(t)-5r(t-1)-11u(t-1)+6u(t-2)+5r(t-2)-5r(t-3)-5u(t-3).
+\]
+Derivative (replace $r\to u$, $u\to\delta$):
+\[
+\frac{\dd x}{\dd t}=5\big[u(t)-u(t-1)\big]+5\big[u(t-2)-u(t-3)\big]-11\delta(t-1)+6\delta(t-2)-5\delta(t-3).
+\]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sig,width=9cm,height=4.2cm,title={$\dd x/\dd t$},xmin=-0.5,xmax=4,ymin=-13,ymax=7,xtick={1,2,3},ytick={-11,5,6,-5},clip=false]
+\addplot[thick,navy]coordinates{(-0.5,0)(0,0)(0,5)(1,5)(1,0)(2,0)(2,5)(3,5)(3,0)(4,0)};
+\impulse{1}{-11}\impulse{2}{6}\impulse{3}{-5}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\ans{$x=5r(t)-5r(t-1)-11u(t-1)+6u(t-2)+5r(t-2)-5r(t-3)-5u(t-3)$; $x'$ has height-5 rectangles on $(0,1)$ and $(2,3)$ and impulses of strength $-11,\,+6,\,-5$ at $t=1,2,3$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q6(a)}{EEE 211 \textbullet\ EEE p.10}{20}
+Check whether the following signals can be used as a mathematical model of a delta function:
+(i) $p_1(t)=\displaystyle\lim_{\epsilon\to0}\Big(\epsilon\pi\cosh\frac t\epsilon\Big)^{-1}$; \qquad (ii) $p_2(t)=\displaystyle\lim_{\epsilon\to0}\frac1\pi\frac{\sin\epsilon t}{t}$.
+\end{qcard}
+\begin{solution}
+A family $p_\epsilon(t)$ models $\delta(t)$ if (1) its area is 1 for every $\epsilon$, (2) $p_\epsilon(t)\to0$ for every $t\ne0$, and (3) its peak grows without bound (the area concentrates at $t=0$).
+
+\step{(i)} Area (substitute $u=t/\epsilon$): $\displaystyle\int\frac{\dd t}{\epsilon\pi\cosh(t/\epsilon)}=\frac1\pi\int_{-\infty}^\infty\frac{\dd u}{\cosh u}=\frac1\pi\cdot\pi=1$. For $t\ne0$: $\cosh(t/\epsilon)\approx\frac12e^{|t|/\epsilon}$, so $p_1\approx\frac{2}{\epsilon\pi}e^{-|t|/\epsilon}\to0$. Peak: $p_1(0)=\frac1{\epsilon\pi}\to\infty$. All three conditions hold.
+
+\step{(ii)} Area: $\int\frac{\sin\epsilon t}{\pi t}\dd t=1$ for every $\epsilon>0$. But for fixed $t$, $\frac{\sin\epsilon t}{\pi t}\to0$ as $\epsilon\to0$ (the peak value $\epsilon/\pi\to0$): the unit area is spread over a main lobe of width $2\pi/\epsilon\to\infty$. The function becomes flat, not narrow. Condition (3) fails, so as $\epsilon\to0$ it is \emph{not} a delta model. (The correct family is $\frac{\sin(t/\epsilon)}{\pi t}$, i.e.\ $\epsilon\to\infty$ in the printed form.)
+\ans{(i) Yes, $p_1$ is a valid model of $\delta(t)$. \quad (ii) No, not as $\epsilon\to0$ (it becomes a delta only as $\epsilon\to\infty$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q1(c)}{EEE 211 \textbullet\ EEE p.12}{15}
+Given the signal $x(t)=\delta(t-1)+u(t)u(t-3)+u(\cos t)$, compute $y(t)=\int_{-\infty}^{t}x(\tau)\dd\tau$ and sketch $y(t/2)$.
+\end{qcard}
+\begin{notebox}The lower limit is partly illegible. Because $u(\cos t)$ equals 1 for half of every period, the integral from $-\infty$ diverges; the solution integrates from $t=0$, which fixes $y$ up to an additive constant.\end{notebox}
+\begin{solution}
+$u(t)u(t-3)=u(t-3)$. The three parts integrate separately:
+\[
+\int\delta(\tau-1)\dd\tau=u(t-1),\qquad \int u(\tau-3)\dd\tau=r(t-3),\qquad
+w(t)=\int_0^t u(\cos\tau)\dd\tau .
+\]
+Write $u(\cos\tau)=\tfrac12+\tfrac12\operatorname{sgn}(\cos\tau)$. Since $\frac{\dd}{\dd\tau}\arcsin(\sin\tau)=\operatorname{sgn}(\cos\tau)$, we have $\int_0^t\operatorname{sgn}(\cos\tau)\dd\tau=\arcsin(\sin t)$ and
+\[
+w(t)=\frac t2+\frac12\arcsin(\sin t)=\begin{cases}t,&|t|\le\frac\pi2,\\ \frac\pi2,&\frac\pi2\le t\le\frac{3\pi}2,\ \text{then repeats with slope }1\text{ for half of each period.}\end{cases}
+\]
+Therefore
+\[
+y(t)=u(t-1)+r(t-3)+\frac t2+\frac12\arcsin(\sin t),\qquad
+y\!\Big(\frac t2\Big)=u\!\Big(\frac t2-1\Big)+r\!\Big(\frac t2-3\Big)+\frac t4+\frac12\arcsin\!\Big(\sin\frac t2\Big).
+\]
+$y(t/2)$ is $y(t)$ stretched by 2: the break points $t=1,3,\frac\pi2,\frac{3\pi}2,\dots$ move to $t=2,6,\pi,3\pi,\dots$ (jump of 1 at $t=2$, extra ramp of slope $\frac12$ from $t=6$, a staircase-ramp of average slope $\frac14$).
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sig,width=10cm,height=4.4cm,title={$y(t/2)$},xmin=-4,xmax=22,ymin=-3,ymax=9,xtick={2,6,10,15,20},samples=400,domain=-4:22]
+\addplot[thick,navy,const plot,unbounded coords=jump]{ (x>2) + max(0,x/2-3) + x/4 + 0.5*rad(asin(sin(deg(x/2)))) };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\ans{$y(t)=u(t-1)+r(t-3)+\dfrac t2+\dfrac12\arcsin(\sin t)$ (integrating $u(\cos t)$ from $0$); $y(t/2)$ is its 2-times-stretched version.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q5(a)}{EEE 211 \textbullet\ EEE p.19}{25}
+Three signals $x_1(t),x_2(t),x_3(t)$ are shown in the figure. $x_1$ ramps from 0 at $t=0$ to 2 at $t=2$, stays 2 until $t=6$ and drops to 0. $x_2$ ramps from 0 at $t=-4$ to 2 at $t=-2$, stays 2 until $t=2$, equals 3 on $(2,4)$ and is 0 afterwards. $x_3$ rises from 0 at $t=-3$ to 4 at $t=-2$, stays 4 until $t=0$, drops to 1 on $(0,2)$ and falls to 0 at $t=3$.
+(i) Express $x_1(t)$ and $x_2(t)$ in terms of the ramp $r(t)$ and unit step $u(t)$. (10) \quad (ii) Draw $x_1(t+2)\,r(t-2)$ and $x_2(t-2)\,u(-2t)$. (10) \quad (iii) Express $x_3(t)$ in terms of $x_1(t)$. (5)
+\end{qcard}
+\begin{solution}
+\step{(i)} $x_1$: slope $1$ from $t=0$, slope returns to $0$ at $t=2$, jump $-2$ at $t=6$:
+\[x_1(t)=r(t)-r(t-2)-2u(t-6).\]
+$x_2$: slope 1 from $t=-4$ to $-2$, jump $+1$ at $t=2$, jump $-3$ at $t=4$:
+\[x_2(t)=r(t+4)-r(t+2)+u(t-2)-3u(t-4).\]
+\step{(ii)} $x_1(t+2)$ is the ramp from $(-2,0)$ to $(0,2)$ then $2$ until $t=4$; $r(t-2)=(t-2)u(t-2)$. For $2\le t\le4$ the product is $2(t-2)$; it is 0 elsewhere.
+$x_2(t-2)$ is the ramp on $(-2,0)$, then 2 on $(0,4)$, 3 on $(4,6)$. $u(-2t)=u(-t)$ keeps only $t<0$: the product is $t+2$ on $[-2,0)$ and $0$ elsewhere.
+\begin{center}
+\plotsig[title={$x_1(t+2)\,r(t-2)$},xmin=-1,xmax=6,ymin=-0.5,ymax=4.8,xtick={2,4}]{(-1,0)(2,0)(4,4)(4,0)(6,0)}\hspace{4mm}
+\plotsig[title={$x_2(t-2)\,u(-2t)$},xmin=-4,xmax=3,ymin=-0.5,ymax=2.8,xtick={-2,0}]{(-4,0)(-2,0)(0,2)(0,0)(3,0)}
+\end{center}
+\step{(iii)} The left part (rise from 0 to 4 over one unit, then 4 for two units) is $2x_1(2t+6)$ (compress by 2, shift left, scale by 2): ramp for $2t+6\in[0,2]\Leftrightarrow t\in[-3,-2]$, flat $4$ for $t\in[-2,0]$. The right part (1 for two units, then a ramp down over one unit) is $\frac12x_1(6-2t)$ (reversed): flat $1$ for $t\in[0,2]$, ramp down on $[2,3]$. Hence
+\[x_3(t)=2x_1(2t+6)+\tfrac12x_1(6-2t).\]
+Check: $x_3(-1)=2\cdot2\cdot1\!=\!4$; $x_3(2.5)=\frac12\cdot1=\frac12$; $x_3(-2.5)=2\cdot1=2$ (mid-ramp).
+\ans{$x_1=r(t)-r(t-2)-2u(t-6)$, \ $x_2=r(t+4)-r(t+2)+u(t-2)-3u(t-4)$, \ $x_3(t)=2x_1(2t+6)+\frac12x_1(6-2t)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q2(b)}{CSE 311 \textbullet\ TF p.15}{11}
+Prove that a unit step signal can be derived from a unit impulse signal and vice versa.
+\end{qcard}
+\begin{solution}
+\step{Definition.} The unit impulse is the limit of a pulse $\delta_\Delta(t)$ of width $\Delta$ and height $1/\Delta$ (area 1 for every $\Delta$) as $\Delta\to0$: $\delta(t)=0$ for $t\neq0$ and $\int\delta\dd t=1$.
+
+\step{Step from impulse.} Integrate the impulse up to time $t$:
+\[
+u(t)=\int_{-\infty}^{t}\delta(\tau)\dd\tau=\begin{cases}0,&t<0\ (\text{the window }(-\infty,t]\text{ misses the impulse}),\\1,&t>0\ (\text{the window contains it, area }1).\end{cases}
+\]
+\step{Impulse from step.} Replace the jump of $u$ by a ramp $u_\Delta(t)$ rising from 0 to 1 over $[0,\Delta]$. Its derivative is
+\[\frac{\dd u_\Delta}{\dd t}=\begin{cases}1/\Delta,&0<t<\Delta,\\0,&\text{otherwise}\end{cases}=\delta_\Delta(t),\]
+a pulse of unit area. As $\Delta\to0$, $u_\Delta\to u$ and $\delta_\Delta\to\delta$, so $\delta(t)=\dfrac{\dd u(t)}{\dd t}$ (in the generalised sense: zero away from the jump, an impulse of area equal to the jump height at $t=0$).
+
+In discrete time the same relations are exact: $\delta[n]=u[n]-u[n-1]$ and $u[n]=\sum_{m=-\infty}^{n}\delta[m]=\sum_{k=0}^\infty\delta[n-k]$.
+\ans{$u(t)=\int_{-\infty}^t\delta(\tau)\dd\tau$ and $\delta(t)=\dfrac{\dd u}{\dd t}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q5(a)}{EEE 211 \textbullet\ EEE p.24}{15}
+Describe the signal $x(t)$ in the figure by a single expression valid for all $t$. Sketch the time-compressed version of $x(t)$ by a factor of 3. (The figure shows $x=2$ on $(-1.5,0)$, then $x=2e^{-t/2}$ on $(0,3)$, and $0$ elsewhere.)
+\end{qcard}
+\begin{solution}
+Use steps to switch each piece on and off:
+\[
+x(t)=2\big[u(t+1.5)-u(t)\big]+2e^{-t/2}\big[u(t)-u(t-3)\big]\quad\text{(valid for all }t).
+\]
+Time compression by 3 replaces $t$ by $3t$, so every break point is divided by 3:
+\[
+x(3t)=2\big[u(t+0.5)-u(t)\big]+2e^{-3t/2}\big[u(t)-u(t-1)\big].
+\]
+\begin{center}
+\begin{tikzpicture}\begin{axis}[sig,title={$x(t)$},xmin=-2.5,xmax=4,ymin=-0.3,ymax=2.6,xtick={-1.5,3}]
+\addplot[thick,navy]coordinates{(-2.5,0)(-1.5,0)(-1.5,2)(0,2)};\addplot[thick,navy,domain=0:3]{2*exp(-x/2)};\addplot[thick,navy]coordinates{(3,2*0.2231)(3,0)(4,0)};
+\end{axis}\end{tikzpicture}
+\end{center}
+\ans{$x(t)=2[u(t+1.5)-u(t)]+2e^{-t/2}[u(t)-u(t-3)]$; $x(3t)=2[u(t+0.5)-u(t)]+2e^{-3t/2}[u(t)-u(t-1)]$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q6(b)}{EEE 211 \textbullet\ EEE p.30}{20}
+The voltage waveform $v(t)$ is shown in the figure: it is 0 for $t<-1$, jumps to $-2$ at $t=-1$, rises linearly through $(0,0)$ to $(1,2)$, stays 2 until $t=2$, rises linearly to $(4,3)$, drops to 1 at $t=4$, stays 1 until $t=5$, falls linearly through $(6,0)$ to $(7,-1)$ and jumps back to 0 at $t=7$.
+(i) Express $v(t)$ in terms of unit step and unit ramp functions. (ii) Compute the derivative of $v(t)$ and sketch its waveform. (iii) Evaluate and sketch the even and odd components of the derivative of $v(t)$.
+\end{qcard}
+\begin{notebox}The scanned label at $t=2$ reads ``(2,1)'' while the curve is drawn at height 2; the solution follows the drawing ($v(2)=2$, slope $\frac12$ on $(2,4)$).\end{notebox}
+\begin{solution}
+\step{Slopes and jumps.} Slopes: $2$ on $(-1,1)$; $0$ on $(1,2)$; $\frac12$ on $(2,4)$; $0$ on $(4,5)$; $-1$ on $(5,7)$. Jumps: $-2$ at $t=-1$, $-2$ at $t=4$, $+1$ at $t=7$.
+
+\step{(i)} Add (slope change)$\,r(t-a)$ and (jump)$\,u(t-a)$ at each break point:
+\[
+v(t)=-2u(t+1)+2r(t+1)-2r(t-1)+\tfrac12r(t-2)-2u(t-4)-\tfrac12r(t-4)-r(t-5)+r(t-7)+u(t-7).
+\]
+Check: $v(3)=-2+8-4+\frac12=2.5$ \,(line from $(2,2)$ with slope $\frac12$); $v(6)=-2+14-10+2-2-1-1=0$.
+
+\step{(ii)} $\dfrac{\dd v}{\dd t}=2\,[u(t+1)-u(t-1)]+\tfrac12[u(t-2)-u(t-4)]-[u(t-5)-u(t-7)]-2\delta(t+1)-2\delta(t-4)+\delta(t-7).$
+
+\step{(iii)} Let $g=v'$ and $g(-t)$ its reflection. $g_e=\frac12[g(t)+g(-t)]$, $g_o=\frac12[g(t)-g(-t)]$:
+\begin{center}\small\begin{tabular}{@{}lll@{}}\toprule
+interval / location & $g_e$ & $g_o$\\\midrule
+$|t|<1$ (slope part) & $2$ & $0$\\
+$2<t<4$ \ ($-4<t<-2$) & $\frac14$ \ ($\frac14$) & $\frac14$ \ ($-\frac14$)\\
+$5<t<7$ \ ($-7<t<-5$) & $-\frac12$ \ ($-\frac12$) & $-\frac12$ \ ($+\frac12$)\\
+$\delta(t+1),\ \delta(t-1)$ & $-1,\ -1$ & $-1,\ +1$\\
+$\delta(t+4),\ \delta(t-4)$ & $-1,\ -1$ & $+1,\ -1$\\
+$\delta(t+7),\ \delta(t-7)$ & $+\frac12,\ +\frac12$ & $-\frac12,\ +\frac12$\\\bottomrule
+\end{tabular}\end{center}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sig,width=7cm,height=3.6cm,title={$v(t)$},xmin=-2,xmax=8,ymin=-2.6,ymax=3.6,xtick={-1,1,2,4,5,6,7}]
+\addplot[thick,navy]coordinates{(-2,0)(-1,0)(-1,-2)(1,2)(2,2)(4,3)(4,1)(5,1)(7,-1)(7,0)(8,0)};
+\end{axis}
+\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}
+\begin{axis}[sig,width=7cm,height=3.6cm,title={$v'(t)$},xmin=-2,xmax=8,ymin=-3.2,ymax=3,xtick={-1,1,2,4,5,7}]
+\addplot[thick,navy]coordinates{(-2,0)(-1,0)(-1,2)(1,2)(1,0)(2,0)(2,0.5)(4,0.5)(4,0)(5,0)(5,-1)(7,-1)(7,0)(8,0)};
+\impulse{-1}{-2}\impulse{4}{-2}\impulse{7}{1}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[sig,width=7.4cm,height=3.8cm,title={even part $g_e$},xmin=-8,xmax=8,ymin=-1.5,ymax=2.6,xtick={-7,-4,-1,1,4,7}]
+\addplot[thick,navy]coordinates{(-8,0)(-7,0)(-7,-0.5)(-5,-0.5)(-5,0)(-4,0)(-4,0.25)(-2,0.25)(-2,0)(-1,0)(-1,2)(1,2)(1,0)(2,0)(2,0.25)(4,0.25)(4,0)(5,0)(5,-0.5)(7,-0.5)(7,0)(8,0)};
+\impulse{-1}{-1}\impulse{1}{-1}\impulse{-4}{-1}\impulse{4}{-1}
+\end{axis}
+\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}
+\begin{axis}[sig,width=7.4cm,height=3.8cm,title={odd part $g_o$},xmin=-8,xmax=8,ymin=-1.5,ymax=1.5,xtick={-7,-4,-1,1,4,7}]
+\addplot[thick,navy]coordinates{(-8,0)(-7,0)(-7,0.5)(-5,0.5)(-5,0)(-4,0)(-4,-0.25)(-2,-0.25)(-2,0)(2,0)(2,0.25)(4,0.25)(4,0)(5,0)(5,-0.5)(7,-0.5)(7,0)(8,0)};
+\impulse{-1}{-1}\impulse{1}{1}\impulse{-4}{1}\impulse{4}{-1}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+(The even part has impulses $-\delta(t\pm1)$, $-\delta(t\pm4)$, $\frac12\delta(t\pm7)$; the odd part has $-\delta(t+1)+\delta(t-1)$, $\delta(t+4)-\delta(t-4)$, $-\frac12\delta(t+7)+\frac12\delta(t-7)$.)
+\ans{$v=-2u(t+1)+2r(t+1)-2r(t-1)+\tfrac12r(t-2)-2u(t-4)-\tfrac12r(t-4)-r(t-5)+r(t-7)+u(t-7)$; $v'$ = slopes $2,0,\frac12,0,-1$ plus impulses $-2,-2,+1$ at $t=-1,4,7$.}
+\end{solution}

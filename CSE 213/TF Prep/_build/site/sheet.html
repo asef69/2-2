@@ -1,0 +1,80 @@
+<h2>Design principles in one line each</h2>
+<div class="tbl"><table><thead><tr><th>Principle</th><th>Rule</th><th>Smell when broken</th></tr></thead><tbody>
+<tr><td><strong>Encapsulate what varies</strong></td><td>Put the part that changes behind its own class or interface</td><td>if/else chains on a type code</td></tr>
+<tr><td><strong>Program to an interface</strong></td><td>Depend on the abstract type, not the concrete class</td><td><code>new ConcreteClass()</code> in client code</td></tr>
+<tr><td><strong>Favour composition</strong></td><td>Has-a and delegate before is-a and extend</td><td>deep inheritance trees, refused bequest</td></tr>
+<tr><td><strong>SRP</strong></td><td>A class has one reason to change</td><td>a class that is edited for two unrelated requirements</td></tr>
+<tr><td><strong>OCP</strong></td><td>Open for extension, closed for modification</td><td>every new variant edits an old class</td></tr>
+<tr><td><strong>LSP</strong></td><td>A subclass can stand in for its parent without surprising the client</td><td>subclass throws or ignores an inherited method</td></tr>
+<tr><td><strong>ISP</strong></td><td>Many small client-specific interfaces beat one fat one</td><td>empty implementations of interface methods</td></tr>
+<tr><td><strong>DIP</strong></td><td>High-level modules depend on abstractions, and so do low-level ones</td><td>business class creates its own database/logger</td></tr>
+</tbody></table></div>
+
+<h2>Which pattern? Trigger phrases</h2>
+<div class="tbl"><table><thead><tr><th>The question says…</th><th>Pattern</th><th>Key participants</th></tr></thead><tbody>
+<tr><td>subclass decides which one product to create; client must not name the concrete class</td><td><strong>Factory Method</strong></td><td>Creator (factoryMethod), ConcreteCreator, Product</td></tr>
+<tr><td>a family of related products that must match (Windows or Mac widgets)</td><td><strong>Abstract Factory</strong></td><td>AbstractFactory with several create methods, ConcreteFactory per family</td></tr>
+<tr><td>build a complex object step by step; same steps, different representations</td><td><strong>Builder</strong></td><td>Director, Builder, ConcreteBuilder, getResult()</td></tr>
+<tr><td>exactly one instance, global access</td><td><strong>Singleton</strong></td><td>private constructor, static instance, getInstance()</td></tr>
+<tr><td>add responsibilities to one object at run time without subclass explosion</td><td><strong>Decorator</strong></td><td>Component, ConcreteComponent, Decorator holding a Component</td></tr>
+<tr><td>treat a single object and a group the same way; part-whole tree</td><td><strong>Composite</strong></td><td>Component, Leaf, Composite (list of Components)</td></tr>
+<tr><td>make an existing class fit an interface the client expects</td><td><strong>Adapter</strong></td><td>Target, Adaptee, Adapter (object: composition; class: inheritance)</td></tr>
+<tr><td>two independent dimensions of variation (shape × colour, UI × OS)</td><td><strong>Bridge</strong></td><td>Abstraction holding an Implementor</td></tr>
+<tr><td>swap an algorithm at run time, caller picks the algorithm</td><td><strong>Strategy</strong></td><td>Context, Strategy interface, ConcreteStrategy</td></tr>
+<tr><td>fixed algorithm skeleton, subclasses fill in steps</td><td><strong>Template Method</strong></td><td>abstract class with a final template method plus abstract steps</td></tr>
+<tr><td>one object changes, many dependents must be told (publish/subscribe)</td><td><strong>Observer</strong></td><td>Subject (attach/detach/notify), Observer (update)</td></tr>
+<tr><td>many objects talk to each other, tangled many-to-many references</td><td><strong>Mediator</strong></td><td>Mediator, Colleagues that only know the mediator</td></tr>
+<tr><td>behaviour changes with the object's own internal state</td><td><strong>State</strong></td><td>Context, State interface, ConcreteState that moves the context on</td></tr>
+</tbody></table></div>
+<p><strong>State vs Strategy:</strong> same class diagram. In State the states switch themselves as the object moves; in Strategy the client picks the algorithm and it stays put.</p>
+
+<h2>Class diagram quick reference</h2>
+<div class="tbl"><table><thead><tr><th>Relationship</th><th>Line</th><th>Meaning / test</th></tr></thead><tbody>
+<tr><td>Association</td><td>plain line, optional arrow</td><td>knows about; give role names and multiplicity at both ends</td></tr>
+<tr><td>Aggregation</td><td>hollow diamond at the whole</td><td>whole-part, part survives without the whole</td></tr>
+<tr><td>Composition</td><td>filled diamond at the whole</td><td>whole-part, part dies with the whole; part has one owner</td></tr>
+<tr><td>Generalisation</td><td>solid line, hollow triangle at the parent</td><td>is-a</td></tr>
+<tr><td>Realisation</td><td>dashed line, hollow triangle at the interface</td><td>implements</td></tr>
+<tr><td>Dependency</td><td>dashed arrow</td><td>uses temporarily (parameter, local variable)</td></tr>
+</tbody></table></div>
+<p>Visibility: <code>+</code> public, <code>-</code> private, <code>#</code> protected, <code>~</code> package. Multiplicity: <code>1</code>, <code>0..1</code>, <code>*</code>, <code>1..*</code>, <code>m..n</code>. Abstract class and method names are in <em>italics</em>.</p>
+
+<h2>Other UML and BPMN notation</h2>
+<div class="tbl"><table><thead><tr><th>Diagram</th><th>Remember</th></tr></thead><tbody>
+<tr><td><strong>State</strong></td><td>transition label <code>event [guard] / action</code>; initial dot, final bull's-eye; entry/exit/do inside the state; nested states and concurrent regions split by a dashed line; four events: change (when), call, signal, time (after)</td></tr>
+<tr><td><strong>Sequence</strong></td><td>lifelines across the top, time runs down; activation bar while an object works; solid arrow = call, dashed arrow = return; <code>create</code> arrow to a new box, X to destroy; fragments <code>alt</code>, <code>opt</code>, <code>loop</code></td></tr>
+<tr><td><strong>Collaboration</strong></td><td>same information as sequence but objects laid out as a network; links plus numbered messages (1, 1.1, 2 …) give the order</td></tr>
+<tr><td><strong>Use case</strong></td><td>actors outside the system box, ovals inside; <code>&lt;&lt;include&gt;&gt;</code> mandatory shared step (arrow to the included case); <code>&lt;&lt;extend&gt;&gt;</code> optional step (arrow to the base case); generalisation between actors or cases</td></tr>
+<tr><td><strong>BPMN</strong></td><td>events (circles: start thin, intermediate double, end thick), activities (rounded rectangles), gateways (diamonds: X exclusive, + parallel, O inclusive), sequence flow stays inside a pool, message flow (dashed) crosses pools, lanes split a pool by role</td></tr>
+</tbody></table></div>
+
+<h2>Testing formulas and rules</h2>
+<p class="mathp"><strong>Cyclomatic complexity</strong> V(G) = E − N + 2 = P + 1 = number of regions. It equals the number of basis paths and the minimum number of test cases for branch coverage.</p>
+<div class="tbl"><table><thead><tr><th>Technique</th><th>Rule</th></tr></thead><tbody>
+<tr><td>Equivalence partitioning</td><td>split each input into valid and invalid classes; one test per class</td></tr>
+<tr><td>BVA for [a, b]</td><td>a−1, a, a+1, b−1, b, b+1 (add a nominal value)</td></tr>
+<tr><td>Weak / strong ECT</td><td>weak = largest number of classes of any one input; strong = product of the class counts</td></tr>
+<tr><td>Statement / branch coverage</td><td>every statement runs / every decision takes both outcomes. Branch coverage subsumes statement coverage</td></tr>
+<tr><td>Condition coverage</td><td>every atomic condition takes true and false. Remember short-circuit evaluation in <code>||</code> and <code>&amp;&amp;</code></td></tr>
+<tr><td>Loop tests</td><td>0, 1, 2, m, n−1, n, n+1 passes</td></tr>
+<tr><td>Integration</td><td>top-down needs stubs, bottom-up needs drivers</td></tr>
+<tr><td>Verification vs validation</td><td>built the product right / built the right product</td></tr>
+</tbody></table></div>
+
+<h2>Process models and agile</h2>
+<div class="tbl"><table><thead><tr><th>Model</th><th>Use when</th><th>Weakness</th></tr></thead><tbody>
+<tr><td>Waterfall</td><td>requirements are fixed and well understood</td><td>no working software until late, changes are expensive</td></tr>
+<tr><td>Incremental</td><td>core first, extras later, staffing is tight</td><td>needs a good architecture up front</td></tr>
+<tr><td>Prototyping</td><td>requirements are unclear</td><td>throw-away prototype may be shipped by mistake</td></tr>
+<tr><td>Spiral</td><td>large risky projects</td><td>needs risk-analysis skill, costly</td></tr>
+<tr><td>Scrum</td><td>changing requirements, short sprints</td><td>needs a disciplined, co-located team</td></tr>
+</tbody></table></div>
+<p><strong>Scrum:</strong> roles product owner, scrum master, team. Events sprint, planning, daily scrum, review, retrospective. Artifacts product backlog, sprint backlog, increment. <strong>Kanban:</strong> board, columns, WIP limit per column, pull system, no fixed sprint.</p>
+
+<h2>Refactoring and unit testing</h2>
+<ul>
+<li>Refactoring changes structure, not behaviour. Run the tests before and after every small step.</li>
+<li>Smells to name: long method, large class, duplicate code, feature envy, shotgun surgery, divergent change, data clumps, primitive obsession, switch statements, refused bequest.</li>
+<li>Fixes to name: extract method, move method, extract class, replace conditional with polymorphism, introduce parameter object, pull up method.</li>
+<li>JUnit: <code>@Before</code>/<code>@After</code> run around each test, <code>@BeforeClass</code>/<code>@AfterClass</code> once, <code>assertEquals(expected, actual)</code>. TDD cycle: red, green, refactor.</li>
+</ul>

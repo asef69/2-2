@@ -1,0 +1,242 @@
+\part{Ashraf Sir --- Laplace and z-Transforms}
+
+%=====================================================================
+\chapter{The Laplace Transform}
+%=====================================================================
+\section{Definition, ROC and basic pairs}
+\begin{formula}
+\[X(s)=\int_{-\infty}^{\infty}x(t)e^{-st}\dd t=\F\{x(t)e^{-\sigma t}\},\quad s=\sigma+j\omega;\qquad x(t)=\frac1{2\pi j}\int_{\sigma-j\infty}^{\sigma+j\infty}X(s)e^{st}\dd s.\]
+$s=j\omega$ gives the Fourier transform, valid only if the ROC contains the $j\omega$-axis. Eigenfunction: $e^{st}\to H(s)e^{st}$, $H=\Lap\{h\}$.\\
+Unilateral (initial conditions at $0^-$): $\Lap\{y'\}=sY-y(0^-)$, $\Lap\{y''\}=s^2Y-sy(0^-)-y'(0^-)$.
+\end{formula}
+\begin{formula}[Pairs]
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}lll@{}}
+$e^{-at}u(t)$ & $\dfrac1{s+a}$ & $\Re s>-a$\\
+$-e^{-at}u(-t)$ & $\dfrac1{s+a}$ & $\Re s<-a$\\
+$\delta(t)$ & $1$ & all $s$\\
+$u(t)$ & $\dfrac1s$ & $\Re s>0$\\
+$t^{n-1}e^{-at}u(t)/(n-1)!$ & $\dfrac1{(s+a)^n}$ & $\Re s>-a$\\
+$e^{-at}\cos\omega_0t\,u(t)$ & $\dfrac{s+a}{(s+a)^2+\omega_0^2}$ & $\Re s>-a$\\
+$e^{-at}\sin\omega_0t\,u(t)$ & $\dfrac{\omega_0}{(s+a)^2+\omega_0^2}$ & $\Re s>-a$\\
+$e^{-b\abs t}$, $b>0$ & $\dfrac{-2b}{s^2-b^2}$ & $-b<\Re s<b$\\
+$x=e^{-at}$ on $(0,T)$ & $\dfrac{1-e^{-(s+a)T}}{s+a}$ & all $s$ (no pole at $-a$)
+\end{tabular}
+\end{formula}
+\begin{formula}[ROC rules]
+(1) Vertical strips. (2) No poles inside. (3) Finite-duration absolutely integrable: entire plane. (4) Right-sided: $\Re s>\sigma_0$. (5) Left-sided: $\Re s<\sigma_0$. (6) Two-sided: a strip (or empty). (7--8) Rational: bounded by poles; right-sided $\Rightarrow$ right of the rightmost pole, left-sided $\Rightarrow$ left of the leftmost pole.
+\end{formula}
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\begin{scope}[xshift=0cm]
+\fill[sky!20] (0.8,-1.2) rectangle (3.3,1.2);\draw[->] (-0.2,0)--(3.4,0);\draw[->] (1.6,-1.3)--(1.6,1.3);
+\node[crimson] at (0.4,0){$\times$};\node[crimson] at (1.2,0){$\times$};\node[below] at (1.7,-1.2){\scriptsize $\Re s>-1$};
+\end{scope}
+\begin{scope}[xshift=4.5cm]
+\fill[sky!20] (0.4,-1.2) rectangle (1.2,1.2);\draw[->] (-0.2,0)--(3.4,0);\draw[->] (1.6,-1.3)--(1.6,1.3);
+\node[crimson] at (0.4,0){$\times$};\node[crimson] at (1.2,0){$\times$};\node[below] at (1.7,-1.2){\scriptsize $-2<\Re s<-1$};
+\end{scope}
+\begin{scope}[xshift=9cm]
+\fill[sky!20] (-0.2,-1.2) rectangle (0.4,1.2);\draw[->] (-0.2,0)--(3.4,0);\draw[->] (1.6,-1.3)--(1.6,1.3);
+\node[crimson] at (0.4,0){$\times$};\node[crimson] at (1.2,0){$\times$};\node[below] at (1.7,-1.2){\scriptsize $\Re s<-2$};
+\end{scope}
+\end{tikzpicture}\\[-2pt]{\small Three ROCs of $X=\frac1{(s+1)(s+2)}$: three different signals.}
+\end{center}
+\begin{pitfall}
+The expression alone does not give the signal --- always state the ROC. The ROC of a sum is the intersection of the ROCs (empty $\Rightarrow$ no transform). A time shift does not change the ROC; pole cancellation can enlarge it.
+\end{pitfall}
+\begin{method}[LT and ROC of a composite signal]
+\begin{steps}
+\item Split into right-sided, left-sided and finite pieces; transform each with its own ROC.
+\item Use properties (shift $e^{-st_0}$, $s$-shift, $-tx\leftrightarrow X'(s)$, reversal $X(-s)$).
+\item Intersect the ROCs; mark poles on the sketch.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2023--24 Q6(b)}
+$x=\abs t\,e^{-2\abs t}-e^{-t}\cos3t\,u(t)+t^2e^{-4t}u(t)$.\\
+$te^{-2t}u\leftrightarrow\frac1{(s+2)^2}$ ($\Re s>-2$); $(-t)e^{2t}u(-t)\leftrightarrow\frac{\dd}{\dd s}\!\big[\tfrac{-1}{s-2}\big]=\frac1{(s-2)^2}$ ($\Re s<2$); $e^{-t}\cos3t\,u\leftrightarrow\frac{s+1}{(s+1)^2+9}$ ($\Re s>-1$); $t^2e^{-4t}u\leftrightarrow\frac2{(s+4)^3}$ ($\Re s>-4$).
+\[X(s)=\frac1{(s+2)^2}+\frac1{(s-2)^2}-\frac{s+1}{(s+1)^2+9}+\frac2{(s+4)^3},\qquad\boxed{-1<\Re s<2}.\]
+Poles: $-2$ (double), $2$ (double), $-1\pm3j$, $-4$ (triple). The ROC contains the $j\omega$-axis.
+\end{example}
+\begin{example}{2022--23 Q1(b), Q2(c)}
+$x=e^{-at}$ on $0<t<T$: $X=\frac{1-e^{-(s+a)T}}{s+a}$; at $s=-a$ the limit is $T$ (finite), so $s=-a$ \emph{is} in the ROC. $e^{-b\abs{t-2}}\leftrightarrow\dfrac{2be^{-2s}}{b^2-s^2}$, $-b<\Re s<b$.
+\end{example}
+
+\section{Properties}
+\begin{formula}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}llll@{}}
+Linearity & $ax_1+bx_2$ & $aX_1+bX_2$ & $\supseteq R_1\cap R_2$\\
+Time shift & $x(t-t_0)$ & $e^{-st_0}X$ & $R$\\
+$s$-shift & $e^{s_0t}x(t)$ & $X(s-s_0)$ & $R+\Re s_0$\\
+Scaling & $x(at)$ & $\frac1{\abs a}X(s/a)$ & $aR$\\
+Reversal & $x(-t)$ & $X(-s)$ & $-R$\\
+Convolution & $x_1*x_2$ & $X_1X_2$ & $\supseteq R_1\cap R_2$\\
+Differentiation & $\dd x/\dd t$ & $sX$ & $\supseteq R$\\
+$s$-differentiation & $-t\,x(t)$ & $\dd X/\dd s$ & $R$\\
+Integration & $\int_{-\infty}^tx$ & $X/s$ & $\supseteq R\cap\{\Re s>0\}$
+\end{tabular}\\[3pt]
+Final value: if $sY(s)$ has all poles in the open LHP, $y(\infty)=\lim_{s\to0}sY(s)$. Initial value: $x(0^+)=\lim_{s\to\infty}sX(s)$.
+\end{formula}
+\begin{proofbox}[Differentiation]
+$x=\frac1{2\pi j}\int Xe^{st}\dd s\Rightarrow x'=\frac1{2\pi j}\int sXe^{st}\dd s$, so $x'\leftrightarrow sX$ (e.g.\ $u\to\frac1s$, $\delta=u'\to1$: the pole cancels and the ROC grows). $s$-domain: $\frac{\dd X}{\dd s}=\int(-t)x(t)e^{-st}\dd t$. Final value: $\int_0^\infty y'e^{-st}\dd t=sY-y(0^-)\to y(\infty)-y(0^-)$ as $s\to0$.
+\end{proofbox}
+
+\section{Inverse Laplace transform}
+\begin{method}[Partial fractions with the ROC]
+\begin{steps}
+\item If $\deg N\ge\deg D$ divide first (polynomial part $\to\delta,\delta'$).
+\item Factor $D$; expand: simple pole $\frac A{s+a}$ with $A=(s+a)X\big|_{s=-a}$; repeated poles $\frac{A_1}{s+a}+\frac{A_2}{(s+a)^2}$; complex poles $\to$ complete the square ($e^{-\alpha t}\cos\beta t$, $e^{-\alpha t}\sin\beta t$).
+\item Use the ROC: a pole to the \emph{left} of the ROC $\to$ right-sided term $Ae^{-at}u(t)$; a pole to the \emph{right} $\to$ left-sided term $-Ae^{-at}u(-t)$.
+\item Check with $x(0^+)$ or one numeric value.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2022--23 Q2(b)}
+$X=\dfrac{s+2}{s^2+7s+12}=\dfrac{-1}{s+3}+\dfrac2{s+4}$, ROC $-4<\Re s<-3$. Pole $-3$ is to the right of the ROC (left-sided), pole $-4$ to the left (right-sided):
+\[x(t)=2e^{-4t}u(t)+e^{-3t}u(-t).\]
+\end{example}
+\begin{example}{several inversions}
+$\frac{3s+7}{(s+1)(s+2)}=\frac4{s+1}-\frac1{s+2}\Rightarrow(4e^{-t}-e^{-2t})u$ ($\Re s>-1$). $\frac{-5}{(s+1)(s-4)}$, $-1<\Re s<4$: $e^{-t}u(t)+e^{4t}u(-t)$. $\frac{s}{s+2}=1-\frac2{s+2}\Rightarrow\delta-2e^{-2t}u$. $\frac{e^{-s}}{s(s+2)}\Rightarrow\tfrac12[1-e^{-2(t-1)}]u(t-1)$. $\frac1{(s-a)^3}\Rightarrow\tfrac12t^2e^{at}u$.
+\end{example}
+
+\section{LTI systems, differential equations, circuits, feedback}
+\begin{formula}
+$Y=HX$. DE $\sum a_ky^{(k)}=\sum b_kx^{(k)}$: $H(s)=\dfrac{\sum b_ks^k}{\sum a_ks^k}$ (zeros from the numerator, poles from the denominator); the equation does \emph{not} fix the ROC.\\
+\textbf{Causal} $\Leftrightarrow$ ROC is a right half-plane. \textbf{Stable} $\Leftrightarrow$ ROC contains $j\omega$-axis; causal rational: all poles in the open LHP.\\
+Cascade $H_1H_2$; parallel $H_1+H_2$; negative feedback $\dfrac{G}{1+GH}$; disturbance after controller: $H_d=\dfrac{G}{1+G_cG}$.
+\end{formula}
+\begin{method}[Solving a DE with initial conditions (unilateral)]
+\begin{steps}
+\item Transform: $Y\,D(s)=N(s)X(s)+I(s)$, with $I(s)=(s+a_1)y(0^-)+y'(0^-)$ for a second-order equation.
+\item $\text{ZIR}=I/D$, $\text{ZSR}=NX/D$, $y=\text{ZIR}+\text{ZSR}$.
+\item Partial fractions, invert, check $y(0^+)$.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2023--24 Q6(a)}
+$y''+7y'+12y=x'+2x$, $x=u$, zero ICs: $Y=\dfrac{s+2}{s(s+3)(s+4)}=\dfrac{1/6}s+\dfrac{1/3}{s+3}-\dfrac{1/2}{s+4}$,
+\[y(t)=\left[\tfrac16+\tfrac13e^{-3t}-\tfrac12e^{-4t}\right]u(t).\]
+\end{example}
+\begin{example}{EEE 211 2023--24 Q8(b)}
+$y''+5y'+6y=x'+x$, $y(0^-)=2$, $y'(0^-)=1$, $x=e^{-4t}u$. ZIR: $\frac{2s+11}{(s+2)(s+3)}\Rightarrow7e^{-2t}-5e^{-3t}$. ZSR: $\frac{s+1}{(s+2)(s+3)(s+4)}\Rightarrow-\tfrac12e^{-2t}+2e^{-3t}-\tfrac32e^{-4t}$.
+\[y=(6.5e^{-2t}-3e^{-3t}-1.5e^{-4t})u(t),\quad y(0^+)=2\ \checkmark.\]
+\end{example}
+\begin{example}{CSE 219 2023--24 Q6(c): ROC reasoning}
+Causal but unstable: $H=\frac1{s-2}$, ROC $\Re s>2$ (right half-plane $\Rightarrow$ causal; pole in RHP so the ROC excludes $j\omega$). Stable but non-causal: $H=\frac{-2}{s^2-1}$, ROC $-1<\Re s<1$, $h=e^{-\abs t}$. For $H=\frac{s-1}{(s+1)(s-2)}$: $\Re s>2$ causal--unstable; $-1<\Re s<2$ stable--non-causal; $\Re s<-1$ anti-causal--unstable.
+\end{example}
+\begin{method}[Circuits]
+\begin{steps}
+\item Initial states: $v_C(0^-)$, $i_L(0^-)$ (for a source that is on at $t<0$, use the dc steady state at $0^-$).
+\item s-domain models: $R$; $L\to sL$ in series with $Li_L(0^-)$ (or parallel with $i_L(0^-)/s$); $C\to\frac1{sC}$ in series with $\frac{v_C(0^-)}s$.
+\item KVL/KCL or division; partial fractions; invert; check $y(0^+)$.
+\end{steps}
+\end{method}
+\begin{example}{EEE 211 2023--24 Q4(a): series $L=2$\,H, then $R=1\,\Omega\parallel C=2$\,F, $y=v_C$}
+$v_C(0^-)=1$, $i_L(0^-)=2$, $x=u$: $\frac1s=2(sI-2)+V$, $I=(2s+1)V-2\Rightarrow V(4s^2+2s+1)=\frac1s+4s+4$.
+\[Y=\frac1s+\frac2{4s^2+2s+1},\qquad y(t)=\left[1+\tfrac2{\sqrt3}e^{-t/4}\sin\tfrac{\sqrt3t}4\right]u(t).\]
+\end{example}
+\begin{example}{EEE 211 2023--24 Q5(b): steady-state with a controller}
+Unity feedback, plant $\frac1{s+2}$, $G_c=\frac{s+1}s$: $T=\frac{s+1}{s^2+3s+1}$, poles stable, $T(0)=1$ so $y(\infty)=A$ (integral action). With $G_c=\frac1{s-2}$: $T=\frac1{s^2-3}$ has a pole at $+\sqrt3$: unstable, the final-value theorem does not apply.
+\end{example}
+\begin{example}{other recurring checks}
+$y''+4y'+3y=u$, $y(0^-)=2$, $y'(0^-)=1$: $y=\tfrac13+3e^{-t}-\tfrac43e^{-3t}$. $y''+5y'+6y=2e^{-t}u$, $y(0^-)=3$, $y'(0^-)=-2$: $y=e^{-t}+5e^{-2t}-3e^{-3t}$. $H=\frac{s^2+5s+5}{s^2+5s+6}$: $h=\delta+(e^{-3t}-e^{-2t})u$. $H=\frac{2s+1}{(s+1)(s+2)}$: $h=(3e^{-2t}-e^{-t})u$. Closed loop with $H_1=\frac1{s^2+bs+b-3}$, $H_2=-2$: $H=\frac1{s^2+bs+b-5}$, stable for $b>5$.
+\end{example}
+\begin{inexam}
+EEE papers: 2--3 Laplace questions every year (DE with ICs, RLC circuit, block diagram/feedback, final value). CSE 219: 2022--23 Q1--Q2 (32 marks), 2023--24 Q6 (35 marks). Figure-based questions: write $H(s)$ from the diagram first.
+\end{inexam}
+
+%=====================================================================
+\chapter{The $z$-Transform}
+%=====================================================================
+\section{Definition, ROC and pairs}
+\begin{formula}
+\[X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n},\quad z=re^{j\omega},\quad X(re^{j\omega})=\F\{x[n]r^{-n}\},\quad z=e^{sT}.\]
+The DTFT exists iff the ROC contains $\abs z=1$. $y[n]=H(z)z^n$ for input $z^n$.
+\end{formula}
+\begin{formula}[Pairs]
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}lll@{}}
+$a^nu[n]$ & $\dfrac1{1-az^{-1}}$ & $\abs z>\abs a$\\
+$-a^nu[-n-1]$ & $\dfrac1{1-az^{-1}}$ & $\abs z<\abs a$\\
+$\delta[n],\ \delta[n-1],\ \delta[n+1]$ & $1,\ z^{-1},\ z$ & all $z$; $z\ne0$; finite $z$\\
+$a^n$, $0\le n\le N-1$ & $\dfrac{1-a^Nz^{-N}}{1-az^{-1}}$ & $z\ne0$\\
+$na^nu[n]$ & $\dfrac{az^{-1}}{(1-az^{-1})^2}$ & $\abs z>\abs a$\\
+$b^{\abs n}$, $0<b<1$ & $\dfrac{1-b^2}{(1-bz^{-1})(1-bz)}$ & $b<\abs z<1/b$\\
+$(\tfrac13)^n\sin(\tfrac\pi4n)u[n]$ & $\dfrac{\frac{\sqrt2}6z^{-1}}{1-\frac{\sqrt2}3z^{-1}+\frac19z^{-2}}$ & $\abs z>\frac13$
+\end{tabular}
+\end{formula}
+\begin{formula}[ROC rules]
+Ring centred at the origin; no poles inside; finite sequence: all $z$ except $0$ (terms with $n>0$) and/or $\infty$ (terms with $n<0$); right-sided $\Rightarrow$ exterior of a circle (includes $\infty$ iff causal); left-sided $\Rightarrow$ interior; two-sided $\Rightarrow$ annulus. Rational: right-sided outside the outermost pole, left-sided inside the innermost pole.
+\end{formula}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\foreach \xs/\ra/\rb/\tt in {0/0.7/2.0/{$\tfrac12<\abs z<2$ (ring, DTFT exists)},5.2/2.0/2.8/{$\abs z>2$ (right-sided)},10.4/0/0.7/{$\abs z<\tfrac12$ (left-sided)}}{
+\begin{scope}[xshift=\xs cm]
+\fill[sky!20] (0,0) circle (\rb);\ifdim\ra cm>0cm\fill[white] (0,0) circle (\ra);\fi
+\draw[gray] (0,0) circle (1.0);\draw[->] (-2.2,0)--(2.2,0);\draw[->] (0,-1.5)--(0,1.5);
+\node[crimson] at (0.7,0){$\times$};\node[crimson] at (2.0,0){$\times$};
+\node[below] at (0,-1.5){\scriptsize \tt};
+\end{scope}}
+\end{tikzpicture}\\[-2pt]{\small Poles at $\tfrac12$ and $2$; only the ring contains the unit circle (grey).}
+\end{center}
+\begin{example}{CSE 219 2022--23 Q1(a), Q3(a)}
+$\sum_{n\ge0}a^nz^{-n}=\frac1{1-az^{-1}}$ for $\abs{az^{-1}}<1\Leftrightarrow\abs z>\abs a$. For $x[n]=a^n$, $0\le n\le N-1$, $X(z)$ contains $az^{-1}\to\infty$ as $z\to0$, so $0\notin\ROC$; ROC is $\abs z>0$ (closed form $\frac{z(1-a^Nz^{-N})}{z-a}$ has $N-1$ poles at the origin; the pole at $a$ cancels).
+\end{example}
+
+\section{Inverse $z$-transform}
+\begin{formula}
+Contour: $x[n]=\dfrac1{2\pi j}\oint_CX(z)z^{n-1}\dd z$ ($C$ in the ROC, counter-clockwise). Derivation: inverse DTFT of $X(re^{j\omega})r^{-n}$, then $\dd z=jz\dd\omega$.
+\end{formula}
+\begin{method}[Inversion]
+\begin{steps}
+\item Write $X$ in powers of $z^{-1}$ with unit constant terms; expand in partial fractions $\frac A{1-pz^{-1}}$.
+\item $\abs p<$ inner edge of the ROC (pole inside) $\to Ap^nu[n]$; pole outside the ROC $\to -Ap^nu[-n-1]$.
+\item Irrational $X$ (log): expand in a power series of $z^{-1}$ valid in the ROC and read $x[n]$ as the coefficient of $z^{-n}$.
+\item Causal check: $x[0]=\lim_{z\to\infty}X(z)$.
+\end{steps}
+\end{method}
+\begin{example}{CSE 219 2022--23 Q3(c): $X=\log(1+az^{-1})$, $\abs z>\abs a$}
+$\log(1+v)=\sum_{n\ge1}(-1)^{n+1}\frac{v^n}n$ for $\abs v<1$; $v=az^{-1}$ satisfies this exactly for $\abs z>\abs a$:
+\[x[n]=(-1)^{n+1}\frac{a^n}{n}\,u[n-1].\]
+\end{example}
+\begin{example}{CSE 219 2023--24 Q8(a)}
+$X=\dfrac{1+2z^{-1}-z^{-2}}{1-\frac{11}6z^{-1}+z^{-2}-\frac16z^{-3}}=\dfrac6{1-z^{-1}}-\dfrac3{1-\frac12z^{-1}}-\dfrac2{1-\frac13z^{-1}}$, poles $1,\tfrac12,\tfrac13$.\\
+$\abs z>1$: $x=[6-3(\tfrac12)^n-2(\tfrac13)^n]u[n]$.\\
+$\tfrac12<\abs z<1$: $x=-6u[-n-1]-3(\tfrac12)^nu[n]-2(\tfrac13)^nu[n]$.\\
+$\tfrac13<\abs z<\tfrac12$: $x=-6u[-n-1]+3(\tfrac12)^nu[-n-1]-2(\tfrac13)^nu[n]$.\\
+$\abs z<\tfrac13$: $x=-6u[-n-1]+3(\tfrac12)^nu[-n-1]+2(\tfrac13)^nu[-n-1]$.\\
+The pole at $z=1$ lies on the unit circle: no ROC contains it, so no DTFT exists.
+\end{example}
+
+\section{Properties and LTI systems}
+\begin{formula}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}llll@{}}
+Time shift & $x[n-n_0]$ & $z^{-n_0}X$ & $R$ (except $0,\infty$)\\
+$z$-scaling & $a_0^nx[n]$ & $X(z/a_0)$ & $\abs{a_0}R$\\
+Reversal & $x[-n]$ & $X(z^{-1})$ & $R^{-1}$\\
+Expansion & $x[n/k]$ & $X(z^k)$ & $R^{1/k}$\\
+Convolution & $x*h$ & $XH$ & $\supseteq R_1\cap R_2$\\
+First difference & $x[n]-x[n-1]$ & $(1-z^{-1})X$ & \\
+Accumulation & $\sum_{k\le n}x[k]$ & $\frac{X}{1-z^{-1}}$ & $\supseteq R\cap\abs z>1$\\
+$z$-differentiation & $nx[n]$ & $-z\frac{\dd X}{\dd z}$ & $R$\\
+Initial value & $x[0]$ (causal) & $\lim_{z\to\infty}X$ &
+\end{tabular}\\[3pt]
+\textbf{Causal} $\Leftrightarrow$ ROC is an exterior including $\infty$. \textbf{Stable} $\Leftrightarrow$ ROC contains the unit circle. Causal rational: stable iff all poles inside $\abs z=1$. Difference equation: $H=\dfrac{\sum b_kz^{-k}}{\sum a_kz^{-k}}$, ROC from causality.
+\end{formula}
+\begin{example}{Difference equation}
+$y[n]-\tfrac12y[n-1]=x[n]+\tfrac13x[n-1]$: $H=\frac{1+\frac13z^{-1}}{1-\frac12z^{-1}}$, ROC $\abs z>\tfrac12$ (causal). Step response: $Y=\frac{8/3}{1-z^{-1}}-\frac{5/3}{1-\frac12z^{-1}}$, $y[n]=\tfrac83u[n]-\tfrac53(\tfrac12)^nu[n]$.
+\end{example}
+\begin{example}{CSE 219 2023--24 Q8(b): pole--zero reasoning (poles $\tfrac13,\tfrac23,2$)}
+\begin{center}\small\begin{tabular}{@{}ll@{}}\toprule
+statement & ROC\\\midrule
+right-sided & $\abs z>2$\\ FT converges & $\tfrac23<\abs z<2$\\ FT does not converge & $\abs z>2$, or $\tfrac13<\abs z<\tfrac23$, or $\abs z<\tfrac13$\\ left-sided & $\abs z<\tfrac13$\\\bottomrule
+\end{tabular}\end{center}
+\end{example}
+\begin{example}{CSE 219 2023--24 Q8(c): $x[n]=\abs n(\tfrac12)^{\abs n}$}
+$n\ge0$: $n(\tfrac12)^nu[n]\leftrightarrow\frac{\frac12z^{-1}}{(1-\frac12z^{-1})^2}$, $\abs z>\tfrac12$. $n<0$: with $m=-n$, $\sum m(\tfrac12)^mz^m=\frac{\frac12z}{(1-\frac12z)^2}$, $\abs z<2$.
+\[X(z)=\frac{2z(5z^2-8z+5)}{(z-2)^2(2z-1)^2},\quad\tfrac12<\abs z<2.\]
+Poles: $\tfrac12$ (double), $2$ (double); zeros: $0$ and $0.8\pm0.6j$ (on the unit circle). Check $X(1)=4=\sum\abs n(\tfrac12)^{\abs n}$.
+\end{example}
+\begin{example}{CSE 219 2023--24 Q8(d): Laplace vs $z$}
+$\Lap$: continuous time, $s=\sigma+j\omega$, strips/half-planes, stability: ROC contains $j\omega$. $\Z$: discrete time, $z=re^{j\omega}$, rings, stability: ROC contains $\abs z=1$; $z=e^{sT}$. The map $s\to e^{sT}$ is many-to-one (s and $s+j2\pi/T$ give the same sequence), so $z$ removes that redundancy and turns difference equations into algebra.
+\end{example}

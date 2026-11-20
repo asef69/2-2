@@ -1,0 +1,942 @@
+
+===== page 1 =====
+Lecture 2: Some Useful Signals
+CSE 219: Signals and Linear Systems
+Anik Saha
+Adjunct Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+Unit Step and Unit Impulse
+Functions
+
+===== page 3 =====
+The discrete-time unit step turns on at n = 0
+u[n]
+=
+
+
+
+0,
+n < 0,
+1,
+n ≥0.
+Graph of u[n]
+n
+−6
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+6
+1
+u[n]
+· · ·
+· · ·
+
+===== page 4 =====
+The discrete-time unit impulse is nonzero only at the origin
+δ[n]
+=
+
+
+
+1,
+n = 0,
+0,
+n̸ = 0.
+Graph of δ[n]
+n
+−6
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+6
+1
+δ[n]
+· · ·
+· · ·
+
+===== page 5 =====
+Unit step function: The sleeping giraffe
+
+===== page 6 =====
+Unit impulse function: The giraffe wakes up
+
+===== page 7 =====
+Practice
+Use the definitions of u[n] and δ[n].
+Unit step
+(a)
+u[1] = ?
+(b)
+u[−3] = ?
+(c)
+u[0] = ?
+Unit impulse
+(d)
+δ[0] = ?
+(e)
+δ[4] = ?
+(f)
+δ[−2] = ?
+
+===== page 8 =====
+Answers: values of u[n] and δ[n]
+Unit step
+u[1] = 1
+u[−3] = 0
+u[0] = 1
+Since u[n] = 1 for n ≥0.
+Unit impulse
+δ[0] = 1
+δ[4] = 0
+δ[−2] = 0
+Since δ[n] = 1 only at n = 0.
+
+===== page 9 =====
+Practice: how do shifted signals look?
+Can we plot each of the signals below?
+Shifted steps
+(a)
+u[n −2] = ?
+(b)
+u[n + 3] = ?
+Shifted impulses
+(c)
+δ[n −2] = ?
+(d)
+δ[n + 3] = ?
+
+===== page 10 =====
+Answers: shifted steps and shifted impulses
+u[n −2]
+n
+0
+2
+1
+δ[n −2]
+n
+0
+2
+1
+u[n + 3]
+n
+−3
+0
+1
+δ[n + 3]
+n
+−3
+0
+1
+
+===== page 11 =====
+R1: The impulse is the first difference of the step function
+δ[n]
+=
+u[n] −u[n −1]
+u[n]
+n
+0
+1
+u[n −1]
+n
+0
+1
+1
+δ[n] = u[n] −u[n −1]
+n
+0
+1
+δ[n]
+
+===== page 12 =====
+R2: A running sum asks whether the impulse is included
+Pn
+m=−∞δ[m]
+Case 1: n
+<
+0
+m
+summation interval
+n
+0
+δ[m]
+spike not included
+n
+X
+m=−∞
+δ[m] = 0
+Case 2: n
+≥
+0
+m
+summation interval
+0
+n
+δ[m]
+spike included
+n
+X
+m=−∞
+δ[m] = 1
+
+===== page 13 =====
+R2: The running sum of the impulse is the step function
+u[n]
+=
+n
+X
+m=−∞
+δ[m]
+Why?
+n < 0
+⇒
+the spike at m = 0 is not included
+⇒
+0
+n ≥0
+⇒
+the spike at m = 0 is included
+⇒
+1
+
+===== page 14 =====
+R3: Delayed impulses can build the step function
+Each delayed impulse δ[n −k] contributes exactly one sample, at n = k.
+δ[n]
+n
+0
+δ[n −1]
+n
+0
+1
+δ[n −2]
+n
+0
+2
+δ[n −3]
+n
+0
+3
+
+===== page 15 =====
+R3: Summing delayed impulses gives the unit step function
+u[n] = δ[n] + δ[n −1] + δ[n −2] + · · · =
+P∞
+k=0 δ[n −k]
+Interpretation
+δ[n]
+⇒
+sample at n = 0
+δ[n −1]
+⇒
+sample at n = 1
+δ[n −2]
+⇒
+sample at n = 2
+...
+⇒
+...
+The sum: unit step function
+n
+0
+1
+2
+3
+1
+u[n]
+· · ·
+
+===== page 16 =====
+The continuous-time unit step jumps at t = 0
+u(t)
+=
+
+
+
+0,
+t < 0,
+1,
+t > 0.
+Graph of u(t)
+t
+−3
+−2
+−1
+0
+1
+2
+3
+1
+u(t)
+jump
+The value at exactly t = 0 is usually not important for our signal operations.
+
+===== page 17 =====
+The impulse should be the derivative of the step
+Discrete time gave us
+δ[n] = u[n] −u[n −1].
+This looks like a difference. In continu-
+ous time, we want the analogous idea:
+δ(t) = du(t)
+dt
+.
+
+===== page 18 =====
+The impulse should be the derivative of the step
+Step
+t
+0
+1
+u(t)
+Derivative idea
+d
+dt u(t)
+The function is flat every-
+where except at the jump.
+The jump should be-
+come an impulse.
+
+===== page 19 =====
+But Oops, we can’t differentiate at the origin!
+Away from t = 0, the step is constant, so derivative is 0. At t =
+0, the step jumps instantly, so the ordinary derivative is not defined.
+Ordinary derivative
+t
+0
+1
+slope 0
+slope 0
+problem at t = 0
+Impulse notation
+t
+−2
+−1
+1
+2
+0
+δ(t)
+area = 1
+An arrow represents
+an ideal impulse.
+
+===== page 20 =====
+(*) The derivative of a smoothed step is a tall narrow pulse
+We first smooth the jump over a tiny interval ∆, then take the derivative.
+δ∆(t) = du∆(t)
+dt
+Approximate step u∆(t)
+t
+0
+∆
+1
+u∆(t)
+Derivative δ∆(t)
+t
+0
+∆
+1
+∆
+δ∆(t)
+area 1
+
+===== page 21 =====
+(*) We first replace the instant jump by a very short ramp
+Instead of jumping instantly, let the sig-
+nal rise from 0 to 1 over a short interval ∆.
+u∆(t) =
+
+
+
+
+
+
+
+
+
+
+
+0,
+t < 0,
+t
+∆,
+0 ≤t ≤∆,
+1,
+t > ∆.
+
+===== page 22 =====
+(*) We first replace the instant jump by a very short ramp
+Smoothed step u∆(t)
+t
+0
+∆
+1
+u∆(t)
+short ramp
+Its derivative
+δ∆(t) = du∆(t)
+dt
+=
+
+
+
+
+
+1
+∆,
+0 < t < ∆,
+0,
+otherwise.
+The steeper the ramp, the
+taller the derivative pulse.
+
+===== page 23 =====
+(*) Making the transition shorter makes the pulse taller
+t
+0
+∆1
+1
+u∆1(t)
+t
+0
+∆1
+1
+∆1
+δ∆1(t)
+t
+0
+∆2
+1
+u∆2(t)
+t
+0
+∆2
+1
+∆2
+δ∆2(t)
+t
+0 ∆3
+1
+u∆3(t)
+t
+0 ∆3
+1
+∆3
+δ∆3(t)
+
+===== page 24 =====
+(*) The area under the pulse stays equal to 1
+Area of δ∆(t)
+t
+width ∆
+height
+1
+∆
+0
+∆
+area
+So the area is
+Z ∞
+−∞δ∆(t) dt = ∆· 1
+∆
+= 1.
+This is the quantity that survives
+as the pulse becomes ideal.
+
+===== page 25 =====
+The ideal impulse is the limiting infinitely narrow pulse
+From δ∆(t) to δ(t)
+t
+0
+∆
+δ∆(t)
+area 1
+∆→0
+t
+0
+δ(t)
+area 1
+δ(t) = du(t)
+dt
+,
+u(t) =
+Z t
+−∞δ(τ) dτ.
+
+===== page 26 =====
+How to draw impulses with arrows
+The arrow height is not the actual value of the impulse. The
+number beside the arrow just tells us the area or strength.
+Examples of impulse arrows
+t
+−2
+−1
+0
+1
+2
+3
+4
+δ(t)
+2δ(t −1)
+−3δ(t −3)
+
+===== page 27 =====
+Example: differentiating 2u(t)
+d
+dt
+h
+2u(t)
+i
+= 2δ(t)
+Signal: 2u(t)
+t
+0
+2
+2u(t)
+Derivative: 2δ(t)
+t
+0
+2
+2δ(t)
+area 2
+
+===== page 28 =====
+Practice: write the signal using shifted steps
+Observe the jumps
+t = 1
+:
+0 →2
+⇒
++2
+t = 2
+:
+2 →−1
+⇒
+−3
+t = 4
+:
+−1 →1
+⇒
++2
+x(t) = 2u(t−1)−3u(t−2)+2u(t−4)
+Signal x(t)
+t
+x(t)
+1
+2
+3
+4
+−1
+1
+2
+x(t)
+
+===== page 29 =====
+Practice: differentiate the jump signal (Example 1.7)
+dx(t)
+dt
+= 2δ(t −1) −3δ(t −2) + 2δ(t −4)
+Derivative ˙x(t)
+t
+˙x(t)
+1
+2
+3
+4
+−3
+−2
+−1
+1
+2
++2
+−3
++2
+upward jump
+downward jump
+
+===== page 30 =====
+Exponential and Sinusoidal
+Signals
+
+===== page 31 =====
+A real exponential either grows, decays, or stays flat
+The basic continuous-time real exponential has the form
+x(t) = Ceat,
+where C and a are real constants.
+a > 0: grows
+t
+x(t)
+C
+Ceat
+a = 0: constant
+t
+x(t)
+C
+C
+a < 0: decays
+t
+x(t)
+C
+Ceat
+
+===== page 32 =====
+Multiplying by a step function keeps only part of a signal
+The unit step acts like a switch:
+x(t)u(t) keeps the right side of x(t) and removes the left side.
+Original exponential e2t
+t
+x(t)
+0
+1
+e2t
+After multiplying by u(t)
+t
+x(t)
+0
+1
+e2tu(t)
+zero
+
+===== page 33 =====
+Shifted steps choose where the exponential begins
+Graph of e−tu(t
+−2)
+t
+x(t)
+0
+1
+2
+3
+4
+5
+turns one−tu(t −2)
+zero before 2
+
+===== page 34 =====
+Practice: what do these exponential-step signals look like?
+Left/right selection
+(a)
+etu(−t) = ?
+(b)
+e−tu(t −2) = ?
+Shifted switches
+(c)
+etu(3 −t) = ?
+(d)
+e−tu(3t) = ?
+Remember: u(3t) = u(t), because 3t has the same sign as t.
+
+===== page 35 =====
+etu(−t)
+t
+0
+1
+zero
+e−tu(t −2)
+t
+0
+2
+zero
+etu(3 −t)
+t
+0
+3
+1
+zero after 3
+e−tu(3t) = e−tu(t)
+t
+0
+1
+zero
+
+===== page 36 =====
+A sinusoid repeats after one full cycle
+x(t)
+=
+A cos(ω0t + ϕ).
+A controls height, ω0 controls speed of oscillation, and ϕ shifts the wave.
+Period of a continuous-time sinusoid
+t
+x(t)
+T0 = 2π
+|ω0|
+A
+−A
+A cos(ω0t + ϕ)
+
+===== page 37 =====
+Larger |ω0| means faster oscillation
+cos t
+t
+cos(2t)
+t
+cos(4t)
+t
+
+===== page 38 =====
+A rotating point carries both cosine and sine
+Unit circle view
+ℜ
+ℑ
+θ
+cos θ
+sin θ
+(cos θ, sin θ)
+Angle θ = ω0t gives two signals
+cos(ω0t)
+and
+sin(ω0t)
+They are the horizontal and vertical
+coordinates of the same rotating point.
+
+===== page 39 =====
+Euler’s formula packages two sinusoids into one expression
+ejθ
+=
+cos θ + j sin θ
+With θ
+=
+ω0t
+ejω0t = cos(ω0t)+j sin(ω0t).
+One compact expression car-
+ries both cosine and sine.
+Real and imaginary parts
+ℜ{ejω0t} = cos(ω0t)
+ℑ{ejω0t} = sin(ω0t)
+
+===== page 40 =====
+Changing ω0 changes how fast the arrow rotates
+The signal ejω0t moves around the unit circle.
+Larger |ω0| means faster rotation.
+ejω0t
+ℜ
+ℑ
+base speed
+ej2ω0t
+ℜ
+ℑ
+twice as fast
+e−jω0t
+ℜ
+ℑ
+opposite direction
+
+===== page 41 =====
+A real cosine is the sum of two opposite rotations
+cos(ω0t)
+=
+1
+2ejω0t +
+1
+2e−jω0t
+Two rotating arrows
+ℜ
+ℑ
+1
+2 ejω0t
+1
+2 e−jω0t
+imaginary parts cancel
+What remains is real
+ejθ + e−jθ = 2 cos θ,
+ejθ −e−jθ = 2j sin θ.
+
+===== page 42 =====
+Continuous complex exponentials repeat after a full rotation
+One full rotation
+ℜ
+ℑ
+angle 2π
+same point
+Period condition
+ejω0(t+T) = ejω0t
+ejω0tejω0T = ejω0t
+ejω0T = 1
+ω0T = 2π
+⇒
+T0 = 2π
+|ω0|.
+
+===== page 43 =====
+A discrete periodic signal: A sampled cosine
+In discrete time, we only keep the values at integer indices:
+x[n] = cos(ω0n).
+Samples of cos
+
+π
+4t
+
+n
+x[n]
+−8
+−4
+0
+4
+8
+1
+−1
+x[n] = cos(πn/4)
+
+===== page 44 =====
+Discrete-time periodicity asks for an integer shift
+Discrete time periodicity
+cos(ω0n)
+repeats after every multiple of 2π
+ω0
+But, some multiple N = m2π
+ω0
+must be an integer.
+The discrete signal is periodic only if such an integer N exists.
+
+===== page 45 =====
+Example: cos(2t) is periodic, but cos(2n) is not
+For the continuous signal x(t) = cos(2t), the period, T0 = 2π
+2 = π.
+But π is not an integer shift in discrete time.
+Continuous-time
+t
+π
+cos(2t)
+Discrete-time
+n
+0
+1
+2
+3
+4
+5
+π
+not an integer
+repeat spacing π
+1
+−1
+cos(2n)
+
+===== page 46 =====
+Example: cos
+2π
+5 n
+
+repeats every 5 samples
+After N = 5 samples, the angle has increased by 2π, so it repeats.
+A periodic discrete-time sinusoid
+n
+x[n]
+N = 5
+−5
+0
+5
+10
+1
+−1
+x[n] = cos(2πn/5)
+
+===== page 47 =====
+Practice: is 3 sin
+5
+7n
+
+periodic?
+x[n]
+=
+3 sin
+5
+7n
+
+Question
+Is there a positive integer N so that
+x[n + N] = x[n]
+for every integer n?
+Hint
+We need
+2π
+ω0
+= N
+m
+
+===== page 48 =====
+Answer: 3 sin
+5
+7n
+
+is not periodic
+x[n]
+=
+3 sin
+5
+7n
+
+is not periodic.
+Apply the test
+2π
+ω0
+= 2π
+5/7 = 14π
+5
+= N
+m
+But N
+m must be rational
+Why it fails
+For m̸
+=
+0,
+14π
+5 m
+is irrational, so it can
+never be an integer N.
+
+===== page 49 =====
+Practice: find the period if it exists
+x[n]
+=
+2 cos
+16π
+63 n + π
+3
+
+Hint
+The phase shift
+π
+3
+does not affect the period.
+Only the coefficient of n matters.
+
+===== page 50 =====
+Answer: the fundamental period is N0 = 63
+x[n]
+=
+2 cos
+16π
+63 n + π
+3
+
+Find when the samples line up again
+2π
+ω0
+=
+2π
+16π/63 = 63
+8 = N
+m
+So after 8 cycles, the samples land exactly 63 steps later: 8 · 63
+8 = 63.
+
+===== page 51 =====
+Thank you!

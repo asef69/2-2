@@ -1,0 +1,240 @@
+//// FILE: Test.java
+// Minimal stand-ins for JUnit 4 so the test classes compile and run without the JUnit jar (not part of the notes)
+package org.junit;
+import java.lang.annotation.*;
+@Retention(RetentionPolicy.RUNTIME) @Target(ElementType.METHOD)
+public @interface Test { Class<? extends Throwable> expected() default None.class; class None extends Throwable { } }
+//// FILE: Before.java
+package org.junit;
+import java.lang.annotation.*;
+@Retention(RetentionPolicy.RUNTIME) @Target(ElementType.METHOD)
+public @interface Before { }
+//// FILE: After.java
+package org.junit;
+import java.lang.annotation.*;
+@Retention(RetentionPolicy.RUNTIME) @Target(ElementType.METHOD)
+public @interface After { }
+//// FILE: Assert.java
+package org.junit;
+public class Assert {
+    public static void assertTrue(String m, boolean c) { if (!c) throw new AssertionError(m); }
+    public static void assertTrue(boolean c) { assertTrue("", c); }
+    public static void assertFalse(String m, boolean c) { if (c) throw new AssertionError(m); }
+    public static void assertFalse(boolean c) { assertFalse("", c); }
+    public static void assertEquals(String m, Object e, Object a) { if (!java.util.Objects.equals(e, a)) throw new AssertionError(m + " expected " + e + " got " + a); }
+    public static void assertEquals(Object e, Object a) { assertEquals("", e, a); }
+    public static void assertEquals(String m, double e, double a, double d) { if (Math.abs(e - a) > d) throw new AssertionError(m); }
+    public static void fail(String m) { throw new AssertionError(m); }
+}
+//// FILE: MiniRunner.java
+// Runs @Test methods (with @Before/@After) of the given classes — replaces the JUnit runner for this check
+import java.lang.reflect.*;
+import org.junit.*;
+public class MiniRunner {
+    public static void main(String[] args) throws Exception {
+        int pass = 0, fail = 0;
+        for (String cn : args) {
+            Class<?> c = Class.forName(cn);
+            for (Method m : c.getDeclaredMethods()) {
+                Test t = m.getAnnotation(Test.class);
+                if (t == null) continue;
+                Object o = c.getDeclaredConstructor().newInstance();
+                for (Method b : c.getDeclaredMethods()) if (b.isAnnotationPresent(Before.class)) b.invoke(o);
+                boolean ok;
+                try { m.invoke(o); ok = t.expected() == Test.None.class; }
+                catch (InvocationTargetException e) { ok = t.expected().isInstance(e.getCause()); if (!ok) System.out.println(e.getCause()); }
+                for (Method a : c.getDeclaredMethods()) if (a.isAnnotationPresent(After.class)) a.invoke(o);
+                System.out.println((ok ? "PASS " : "FAIL ") + cn + "." + m.getName());
+                if (ok) pass++; else fail++;
+            }
+        }
+        System.out.println(pass + " passed, " + fail + " failed");
+    }
+}
+//// FILE: LeapYear.java
+public class LeapYear {
+    public static boolean isLeapYear(int year) {
+        if (year <= 0) throw new IllegalArgumentException("year must be positive");
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+    }
+}
+//// FILE: LeapYearTest.java
+// 2024-25 Q6(a) — one test per logically distinct input class
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class LeapYearTest {
+    @Test
+    public void divisibleBy4NotBy100_isLeap() {
+        assertTrue("2024 is divisible by 4 but not by 100", LeapYear.isLeapYear(2024));
+    }
+    @Test
+    public void notDivisibleBy4_isNotLeap() {
+        assertFalse("2023 is not divisible by 4", LeapYear.isLeapYear(2023));
+    }
+    @Test
+    public void divisibleBy100NotBy400_isNotLeap() {
+        assertFalse("1900 is a century year not divisible by 400", LeapYear.isLeapYear(1900));
+    }
+    @Test
+    public void divisibleBy400_isLeap() {
+        assertTrue("2000 is divisible by 400", LeapYear.isLeapYear(2000));
+    }
+    @Test
+    public void smallestValidYear_isNotLeap() {
+        assertFalse("year 1 (boundary)", LeapYear.isLeapYear(1));
+    }
+    @Test
+    public void firstLeapYear_isLeap() {
+        assertTrue("year 4", LeapYear.isLeapYear(4));
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void zero_throws() {
+        LeapYear.isLeapYear(0);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void negativeYear_throws() {
+        LeapYear.isLeapYear(-4);
+    }
+}
+//// FILE: Grader.java
+public class Grader {
+    // A: mark > 80, B: 70 < mark <= 80, C: 60 < mark <= 70, otherwise F; valid marks 0..100
+    public static char grade(int mark) {
+        if (mark < 0 || mark > 100) throw new IllegalArgumentException("mark out of range");
+        if (mark > 80) return 'A';
+        if (mark > 70) return 'B';
+        if (mark > 60) return 'C';
+        return 'F';
+    }
+}
+//// FILE: GraderTest.java
+// 2019-20 Q7(a) — fixture + equivalence partitions + boundary values
+import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class GraderTest {
+    private int[] aMarks, bMarks, cMarks;
+
+    @Before                                    // fixture: fresh test data before every test
+    public void setUp() {
+        aMarks = new int[]{81, 90, 100};       // just above 80, nominal, upper limit
+        bMarks = new int[]{71, 75, 80};        // just above 70, nominal, boundary 80
+        cMarks = new int[]{61, 65, 70};        // just above 60, nominal, boundary 70
+    }
+    @After
+    public void tearDown() { aMarks = bMarks = cMarks = null; }
+
+    @Test
+    public void partitionA_above80() {
+        for (int m : aMarks) assertEquals("mark " + m, 'A', Grader.grade(m));
+    }
+    @Test
+    public void partitionB_71to80() {
+        for (int m : bMarks) assertEquals("mark " + m, 'B', Grader.grade(m));
+    }
+    @Test
+    public void partitionC_61to70() {
+        for (int m : cMarks) assertEquals("mark " + m, 'C', Grader.grade(m));
+    }
+    @Test
+    public void boundary60_isNotC() {
+        assertEquals("mark 60", 'F', Grader.grade(60));
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void invalid_aboveRange() { Grader.grade(101); }
+    @Test(expected = IllegalArgumentException.class)
+    public void invalid_negative() { Grader.grade(-1); }
+}
+//// FILE: SortTester.java
+// 2014-15 Q2(c) / 2013-14 Q3(c) — automated tester (driver) for a float sort: order + same multiset of data
+import java.util.Arrays;
+import java.util.Random;
+
+public class SortTester {
+    static void sortDescending(float[] a) {              // module under test
+        Arrays.sort(a);
+        for (int i = 0, j = a.length - 1; i < j; i++, j--) { float t = a[i]; a[i] = a[j]; a[j] = t; }
+    }
+    static boolean isDescending(float[] a) {
+        for (int i = 1; i < a.length; i++) if (a[i - 1] < a[i]) return false;
+        return true;
+    }
+    static boolean sameData(float[] in, float[] out) {   // 'originality': permutation of the input
+        float[] x = in.clone(), y = out.clone();
+        Arrays.sort(x); Arrays.sort(y);
+        return Arrays.equals(x, y);
+    }
+    public static void main(String[] args) {
+        Random r = new Random(42);
+        int[] sizes = {0, 1, 2, 10, 1000};                // driver generates different sizes
+        boolean all = true;
+        for (int n : sizes) {
+            float[] in = new float[n];
+            for (int i = 0; i < n; i++) in[i] = r.nextInt(50) - 25 + r.nextFloat();   // duplicates and negatives
+            float[] out = in.clone();
+            sortDescending(out);
+            boolean ok = isDescending(out) && sameData(in, out);
+            all &= ok;
+            System.out.println("n=" + n + (ok ? " PASS" : " FAIL"));
+        }
+        System.out.println(all ? "ALL PASS" : "SOME FAILED");
+    }
+}
+//// FILE: BoundedQueue.java
+public class BoundedQueue<T> {
+    private final Object[] data; private int head, size;
+    public BoundedQueue(int capacity) {
+        if (capacity <= 0) throw new IllegalArgumentException();
+        data = new Object[capacity];
+    }
+    public void enqueue(T x) {
+        if (size == data.length) throw new IllegalStateException("full");
+        data[(head + size++) % data.length] = x;
+    }
+    @SuppressWarnings("unchecked")
+    public T dequeue() {
+        if (size == 0) throw new IllegalStateException("empty");
+        T x = (T) data[head]; data[head] = null; head = (head + 1) % data.length; size--;
+        return x;
+    }
+    public boolean isEmpty() { return size == 0; }
+    public int size() { return size; }
+}
+//// FILE: QueueTest.java
+// 2010-11 Q6(e) — test cases for a Queue class
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+public class QueueTest {
+    private BoundedQueue<Integer> q;
+    @Before public void setUp() { q = new BoundedQueue<>(3); }
+
+    @Test public void newQueue_isEmpty() { assertTrue(q.isEmpty()); assertEquals(0, q.size()); }
+    @Test public void fifoOrder() {
+        q.enqueue(1); q.enqueue(2); q.enqueue(3);
+        assertEquals(Integer.valueOf(1), q.dequeue());
+        assertEquals(Integer.valueOf(2), q.dequeue());
+    }
+    @Test public void wrapAround_keepsOrder() {
+        q.enqueue(1); q.enqueue(2); q.dequeue(); q.enqueue(3); q.enqueue(4);
+        assertEquals(Integer.valueOf(2), q.dequeue());
+        assertEquals(Integer.valueOf(3), q.dequeue());
+        assertEquals(Integer.valueOf(4), q.dequeue());
+    }
+    @Test(expected = IllegalStateException.class) public void dequeueEmpty_throws() { q.dequeue(); }
+    @Test(expected = IllegalStateException.class) public void enqueueFull_throws() {
+        q.enqueue(1); q.enqueue(2); q.enqueue(3); q.enqueue(4);
+    }
+    @Test(expected = IllegalArgumentException.class) public void zeroCapacity_throws() { new BoundedQueue<Integer>(0); }
+}
+//// FILE: RunTests.java
+public class RunTests {
+    public static void main(String[] a) throws Exception {
+        MiniRunner.main(new String[]{"LeapYearTest", "GraderTest", "QueueTest"});
+        SortTester.main(a);
+    }
+}

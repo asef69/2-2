@@ -1,0 +1,89 @@
+
+===== page 1 =====
+
+
+===== page 2 =====
+Decorator Pattern in Java File Reading
+Java's java.io package is the textbook real-world example of the Decorator pattern. Instead of one class trying to do 
+everything (read raw bytes + buffer + handle characters + parse lines), Java wraps simple objects with layers that each add 
+one capability.
+BufferedReader reader = new BufferedReader(
+new InputStreamReader(
+new FileInputStream("data.txt")));
+●
+FileInputStream — the core component; just reads raw bytes.
+●
+InputStreamReader — decorator that adds byte→character conversion.
+●
+BufferedReader — decorator that adds buffering + readLine().
+Each wrapper implements the same interface as what it wraps, and adds behavior without touching the original class. 
+That's the whole point of the pattern — open for extension, closed for modification.
+
+===== page 3 =====
+Template Method
+
+===== page 4 =====
+Template Method
+Standard way
+
+===== page 5 =====
+Bridge Pattern
+
+===== page 6 =====
+Bridge Pattern
+
+===== page 7 =====
+Bridge Pattern
+-
+separates an abstraction from its implementation so that both can vary independently.
+-
+useful when you have two independent dimensions of variation. Instead of creating subclasses for every combination, you 
+connect the two hierarchies using composition.
+-
+Example
+Suppose your application can send notifications through different channels.
+Abstraction
+●
+Alert Notification
+●
+Promotion Notification
+●
+OTP Notification
+Implementation
+●
+Email
+●
+SMS
+●
+Push Notification
+
+===== page 8 =====
+With Bridge
+interface MessageSender {
+void send(String msg);
+}
+class EmailSender implements 
+MessageSender {
+public void send(String msg){
+System.out.println("Email: " + 
+msg);
+}
+}
+…..
+abstract class Notification {
+protected MessageSender sender;
+Notification(MessageSender sender){
+this.sender = sender;
+}
+abstract void notifyUser();
+}
+class AlertNotification extends Notification {
+AlertNotification(MessageSender 
+sender){
+super(sender);
+}
+void notifyUser(){
+sender.send("Server is down!");
+}
+}
+…

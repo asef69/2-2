@@ -1,0 +1,123 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURE 3}
+\chapter{System Properties and Responses of LTI Systems}
+
+%------------------------------------------------------------------
+\repeated{2}
+\begin{qcard}{2023--2024 \textbullet\ Q1(b)}{EEE 211 \textbullet\ EEE p.1}{7}
+Consider a system with input $x(t)$ and output $y(t)$ described by the differential equation $\dfrac{\dd y(t)}{\dd t}+t^2y(t)=(2t+3)x(t)$. Determine whether the system is (i) linear; (ii) time invariant.
+\end{qcard}
+\begin{qcard}{2022--2023 \textbullet\ Q8(b)}{EEE 211 \textbullet\ EEE p.11}{15}
+Consider a system with input $x(t)$ and output $y(t)$ described by $\dfrac{\dd y(t)}{\dd t}+t^2y(t)=(2t+3)x(t)$. Comment on whether the system is (i) linear; (ii) time invariant.
+\end{qcard}
+\begin{solution}
+Assume the system is initially relaxed ($y=0$ before the input starts).
+
+\step{(i) Linearity.} Let $x_1\mapsto y_1$ and $x_2\mapsto y_2$, i.e.\ $y_i'+t^2y_i=(2t+3)x_i$. For $x=ax_1+bx_2$, try $y=ay_1+by_2$:
+\[
+y'+t^2y=a\big(y_1'+t^2y_1\big)+b\big(y_2'+t^2y_2\big)=(2t+3)(ax_1+bx_2)=(2t+3)x .
+\]
+Superposition holds (both sides are first order in $x,y$ and no constant term appears), so the system is \emph{linear}.
+
+\step{(ii) Time invariance.} Let $y$ be the response to $x(t)$. Delay the input: $x_d(t)=x(t-t_0)$. If the system were time invariant the response would be $y(t-t_0)$, which satisfies
+\[
+y'(t-t_0)+(t-t_0)^2y(t-t_0)=\big(2(t-t_0)+3\big)x(t-t_0).
+\]
+The actual system requires $\;y_d'+t^2y_d=(2t+3)x(t-t_0)$. The coefficients $t^2$ and $2t+3$ differ from $(t-t_0)^2$ and $2(t-t_0)+3$ whenever $t_0\ne0$, so $y(t-t_0)$ is not the response to $x(t-t_0)$.
+\ans{Linear, but \emph{not} time invariant (the coefficients depend explicitly on $t$).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q5(b)}{EEE 211 \textbullet\ EEE p.9--10}{15}
+The input $x(t)$ and output $y(t)$ of an LTI system are shown in the figure: $x(t)=|t|$ for $|t|\le1$ (a ``V'' with value 1 at $t=\pm1$) and $y(t)=1$ for $|t|\le1$ (a unit rectangle). Find the outputs of this system for the inputs (i) $x(t-\tfrac12)-x(t+\tfrac12)$ and (ii) $\dfrac{\dd x(t)}{\dd t}$. Sketch both outputs with proper axis labels.
+\end{qcard}
+\begin{solution}
+Linearity and time invariance give: $x(t-t_0)\mapsto y(t-t_0)$ and $\alpha x_1+\beta x_2\mapsto\alpha y_1+\beta y_2$. Differentiation is a limit of differences of shifted inputs, so $\dfrac{\dd x}{\dd t}\mapsto\dfrac{\dd y}{\dd t}$ for an LTI system.
+
+\step{(i)} Output $=y(t-\tfrac12)-y(t+\tfrac12)$, where $y(t-\frac12)=1$ on $(-\frac12,\frac32)$ and $y(t+\frac12)=1$ on $(-\frac32,\frac12)$:
+\[
+\text{output}=\begin{cases}-1,&-\frac32<t<-\frac12,\\0,&-\frac12<t<\frac12,\\+1,&\frac12<t<\frac32,\\0,&\text{otherwise.}\end{cases}
+\]
+\step{(ii)} $y(t)=u(t+1)-u(t-1)$, so $\dfrac{\dd y}{\dd t}=\delta(t+1)-\delta(t-1)$.
+\begin{center}
+\plotsig[title={(i) $y(t-\frac12)-y(t+\frac12)$},xmin=-2.5,xmax=2.5,ymin=-1.5,ymax=1.5,xtick={-1.5,-0.5,0.5,1.5}]{(-2.5,0)(-1.5,0)(-1.5,-1)(-0.5,-1)(-0.5,0)(0.5,0)(0.5,1)(1.5,1)(1.5,0)(2.5,0)}\hspace{4mm}
+\begin{tikzpicture}\begin{axis}[sig,title={(ii) $y'(t)$},xmin=-2.5,xmax=2.5,ymin=-1.5,ymax=1.5,xtick={-1,1}]
+\addplot[thick,navy]coordinates{(-2.5,0)(2.5,0)};\impulse{-1}{1}\impulse{1}{-1}\end{axis}\end{tikzpicture}
+\end{center}
+\ans{(i) $-1$ on $(-\frac32,-\frac12)$, $0$ on $(-\frac12,\frac12)$, $+1$ on $(\frac12,\frac32)$. \quad (ii) $\delta(t+1)-\delta(t-1)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q2(b)}{EEE 211 \textbullet\ EEE p.12}{18}
+Let $h$ be the impulse response of an LTI system, and let $x_1,x_2,y_1,y_2$ denote functions such that $y_1=x_1*h$ and $y_2=x_2*h$. The functions $x_1$ and $x_2$ are shown in the figure ($x_1$ is a triangle on $(0,2)$ with peak 1 at $t=1$; $x_2$ is a trapezoid on $(-2,2)$ with plateau height 2). \emph{[the remaining part of the wording is cut off in the scan]}
+\end{qcard}
+\begin{notebox}The question text after the figure is not legible, so the exact task cannot be recovered. The solution gives the standard method for this setting.\end{notebox}
+\begin{solution}
+In this setting the data usually include a given $y_1(t)$ and ask for $y_2(t)$. Method:
+\begin{steps}
+\item Write $x_2(t)$ as a linear combination of shifted/scaled copies of $x_1(t)$ (a trapezoid is a sum of delayed triangles, or $x_2=\sum_ka_kx_1(t-t_k)$).
+\item By linearity and time invariance, $y_2(t)=\sum_ka_ky_1(t-t_k)$.
+\item Otherwise differentiate the signals: $x_i'$ consists of rectangles/impulses and $y_i'=x_i'*h$, so $h$-dependent parts cancel when comparing $x_1$ and $x_2$.
+\end{steps}
+\ans{Not solvable without the illegible wording; use $y_2=\sum a_ky_1(t-t_k)$ after decomposing $x_2$ into shifted copies of $x_1$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q6(a)}{EEE 211 \textbullet\ EEE p.20}{15}
+Consider a continuous-time system with input--output relationship $y(t)=t\,x(t+2)$. Determine whether the system is (i) linear, (ii) causal, (iii) time-variant, (iv) memoryless and (v) stable. You will have to use time-domain techniques.
+\end{qcard}
+\begin{solution}
+\begin{steps}
+\item \emph{Linear.} $S\{ax_1+bx_2\}=t\,[ax_1(t+2)+bx_2(t+2)]=ay_1+by_2$ --- yes.
+\item \emph{Causal.} $y(t)$ uses $x(t+2)$, a value two seconds in the future --- not causal.
+\item \emph{Time-variant.} $S\{x(t-t_0)\}=t\,x(t-t_0+2)$ but $y(t-t_0)=(t-t_0)\,x(t-t_0+2)$. These differ ($t\ne t-t_0$) --- time-variant.
+\item \emph{Memoryless.} The output at $t$ depends on $x(t+2)$, not on $x(t)$ --- has memory.
+\item \emph{Stable.} Take the bounded input $x=1$: $y(t)=t$, unbounded --- not BIBO stable.
+\end{steps}
+\ans{Linear; not causal; time-variant; with memory; unstable.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q1}{EEE 211 \textbullet\ EEE p.22}{35}
+A continuous-time system is given by $y(t)=\dfrac13\displaystyle\int_{-\infty}^{\infty}x(\tau)\big[\delta(t-\tau)+\delta(t-\tau+t_0)+\delta(t-\tau-t_0)\big]\dd\tau$.
+(i) Explain what this system does. (ii) Is the system BIBO stable? (iii) Linear? (iv) Memoryless? (v) Causal? (vi) Time invariant? Justify each answer.
+\end{qcard}
+\begin{solution}
+Sifting each impulse ($\int x(\tau)\delta(t-\tau+a)\dd\tau=x(t+a)$):
+\[
+y(t)=\tfrac13\big[x(t)+x(t+t_0)+x(t-t_0)\big],\qquad h(t)=\tfrac13\big[\delta(t)+\delta(t+t_0)+\delta(t-t_0)\big].
+\]
+\begin{steps}
+\item It averages the signal over the three instants $t-t_0,\,t,\,t+t_0$: a three-point moving average (a smoothing low-pass filter).
+\item \emph{BIBO stable:} $\abs{y}\le\frac13(B+B+B)=B$; equivalently $\int\abs h=1<\infty$.
+\item \emph{Linear:} a weighted sum of shifted inputs --- yes.
+\item \emph{Memoryless:} no, it uses $x(t\pm t_0)$.
+\item \emph{Causal:} no (for $t_0\ne0$): the term $x(t+t_0)$ needs a future value; $h\ne0$ at $t=-t_0<0$.
+\item \emph{Time invariant:} yes --- the system is the convolution with a fixed $h$; delaying $x$ by $T$ delays every term by $T$.
+\end{steps}
+\ans{A 3-point moving average; BIBO stable, linear, time invariant, but with memory and non-causal.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q7(a)}{EEE 211 \textbullet\ EEE p.30}{20}
+A linear system with impulse response $h(t)$ has the input--output pair shown in the figure: $x(t)=1$ on $(1,2)$ gives $y(t)$ that rises linearly from 0 at $t=1$ to 1 at $t=2$, stays 1 until $t=3$ and is 0 afterwards. Determine whether the system is causal, time-invariant and memoryless. Also find the output of the system for the input $x_1(t)=u(t)+u(t-1)-2u(t-2)$.
+\end{qcard}
+\begin{notebox}The system is treated as LTI (it is described by an impulse response $h(t)$). A single input--output pair cannot prove time invariance by itself.\end{notebox}
+\begin{solution}
+Here $x(t)=u(t-1)-u(t-2)$ and $y(t)=r(t-1)-r(t-2)-u(t-3)$.
+
+\step{Causal.} The output is zero for $t<1$, exactly where the input is zero: nothing appears before the cause. Solving $x*h=y$ for the LTI case, $x'=\delta(t-1)-\delta(t-2)$ and $y'=u(t-1)-u(t-2)-\delta(t-3)$ give $h(t)-h(t-1)=u(t)-u(t-1)-\delta(t-2)$, so $h(t)=u(t)-\sum_{k=2}^\infty\delta(t-k)$, which is zero for $t<0$: \emph{causal}.
+
+\step{Memoryless.} No. A memoryless system would give a scaled copy of $x$ (a rectangle on $(1,2)$), but $y$ extends to $t=3$ and is not a rectangle.
+
+\step{Time invariance.} Assumed (LTI).
+
+\step{Output for $x_1$.} Write $x_1=[u(t)-u(t-1)]+2[u(t-1)-u(t-2)]=x(t+1)+2x(t)$. By linearity and time invariance $y_1(t)=y(t+1)+2y(t)$:
+\[
+y(t+1)=\begin{cases}t,&0\le t\le1\\1,&1\le t\le2\\0,&\text{else}\end{cases}\qquad 2y(t)=\begin{cases}2(t-1),&1\le t\le2\\2,&2\le t\le3\\0,&\text{else}\end{cases}
+\]
+\[
+y_1(t)=\begin{cases}t,&0\le t\le1,\\2t-1,&1\le t\le2,\\2,&2<t\le3,\\0,&\text{otherwise.}\end{cases}
+\]
+\begin{center}\plotsig[title={$y_1(t)$},xmin=-1,xmax=4,ymin=-0.3,ymax=3.4,xtick={1,2,3}]{(-1,0)(0,0)(1,1)(2,3)(2,2)(3,2)(3,0)(4,0)}\end{center}
+\ans{Causal, not memoryless; $y_1=t$ ($0\le t\le1$), $2t-1$ ($1\le t\le2$), $2$ ($2<t\le3$), $0$ otherwise.}
+\end{solution}

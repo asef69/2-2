@@ -1,0 +1,557 @@
+//// FILE: RobotSim.java
+// 2018-19 Q2(a) — Strategy: robot behaviours changed at run time
+interface Behaviour { int moveCommand(String robot, int position, boolean obstacleClose); }
+class AggressiveBehaviour implements Behaviour {
+    public int moveCommand(String r, int pos, boolean obs) {
+        System.out.println(r + ": aggressive - attack the robot found"); return obs ? 1 : 0; }
+}
+class DefensiveBehaviour implements Behaviour {
+    public int moveCommand(String r, int pos, boolean obs) {
+        System.out.println(r + ": defensive - run away in the opposite direction"); return obs ? -1 : 0; }
+}
+class NormalBehaviour implements Behaviour {
+    public int moveCommand(String r, int pos, boolean obs) {
+        System.out.println(r + ": normal - ignore other robots"); return 0; }
+}
+class Robot {                                         // context
+    private final String name; private Behaviour behaviour; private int position;
+    Robot(String name) { this.name = name; }
+    void setBehaviour(Behaviour b) { behaviour = b; }
+    void move(boolean obstacleClose) {                // passes sensor info to the strategy
+        position += behaviour.moveCommand(name, position, obstacleClose);
+    }
+}
+public class RobotSim {
+    public static void main(String[] args) {
+        Robot r1 = new Robot("Big Robot"), r2 = new Robot("George v.2.1"), r3 = new Robot("R2");
+        r1.setBehaviour(new AggressiveBehaviour());
+        r2.setBehaviour(new DefensiveBehaviour());
+        r3.setBehaviour(new NormalBehaviour());
+        r1.move(true); r2.move(true); r3.move(true);
+        System.out.println("-- behaviours changed --");
+        r1.setBehaviour(new DefensiveBehaviour());
+        r2.setBehaviour(new NormalBehaviour());
+        r3.setBehaviour(new AggressiveBehaviour());
+        r1.move(true); r2.move(true); r3.move(true);
+    }
+}
+//// FILE: SortStrategyDemo.java
+// 2020-21 Q2(b) — Strategy: selection / insertion / quick sort
+import java.util.Arrays;
+
+interface SortStrategy { void sort(int[] a); }
+class SelectionSort implements SortStrategy {
+    public void sort(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            int m = i;
+            for (int j = i + 1; j < a.length; j++) if (a[j] < a[m]) m = j;
+            int t = a[i]; a[i] = a[m]; a[m] = t;
+        }
+    }
+}
+class InsertionSort implements SortStrategy {
+    public void sort(int[] a) {
+        for (int i = 1; i < a.length; i++) {
+            int k = a[i], j = i - 1;
+            while (j >= 0 && a[j] > k) { a[j + 1] = a[j]; j--; }
+            a[j + 1] = k;
+        }
+    }
+}
+class QuickSort implements SortStrategy {
+    public void sort(int[] a) { qs(a, 0, a.length - 1); }
+    private void qs(int[] a, int lo, int hi) {
+        if (lo >= hi) return;
+        int p = a[hi], i = lo;
+        for (int j = lo; j < hi; j++) if (a[j] < p) { int t = a[i]; a[i] = a[j]; a[j] = t; i++; }
+        int t = a[i]; a[i] = a[hi]; a[hi] = t;
+        qs(a, lo, i - 1); qs(a, i + 1, hi);
+    }
+}
+class Sorter {                                          // context
+    private SortStrategy strategy;
+    Sorter(SortStrategy s) { strategy = s; }
+    void setStrategy(SortStrategy s) { strategy = s; }
+    int[] sort(int[] data) { int[] c = data.clone(); strategy.sort(c); return c; }
+}
+public class SortStrategyDemo {
+    public static void main(String[] args) {
+        int[] d = {5, 2, 9, 1, 7, 3};
+        Sorter s = new Sorter(new SelectionSort());
+        System.out.println("selection " + Arrays.toString(s.sort(d)));
+        s.setStrategy(new InsertionSort());
+        System.out.println("insertion " + Arrays.toString(s.sort(d)));
+        s.setStrategy(new QuickSort());
+        System.out.println("quick     " + Arrays.toString(s.sort(d)));
+    }
+}
+//// FILE: TalkTimeDemo.java
+// 2020-21 Q2(a) — Strategy: UI depends only on the TalkTimeScheme interface; new schemes are plug-ins
+import java.util.ArrayList;
+import java.util.List;
+
+interface TalkTimeScheme { String name(); double cost(int minutes); }
+class PerMinuteScheme implements TalkTimeScheme {
+    public String name() { return "Per minute (Tk 1.0/min)"; }
+    public double cost(int m) { return m * 1.0; }
+}
+class BundleScheme implements TalkTimeScheme {
+    public String name() { return "Bundle 300 min for Tk 199, then Tk 0.8/min"; }
+    public double cost(int m) { return 199 + Math.max(0, m - 300) * 0.8; }
+}
+class NightScheme implements TalkTimeScheme {          // added later: no UI change
+    public String name() { return "Night owl (Tk 0.5/min)"; }
+    public double cost(int m) { return m * 0.5; }
+}
+class SchemeRegistry {                                 // the only place that knows concrete schemes
+    static List<TalkTimeScheme> all() {
+        List<TalkTimeScheme> l = new ArrayList<>();
+        l.add(new PerMinuteScheme()); l.add(new BundleScheme()); l.add(new NightScheme());
+        return l;
+    }
+}
+class SchemePage {                                     // UI team codes against the interface only
+    void show(TalkTimeScheme s, int minutes) {
+        System.out.printf("%-45s %4d min -> Tk %.2f%n", s.name(), minutes, s.cost(minutes));
+    }
+}
+public class TalkTimeDemo {
+    public static void main(String[] args) {
+        SchemePage ui = new SchemePage();
+        for (TalkTimeScheme s : SchemeRegistry.all()) ui.show(s, 400);
+    }
+}
+//// FILE: MeritListDemo.java
+// 2020-21 Q2(c) — Strategy: grading scheme chosen at run time; merit list of the top grade
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+interface GradingStrategy { String grade(int marks); String topGrade(); }
+class BuetGrading implements GradingStrategy {
+    public String grade(int m) {
+        if (m >= 80) return "A+"; if (m >= 75) return "A"; if (m >= 70) return "A-";
+        if (m >= 65) return "B+"; if (m >= 60) return "B"; if (m >= 55) return "B-";
+        if (m >= 50) return "C+"; if (m >= 45) return "C"; if (m >= 40) return "D"; return "F";
+    }
+    public String topGrade() { return "A+"; }
+}
+class PassFailGrading implements GradingStrategy {
+    public String grade(int m) { return m >= 50 ? "P" : "F"; }
+    public String topGrade() { return "P"; }
+}
+class ResultProcessor {                                // context
+    private GradingStrategy strategy;
+    ResultProcessor(GradingStrategy s) { strategy = s; }
+    void setStrategy(GradingStrategy s) { strategy = s; }
+    Map<String, String> grades(Map<String, Integer> marks) {
+        Map<String, String> g = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> e : marks.entrySet()) g.put(e.getKey(), strategy.grade(e.getValue()));
+        return g;
+    }
+    List<String> meritList(Map<String, Integer> marks) {   // students with the highest grade, by marks
+        List<String> ids = new ArrayList<>();
+        for (Map.Entry<String, Integer> e : marks.entrySet())
+            if (strategy.grade(e.getValue()).equals(strategy.topGrade())) ids.add(e.getKey());
+        ids.sort((a, b) -> marks.get(b) - marks.get(a));
+        return ids;
+    }
+}
+public class MeritListDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> marks = new LinkedHashMap<>();
+        marks.put("2205001", 86); marks.put("2205002", 74); marks.put("2205003", 91); marks.put("2205004", 38);
+        ResultProcessor rp = new ResultProcessor(new BuetGrading());
+        System.out.println(rp.grades(marks));
+        System.out.println("Merit list: " + rp.meritList(marks));
+    }
+}
+//// FILE: DataMinerDemo.java
+// 2024-25 Q8(a) — Template Method (fixed parsing pipeline) + Strategy (pluggable analysis)
+import java.util.Arrays;
+import java.util.List;
+
+interface AnalysisStrategy { String analyze(List<Double> values); }     // strategy
+class AverageAnalysis implements AnalysisStrategy {
+    public String analyze(List<Double> v) {
+        return "average = " + v.stream().mapToDouble(Double::doubleValue).average().orElse(0); }
+}
+class MaxAnalysis implements AnalysisStrategy {
+    public String analyze(List<Double> v) {
+        return "max = " + v.stream().mapToDouble(Double::doubleValue).max().orElse(0); }
+}
+abstract class DataParser {                                             // template
+    private final AnalysisStrategy analysis;
+    DataParser(AnalysisStrategy a) { analysis = a; }
+    public final String process(String raw) {                          // the template method
+        String content = openFile(raw);
+        List<Double> data = parseData(extractData(content));
+        String result = analysis.analyze(data);                        // varying algorithm = strategy
+        if (wantsReport()) sendReport(result);                         // hook
+        closeFile();
+        return result;
+    }
+    protected String openFile(String raw) { return raw.trim(); }       // common steps
+    protected abstract String extractData(String content);             // format-specific steps
+    protected abstract List<Double> parseData(String data);
+    protected boolean wantsReport() { return true; }                   // hook with default
+    protected void sendReport(String r) { System.out.println("Report: " + r); }
+    protected void closeFile() { }
+}
+class CsvParser extends DataParser {
+    CsvParser(AnalysisStrategy a) { super(a); }
+    protected String extractData(String c) { return c; }
+    protected List<Double> parseData(String d) {
+        return Arrays.stream(d.split(",")).map(String::trim).map(Double::valueOf).toList(); }
+}
+class JsonParser extends DataParser {
+    JsonParser(AnalysisStrategy a) { super(a); }
+    protected String extractData(String c) { return c.substring(c.indexOf('[') + 1, c.indexOf(']')); }
+    protected List<Double> parseData(String d) {
+        return Arrays.stream(d.split(",")).map(String::trim).map(Double::valueOf).toList(); }
+    protected boolean wantsReport() { return false; }
+}
+public class DataMinerDemo {
+    public static void main(String[] args) {
+        System.out.println(new CsvParser(new AverageAnalysis()).process("3, 5, 10"));
+        System.out.println(new JsonParser(new MaxAnalysis()).process("{\"v\": [4, 9, 2]}"));
+    }
+}
+//// FILE: StockDemo.java
+// 2023-24 Q2(a) — Observer: StockGrabber (subject) and StockObserver (observer)
+import java.util.ArrayList;
+import java.util.List;
+
+interface Subject {
+    void register(Observer o);
+    void unregister(Observer o);
+    void notifyObservers();
+}
+interface Observer { void update(double ibmPrice, double aaplPrice, double googPrice); }
+
+class StockGrabber implements Subject {
+    private final List<Observer> observers = new ArrayList<>();
+    private double ibmPrice, aaplPrice, googPrice;
+    public void register(Observer o)   { observers.add(o); }
+    public void unregister(Observer o) { observers.remove(o); }
+    public void notifyObservers() {
+        for (Observer o : observers) o.update(ibmPrice, aaplPrice, googPrice);
+    }
+    public void setIBMPrice(double p)  { ibmPrice = p;  notifyObservers(); }
+    public void setAAPLPrice(double p) { aaplPrice = p; notifyObservers(); }
+    public void setGOOGPrice(double p) { googPrice = p; notifyObservers(); }
+}
+class StockObserver implements Observer {
+    private static int count = 0;
+    private final int id;
+    private final Subject stockGrabber;
+    StockObserver(Subject s) {
+        stockGrabber = s;
+        id = ++count;
+        s.register(this);                                // subscribes itself
+        System.out.println("New observer " + id);
+    }
+    public void update(double ibm, double aapl, double goog) {
+        System.out.printf("Observer %d: IBM %.2f AAPL %.2f GOOG %.2f%n", id, ibm, aapl, goog);
+    }
+    void stop() { stockGrabber.unregister(this); }
+}
+public class StockDemo {
+    public static void main(String[] args) {
+        StockGrabber g = new StockGrabber();
+        StockObserver o1 = new StockObserver(g);
+        g.setIBMPrice(197.00);
+        StockObserver o2 = new StockObserver(g);
+        g.setAAPLPrice(677.60);
+        o1.stop();
+        g.setGOOGPrice(676.40);                          // only observer 2 is told
+    }
+}
+//// FILE: BlogDemo.java
+// 2022-23 Q4(a), 2017-18 Q8(b) — Observer: alumni blog notifies registered users; they pull the new article
+import java.util.ArrayList;
+import java.util.List;
+
+interface BlogObserver { void update(Blog blog); }
+class Blog {                                               // subject (publisher)
+    private final List<BlogObserver> subscribers = new ArrayList<>();
+    private final List<String> articles = new ArrayList<>();
+    void register(BlogObserver o)   { subscribers.add(o); }
+    void unregister(BlogObserver o) { subscribers.remove(o); }
+    void postArticle(String title) {
+        articles.add(title);
+        for (BlogObserver o : subscribers) o.update(this);  // 'a new article is posted'
+    }
+    String getLatestArticle() { return articles.get(articles.size() - 1); }
+}
+class AlumniUser implements BlogObserver {               // concrete observer
+    private final String name;
+    AlumniUser(String name) { this.name = name; }
+    public void update(Blog blog) {
+        System.out.println(name + " notified: a new article is posted");
+        System.out.println(name + " reads: " + blog.getLatestArticle());   // pull model
+    }
+}
+public class BlogDemo {
+    public static void main(String[] args) {
+        Blog blog = new Blog();
+        AlumniUser a = new AlumniUser("Asef"), b = new AlumniUser("Nadia");
+        blog.register(a); blog.register(b);
+        blog.postArticle("Life after BUET");
+        blog.unregister(a);
+        blog.postArticle("Alumni reunion 2026");
+    }
+}
+//// FILE: TempDashboard.java
+// 2020-21 Q3(b) — Observer: end-of-day temperature summary pushed to dashboards
+import java.util.ArrayList;
+import java.util.List;
+
+interface DayObserver { void update(double max, double avg); }
+class TemperatureLog {                                    // subject
+    private final List<Double> readings = new ArrayList<>();
+    private final List<DayObserver> observers = new ArrayList<>();
+    void attach(DayObserver o) { observers.add(o); }
+    void record(double t) { readings.add(t); }
+    void endOfDay() {
+        double max = readings.stream().mapToDouble(Double::doubleValue).max().orElse(0);
+        double avg = readings.stream().mapToDouble(Double::doubleValue).average().orElse(0);
+        for (DayObserver o : observers) o.update(max, avg);
+        readings.clear();
+    }
+}
+class MaxTempWidget implements DayObserver {
+    public void update(double max, double avg) { System.out.println("Max today: " + max); }
+}
+class AvgTempWidget implements DayObserver {
+    public void update(double max, double avg) { System.out.printf("Average today: %.2f%n", avg); }
+}
+public class TempDashboard {
+    public static void main(String[] args) {
+        TemperatureLog log = new TemperatureLog();
+        log.attach(new MaxTempWidget()); log.attach(new AvgTempWidget());
+        for (double t : new double[]{24.5, 31.0, 29.5, 27.0}) log.record(t);
+        log.endOfDay();
+    }
+}
+//// FILE: AtcDemo.java
+// 2022-23 Q2(a) — Mediator: flights talk only to the ATC tower
+import java.util.ArrayList;
+import java.util.List;
+
+interface ATCMediator {
+    void register(Flight f);
+    boolean requestLanding(Flight f);
+    void landed(Flight f);
+}
+class ControlTower implements ATCMediator {
+    private final List<Flight> flights = new ArrayList<>();
+    private boolean runwayFree = true;
+    public void register(Flight f) { flights.add(f); }
+    public boolean requestLanding(Flight f) {
+        if (runwayFree) {
+            runwayFree = false;
+            for (Flight o : flights) if (o != f) o.receive(f.id + " is landing, hold your position");
+            return true;
+        }
+        return false;
+    }
+    public void landed(Flight f) {
+        runwayFree = true;
+        for (Flight o : flights) if (o != f) o.receive("runway free after " + f.id);
+    }
+}
+class Flight {                                         // colleague: knows only the mediator
+    final String id; private final ATCMediator atc;
+    Flight(String id, ATCMediator atc) { this.id = id; this.atc = atc; atc.register(this); }
+    void land() {
+        if (atc.requestLanding(this)) { System.out.println(id + ": landing"); atc.landed(this); }
+        else System.out.println(id + ": waiting - runway busy");
+    }
+    void receive(String msg) { System.out.println(id + " <- ATC: " + msg); }
+}
+public class AtcDemo {
+    public static void main(String[] args) {
+        ATCMediator tower = new ControlTower();
+        Flight bg = new Flight("BG-147", tower), ek = new Flight("EK-585", tower);
+        bg.land();
+        ek.land();
+    }
+}
+//// FILE: SortBroker.java
+// 2019-20 Q1(b) — Mediator: central broker forwards sorting requests to servers, queueing them
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Queue;
+
+interface Broker { void submit(Client c, String algorithm, int[] data); void processAll(); }
+
+abstract class SortServer {                                  // colleague
+    abstract String algorithm();
+    abstract int[] sort(int[] a);
+}
+class SelectionServer extends SortServer {
+    String algorithm() { return "selection"; }
+    int[] sort(int[] a) {
+        int[] c = a.clone();
+        for (int i = 0; i < c.length - 1; i++) { int m = i;
+            for (int j = i + 1; j < c.length; j++) if (c[j] < c[m]) m = j;
+            int t = c[i]; c[i] = c[m]; c[m] = t; }
+        return c;
+    }
+}
+class InsertionServer extends SortServer {
+    String algorithm() { return "insertion"; }
+    int[] sort(int[] a) {
+        int[] c = a.clone();
+        for (int i = 1; i < c.length; i++) { int k = c[i], j = i - 1;
+            while (j >= 0 && c[j] > k) { c[j + 1] = c[j]; j--; } c[j + 1] = k; }
+        return c;
+    }
+}
+class QuickServer extends SortServer {
+    String algorithm() { return "quick"; }
+    int[] sort(int[] a) { int[] c = a.clone(); Arrays.sort(c); return c; }   // library quicksort for primitives
+}
+class Client {                                               // colleague
+    private final String name; private final Broker broker;
+    Client(String name, Broker b) { this.name = name; broker = b; }
+    void requestSort(String alg, int[] data) { broker.submit(this, alg, data); }
+    void receive(int[] sorted) { System.out.println(name + " got " + Arrays.toString(sorted)); }
+}
+class CentralBroker implements Broker {                      // concrete mediator
+    private record Request(Client c, String alg, int[] data) { }
+    private final Map<String, SortServer> servers = new HashMap<>();
+    private final Queue<Request> queue = new ArrayDeque<>();
+    void addServer(SortServer s) { servers.put(s.algorithm(), s); }
+    public void submit(Client c, String alg, int[] data) { queue.add(new Request(c, alg, data)); }
+    public void processAll() {                               // FIFO when several requests arrive together
+        while (!queue.isEmpty()) {
+            Request r = queue.poll();
+            r.c().receive(servers.get(r.alg()).sort(r.data()));
+        }
+    }
+}
+public class SortBroker {
+    public static void main(String[] args) {
+        CentralBroker b = new CentralBroker();
+        b.addServer(new SelectionServer()); b.addServer(new InsertionServer()); b.addServer(new QuickServer());
+        Client c1 = new Client("C1", b), c2 = new Client("C2", b);
+        c1.requestSort("quick", new int[]{4, 1, 3});
+        c2.requestSort("selection", new int[]{9, 7, 8});
+        c1.requestSort("insertion", new int[]{2, 0, 1});
+        b.processAll();
+    }
+}
+//// FILE: GumballDemo.java
+// IJ slides p203-240 — State pattern: gumball machine
+interface State { void insertQuarter(); void ejectQuarter(); void turnCrank(); void dispense(); }
+
+class GumballMachine {                                          // context
+    final State soldOut, noQuarter, hasQuarter, sold;
+    private State state;
+    int count;
+    GumballMachine(int n) {
+        soldOut = new SoldOutState(this); noQuarter = new NoQuarterState(this);
+        hasQuarter = new HasQuarterState(this); sold = new SoldState(this);
+        count = n; state = n > 0 ? noQuarter : soldOut;
+    }
+    void setState(State s) { state = s; }
+    void insertQuarter() { state.insertQuarter(); }
+    void ejectQuarter() { state.ejectQuarter(); }
+    void turnCrank() { state.turnCrank(); state.dispense(); }
+    void releaseBall() { System.out.println("A gumball comes rolling out"); if (count > 0) count--; }
+}
+class NoQuarterState implements State {
+    private final GumballMachine m; NoQuarterState(GumballMachine m) { this.m = m; }
+    public void insertQuarter() { System.out.println("You inserted a quarter"); m.setState(m.hasQuarter); }
+    public void ejectQuarter() { System.out.println("You haven't inserted a quarter"); }
+    public void turnCrank() { System.out.println("You turned, but there's no quarter"); }
+    public void dispense() { System.out.println("You need to pay first"); }
+}
+class HasQuarterState implements State {
+    private final GumballMachine m; HasQuarterState(GumballMachine m) { this.m = m; }
+    public void insertQuarter() { System.out.println("You can't insert another quarter"); }
+    public void ejectQuarter() { System.out.println("Quarter returned"); m.setState(m.noQuarter); }
+    public void turnCrank() { System.out.println("You turned..."); m.setState(m.sold); }
+    public void dispense() { System.out.println("No gumball dispensed"); }
+}
+class SoldState implements State {
+    private final GumballMachine m; SoldState(GumballMachine m) { this.m = m; }
+    public void insertQuarter() { System.out.println("Please wait, we're already giving you a gumball"); }
+    public void ejectQuarter() { System.out.println("Sorry, you already turned the crank"); }
+    public void turnCrank() { System.out.println("Turning twice doesn't get you another gumball!"); }
+    public void dispense() {
+        m.releaseBall();
+        if (m.count > 0) m.setState(m.noQuarter);
+        else { System.out.println("Oops, out of gumballs!"); m.setState(m.soldOut); }
+    }
+}
+class SoldOutState implements State {
+    private final GumballMachine m; SoldOutState(GumballMachine m) { this.m = m; }
+    public void insertQuarter() { System.out.println("Machine is sold out"); }
+    public void ejectQuarter() { System.out.println("You haven't inserted a quarter"); }
+    public void turnCrank() { System.out.println("No gumballs"); }
+    public void dispense() { System.out.println("No gumball dispensed"); }
+}
+public class GumballDemo {
+    public static void main(String[] args) {
+        GumballMachine g = new GumballMachine(1);
+        g.insertQuarter(); g.turnCrank();
+        g.insertQuarter();                              // sold out now
+    }
+}
+//// FILE: SmartHomeDemo.java
+// 2024-25 Q5(b)(i) — Mediator: sensors talk only to the hub; the hub owns the coordination rules
+import java.util.ArrayList;
+import java.util.List;
+
+interface HubMediator { void notify(Device sender, String event); }
+
+abstract class Device {                                  // colleague: knows only the mediator
+    protected final HubMediator hub; final String name;
+    Device(String name, HubMediator hub) { this.name = name; this.hub = hub; }
+}
+class MotionSensor extends Device {
+    MotionSensor(HubMediator h) { super("MotionSensor", h); }
+    void detect() { hub.notify(this, "motion"); }
+}
+class DoorSensor extends Device {
+    DoorSensor(HubMediator h) { super("DoorSensor", h); }
+    void forced() { hub.notify(this, "forced"); }
+}
+class Light extends Device {
+    Light(HubMediator h) { super("Light", h); }
+    void on() { System.out.println("Light ON"); }
+}
+class Alarm extends Device {
+    Alarm(HubMediator h) { super("Alarm", h); }
+    void activate() { System.out.println("Alarm ACTIVATED"); }
+}
+class SmartHomeHub implements HubMediator {             // concrete mediator
+    Light light; Alarm alarm;
+    final List<String> log = new ArrayList<>();
+    public void notify(Device sender, String event) {
+        log.add(sender.name + ":" + event);
+        if (sender instanceof MotionSensor && event.equals("motion")) {
+            light.on();
+            System.out.println("Hub notified: motion in hallway");
+        } else if (sender instanceof DoorSensor && event.equals("forced")) {
+            alarm.activate();
+            light.on();
+        }
+    }
+}
+public class SmartHomeDemo {
+    public static void main(String[] args) {
+        SmartHomeHub hub = new SmartHomeHub();
+        hub.light = new Light(hub);
+        hub.alarm = new Alarm(hub);
+        new MotionSensor(hub).detect();
+        new DoorSensor(hub).forced();
+        System.out.println("events: " + hub.log);
+    }
+}

@@ -1,0 +1,833 @@
+
+===== page 1 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+CSE 213: Software Engineering
+Structural Design Patterns
+Nafis Tahmid
+Lecturer, CSE, BUET
+
+===== page 2 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Structural Design Pattern Deﬁned
+Structural pattern explain how to assemble objects and classes into larger structures, while 
+keeping this structure flexible and efficient.
+2
+
+===== page 3 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Structural Design Pattern Deﬁned
+3
+Structural pattern explain how to assemble objects and classes into larger structures, while 
+keeping this structure flexible and efficient.
+
+===== page 4 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Structural Design Pattern Deﬁned
+4
+We are here
+Structural pattern explain how to assemble objects and classes into larger structures, while 
+keeping this structure flexible and efficient.
+
+===== page 5 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Starbuzz Coﬀee
+At first, they had simple menu.
+5
+
+===== page 6 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Starbuzz Coﬀee
+6
+At first, they had simple menu.
+
+===== page 7 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Starbuzz Coﬀee
+7
+At first, they had simple menu.
+
+===== page 8 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Starbuzz Coﬀee
+8
+At first, they had simple menu.
+Now you need to add condiments
+●
+Steamed milk
+●
+Soy
+●
+Mocha
+●
+Whipped milk
+
+===== page 9 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Starbuzz Coﬀee
+9
+At first, they had simple menu.
+Now you need to add condiments
+●
+Steamed milk
+●
+Soy
+●
+Mocha
+●
+Whipped milk
+Clients may take conds. or not
+
+===== page 10 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Starbuzz Coﬀee
+10
+At first, they had simple menu.
+Now you need to add condiments
+●
+Steamed milk
+●
+Soy
+●
+Mocha
+●
+Whipped milk
+Clients may take conds. or not
+How to handle this?
+
+===== page 11 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Subclass explosion?
+11
+Each cost() computes the cost of 
+coffee + the condiments
+
+===== page 12 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Subclass explosion?
+12
+Each cost() computes the cost of 
+coffee + the condiments
+Definitely not an option…
+
+===== page 13 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Subclass explosion?
+13
+Each cost() computes the cost of 
+coffee + the condiments
+Definitely not an option…
+
+===== page 14 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Boolean Values
+14
+
+===== page 15 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Boolean Values
+15
+Beverage class’s cost method calculates 
+the cost of condiments.
+
+===== page 16 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The design using Booleans
+16
+
+===== page 17 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The design using Booleans
+17
+
+===== page 18 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The design using Booleans
+18
+Problems?
+
+===== page 19 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The design using Booleans
+19
+Problems?
+●
+New condiments break the superclass design.
+
+===== page 20 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The design using Booleans
+20
+Problems?
+●
+New condiments break the superclass design.
+●
+Some beverages (e.g.iced tea) may not support 
+certain condiments but still inherit them. (BAD)
+
+===== page 21 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The design using Booleans
+21
+Problems?
+●
+New condiments break the superclass design.
+●
+Some beverages (e.g.iced tea) may not support 
+certain condiments but still inherit them. (BAD)
+●
+The design does not handle multiple quantities 
+(e.g., double mocha).
+
+===== page 22 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Let’s do it like “Decoration”
+❏
+Inheritance didn’t work well.
+❏
+Instead we start with a beverage and “decorate” it with condiments
+22
+
+===== page 23 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Let’s do it like “Decoration”
+❏
+Inheritance didn’t work well.
+❏
+Instead we start with a beverage and “decorate” it with condiments
+For DarkRoast with Mocha and Whip
+23
+
+===== page 24 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+24
+
+===== page 25 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+25
+
+===== page 26 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+26
+
+===== page 27 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+27
+
+===== page 28 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+28
+
+===== page 29 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+29
+
+===== page 30 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+30
+
+===== page 31 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+31
+
+===== page 32 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+DarkRoast with Mocha and Whip
+32
+
+===== page 33 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+33
+
+===== page 34 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+34
+
+===== page 35 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+35
+subclasses handle
+
+===== page 36 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+36
+set description
+
+===== page 37 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+37
+
+===== page 38 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+38
+
+===== page 39 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+39
+
+===== page 40 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+40
+
+===== page 41 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+41
+DarkRoast
+
+===== page 42 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Mocha
+Test Drive
+42
+DarkRoast
+
+===== page 43 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Mocha
+Mocha
+Test Drive
+43
+DarkRoast
+
+===== page 44 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Whip
+Mocha
+Mocha
+Test Drive
+44
+DarkRoast
+
+===== page 45 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+45
+Whip
+Mocha
+Mocha
+DarkRoast
+
+===== page 46 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+46
+Whip
+Mocha
+Mocha
+DarkRoast
+
+===== page 47 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Decorator Pattern Deﬁned
+47
+Decorator lets you attach new behaviors to objects 
+by placing these objects inside special wrapper 
+objects that contain the behaviors.
+
+===== page 48 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Decorator Pattern Deﬁned
+48
+
+===== page 49 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Decorator Pattern Deﬁned
+49
+
+===== page 50 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Decorator Pattern Deﬁned
+50
+
+===== page 51 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Let’s talk about Pancake House and Diner
+51
+
+===== page 52 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Let’s talk about Pancake House and Diner
+52
+
+===== page 53 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Something tree-like
+53
+●
+Tree-structured menus with support for 
+submenus and items
+●
+Traversal should be flexible; allow iterating 
+over a specific submenu (e.g., desserts) or 
+the entire menu hierarchy.
+
+===== page 54 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Something tree-like
+54
+●
+Tree-structured menus with support for 
+submenus and items
+●
+Traversal should be flexible; allow iterating 
+over a specific submenu (e.g., desserts) or 
+the entire menu hierarchy.
+
+===== page 55 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Something tree-like
+55
+●
+Tree-structured menus with support for 
+submenus and items
+●
+Traversal should be flexible; allow iterating 
+over a specific submenu (e.g., desserts) or 
+the entire menu hierarchy.
+
+===== page 56 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Nodes and Leaves
+56
+
+===== page 57 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+The Design
+57
+
+===== page 58 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Composite Pattern Deﬁned
+58
+Composite pattern lets you compose objects into tree 
+structures and then work with these structures as if they 
+were individual objects.
+
+===== page 59 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Composite Pattern Deﬁned
+59
+
+===== page 60 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Composite Pattern Deﬁned
+60
+
+===== page 61 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapters in real life
+61
+
+===== page 62 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapters in real life
+62
+
+===== page 63 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapters in OO System
+63
+
+===== page 64 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapters in OO System
+64
+
+===== page 65 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapters in OO System
+65
+
+===== page 66 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+66
+Existing code
+
+===== page 67 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+67
+Existing code
+Vendor code
+
+===== page 68 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+68
+Existing code
+Vendor code
+Current code uses Duck interface
+
+===== page 69 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+69
+Existing code
+Vendor code
+Current code uses Duck interface
+How to incorporate Turkey?
+
+===== page 70 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+70
+
+===== page 71 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+71
+
+===== page 72 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter in our Duck Simulator
+72
+
+===== page 73 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+73
+
+===== page 74 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+74
+
+===== page 75 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+75
+
+===== page 76 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Test Drive
+76
+Getting Turkey using existing Duck code
+
+===== page 77 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Overview
+77
+Duck
+
+===== page 78 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Overview
+78
+Duck
+
+===== page 79 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Overview
+79
+Duck
+
+===== page 80 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Overview
+80
+Duck
+
+===== page 81 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Birds Eye View
+81
+
+===== page 82 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+There are no DUMB Questions
+82
+
+===== page 83 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Adapter Pattern Deﬁned
+83
+Convert the interface of a class into another interface 
+clients expect. Adapter lets classes work together that 
+couldn't otherwise because of incompatible interfaces.
+
+===== page 84 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Yet Another Example
+84
+
+===== page 85 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Yet Another Example
+85
+
+===== page 86 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Object Adapter
+86
+Uses the composition principle: 
+●
+The adapter implements the interface of one 
+object and wraps the other one. 
+●
+Can be implemented in all popular programming 
+languages.
+
+===== page 87 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Object Adapter
+87
+
+===== page 88 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Object Adapter
+88
+
+===== page 89 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Class Adapter
+89
+Uses inheritance: 
+●
+Adapter inherits interfaces from both objects at the 
+same time. 
+●
+Can only be implemented in programming 
+languages that support multiple inheritance, such as 
+C++.
+
+===== page 90 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Class Adapter
+90
+Uses inheritance: 
+●
+Adapter inherits interfaces from both objects at the 
+same time. 
+●
+Can only be implemented in programming 
+languages that support multiple inheritance, such as 
+C++.
+
+===== page 91 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+91
+
+===== page 92 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+92
+
+===== page 93 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+93
+
+===== page 94 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+94
+
+===== page 95 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+95
+
+===== page 96 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Colored Shapes
+96
+●
+You have two shapes Circle and Square .
+
+===== page 97 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Colored Shapes
+97
+●
+You have two shapes Circle and Square . 
+●
+You want to incorporate colors, Red and Blue
+
+===== page 98 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Colored Shapes
+98
+●
+You have two shapes Circle and Square . 
+●
+You want to incorporate colors, Red and Blue
+●
+You create four combinations such as 
+BlueCircle and RedSquare and so on.
+
+===== page 99 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Colored Shapes
+99
+●
+You have two shapes Circle and Square . 
+●
+You want to incorporate colors, Red and Blue
+●
+You create four combinations such as 
+BlueCircle and RedSquare and so on.
+●
+New color (green) or shape (triangle)?
+
+===== page 100 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Colored Shapes
+100
+●
+You have two shapes Circle and Square . 
+●
+You want to incorporate colors, Red and Blue
+●
+You create four combinations such as 
+BlueCircle and RedSquare and so on.
+●
+New color (green) or shape (triangle)?
+●
+Hierarchy will grow exponentially
+
+===== page 101 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Colored Shapes
+101
+●
+You have two shapes Circle and Square . 
+●
+You want to incorporate colors, Red and Blue
+●
+You create four combinations such as 
+BlueCircle and RedSquare and so on.
+●
+New color (green) or shape (triangle)?
+●
+Hierarchy will grow exponentially
+●
+Why? As things extend in two independent 
+dimensions
+
+===== page 102 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Two Hierarchies
+102
+●
+Two independent dimensions: form and color
+
+===== page 103 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Two Hierarchies
+103
+●
+Two independent dimensions: form and color
+●
+From inheritance to composition
+
+===== page 104 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Two Hierarchies
+104
+●
+Two independent dimensions: form and color
+●
+From inheritance to composition
+●
+Shape delegates color related work to Color
+
+===== page 105 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Some academic terms
+The GoF book uses two terms Abstraction & Implementation
+●
+Abstraction: high-level control layer for some entity. (also called interface)
+●
+This layer isn’t supposed to do any real work on its own. 
+●
+It should delegate the work to the implementation layer (also called platform)
+105
+
+===== page 106 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Some academic terms
+The GoF book uses two terms Abstraction & Implementation
+●
+Abstraction: high-level control layer for some entity. (also called interface)
+●
+This layer isn’t supposed to do any real work on its own. 
+●
+It should delegate the work to the implementation layer (also called platform)
+106
+Real application:
+●
+Abstraction: GUI (regular customer, admins)
+●
+Implementation: APIs for Linux, Windows, MacOS etc.
+
+===== page 107 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Some academic terms
+The GoF book uses two terms Abstraction & Implementation
+●
+Abstraction: high-level control layer for some entity. (also called interface)
+●
+This layer isn’t supposed to do any real work on its own. 
+●
+It should delegate the work to the implementation layer (also called platform)
+107
+Real application:
+●
+Abstraction: GUI (regular customer, admins)
+●
+Implementation: APIs for Linux, Windows, MacOS etc.
+❏
+Abstraction object controls the appearance of the app, delegates the 
+actual work to the linked implementation object.
+❏
+Implementations are interchangeable
+❏
+Enables same GUI to work under different OS.
+
+===== page 108 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Bridge Pattern Deﬁned
+108
+Bridge lets you split a large class or a set of closely related classes 
+into two separate hierarchies, abstraction and implementation, 
+which can be developed independently of each other.
+
+===== page 109 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Bridge Pattern Deﬁned
+109
+
+===== page 110 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Summary
+110
+
+===== page 111 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+Acknowledgement
+❏
+Dive Into Design Patterns - Alexander Shvets
+❏
+Head First Design Patterns, 2nd Edition - Eric Freeman, Elisabeth Robson
+111
+
+===== page 112 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+112
+
+===== page 113 =====
+Nafis Tahmid, Lecturer, CSE, BUET
+113

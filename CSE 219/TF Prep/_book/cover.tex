@@ -1,0 +1,27 @@
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+ \fill[navy] (current page.north west) rectangle ($(current page.north east)+(0,-13.3cm)$);
+ \fill[coral] ($(current page.north west)+(0,-13.3cm)$) rectangle ($(current page.north east)+(0,-13.65cm)$);
+ \node[anchor=north west,text=coral,inner sep=0] at ($(current page.north west)+(2.2cm,-2.6cm)$) {\sffamily\bfseries\small BUET \textbullet\ CSE 219 \textbullet\ EEE 211};
+ \node[anchor=north west,text=white,inner sep=0,font=\sffamily\bfseries\fontsize{40}{46}\selectfont] at ($(current page.north west)+(2.2cm,-4.2cm)$) {Signals and};
+ \node[anchor=north west,text=white,inner sep=0,font=\sffamily\bfseries\fontsize{40}{46}\selectfont] at ($(current page.north west)+(2.2cm,-5.9cm)$) {Linear Systems};
+ \node[anchor=north west,text=gold,inner sep=0,align=left,font=\sffamily\large] at ($(current page.north west)+(2.2cm,-8.4cm)$) {Topic-wise questions with\\ complete worked solutions};
+ \begin{scope}[shift={($(current page.north west)+(11.0cm,-10.6cm)$)}]
+  \draw[white,-{Stealth}] (0,0)--(7.2,0);\draw[white] (0.2,-1.4)--(0.2,1.5);
+  \draw[gold,very thick,domain=0.2:7,samples=200,smooth] plot (\x,{0.9*sin(deg(2.2*\x))+0.35*sin(deg(6.6*\x))});
+ \end{scope}
+\end{tikzpicture}
+\vspace*{14.8cm}
+
+\begin{tabular}{@{}p{3cm}p{3cm}p{3cm}p{3cm}@{}}
+{\sffamily\bfseries\fontsize{26}{28}\selectfont\color{coral}16}&{\sffamily\bfseries\fontsize{26}{28}\selectfont\color{coral}169}&{\sffamily\bfseries\fontsize{26}{28}\selectfont\color{coral}6}&{\sffamily\bfseries\fontsize{26}{28}\selectfont\color{coral}3}\\
+{\sffamily\small topic sections}&{\sffamily\small exam questions}&{\sffamily\small exam sessions}&{\sffamily\small course codes}
+\end{tabular}
+
+\vspace{1.4cm}
+{\sffamily\small\color{slate} CSE 219, EEE 211/301 and CSE 311 term finals, sessions 2018--2019 to 2023--2024. Anik Sir's part (signals, systems, convolution, Fourier series and transform) comes first, followed by Ashraf Sir's part (sampling, DFT/FFT, Laplace and $z$-transform).
+
+{\sffamily\small\color{slate} Every question on the content of the course is organised topic-wise (most recent session first) and followed by a step-by-step worked solution. Diagrams are redrawn in vector graphics.}
+\vfill
+\begin{center}{\color{teal}\rule{2.4cm}{2.4pt}}\\[8pt]{\sffamily\small Solutions checked numerically in Python}\end{center}
+\vspace{1cm}

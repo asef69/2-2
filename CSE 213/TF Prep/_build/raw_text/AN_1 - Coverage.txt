@@ -1,0 +1,170 @@
+
+===== slide 1 =====
+Code Coverage
+Code coverage is a measure used to describe the degree to which the source code of a program is tested by a particular test suite.
+
+ High code coverage means
+ more thoroughly tested 
+has a lower chance of containing software bugs
+[image → C:/Users/Lenovo/AppData/Local/Temp/claude/C--Users-Lenovo-OneDrive-Desktop-Academics-2-2/4af4348d-82fd-42c2-91a3-457e99c48f65/scratchpad/an/img_1 - Coverage\s001_5122.jpg]
+
+===== slide 2 =====
+Coverage criteria
+Method coverage: Have all methods been called? 
+
+Decision/Branch Coverage: Have all decisions been executed in both the true and false paths? 
+
+Condition Coverage: Have all conditionals been executed in both the true and false paths?
+
+ Statement coverage: Have all statements in a method been executed?
+
+===== slide 3 =====
+Method Coverage
+String getTriangle (int a, int b, int c) {
+
+if (a == b && b == c) {
+	success();
+	return "Equilateral";
+}
+
+if (a == b || b == c || c == a) {
+	return "Isosceles";
+}
+ 
+	return "Scalene";
+}
+
+void success()
+{
+	printf(“Got it!”);	
+
+}
+void testCoverage()
+{
+    getTriangle(1,1,2);
+    getTriangle(2,2,2);
+}
+
+===== slide 4 =====
+Condition Coverage
+String getTriangle (int a, int b, int c) {
+
+if (a == b && b == c) {
+	success();
+	return "Equilateral";
+}
+
+if (a == b || b == c || c == a) {
+	return "Isosceles";
+}
+ 
+	return "Scalene";
+}
+
+void success()
+{
+	printf(“Got it!”);	
+
+}
+void testCoverage()
+{
+    getTriangle(2,2,3);
+    getTriangle(2,2,2);
+    getTriangle(1,2,2);
+    getTriangle(2,1,2);
+}
+
+===== slide 5 =====
+Branch Coverage
+String getTriangle (int a, int b, int c) {
+
+if (a == b && b == c) {
+	success();
+	return "Equilateral";
+}
+
+if (a == b || b == c || c == a) {
+	return "Isosceles";
+}
+ 
+	return "Scalene";
+}
+
+void success()
+{
+	printf(“Got it!”);	
+
+}
+void testCoverage()
+{
+    getTriangle(2,2,3);
+    getTriangle(2,2,2);
+    getTriangle(1,2,2);
+    getTriangle(2,1,2);
+    getTriangle(2,3,4);    
+}
+
+===== slide 6 =====
+Statement Coverage
+String getTriangle (int a, int b, int c) {
+
+if (a == b && b == c) {
+	success();
+	return "Equilateral";
+}
+
+if (a == b || b == c || c == a) {
+	return "Isosceles";
+}
+ 
+	return "Scalene";
+}
+
+void success()
+{
+	printf(“Got it!”);	
+
+}
+void testCoverage()
+{
+    getTriangle(2,2,3);
+    getTriangle(2,2,2);
+    getTriangle(1,2,2);
+    getTriangle(2,1,2);
+    getTriangle(2,3,4);    
+}
+
+===== slide 7 =====
+Benefits and Limitations
+Benefits:
+A measure of how complete your test cases are
+High coverage does not guarantee code correctness!
+Can identify paths through the code that you may have missed
+
+Limitations:
+The assumption that you are done testing if you have high coverage is incorrect 
+Coverage tools only tell you if you’ve covered what’s there 
+There may be requirements that you have missed! 
+Don’t write test cases ONLY to make your coverage tool happy
+Inspect surrounding code for other potential errors, perhaps requirements you’ve missed
+
+===== slide 8 =====
+Code Coverage tools
+djUnit- http://works.dgic.co.jp/djunit/ 
+Eclipse plug‐in 
+Measures 
+Statement Coverage 
+Branch Coverage
+EclEmma - http://eclemma.org/ 
+Eclipse plug‐in 
+Measures (at the bytecode level) 
+Instruction Coverage 
+Block Coverage – roughly corresponds to condition coverage 
+Line Coverage 
+Method Coverage 
+Type Coverage
+Clover - https://www.atlassian.com/software/clover/overview 
+Commercial tool
+Method coverage
+Statement coverage
+Decision coverage

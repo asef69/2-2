@@ -1,0 +1,300 @@
+
+===== page 1 =====
+1
+What is Unit testing?
+Unit tests are whitebox tests written by 
+developers, and designed to verify small units 
+of program functionality.
+
+===== page 2 =====
+2
+When to write unit tests?
+Unit tests are written by you, the developer, 
+concurrently with implementation.
+
+===== page 3 =====
+3
+Good Unit Testing
+• Automatic: Run completely by itself, without any 
+human input. 
+• Atomic: Determine by itself whether the function it is 
+testing has passed or failed, without a human 
+interpreting the results
+• Single responsibility: Test exactly one feature
+• Independent: Run in isolation, separate from any 
+other test cases (even if they test the same functions)
+•Repeatable: Multiple invocations of the test should 
+consistently return the same value.
+
+===== page 4 =====
+4
+JUnit
+• Unit testing framework for the Java Programming Language.
+• Open source ( http://Junit.org )  
+• Framework for both writing and automated execution of unit tests
+• Can be integrated with eclipse.
+
+===== page 5 =====
+5
+JUnit in Action
+package edu.siu.cs435;
+public class Math 
+{
+ 
+public int add(int a, int b) {
+ 
+ 
+return a + b;
+ 
+}
+ 
+ 
+public int sub(int a, int b) {
+ 
+return a - b;
+ 
+}
+}
+
+===== page 6 =====
+6
+JUnit and Eclipse
+• To add JUnit to an Eclipse project, click:
+ꟷProject  Properties  Build Path  Libraries 
+Add Library...  JUnit  JUnit 4  Finish
+• To create a test case:
+ꟷright-click a file and
+choose New  Test Case
+ꟷor click File  New 
+ JUnit Test Case
+ꟷEclipse can create stubs
+of method tests for you.
+
+===== page 7 =====
+7
+Junit in Eclipse
+
+===== page 8 =====
+8
+
+===== page 9 =====
+9
+
+===== page 10 =====
+10
+
+===== page 11 =====
+11
+
+===== page 12 =====
+12
+JUnit assertion methods
+• Each method can also be passed a string to display if it fails:
+ꟷe.g.  assertEquals("message", expected, actual)
+assertTrue(test)
+fails if the boolean test is false
+assertFalse(test)
+fails if the boolean test is true
+assertEquals(expected, actual)
+fails if the values are not equal
+assertSame(expected, actual)
+fails if the values are not the same (by ==)
+assertNotSame(expected, actual)
+fails if the values are the same (by ==)
+assertNull(value)
+fails if the given value is not null
+assertNotNull(value)
+fails if the given value is null
+fail()
+causes current test to immediately fail
+
+===== page 13 =====
+13
+Junit Framework
+Provides following important features
+1.
+Fixtures
+2.
+Test suites
+3.
+Test runners
+4.
+JUnit classes
+
+===== page 14 =====
+14
+Fixtures
+• Fixtures is a fixed state of a set of objects used as a baseline for 
+running tests. The purpose of a test fixture is to ensure that there is a 
+well known and fixed environment in which tests are run so that 
+results are repeatable.
+• @Before
+ꟷPerforms this function before each test case
+ꟷSince each of the tests are independent, each test will receive its own 
+instance of whatever is created in the @Before methods
+• @Test
+ꟷIndicates individual test cases
+ꟷMust be present to tell JUnit which methods are tests and which are helpers
+• @After
+ꟷThe teardown after each test case
+ꟷUsually need to worry about this only if you have created external resources
+
+===== page 15 =====
+15
+
+===== page 16 =====
+16
+Test Suite
+• Test suite means bundle a few unit test cases and run it together. In 
+JUnit, both @RunWith and @Suite annotation are used to run the 
+suite test.
+
+===== page 17 =====
+17
+Test Runner
+• Test runner is used for executing the test cases.
+
+===== page 18 =====
+18
+JUnit exercise
+Given a Date class with the following methods:
+ꟷpublic Date(int year, int month, int day)
+ꟷpublic Date()                   // today
+ꟷpublic int getDay(), getMonth(), getYear()
+ꟷpublic void addDays(int days)   // advances by days
+ꟷpublic int daysInMonth()
+ꟷpublic String dayOfWeek()       // e.g. "Sunday"
+ꟷpublic boolean equals(Object o)
+ꟷpublic boolean isLeapYear()
+ꟷpublic void nextDay()           // advances by 1 day
+ꟷpublic String toString()
+• Come up with unit tests to check the following:
+ꟷThat no Date object can ever get into an invalid state.
+ꟷThat the addDays method works properly.
+• It should be efficient enough to add 1,000,000 days in a call.
+
+===== page 19 =====
+19
+What's wrong with this?
+public class DateTest {
+    @Test
+    public void test1() {
+        Date d = new Date(2050, 2, 15);
+        d.addDays(4);
+        assertEquals(d.getYear(), 2050);
+        assertEquals(d.getMonth(), 2);
+        assertEquals(d.getDay(), 19);
+    }
+    @Test
+    public void test2() {
+        Date d = new Date(2050, 2, 15);
+        d.addDays(14);
+        assertEquals(d.getYear(), 2050);
+        assertEquals(d.getMonth(), 3);
+        assertEquals(d.getDay(), 1);
+    }
+}
+
+===== page 20 =====
+20
+Well-structured assertions
+public class DateTest {
+    @Test
+    public void test1() {
+        Date d = new Date(2050, 2, 15);
+        d.addDays(4);
+        assertEquals(2050, d.getYear());  // expected
+        assertEquals(2, d.getMonth());    // value should 
+        assertEquals(19, d.getDay());     // be at LEFT
+    }
+    @Test
+    public void test2() {
+        Date d = new Date(2050, 2, 15);
+        d.addDays(14);
+        assertEquals("year after +14 days", 2050, d.getYear());
+        assertEquals("month after +14 days", 3, d.getMonth());
+        assertEquals("day after +14 days", 1, d.getDay());
+    }   // test cases should usually have messages explaining
+}       // what is being checked, for better failure output
+
+===== page 21 =====
+21
+Expected answer objects
+public class DateTest {
+    @Test
+    public void test1() {
+        Date d = new Date(2050, 2, 15);
+        d.addDays(4);
+        Date expected = new Date(2050, 2, 19);
+        assertEquals(expected, d);  // use an expected answer
+    }                               // object to minimize tests
+                                    
+                                    // (Date must have toString
+    @Test                           //  and equals methods)
+    public void test2() {
+        Date d = new Date(2050, 2, 15);
+        d.addDays(14);
+        Date expected = new Date(2050, 3, 1);
+        assertEquals("date after +14 days", expected, d);
+    }
+}
+
+===== page 22 =====
+22
+Naming test cases
+public class DateTest {
+    @Test
+    public void test_addDays_withinSameMonth_1() {
+        Date actual = new Date(2050, 2, 15);
+        actual.addDays(4);
+        Date expected = new Date(2050, 2, 19);
+        assertEquals("date after +4 days", expected, actual);
+    }
+    // give test case methods really long descriptive names
+    @Test
+    public void test_addDays_wrapToNextMonth_2() {
+        Date actual = new Date(2050, 2, 15);
+        actual.addDays(14);
+        Date expected = new Date(2050, 3, 1);
+        assertEquals("date after +14 days", expected, actual);
+    }
+    // give descriptive names to expected/actual values
+}
+
+===== page 23 =====
+23
+What's wrong with this?
+public class DateTest {
+    @Test
+    public void test_addDays_addJustOneDay_1() {
+        Date actual = new Date(2050, 2, 15);
+        actual.addDays(1);
+        Date expected = new Date(2050, 2, 16);
+        assertEquals(
+            "should have gotten " + expected + "\n" +
+            " but instead got " + actual\n", 
+            expected, actual);
+    }
+    ...
+}
+
+===== page 24 =====
+24
+Good assertion messages
+public class DateTest {
+    @Test
+    public void test_addDays_addJustOneDay_1() {
+        Date actual = new Date(2050, 2, 15);
+        actual.addDays(1);
+        Date expected = new Date(2050, 2, 16);
+        assertEquals("adding one day to 2050/2/15", 
+            expected, actual);
+    }
+    ...
+}
+// JUnit will already show
+// the expected and actual
+// values in its output;
+//
+// don't need to repeat them
+// in the assertion message

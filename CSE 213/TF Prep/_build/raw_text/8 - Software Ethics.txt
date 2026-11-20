@@ -1,0 +1,251 @@
+
+===== page 1 =====
+Software Ethics
+
+===== page 2 =====
+"With great power comes great responsibility." — Uncle Ben 
+Why building software is never a value-neutral act: guiding engineering decisions to protect human wellbeing, 
+digital rights, and public trust.
+
+===== page 3 =====
+FOUNDATIONAL PHILOSOPHY
+The Fundamental Ethical Question
+"Does this system do what it should, for whom it should, without harm?"
+Code is never neutral — every architectural and algorithmic choice encodes human values, assumptions, 
+and societal consequences.
+Moral Judgment Over 
+Algorithms
+Ethical codes are not 
+simple automated rules; 
+they require active 
+assessment of tradeoffs 
+and consequences.
+Public Welfare Priority
+Engineers carry an 
+absolute duty to 
+prioritize societal safety 
+and rights over 
+corporate deadline 
+pressure.
+Preventing Negligence
+Ignoring known safety 
+risks or rushing 
+defective code directly 
+endangers human life 
+and livelihoods.
+
+===== page 4 =====
+Key Dimensions of Software Ethics
+1. Data Privacy
+Informed consent & minimal 
+data collection.
+2. Bias & Fairness
+Auditing systems against 
+systemic discrimination.
+3. Accountability
+Human ownership of system 
+outcomes.
+4. Transparency
+Auditable decision paths for 
+users.
+5. Autonomy
+Eliminating deceptive dark 
+patterns.
+6. Security Duty
+Addressing negligent flaws 
+as ethical failures.
+7. Sustainability
+Minimizing carbon & 
+compute footprints.
+8. IP & Authorship
+Fair licensing in AI 
+generative models.
+
+===== page 5 =====
+DIMENSIONS 1 & 2
+Privacy & Data Ethics vs. Bias & Fairness
+DIMENSION 01
+Privacy & Data Ethics
+Consent must be informed, explicit, and unburied. Gather 
+only necessary data.
+CASE STUDY: CAMBRIDGE ANALYTICA (2018)
+Facebook data of 87M users harvested via quiz apps 
+for political psychographics without explicit consent. 
+Resulted in a $5B FTC fine.
+DIMENSION 02
+Algorithmic Bias & Fairness
+Algorithms encode historical human biases unless 
+proactively tested and mitigated.
+CASE STUDY: AMAZON AI RECRUITING (2018)
+Internal hiring tool trained on 10-year 
+male-dominated resumes penalized 
+candidates with the word "women's".
+ Scrapped before deployment.
+
+===== page 6 =====
+DIMENSIONS 3 & 4
+Accountability vs. Transparency & Explainability
+DIMENSION 03
+System Accountability
+"The algorithm did it" is not an ethical or legal defense. 
+Humans must own code outcomes.
+CASE STUDY: VW DIESELGATE & BOEING MCAS
+VW deliberately coded defeat software (11M 
+cars affected). Boeing 737 MAX MCAS 
+software concealed risks, causing 346 fatal 
+crashes.
+DIMENSION 04
+Transparency & Explainability
+Opaque "black-box" systems prevent users from contesting 
+automated life decisions.
+CASE STUDY: DUTCH CHILDCARE BENEFITS SCANDAL (2021)
+An unexplainable risk algorithm falsely 
+flagged thousands of dual-national families 
+as fraud suspects, bankrupting victims and 
+dissolving the government.
+
+===== page 7 =====
+DIMENSIONS 5 & 6
+User Autonomy vs. Security as an Ethical Duty
+DIMENSION 05
+Autonomy vs. Dark Patterns
+Software UX should support user intention, 
+not manipulate cognitive vulnerabilities for 
+revenue.
+CASE STUDY: FTC V. AMAZON "ILIAD FLOW" (2023)
+Amazon sued for designing a labyrinthine 
+multi-step cancellation flow ("Iliad") to 
+prevent users from unsubscribing from 
+Prime while signup took one click.
+DIMENSION 06
+Security as an Ethical Duty
+Negligent security patching and software race 
+conditions inflict direct physical and financial 
+harm.
+CASE STUDY: THERAC-25 & EQUIFAX BREACH
+Therac-25 software race conditions fatal-
+dosed radiation patients. Equifax exposed 
+147M records by ignoring a known Apache 
+Struts patch for months.
+
+===== page 8 =====
+DIMENSIONS 7 & 8
+Environmental Sustainability & IP / Generative AI
+DIMENSION 07
+Environmental Sustainability
+Computation carries immense environmental costs in 
+energy, water cooling, and carbon output.
+CASE STUDY: LLM TRAINING CARBON FOOTPRINTS
+Strubell et al. (2019) demonstrated 
+training a single large model emits CO2 
+equal to 5 cars over their lifetime, 
+spurring the Green AI movement.
+DIMENSION 08
+IP & Generative AI Authorship
+Generative AI blurs lines between data training reuse, 
+licensing compliance, and original authorship.
+CASE STUDY: NYT V. OPENAI & GITHUB COPILOT
+Landmark lawsuits challenging 
+unpermitted scraping of copyrighted 
+news articles and open-source code for 
+training commercial LLMs.
+
+===== page 9 =====
+PROFESSIONAL GOVERNANCE
+IEEE-CS / ACM Software Engineering 8 Principles
+01. PUBLIC (TOP PRIORITY)
+02. CLIENT & EMPLOYER
+03. PRODUCT
+04. JUDGMENT
+05. MANAGEMENT
+06. PROFESSION
+07. COLLEAGUES
+08. SELF
+Public Interest First
+Act consistently with public 
+health, safety, and welfare.
+Aligned Interests
+Serve clients loyally while 
+remaining compliant with 
+public good.
+Quality Standards
+Ensure highest professional 
+standards and rigorous QA.
+Independence
+Maintain professional 
+integrity and impartial 
+assessment.
+Ethical Leadership
+Promote ethical software 
+development workflows.
+Reputation
+Advance the integrity of 
+software engineering 
+discipline.
+Fair Support
+Be fair to and supportive of 
+professional colleagues.
+Lifelong Learning
+Continuously improve skills 
+in ethical engineering 
+practice.
+
+===== page 10 =====
+Domain
+Unethical Practice
+Ethical Engineering Standard
+UX & Choice Architecture
+Deceptive dark patterns & forced retention flows
+Transparent, reversible, user-centric choices
+User Data & Telemetry
+Uninformed harvesting & re-identifying records
+Privacy-by-design & minimal data collection
+AI & Model Training
+Unverified training data with historical bias
+Rigorous demographic fairness auditing
+Security & Release QA
+Deploying known vulnerabilities to meet 
+deadlines
+Pre-deployment safety gates & continuous 
+patching
+PRACTICAL CONTRAST
+Unethical Risks vs. Ethical Practice Standards
+
+===== page 11 =====
+ACADEMIC & PROFESSIONAL GROUNDING
+Essential Literature in Software Ethics
+Cathy O'Neil
+Ruha Benjamin
+Virginia Eubanks
+Safiya Noble
+Kearns & Roth
+Brian Christian
+Weapons of Math Destruction
+Exposing opaque, unregulated 
+mathematical models driving 
+inequality.
+Race After Technology
+Analyzing how systemic racial 
+bias gets encoded into "neutral" 
+tech.
+Automating Inequality
+Investigating automated 
+decision profiling in public 
+welfare systems.
+Algorithms of Oppression
+Structural discrimination 
+embedded in commercial search 
+engines.
+The Ethical Algorithm
+Formal mathematical techniques 
+for embedding privacy & 
+fairness.
+The Alignment Problem
+How machine learning models 
+learn human values and 
+misalignments.
+
+===== page 12 =====
+Ethics is a Design Constraint, Not an Afterthought.
+Real-world failures trace back to treating ethics as an afterthought. Ask 
+at design time: "Who could this harm, and how would we know?"

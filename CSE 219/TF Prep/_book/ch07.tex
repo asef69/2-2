@@ -1,0 +1,47 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 5--7}
+\chapter{Fourier Series through LTI Systems}
+
+\noindent{\sffamily\small\color{slate}Method: if $x=\sum a_ke^{jk\omega_0t}$ then $y=\sum a_kH(jk\omega_0)e^{jk\omega_0t}$. Find $H(j\omega)$, evaluate it at each harmonic, multiply.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q7(b)}{EEE 211 \textbullet\ EEE p.20}{15}
+A system is described by $y''+3y'+2y=x'+x$. For the input $x(t)=2\cos t+6\cos3t$, find the output $y(t)$ and its average power.
+\end{qcard}
+\begin{solution}
+\step{Frequency response.} $H(j\omega)=\dfrac{j\omega+1}{(j\omega)^2+3j\omega+2}=\dfrac{j\omega+1}{(j\omega+1)(j\omega+2)}=\dfrac1{2+j\omega}$.
+
+\step{Each sinusoid.} $A\cos(\omega t)\to A|H|\cos(\omega t+\angle H)$.
+\begin{center}\small\begin{tabular}{@{}c|ccc@{}}$\omega$&$H(j\omega)$&$|H|$&$\angle H$\\\hline1&$\frac1{2+j}$&$0.4472$&$-26.57^\circ$\\3&$\frac1{2+3j}$&$0.2774$&$-56.31^\circ$\end{tabular}\end{center}
+\[y(t)=0.894\cos(t-26.57^\circ)+1.664\cos(3t-56.31^\circ).\]
+\step{Average power} of a sum of sinusoids at distinct frequencies is $\sum\frac{A^2}2$:
+\[P_y=\tfrac12\big(0.894^2+1.664^2\big)=\tfrac12\Big(\tfrac45+\tfrac{36}{13}\Big)=1.785 .\]
+\ans{$y(t)=0.894\cos(t-26.57^\circ)+1.664\cos(3t-56.31^\circ)$; $P_y\approx1.785$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q5(b)}{EEE 211 \textbullet\ EEE p.24}{20}
+A full-wave rectified signal $x(t)=|\sin t|$ is applied to an $RC$ low-pass circuit with $R=15\,\Omega$, $C=\frac15$ F (output across the capacitor). Find $H(\omega)$ and the output $y(t)$.
+\end{qcard}
+\begin{solution}
+\step{Circuit.} $RC=3$ s, so $H(j\omega)=\dfrac{1}{1+j3\omega}$.
+
+\step{Input series.} $|\sin t|$ has period $\pi$, $\omega_0=2$.
+\[a_0=\frac1\pi\int_0^\pi\sin t\dd t=\frac2\pi,\qquad |\sin t|=\frac2\pi-\frac4\pi\sum_{k=1}^\infty\frac{\cos2kt}{4k^2-1}.\]
+\step{Output.} At $\omega=2k$: $H=\dfrac1{1+j6k}$, $|H|=\dfrac1{\sqrt{1+36k^2}}$, phase $-\tan^{-1}6k$. DC passes with $H(0)=1$:
+\[y(t)=\frac2\pi-\frac4\pi\sum_{k=1}^\infty\frac{\cos\!\big(2kt-\tan^{-1}6k\big)}{(4k^2-1)\sqrt{1+36k^2}} .\]
+First terms: $y\approx0.637-0.0698\cos(2t-80.5^\circ)-0.0070\cos(4t-87.6^\circ)-\cdots$ (the RC filter has smoothed the ripple to about $\pm0.07$).
+\ans{$H(j\omega)=\frac1{1+j3\omega}$; $y(t)=\frac2\pi-\frac4\pi\sum\frac{\cos(2kt-\tan^{-1}6k)}{(4k^2-1)\sqrt{1+36k^2}}$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q1(c)}{EEE 211 \textbullet\ EEE p.27}{15}
+A triangular wave of period $T=4$ and amplitude $A=4$ is applied to a series $R=100\,\Omega$, $L=0.1$ H circuit. Find the power dissipated in $R$.
+\end{qcard}
+\begin{notebox}The waveform is read as the zero-mean triangle swinging between $-4$ and $+4$ (period 4, $\omega_0=\pi/2$) with the current as the response. If the figure shows a different offset, only $a_0$ changes.\end{notebox}
+\begin{solution}
+Zero-mean triangle of peak $A$ and period $T$: $|a_k|=\frac{4A}{\pi^2k^2}$ for odd $k$ (here $\frac{16}{\pi^2k^2}$). Voltage across the series circuit: $I_k=\dfrac{a_k}{R+jk\omega_0L}$, and $P=\sum|I_k|^2R$.
+With $k\omega_0L=0.05\pi k\ll R$ the inductor reactance is tiny ($0.157$ for $k=1$ against $100$):
+\[|I_1|=\frac{1.621}{\sqrt{100^2+0.157^2}}\approx0.01621,\qquad P\approx R\sum_{k\ \mathrm{odd}}\frac{|a_k|^2}{R^2}=\frac{1}{R}\sum_{k\ \mathrm{odd}}|a_k|^2 .\]
+By Parseval for the triangle, $\sum|a_k|^2=\frac1T\int_T x^2\dd t=\frac{A^2}{3}=\frac{16}3$, so $P\approx\dfrac{16/3}{100}=0.0533$ W.
+\ans{$P_R\approx\dfrac{A^2/3}{R}=0.0533$ W (the inductor barely affects the power at these frequencies).}
+\end{solution}

@@ -1,0 +1,563 @@
+//// FILE: TravelDemo.java
+// 2024-25 Q1(a) — Factory Method: client never names a concrete package class
+import java.util.List;
+
+interface TourPackage {
+    String getName();
+    double getPrice();
+    String getDescription();
+    List<String> getActivities();
+}
+class AdventurePackage implements TourPackage {
+    public String getName() { return "Adventure"; }
+    public double getPrice() { return 25000; }
+    public String getDescription() { return "For thrill-seekers"; }
+    public List<String> getActivities() { return List.of("Mountain hiking", "River rafting"); }
+}
+class RegularPackage implements TourPackage {
+    public String getName() { return "Regular"; }
+    public double getPrice() { return 12000; }
+    public String getDescription() { return "For leisure travellers"; }
+    public List<String> getActivities() { return List.of("City sightseeing", "Museum visits"); }
+}
+
+// Creator = the centralised creation component
+abstract class PackageCreator {
+    protected abstract TourPackage createPackage();          // the factory method
+    public TourPackage orderPackage() {                       // common logic works on the interface
+        TourPackage p = createPackage();
+        System.out.println("Booked " + p.getName() + " (" + p.getPrice() + "): " + p.getActivities());
+        return p;
+    }
+}
+class AdventureCreator extends PackageCreator {
+    protected TourPackage createPackage() { return new AdventurePackage(); }
+}
+class RegularCreator extends PackageCreator {
+    protected TourPackage createPackage() { return new RegularPackage(); }
+}
+// New type later: HoneymoonPackage + HoneymoonCreator. No existing class is edited.
+
+public class TravelDemo {
+    public static void main(String[] args) {
+        PackageCreator creator = new AdventureCreator();   // chosen by configuration / UI
+        creator.orderPackage();
+        new RegularCreator().orderPackage();
+    }
+}
+//// FILE: ParserDemo.java
+// 2016-17 Q5(c) — choose a parser from the file extension (factory with a registry)
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
+interface Parser { void parse(String fileName); }
+class CParser    implements Parser { public void parse(String f) { System.out.println("C parser: " + f); } }
+class CppParser  implements Parser { public void parse(String f) { System.out.println("C++ parser: " + f); } }
+class JavaParser implements Parser { public void parse(String f) { System.out.println("Java parser: " + f); } }
+class HtmlParser implements Parser { public void parse(String f) { System.out.println("HTML parser: " + f); } }
+
+class ParserFactory {
+    private static final Map<String, Supplier<Parser>> REG = new HashMap<>();
+    static {
+        REG.put("c", CParser::new);
+        REG.put("cpp", CppParser::new);
+        REG.put("java", JavaParser::new);
+        REG.put("html", HtmlParser::new);
+    }
+    static void register(String ext, Supplier<Parser> s) { REG.put(ext, s); }  // new language
+    static Parser getParser(String fileName) {
+        String ext = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+        Supplier<Parser> s = REG.get(ext);
+        if (s == null) throw new IllegalArgumentException("No parser for ." + ext);
+        return s.get();
+    }
+}
+public class ParserDemo {
+    public static void main(String[] args) {
+        for (String f : new String[]{"main.c", "a.cpp", "App.java", "index.html"})
+            ParserFactory.getParser(f).parse(f);
+    }
+}
+//// FILE: PizzaDemo.java
+// 2023-24 Q5(a) — Abstract Factory: each region creates a consistent family of ingredients
+interface Crust   { String name(); }
+interface Sauce   { String name(); }
+interface Topping { String name(); }
+
+class ThinCrust       implements Crust   { public String name() { return "thin crust"; } }
+class MarinaraSauce   implements Sauce   { public String name() { return "marinara"; } }
+class Mozzarella      implements Topping { public String name() { return "fresh mozzarella, basil"; } }
+class DeepDishCrust   implements Crust   { public String name() { return "deep-dish crust"; } }
+class PlumTomatoSauce implements Sauce   { public String name() { return "plum-tomato sauce"; } }
+class Pepperoni       implements Topping { public String name() { return "cheddar, pepperoni"; } }
+
+interface PizzaIngredientFactory {                 // abstract factory
+    Crust createCrust();
+    Sauce createSauce();
+    Topping createTopping();
+}
+class ItalyIngredientFactory implements PizzaIngredientFactory {
+    public Crust createCrust()     { return new ThinCrust(); }
+    public Sauce createSauce()     { return new MarinaraSauce(); }
+    public Topping createTopping() { return new Mozzarella(); }
+}
+class AmericaIngredientFactory implements PizzaIngredientFactory {
+    public Crust createCrust()     { return new DeepDishCrust(); }
+    public Sauce createSauce()     { return new PlumTomatoSauce(); }
+    public Topping createTopping() { return new Pepperoni(); }
+}
+class RegionalPizza {                              // client: never names a concrete ingredient
+    private final Crust crust; private final Sauce sauce; private final Topping topping;
+    RegionalPizza(PizzaIngredientFactory f) {
+        crust = f.createCrust(); sauce = f.createSauce(); topping = f.createTopping();
+    }
+    public String toString() { return crust.name() + " + " + sauce.name() + " + " + topping.name(); }
+}
+public class PizzaDemo {
+    static PizzaIngredientFactory factoryFor(String country) {   // chosen once
+        switch (country) {
+            case "Italy":   return new ItalyIngredientFactory();
+            case "America": return new AmericaIngredientFactory();
+            default: throw new IllegalArgumentException(country);
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println("Italy:   " + new RegionalPizza(factoryFor("Italy")));
+        System.out.println("America: " + new RegionalPizza(factoryFor("America")));
+    }
+}
+//// FILE: SetMenuDemo.java
+// 2021-22 Q3(a) — Abstract Factory: one factory per set menu; one product type per kitchen
+interface RiceItem  { String name(); }   // made in Rice Station
+interface MainDish  { String name(); }   // made in Main Mania
+interface FriedItem { String name(); }   // made in Fry More
+
+class Dish implements RiceItem, MainDish, FriedItem {
+    private final String n;
+    Dish(String n) { this.n = n; }
+    public String name() { return n; }
+}
+interface SetMenuFactory {
+    RiceItem prepareRice();
+    MainDish prepareMain();
+    FriedItem prepareFried();
+}
+class VeggieHarvestFactory implements SetMenuFactory {
+    public RiceItem prepareRice()   { return new Dish("Mushroom Rice"); }
+    public MainDish prepareMain()   { return new Dish("Paneer Masala"); }
+    public FriedItem prepareFried() { return new Dish("Fried Vegetable Pakora"); }
+}
+class ChickenDelightFactory implements SetMenuFactory {
+    public RiceItem prepareRice()   { return new Dish("Chicken Fried Rice"); }
+    public MainDish prepareMain()   { return new Dish("Butter Chicken"); }
+    public FriedItem prepareFried() { return new Dish("Fried Chicken Wings"); }
+}
+class BeefFiestaFactory implements SetMenuFactory {
+    public RiceItem prepareRice()   { return new Dish("Beef Fried Rice"); }
+    public MainDish prepareMain()   { return new Dish("Beef Chili Onion"); }
+    public FriedItem prepareFried() { return new Dish("Fried Beef Bacon"); }
+}
+class SeaShantyFactory implements SetMenuFactory {
+    public RiceItem prepareRice()   { return new Dish("Rice with Shrimp"); }
+    public MainDish prepareMain()   { return new Dish("Crab Masala"); }
+    public FriedItem prepareFried() { return new Dish("Fried Calamari"); }
+}
+class Restaurant {                 // client: assembles one family; cannot mix menus by mistake
+    String deliver(SetMenuFactory f) {
+        return f.prepareRice().name() + ", " + f.prepareMain().name() + ", " + f.prepareFried().name();
+    }
+}
+public class SetMenuDemo {
+    public static void main(String[] args) {
+        Restaurant r = new Restaurant();
+        SetMenuFactory[] menus = { new VeggieHarvestFactory(), new ChickenDelightFactory(),
+                                   new BeefFiestaFactory(), new SeaShantyFactory() };
+        for (SetMenuFactory m : menus)
+            System.out.println(m.getClass().getSimpleName().replace("Factory", "") + ": " + r.deliver(m));
+    }
+}
+//// FILE: RideDemo.java
+// 2017-18 Q7(b) — Abstract Factory: each company supplies a matching (car, moto) fare family
+interface CarFare  { double cost(int passengers, double d, int t); }
+interface MotoFare { double cost(double d); }
+
+class UberCar implements CarFare {
+    public double cost(int n, double d, int t) {
+        double f = (t == 1) ? 1.8 : (t == 2) ? 1.2 : 0.9;
+        return n * d * 18 * f;
+    }
+}
+class PathaoCar implements CarFare {
+    public double cost(int n, double d, int t) {
+        double f = (t == 1) ? 1.5 : (t == 2) ? 1.15 : 0.9;
+        return n * d * 20 * f;
+    }
+}
+class UberMoto   implements MotoFare { public double cost(double d) { return 25 + d * 12; } }
+class PathaoMoto implements MotoFare { public double cost(double d) { return 30 + d * 11; } }
+
+interface RideFactory { CarFare carFare(); MotoFare motoFare(); String name(); }
+class UberFactory implements RideFactory {
+    public CarFare carFare()   { return new UberCar(); }
+    public MotoFare motoFare() { return new UberMoto(); }
+    public String name()       { return "Uber"; }
+}
+class PathaoFactory implements RideFactory {
+    public CarFare carFare()   { return new PathaoCar(); }
+    public MotoFare motoFare() { return new PathaoMoto(); }
+    public String name()       { return "Pathao"; }
+}
+public class RideDemo {
+    public static void main(String[] args) {
+        double d = 10; int n = 2; int t = 1;   // in the exam read these with a Scanner
+        for (RideFactory f : new RideFactory[]{ new UberFactory(), new PathaoFactory() })
+            System.out.printf("%s car: %.2f   %s moto: %.2f%n",
+                    f.name(), f.carFare().cost(n, d, t), f.name(), f.motoFare().cost(d));
+    }
+}
+//// FILE: IdDemo.java
+// 2019-20 Q1(a) — one Singleton generator per identifier kind; serial ids from 1, never duplicated
+class IdGenerator {
+    private static IdGenerator userIds, districtIds, qualificationIds, txIds;
+    private long next = 1;
+    private IdGenerator() { }                                  // no outside construction
+
+    public static synchronized IdGenerator forUser() {
+        if (userIds == null) userIds = new IdGenerator();
+        return userIds;
+    }
+    public static synchronized IdGenerator forDistrict() {
+        if (districtIds == null) districtIds = new IdGenerator();
+        return districtIds;
+    }
+    public static synchronized IdGenerator forQualification() {
+        if (qualificationIds == null) qualificationIds = new IdGenerator();
+        return qualificationIds;
+    }
+    public static synchronized IdGenerator forTransaction() {
+        if (txIds == null) txIds = new IdGenerator();
+        return txIds;
+    }
+    public synchronized long nextId() { return next++; }      // strictly serial
+}
+class RegistrationService {                // back end called by the UI
+    long registerUser(String name)      { return IdGenerator.forUser().nextId(); }
+    long createDistrict(String d)       { return IdGenerator.forDistrict().nextId(); }
+    long createQualification(String q)  { return IdGenerator.forQualification().nextId(); }
+    long recordTransaction()            { return IdGenerator.forTransaction().nextId(); }
+}
+public class IdDemo {
+    public static void main(String[] args) {
+        RegistrationService s = new RegistrationService();
+        System.out.println("user " + s.registerUser("A") + ", user " + s.registerUser("B"));
+        System.out.println("district " + s.createDistrict("Dhaka") + ", tx " + s.recordTransaction()
+                + ", tx " + s.recordTransaction() + ", qualification " + s.createQualification("BSc"));
+        System.out.println("same object? " + (IdGenerator.forUser() == IdGenerator.forUser()));
+    }
+}
+//// FILE: SingletonKinds.java
+// 2016-17 Q5(a), 2012-13 Q2(a), 2010-11 Q4(a) — eager, lazy, double-checked, holder
+class EagerSingleton {
+    private static final EagerSingleton INSTANCE = new EagerSingleton();  // made at class load
+    private EagerSingleton() { }
+    public static EagerSingleton getInstance() { return INSTANCE; }
+}
+class LazySingleton {
+    private static LazySingleton instance;                                // made on first use
+    private LazySingleton() { }
+    public static synchronized LazySingleton getInstance() {
+        if (instance == null) instance = new LazySingleton();
+        return instance;
+    }
+}
+class DclSingleton {
+    private static volatile DclSingleton instance;
+    private DclSingleton() { }
+    public static DclSingleton getInstance() {
+        if (instance == null) {
+            synchronized (DclSingleton.class) {
+                if (instance == null) instance = new DclSingleton();
+            }
+        }
+        return instance;
+    }
+}
+class HolderSingleton {                                // 2010-11 Q4(a)(ii): valid, lazy, thread-safe
+    private HolderSingleton() { }
+    private static class SingletonHolder {
+        private static final HolderSingleton instance = new HolderSingleton();
+    }
+    public static HolderSingleton getInstance() { return SingletonHolder.instance; }
+}
+public class SingletonKinds {
+    public static void main(String[] args) {
+        System.out.println(EagerSingleton.getInstance() == EagerSingleton.getInstance());
+        System.out.println(LazySingleton.getInstance() == LazySingleton.getInstance());
+        System.out.println(DclSingleton.getInstance() == DclSingleton.getInstance());
+        System.out.println(HolderSingleton.getInstance() == HolderSingleton.getInstance());
+    }
+}
+//// FILE: LimitedDemo.java
+// 2011-12 Q1(b) — Base inherited by Derived1 (max 5) and Derived2 (max 10): Singleton generalised
+import java.util.HashMap;
+import java.util.Map;
+
+abstract class Base {
+    private static final Map<Class<?>, Integer> COUNT = new HashMap<>();
+    protected Base(int limit) {                       // each subclass passes its own limit
+        int c = COUNT.getOrDefault(getClass(), 0);
+        if (c >= limit)
+            throw new IllegalStateException(getClass().getSimpleName() + ": limit " + limit + " reached");
+        COUNT.put(getClass(), c + 1);
+    }
+}
+class Derived1 extends Base {
+    private static final int MAX = 5;
+    private Derived1() { super(MAX); }                // private: only getInstance() creates
+    public static synchronized Derived1 getInstance() {
+        try { return new Derived1(); } catch (IllegalStateException e) { return null; }
+    }
+}
+class Derived2 extends Base {
+    private static final int MAX = 10;
+    private Derived2() { super(MAX); }
+    public static synchronized Derived2 getInstance() {
+        try { return new Derived2(); } catch (IllegalStateException e) { return null; }
+    }
+}
+public class LimitedDemo {
+    public static void main(String[] args) {
+        Derived1[] a = new Derived1[7];
+        Derived2[] b = new Derived2[12];
+        int ok1 = 0, ok2 = 0;
+        for (int i = 0; i < a.length; i++) if ((a[i] = Derived1.getInstance()) != null) ok1++;
+        for (int i = 0; i < b.length; i++) if ((b[i] = Derived2.getInstance()) != null) ok2++;
+        System.out.println("Derived1 created: " + ok1 + " of " + a.length);
+        System.out.println("Derived2 created: " + ok2 + " of " + b.length);
+    }
+}
+//// FILE: HtmlDemo.java
+// 2022-23 Q3(a) — Builder: HTMLPageDirector drives HTMLPageBuilder
+import java.util.ArrayList;
+import java.util.List;
+
+class HTMLPage {                                       // product
+    private String title = "", heading = "";
+    private final List<String> lines = new ArrayList<>();
+    void setTitle(String t)   { title = t; }
+    void setHeading(String h) { heading = h; }
+    void addLine(String l)    { lines.add(l); }
+    String render() {
+        StringBuilder sb = new StringBuilder("<html><head><title>" + title + "</title></head><body>\n");
+        sb.append("<h1>").append(heading).append("</h1>\n");
+        for (String l : lines) sb.append("<p>").append(l).append("</p>\n");
+        return sb.append("</body></html>").toString();
+    }
+}
+interface PageBuilder {                                // builder
+    void setPageTitle(String t);
+    void setPageHeading(String h);
+    void addText(String line);
+    HTMLPage getPage();                                // final assembly
+}
+class HTMLPageBuilder implements PageBuilder {         // concrete builder
+    private final HTMLPage page = new HTMLPage();
+    public void setPageTitle(String t)   { page.setTitle(t); }
+    public void setPageHeading(String h) { page.setHeading(h); }
+    public void addText(String line)     { page.addLine(line); }
+    public HTMLPage getPage()            { return page; }
+}
+class HTMLPageDirector {                               // director
+    private final PageBuilder builder;
+    HTMLPageDirector(PageBuilder b) { builder = b; }
+    HTMLPage construct(String title, String heading, String... lines) {
+        builder.setPageTitle(title);
+        builder.setPageHeading(heading);
+        for (String l : lines) builder.addText(l);
+        return builder.getPage();
+    }
+}
+public class HtmlDemo {
+    public static void main(String[] args) {
+        HTMLPageDirector d = new HTMLPageDirector(new HTMLPageBuilder());
+        System.out.println(d.construct("CSE 213", "Builder Pattern", "Line one.", "Line two.").render());
+    }
+}
+//// FILE: FormDemo.java
+// 2018-19 Q3(b) — Builder: a form per user type; Director = the application
+import java.util.ArrayList;
+import java.util.List;
+
+class Form {                                                    // product
+    private final List<String> parts = new ArrayList<>();
+    void add(String p) { parts.add(p); }
+    public String toString() { return String.join(" | ", parts); }
+}
+abstract class FormBuilder {                                    // builder
+    protected Form form;
+    void createNewForm() { form = new Form(); }
+    abstract void buildHeader();
+    abstract void buildGradeTable();
+    abstract void buildButtons();
+    Form getForm() { return form; }
+}
+class AdminFormBuilder extends FormBuilder {                    // concrete builders
+    void buildHeader()     { form.add("Header: Admin panel"); }
+    void buildGradeTable() { form.add("Grades: all students (editable)"); }
+    void buildButtons()    { form.add("Edit[on] Publish[on] Delete[on]"); }
+}
+class StudentFormBuilder extends FormBuilder {
+    void buildHeader()     { form.add("Header: My grades"); }
+    void buildGradeTable() { form.add("Grades: own (read-only)"); }
+    void buildButtons()    { form.add("Edit[off] Publish[off] Print[on]"); }
+}
+class GradeApplication {                                        // director
+    Form formFor(String role) {
+        FormBuilder b = role.equals("admin") ? new AdminFormBuilder() : new StudentFormBuilder();
+        b.createNewForm();
+        b.buildHeader();
+        b.buildGradeTable();
+        b.buildButtons();
+        return b.getForm();
+    }
+}
+public class FormDemo {
+    public static void main(String[] args) {
+        GradeApplication app = new GradeApplication();
+        System.out.println("admin:   " + app.formFor("admin"));
+        System.out.println("student: " + app.formFor("student"));
+    }
+}
+//// FILE: LalbaghDemo.java
+// 2017-18 Q6(a) — Builder: set meals (rice + curries, or bread + kebabs), optional drinks, bill first
+import java.util.ArrayList;
+import java.util.List;
+
+class Food {
+    final String name; final double price;
+    Food(String name, double price) { this.name = name; this.price = price; }
+}
+class SetMeal {                                                // product
+    private final List<Food> items = new ArrayList<>();
+    void add(Food f) { items.add(f); }
+    double bill() { double s = 0; for (Food f : items) s += f.price; return s; }
+    void show() {
+        for (Food f : items) System.out.printf("  %-20s %6.1f%n", f.name, f.price);
+        System.out.printf("  %-20s %6.1f%n", "BILL (pay first)", bill());
+    }
+}
+abstract class SetMealBuilder {                                // builder
+    protected final SetMeal meal = new SetMeal();
+    abstract void addMainItem();
+    abstract void addSides();
+    void addDrink(String name, double price) { meal.add(new Food(name, price)); }
+    SetMeal getMeal() { return meal; }
+}
+class RiceMealBuilder extends SetMealBuilder {
+    void addMainItem() { meal.add(new Food("Plain rice", 40)); }
+    void addSides()    { meal.add(new Food("Chicken gravy curry", 90)); meal.add(new Food("Dal", 20)); }
+}
+class ChickenKebabMealBuilder extends SetMealBuilder {
+    void addMainItem() { meal.add(new Food("Naan x2", 30)); }
+    void addSides()    { meal.add(new Food("Chicken kebab", 110)); }
+}
+class BeefKebabMealBuilder extends SetMealBuilder {
+    void addMainItem() { meal.add(new Food("Naan x2", 30)); }
+    void addSides()    { meal.add(new Food("Beef kebab", 140)); }
+}
+class Waiter {                                                 // director
+    SetMeal prepare(SetMealBuilder b, String drink, double drinkPrice) {
+        b.addMainItem();
+        b.addSides();
+        if (drink != null) b.addDrink(drink, drinkPrice);       // drinks are optional extras
+        return b.getMeal();
+    }
+}
+public class LalbaghDemo {
+    public static void main(String[] args) {
+        Waiter w = new Waiter();
+        System.out.println("Rice set + lemonade:");
+        w.prepare(new RiceMealBuilder(), "Lemonade", 35).show();
+        System.out.println("Bread + beef kebab, no drink:");
+        w.prepare(new BeefKebabMealBuilder(), null, 0).show();
+    }
+}
+//// FILE: BurgerShop.java
+// 2020-21 Q1(a) — the orders built with three patterns: Decorator (cheese), Composite (orders), Builder (combo meals)
+import java.util.ArrayList;
+import java.util.List;
+
+interface MenuItem { String desc(); double price(); }          // common component interface
+class ShopPizza implements MenuItem {
+    private final String kind; private final double p;
+    ShopPizza(String kind, double p) { this.kind = kind; this.p = p; }
+    public String desc() { return kind + " pizza"; }
+    public double price() { return p; }
+}
+class SimpleItem implements MenuItem {                         // drinks, appetizers
+    private final String n; private final double p;
+    SimpleItem(String n, double p) { this.n = n; this.p = p; }
+    public String desc() { return n; }
+    public double price() { return p; }
+}
+// assumed prices: Veggi 300, Beef 400, Chicken 350, cheese +50; Coffee 80, Water 20, Coke 40;
+//                 French Fry 100, Onion Rings 120
+
+// Pattern 1 — DECORATOR: extra cheese wraps any pizza
+abstract class PizzaDecorator implements MenuItem {
+    protected final MenuItem inner;
+    PizzaDecorator(MenuItem i) { inner = i; }
+}
+class ExtraCheese extends PizzaDecorator {
+    ExtraCheese(MenuItem i) { super(i); }
+    public String desc() { return inner.desc() + " + cheese"; }
+    public double price() { return inner.price() + 50; }
+}
+
+// Pattern 2 — COMPOSITE: an order is a MenuItem made of MenuItems
+class Order implements MenuItem {
+    private final String name;
+    private final List<MenuItem> parts = new ArrayList<>();
+    Order(String name) { this.name = name; }
+    Order add(MenuItem m) { parts.add(m); return this; }
+    public String desc() {
+        List<String> d = new ArrayList<>();
+        for (MenuItem m : parts) d.add(m.desc());
+        return name + " [" + String.join(", ", d) + "]";
+    }
+    public double price() { double s = 0; for (MenuItem m : parts) s += m.price(); return s; }
+}
+
+// Pattern 3 — BUILDER: a combo meal is assembled step by step (appetizer, pizza, drinks)
+class ComboMeal {
+    final List<MenuItem> items = new ArrayList<>();
+    double price() { double s = 0; for (MenuItem m : items) s += m.price(); return s; }
+}
+class ComboBuilder {
+    private final ComboMeal meal = new ComboMeal();
+    ComboBuilder pizza(String kind, double p, boolean cheese) {
+        MenuItem pz = new ShopPizza(kind, p);
+        meal.items.add(cheese ? new ExtraCheese(pz) : pz);
+        return this;
+    }
+    ComboBuilder appetizer(String n, double p) { meal.items.add(new SimpleItem(n, p)); return this; }
+    ComboBuilder drink(String n, double p)     { meal.items.add(new SimpleItem(n, p)); return this; }
+    ComboMeal build() { return meal; }
+}
+public class BurgerShop {
+    public static void main(String[] args) {
+        MenuItem o1 = new Order("Order 1").add(new ExtraCheese(new ShopPizza("Beef", 400)))
+                                          .add(new SimpleItem("French Fry", 100));
+        MenuItem o2 = new Order("Order 2").add(new ShopPizza("Chicken", 350))
+                                          .add(new SimpleItem("Onion Rings", 120)).add(new SimpleItem("Water", 20));
+        ComboMeal o3 = new ComboBuilder().pizza("Veggi", 300, false).appetizer("French Fry", 100)
+                                         .drink("Coke", 40).drink("Coke", 40).build();
+        ComboMeal o4 = new ComboBuilder().pizza("Veggi", 300, false).appetizer("Onion Rings", 120)
+                                         .drink("Coffee", 80).drink("Water", 20).build();
+        System.out.println(o1.desc() + " = " + o1.price());
+        System.out.println(o2.desc() + " = " + o2.price());
+        System.out.println("Order 3 (combo) = " + o3.price());
+        System.out.println("Order 4 (combo) = " + o4.price());
+    }
+}

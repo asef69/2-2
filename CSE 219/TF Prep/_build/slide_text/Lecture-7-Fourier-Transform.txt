@@ -1,0 +1,744 @@
+
+===== page 1 =====
+Lecture 7: Fourier Transform
+CSE 219: Signals and Linear Systems
+Anik Saha
+Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+Fourier Transform: to ∞and beyond
+Looking inside any function. Yes, not just periodic ones!
+
+===== page 3 =====
+Aperiodic functions crying in the background. . .
+
+===== page 4 =====
+Fourier Transform
+When the period goes to infinity!
+Fourier series decomposes periodic signals.
+Fourier transform lets us do something similar for aperiodic signals.
+
+===== page 5 =====
+Fourier series had one big condition
+Fourier Series
+x(t + T) = x(t)
+t
+keeps repeating
+But real signals
+often do not
+no fixed period
+t
+one-time event
+Can we still describe a non-repeating signal using frequencies?
+
+===== page 6 =====
+Let’s cheat first: repeat one lonely pulse
+Start with one finite-duration signal x(t)
+exT(t) =
+∞
+X
+m=−∞
+x(t −mT)
+t
+· · ·
+· · ·
+−T
+0
+T
+T
+Now it is periodic, so Fourier series works.
+
+===== page 7 =====
+Now stretch the period
+Small T
+t
+copies are close
+Large T
+t
+copies move away
+As T
+→
+∞, the repeated signal
+starts looking like one isolated signal.
+
+===== page 8 =====
+What happens in frequency?
+ω0 = 2π
+T ,
+∆ω = ω0.
+Small T, large ∆ω
+ω
+few frequency lines
+Large T, small ∆ω
+ω
+many frequency lines
+Increasing T makes the allowed frequencies closer and closer.
+
+===== page 9 =====
+Fourier-series coefficients of the repeated signal
+The periodic signal has Fourier series
+exT(t) =
+∞
+X
+k=−∞
+akejkω0t
+ak = 1
+T
+Z
+one period
+exT(t)e−jkω0t dt
+This is still the same Fourier-series coefficient formula.
+
+===== page 10 =====
+Choose one period that contains the pulse
+t
+−T/2
+T/2
+x(t)
+ak = 1
+T
+Z T/2
+−T/2
+exT(t)e−jkω0t dt
+Inside this period, exT(t) is just the isolated pulse x(t).
+1 Z ∞
+( )
+jkω0t d
+
+===== page 11 =====
+A smooth spectrum is hiding behind the stems
+Look at the integral part
+ak = 1
+T
+Z ∞
+−∞
+x(t)e−jkω0t dt
+|
+{z
+}
+depends on kω0
+Let
+X(jω) =
+Z ∞
+−∞x(t)e−jωt dt
+
+===== page 12 =====
+So the stems are samples of a smooth curve
+Tak = X(jkω0)
+ω
+X(jω)
+smooth envelope
+Fourier-series samples
+As T increases, the sample locations kω0 become closer.
+
+===== page 13 =====
+But why do raw coefficients shrink?
+ak = 1
+T X(jkω0)
+Since
+∆ω = ω0 = 2π
+T ,
+we have
+1
+T = ∆ω
+2π .
+
+===== page 14 =====
+Think of it like frequency-density
+ω
+∆ω
+spread over a bin
+stem amount
+When ∆ω →0, the bins become thinner and thinner,
+and the discrete spectrum becomes a continuous spectrum.
+
+===== page 15 =====
+The Fourier-series sum becomes an integral
+Start from Fourier-series synthesis
+exT(t) =
+∞
+X
+k=−∞
+akejkω0t
+Use
+ak = ∆ω
+2π X(jkω0).
+exT(t) = 1
+2π
+∞
+X
+k=−∞
+X(jkω0)ejkω0t∆ω
+
+===== page 16 =====
+Let T →∞
+T →∞
+=⇒
+ω0 = ∆ω = 2π
+T →0
+kω0
+becomes a con-
+tinuous variable
+ω
+X
+becomes
+Z
+x(t) = 1 Z ∞
+X(jω)ejωt dω
+
+===== page 17 =====
+The Fourier transform pair
+Analysis
+X(jω) =
+Z ∞
+−∞x(t)e−jωt dt
+x(t) −→X(jω)
+Synthesis
+x(t) = 1
+2π
+Z ∞
+−∞X(jω)ejωt dω
+X(jω) −→x(t)
+Fourier transform is Fourier series after
+the frequency lines become continuous.
+
+===== page 18 =====
+The whole story in one picture
+Fourier Series
+periodic signal
+discrete frequencies
+Increase T
+∆ω = 2π
+T →0
+stems get closer
+Fourier Transform
+aperiodic signal
+continuous spectrum
+Fourier transform is not a totally new idea.
+It is the continuous-frequency version of Fourier series.
+
+===== page 19 =====
+Let’s keep rotating and oscillating random things. . . !
+
+===== page 20 =====
+Injecting oscillation into a signal
+x(t)
+−→
+x(t) cos(ω0t)
+Envelope x(t)
+t
+x(t)
+Oscillation
+t
+cos(ω0t)
+Oscillating
+envelope
+t
+x(t) cos(ω0t)
+We keep the shape of x(t) as an en-
+velope, but put oscillation inside it.
+
+===== page 21 =====
+This happens in real systems too
+A damped oscillation
+t
+x(t)
+decay envelope
+oscillation + decay
+Examples: damped pendulum, vibrating string
+with loss, ringing circuits, fading echoes.
+
+===== page 22 =====
+So what transform should we expect?
+x(t)
+←→
+X(jω).
+What is the Fourier transform of
+x(t) cos(ω0t)?
+Let’s first solve the cleaner version:
+x(t)ejω0t.
+
+===== page 23 =====
+Multiplying by ejω0t shifts every frequency
+A frequency component inside x(t) looks like
+ejωt.
+After multiplying by ejω0t,
+ejωt · ejω0t = ej(ω+ω0)t.
+Every component at ω moves to ω + ω0.
+
+===== page 24 =====
+The spectrum slides to the right
+Before
+ω
+X(jω)
+=⇒
+After multiplying by ejω0t
+ω
+ω0
+X(j(ω −ω0))
+To move the spectrum right by ω0, we write X(j(ω −ω0)).
+
+===== page 25 =====
+Frequency-shifting property
+If
+x(t)
+←→
+X(jω),
+then
+x(t)ejω0t
+←→
+X
+
+j(ω −ω0)
+
+Multiplication by a complex exponential shifts the spectrum.
+
+===== page 26 =====
+Cosine is two rotating exponentials
+cos(ω0t) = 1
+2
+
+ejω0t + e−jω0t
+So
+x(t) cos(ω0t) = 1
+2x(t)ejω0t + 1
+2x(t)e−jω0t.
+A cosine creates two shifted copies of the spectrum.
+
+===== page 27 =====
+Cosine modulation creates two spectral copies
+ω
+−ω0
+ω0
+original X(jω)
+left copy
+right copy
+x(t) cos(ω0t)
+←→
+1
+2X
+
+j(ω −ω0)
+
++ 1
+2X
+
+j(ω + ω0)
+
+
+===== page 28 =====
+What did oscillation do?
+In time:
+x(t) →x(t) cos(ω0t)
+We injected oscillation.
+In frequency:
+X(jω) →two shifted copies
+The spectrum
+moves to ±ω0.
+
+===== page 29 =====
+A very common transform: the rectangle
+x(t) =
+
+
+
+
+
+1,
+−T
+2 < t < T
+2 ,
+0,
+otherwise.
+t
+x(t)
+−T/2
+T/2
+1
+width T
+This transform appears everywhere, let’s keep it in our toolbox :D
+
+===== page 30 =====
+Fourier transform of the rectangle
+Since x(t)
+=
+1 only from −T/2 to T/2,
+X(jω) =
+Z T/2
+−T/2
+e−jωt dt.
+X(jω) =
+"
+e−jωt
+−jω
+#T/2
+−T/2
+= ejωT/2 −e−jωT/2
+jω
+.
+X(jω) = 2 sin(ωT/2)
+ω
+
+===== page 31 =====
+Wider rectangle, narrower spectrum
+x(t) = 1,
+|t| < T
+2
+⇐⇒
+X(jω) = 2 sin(ωT/2)
+ω
+.
+Time domain
+t
+large T
+Frequency domain
+ω
+narrow main lobe
+
+===== page 32 =====
+Practice: two centered rectangles
+x1(t) =
+
+
+
+1,
+−1 < t < 1,
+0,
+otherwise.
+X1(jω) =?
+x2(t) =
+
+
+
+1,
+−3 < t < 3,
+0,
+otherwise.
+X2(jω) =?
+Use
+width T
+=⇒
+X(jω) = 2 sin(ωT/2)
+ω
+.
+
+===== page 33 =====
+Answer: just plug in the width
+For −1
+<
+t
+<
+1, the width is T
+=
+2:
+X1(jω) = 2 sin(ω)
+ω
+.
+For −3
+<
+t
+<
+3, the width is T
+=
+6:
+X2(jω) = 2 sin(3ω)
+ω
+.
+The same rectangle formula works once we identify the width.
+
+===== page 34 =====
+What if the rectangle is shifted?
+x(t) =
+(
+1,
+4 < t < 10,
+0,
+otherwise.
+t
+4
+7
+10
+1
+width 6
+center
+This is a width-6 centered rectangle shifted right by 7.
+
+===== page 35 =====
+Answer: rectangle formula plus time shift
+A width-6 rectangle centered at zero has transform
+R(jω) = 2 sin(3ω)
+ω
+.
+Our signal is
+x(t) = r(t −7).
+Using time shifting,
+r(t −t0)
+←→
+e−jωt0R(jω).
+
+===== page 36 =====
+A Lego block signal
+x(t) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+1,
+1 < t < 2,
+1.5,
+2 < t < 3,
+1,
+3 < t < 4,
+0,
+otherwise.
+t
+x(t)
+1
+2
+3
+4
+1
+1.5
+looks complicated?
+
+===== page 37 =====
+Decompose the Lego block
+x(t) = height 1 rectangle from 1 to 4
+|
+{z
+}
+wide block
++ height 0.5 rectangle from 2 to 3
+|
+{z
+}
+small top block
+.
+t
+1
+2
+3
+4
+width 3, center 2.5
+width 1, center 2.5
+
+===== page 38 =====
+Fourier transform of the Lego block
+Wide block:
+width 3, center 2.5
+=⇒
+e−j2.5ω 2 sin(1.5ω)
+ω
+.
+Top block:
+height 0.5, width 1, center 2.5
+=⇒
+0.5e−j2.5ω 2 sin(0.5ω)
+ω
+.
+X(jω) = e−j2.5ω
+
+2 sin(1.5ω)
+ω
++ sin(0.5ω)
+ω
+
+
+
+===== page 39 =====
+Now lock a cosine inside the rectangle
+Let r(t) be the rectangle from −T/2 to T/2.
+x(t) = r(t) cos(ω0t)
+t
+−T/2
+T/2
+windowed cosine
+This is just modulation of a rectangle.
+
+===== page 40 =====
+A windowed cosine creates two sinc-shaped copies
+ω
+−ω0
+ω0
+copy
+copy
+A cosine inside a rectangle has spectrum
+centered around ±ω0, not around zero.
+
+===== page 41 =====
+Fourier transform of a spike
+x(t) = δ(t)
+t
+x(t)
+area = 1
+0
+· · ·
+· · ·
+What does this single spike look like in the frequency domain?
+
+===== page 42 =====
+Simple, let’s use the sifting property!
+For x(t)
+=
+δ(t),
+X(jω) =
+Z ∞
+−∞
+δ(t)e−jωt dt.
+Now the impulse simply samples the background function at t = 0:
+Z ∞
+−∞
+δ(t)f (t) dt = f (0).
+X(jω)
+=
+e−jω·0
+=
+1.
+
+===== page 43 =====
+So the spectrum is completely flat
+δ(t)
+←→
+1
+Time domain
+t
+δ(t)
+1
+0
+Frequency domain
+ω
+X(jω)
+1
+0
+· · ·
+· · ·
+A very narrow spike in time needs all frequencies equally.
+
+===== page 44 =====
+Small bonus: what if the spike is shifted?
+Let, x(t)
+=
+δ(t
+−t0).
+Then, X(jω)
+=
+R ∞
+−∞δ(t −t0)e−jωt dt.
+Using sifting, the impulse samples the exponential at t
+=
+t0:
+X(jω) = e−jωt0.
+δ(t −t0)
+←→
+e−jωt0
+
+===== page 45 =====
+Applications
+Where Fourier transform quietly appears
+
+===== page 46 =====
+Audio Denoising
+Remove the unwanted frequencies
+
+===== page 47 =====
+Audio denoising: keep the voice, reduce the noise
+t
+noisy audio
+=⇒
+t
+cleaner audio
+Fourier transform lets us see which frequen-
+cies are voice-like and which are noise-like.
+
+===== page 48 =====
+Image Denoising
+Clean an image by editing its frequencies
+
+===== page 49 =====
+Image denoising: noise often hides in high frequencies
+Image
+Frequency view
+Filtered image
+A blurry-but-clean image is often
+better than a sharp-but-noisy one.
+
+===== page 50 =====
+JPEG Compression
+Throw away what the eye barely notices
+
+===== page 51 =====
+JPEG compression: not all frequencies are equally important
+image block
+frequency block
+compressed block
+small high-frequency coefficients are rounded away
+Fourier-like ideas help images become
+smaller without looking very different.
+
+===== page 52 =====
+MRI
+The scanner collects frequency-domain data first
+
+===== page 53 =====
+MRI: the picture is reconstructed from frequency samples
+Measured data
+k-space
+=⇒
+Reconstructed image
+image
+MRI is a beautiful real-life case where fre-
+quency domain comes before the image.
+
+===== page 54 =====
+Music Recognition
+Fingerprints in frequency
+
+===== page 55 =====
+Music recognition: a song can be identified from frequency
+peaks
+time
+frequency
+fingerprint
+another fingerprint
+Even a short audio clip can reveal a
+unique pattern of strong frequencies.
+
+===== page 56 =====
+Vibration Diagnosis
+Machines complain in frequencies
+
+===== page 57 =====
+Vibration diagnosis: a faulty machine changes its spectrum
+Healthy
+ω
+Faulty
+ω
+A bearing crack or loose part may be
+easier to see in frequency than in time.
+
+===== page 58 =====
+ECG Filtering
+Rescue the heartbeat from interference
+
+===== page 59 =====
+ECG filtering: remove hum without destroying the heartbeat
+t
+heartbeat
+power-line hum
+Fourier transform helps design filters that
+remove unwanted frequencies carefully.
+
+===== page 60 =====
+Thank you!
+
+===== page 61 =====
+Thank youuu! Until we meet again. . .

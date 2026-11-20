@@ -1,0 +1,952 @@
+
+===== page 1 =====
+Lecture 3: Linear Time Invariant Systems and
+Convolution
+CSE 219: Signals and Linear Systems
+Anik Saha
+Adjunct Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+Systems and LTI Systems
+Signals go in. Signals come out.
+
+===== page 3 =====
+A system transforms an input signal into an output signal
+A system is something that takes a signal and produces another signal.
+x(t)
+−→
+system
+−→
+y(t)
+Continuous-time view
+t
+x(t) = u(t)
+S
+system
+t
+y(t)
+
+===== page 4 =====
+A system takes a whole signal, not just one number
+Ordinary function: one number goes in, one number comes out
+Signal system: one whole signal / function goes
+in, another whole signal / function comes out
+t
+x(t)
+whole input signal
+S
+system
+t
+y(t)
+whole output signal
+
+===== page 5 =====
+Discrete-time systems transform one sequence into another
+In discrete time, the input is a whole sequence x[n],
+and the output is another sequence y[n].
+x[n]
+−→
+S
+−→
+y[n]
+Example input-output pair
+n
+x[n]
+S
+n
+y[n]
+
+===== page 6 =====
+Two Properties that will
+make things easier
+
+===== page 7 =====
+Linear: scaling the input simply scales the output
+If x(t)
+−→
+y(t), then, a x(t)
+−→
+a y(t).
+x(t)
+S
+y(t)
+2x(t)
+S
+2y(t)
+
+===== page 8 =====
+Linear: adding inputs simply adds outputs
+If x1(t) −→y1(t), and x2(t) −→y2(t), then, x1(t)+x2(t) −→y1(t)+y2(t).
+Separate inputs
+x1(t) −→y1(t)
+x2(t) −→y2(t)
+Treat the two pieces separately.
+Input together
+x1(t)+x2(t) −→y1(t)+y2(t)
+The output is just the sum
+of the separate outputs.
+
+===== page 9 =====
+Time-invariance
+
+===== page 10 =====
+Time-invariant: delaying the input only delays the output
+If x(t)
+−→
+y(t), then, x(t −t0)
+−→
+y(t −t0).
+x(t)
+S
+y(t)
+x(t −t0)
+delay
+S
+same delay
+y(t −t0)
+
+===== page 11 =====
+An LTI system is linear and time-invariant
+Linear
+ax1 + bx2 −→ay1 + by2
+Time-invariant
+x(t −t0) −→y(t −t0)
+Why we care: for LTI systems, one special response will
+eventually let us compute the output for any possible input.
+
+===== page 12 =====
+A Detour through
+Convolution
+Convolution is simply a mathematical operation that appears very
+universally.
+
+===== page 13 =====
+Convolution is just another operation on two sequences
+a[k]
+1
+3
+2
+5
+4
+b[k]
+2
+−1
+4
+1
+3
+k = 0 k = 1 k = 2 k = 3 k = 4
+Add
+(a + b)[k]
+Add match-
+ing positions.
+Subtract
+(a −b)[k]
+Subtract match-
+ing positions.
+Convolve
+(a ∗b)[k]
+A different
+kind of mixing.
+
+===== page 14 =====
+Convolution beautifully appears while multiplying polynomials
+First polynomial
+A(z) = 1+3z+2z2+5z3+4z4
+1
+a0
+3
+a1
+2
+a2
+5
+a3
+4
+a4
+Second polynomial
+B(z) = 2−z +4z2+z3+3z4
+2
+b0
+−1
+b1
+4
+b2
+1
+b3
+3
+b4
+Question: what is the coefficient of z4 in A(z)B(z)?
+
+===== page 15 =====
+The coefficient of z4 comes from criss-crossed pairings
+To obtain z4, we collect all products whose powers add to 4.
+Pair coefficients whose indices add to 4
+1
+3
+2
+5
+4
+2
+−1
+4
+1
+3
+a0
+a1
+a2
+a3
+a4
+b0
+b1
+b2
+b3
+b4
+A(z)
+B(z)
+a0b4, a1b3, a2b2, a3b1, a4b0
+c[4] = 1 · 3 + 3 · 1 + 2 · 4 + 5(−1) + 4 · 2 = 17.
+
+===== page 16 =====
+The crossed-pairing rule has a compact formula
+If
+A(z) =
+X
+k
+a[k]zk,
+B(z) =
+X
+k
+b[k]zk,
+then the coefficient of zn in A(z)B(z) is
+c[n] =
+X
+k
+a[k] b[n −k].
+
+===== page 17 =====
+Reflection turns crossed pairings into vertical pairings
+The formula b[n −k] means: reflect one sequence, then shift it.
+Start with n
+=
+0: compare a[k] with b[−k]
+k
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+a[k]
+b[−k]
+1
+3
+2
+5
+4
+3
+1
+4
+−1
+2
+overlap
+c[0]
+=
+a[0]b[0]
+=
+1 · 2
+=
+2
+
+===== page 18 =====
+Sliding the reflected sequence gives the next coefficients
+For c[n], we compare a[k] with b[n −k].
+The shift n decides which products line up vertically.
+Now take for example n = 2: compare a[k] with b[2 −k]
+k
+−3
+−2
+−1
+0
+1
+2
+3
+4
+a[k]
+b[2 −k]
+1
+3
+2
+5
+4
+3
+1
+4
+−1
+2
+c[2]
+=
+1 · 4 + 3(−1) + 2 · 2
+=
+5
+
+===== page 19 =====
+At n = 4, the vertical products give the z4 coefficient
+Now compare a[k] with b[4 −k]. All five products line up.
+The same c[4] as before, now as vertical multiply-and-add
+k
+0
+1
+2
+3
+4
+a[k]
+b[4 −k]
+1
+3
+2
+5
+4
+3
+1
+4
+−1
+2
+c[4] = 1 · 3 + 3 · 1 + 2 · 4 + 5(−1) + 4 · 2 = 17
+
+===== page 20 =====
+Convolution: Keep the first signal just as is, reflect the
+second, slide rightward, find overlaps, then multiply-and-add!
+
+===== page 21 =====
+This sliding multiply-and-add operation is convolution
+c[n] = (a ∗b)[n] =
+P∞
+k=−∞a[k] b[n −k]
+
+===== page 22 =====
+1. Reflect
+b[k]
+−→
+b[−k]
+Turn one sequence around (time-reversal).
+2. Shift
+b[−k]
+−→
+b[n −k]
+Right shift the reflected sequence to the position n.
+3. Multiply, add
+X
+k
+a[k] b[n −k]
+Sum of vertical products give one output value c[n].
+
+===== page 23 =====
+Practice: compute the convolution of two short sequences
+x[n]
+x[0] = 1, x[1] = 2, x[2] = 1, x[3] = 1
+n
+0
+1
+2
+3
+h[n]
+h[0] = 1, h[1] = 1, h[2] = −1, h[3] = 2
+n
+0
+1
+2
+3
+
+===== page 24 =====
+First reflect one sequence before sliding
+For convolution, we compare x[k] with h[n −k].
+So the second sequence is first reflected: h[k] →h[−k].
+Reflection of h[k]
+k
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+h[k]
+h[−k]
+1
+1
+−1
+2
+2
+−1
+1
+1
+reflect around k = 0
+
+===== page 25 =====
+Slide the reflected sequence: first two output samples
+n = 0: compare x[k] with h[−k]
+k
+−3 −2 −1 0
+1
+2
+3
+x[k]
+h[−k]
+1
+2
+1
+1
+2 −1 1
+1
+y[0] = 1 · 1 = 1
+n = 1: shift right by one
+k
+−2 −1 0
+1
+2
+3
+x[k]
+h[1 −k]
+1
+2
+1
+1
+2 −1 1
+1
+y[1] = 1 · 1 + 2 · 1 = 3
+
+===== page 26 =====
+The middle positions have the largest overlap
+n
+=
+2
+k
+−1 0
+1
+2
+3
+x[k]
+h[2 −k]
+1
+2
+1
+1
+2 −1 1
+1
+y[2] = 1(−1) + 2(1) + 1(1) = 2
+n = 3: all four samples overlap
+k
+0
+1
+2
+3
+x[k]
+h[3 −k]
+1
+2
+1
+1
+2 −1 1
+1
+y[3] = 1(2) + 2(−1) + 1(1) + 1(1) = 2
+
+===== page 27 =====
+As we keep sliding, the overlap becomes smaller
+n
+=
+4
+k
+0
+1
+2
+3
+4
+x[k]
+h[4 −k]
+1
+2
+1
+1
+2 −1 1
+1
+y[4] = 2(2) + 1(−1) + 1(1) = 4
+n
+=
+5
+k
+0
+1
+2
+3
+4
+5
+x[k]
+h[5 −k]
+1
+2
+1
+1
+2 −1 1
+1
+y[5] = 1(2) + 1(−1) = 1
+
+===== page 28 =====
+The last overlap gives the final sample
+n
+=
+6
+k
+0
+1
+2
+3
+4
+5
+6
+x[k]
+h[6 −k]
+1
+2
+1
+1
+2 −1 1
+1
+y[6] = 1(2) = 2
+Final output
+y[n] = {1, 3, 2, 2, 4, 1, 2}
+n
+0
+1
+2
+3
+4
+5
+6
+1
+2
+3
+4
+
+===== page 29 =====
+Think: can we shuffle the order?
+We have defined convolution as
+(a ∗b)[n] =
+X
+k
+a[k] b[n −k].
+But what if we swap the two sequences?
+Does the order of convolution matter?
+
+===== page 30 =====
+Answer: Sure! Convolution does not care about the order
+a ∗b
+=
+b ∗a
+Polynomial analogy
+A(z)B(z) = B(z)A(z)
+Since convolution appeared from polynomial multiplication, swap-
+ping the two polynomials should not change the final coefficients.
+
+===== page 31 =====
+But why are we doing all these. . . ?
+
+===== page 32 =====
+Why Convolution Matters
+(so very much)!
+
+===== page 33 =====
+Our goal: find the output of LTI System for any input signal
+The ambitious problem
+t
+x(t)
+any input
+S
+LTI system
+t
+?
+y(t)
+unknown output
+Can we find a systematic method that works for any possible x(t)?
+
+===== page 34 =====
+Think: how do we solve a difficult problem for any input?
+Before signals, let us look at a familiar number problem.
+Question
+How many positive factors does 72 have?
+Of course, we could check 1, 2, 3, . . . , 72
+one by one. But there is a better idea.
+
+===== page 35 =====
+The easy pieces are prime powers
+72
+=
+23 · 32
+Factors from 23
+20,
+21,
+22,
+23
+3 + 1
+=
+4
+There are 4 choices
+for the power of 2.
+Factors from 32
+30,
+31,
+32
+2 + 1
+=
+3
+There are 3 choices
+for the power of 3.
+
+===== page 36 =====
+Then we combine the small answers
+Each factor is made by choosing one power of 2 and one power of 3.
+Number of choices
+(3 + 1)(2 + 1) = 4 · 3 = 12
+So 72 has 12 positive factors.
+
+===== page 37 =====
+The philosophy: solve simple pieces, then combine
+Step 1
+Solve for the simplest inputs.
+Step 2
+Break any input into simple pieces.
+Step 3
+Combine the small answers gracefully.
+
+===== page 38 =====
+The simplest input signal is the impulse function
+The discrete-time impulse
+n
+−5
+−4
+−3
+−2
+−1
+0
+1
+2
+3
+4
+5
+1
+δ[n]
+It is zero everywhere except at one instant.
+
+===== page 39 =====
+The impulse response: poking a sleeping cat. . .
+
+===== page 40 =====
+The impulse response is the system’s signature
+Given one impulse, the output we observe is called the impulse response.
+Definition
+n
+δ[n]
+S
+LTI system
+n
+h[n]
+δ[n]
+−→
+h[n]
+
+===== page 41 =====
+An example: one hello can create many echoes
+
+===== page 42 =====
+In this toy echo system, the impulse response is a step
+One short input sound produces repeated equal echoes:
+δ[n]
+−→
+h[n] = u[n].
+Input: one short hello
+n
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+δ[n]
+Output: repeated echoes
+n
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+h[n] = u[n]
+· · ·
+
+===== page 43 =====
+Think: what does this new impulse response mean?
+δ[n]
+−→
+h[n]
+=
+αnu[n],
+0
+<
+α
+<
+1.
+Impulse response
+n
+h[n]
+0
+1
+2
+3
+4
+5
+6
+7
+1
+· · ·
+1, α, α2, α3, . . .
+What does it mean physically? What if we change α?
+
+===== page 44 =====
+Answer: α controls how quickly the echoes fade
+α is the fraction of echo strength that survives after each reflection.
+Larger α means slower fading
+n
+α = 0.9
+slower fading
+n
+α = 0.3
+faster fading
+Large α: echoes stay longer.
+Small α: echoes die quickly.
+
+===== page 45 =====
+Think: what impulse response gives only a delay?
+Suppose a system does nothing except delay the input by 3 samples:
+y[n] = x[n −3].
+What should its impulse response be?
+
+===== page 46 =====
+Answer: a pure delay has a shifted impulse response
+Impulse in, delayed impulse out
+n
+0
+1
+2
+3
+δ[n]
+delay by 3
+n
+0
+1
+2
+3
+δ[n −3]
+h[n] = δ[n −3]
+Continuous-time version: h(t)
+=
+δ(t −3).
+
+===== page 47 =====
+Now let’s send a four-sample input to our toy echo system!
+x[n]
+=
+δ[n] + 2δ[n −1] −δ[n −2] + δ[n −3].
+n
+x[n]
+0
+1
+2
+3
+4
+1
+2
+−1
+Can we find the output using only the response to one impulse?
+
+===== page 48 =====
+Let’s first break the input into scaled and shifted impulses!
+Four simple pieces
+n
+0
+δ[n]
+n
+1
+2δ[n −1]
+n
+2
+−δ[n −2]
+n
+3
+δ[n −3]
+
+===== page 49 =====
+LTI tells us the output of each shifted impulse. . .
+δ[n]
+−→
+h[n]
+=
+u[n].
+Linearity and Time invariance simplifies everything beautifully!
+δ[n] −→h[n]
+= u[n]
+δ[n −k] −→h[n −k]
+= u[n −k]
+a δ[n −k] −→a h[n −k] = a u[n −k]
+
+===== page 50 =====
+Each sample creates a shifted copy of the impulse response
+δ[n]
+−→
+u[n]
+n
+−1 0
+1
+2
+3
+4
+5
+2δ[n −1] −→2u[n −1]
+n
+−1 0
+1
+2
+3
+4
+5
+−δ[n −2] −→−u[n −2]
+n
+−1 0
+1
+2
+3
+4
+5
+δ[n −3] −→u[n −3]
+n
+−1 0
+1
+2
+3
+4
+5
+
+===== page 51 =====
+Linearity lets us add the four outputs
+Output of the toy echo system
+y[n] = u[n] + 2u[n −1] −u[n −2] + u[n −3].
+n
+y[n]
+−1
+0
+1
+2
+3
+4
+5
+1
+2
+3
+
+===== page 52 =====
+Any discrete-time input can be built from shifted impulses
+n
+x[n]
+· · ·
+· · ·
+−2
+−1
+0
+1
+2
+3
+each sample comes from one scaled shifted impulse
+x[n]
+=
+∞
+X
+k=−∞
+x[k] δ[n −k]
+The value x[k] becomes the height of the impulse placed at n = k.
+
+===== page 53 =====
+The two LTI properties again simplify everything!
+Time-
+invariant
+If δ[n] −→h[n], then a shifted impulse gives a shifted
+response:
+δ[n −k] −→h[n −k].
+Linear
+If the shifted impulse is scaled by x[k], the output is
+scaled by the same amount:
+x[k]δ[n −k] −→x[k]h[n −k].
+
+===== page 54 =====
+Each sample creates a shifted copy of the impulse response
+Suppose the impulse response of the LTI system is h[n].
+Then one input piece x[k]δ[n −k] produces one output piece x[k]h[n −k].
+One input sample at index k
+n
+k
+x[k]
+x[k]δ[n −k]
+S
+LTI
+n
+k
+x[k]h[n −k]
+
+===== page 55 =====
+Now add the responses from all samples
+Input decomposition becomes output summation
+x[n] =
+X
+k
+x[k]δ[n −k]
+Therefore, y[n] =
+X
+k
+x[k]h[n −k]
+Every term x[k]δ[n−k] contributes one term x[k]h[n−k] to the output.
+
+===== page 56 =====
+Convolution Returns!!!
+The LTI input-output formula
+y[n] =
+∞
+X
+k=−∞x[k] h[n −k]
+y[n]
+=
+(x ∗h)[n]
+
+===== page 57 =====
+The bridge thus completes!
+1
+Find the system’s response to the simplest input.
+δ[n] −→h[n]. This h[n] is the impulse response.
+2
+Break any input signal down into shifted impulses.
+x[n] =
+X
+k
+x[k]δ[n −k].
+3
+Shift, scale, and add the impulse responses.
+y[n] =
+X
+k
+x[k]h[n −k] = (x ∗h)[n].
+
+===== page 58 =====
+Please try listening to convolution outputs here!
+
+===== page 59 =====
+Thank you!

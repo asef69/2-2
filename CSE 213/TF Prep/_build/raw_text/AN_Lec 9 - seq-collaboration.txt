@@ -1,0 +1,139 @@
+
+===== page 1 =====
+Presentation 16
+Register: typical course of events
+Actor Action
+(Student)
+Actor Action
+(Adviser)
+System Response
+1. Open registration 
+Interface
+2. Ask for Student Id, Password
+3. Provide Id, Password
+4. Show List of unfinished courses
+5. Select a course
+6. Get Pre-requisite list for that course
+7. Check results of those courses
+8. If not passed, then give message to student and 
+deselect the course 
+Otherwise, do nothing
+9. Finalize selection
+10. Check total credit hour
+11. If ok, then proceed to next step
+otherwise, give a message requesting the 
+student to revise his selection
+12. Notify Adviser
+13. Ask for details
+14. Show details
+15. Authorize
+16. Update state
+17. update registration information for selected 
+courses and show confirmation message, Print 
+course card
+
+===== page 2 =====
+Presentation 16
+Register: Sequence Diagram 1 
+A Student
+:RegisterUI
+:Register
+:Student
+:MainMenuUI
+itemSelected()
+verifyLogin(id,pw)
+RegisterUI()
+[selectedItem=register]
+Register()
+login(id,pw)
+showLogin()
+Student()
+[pwAccepted=false]
+showLogin()
+getStudentInfo(id)
+
+===== page 3 =====
+Presentation 16
+Register: Sequence Diagram 2
+A Student
+:RegisterUI
+:Register
+:Courses
+*getCourseList()
+RegInfo()
+showCourseList(*Courses)
+selectCourse(Cid)
+:RegInfos
+[pwAccepted=true]
+Course()
+*getRegInfo(id)
+prepareUnfinishedCourseList()
+selectCourse(Cid)
+checkPreRequisite()
+[PRcompleted=true]/addToList(RegInfo)
+showError(type)
+showConfirmation(type)
+loop
+
+===== page 4 =====
+Presentation 16
+
+===== page 5 =====
+Presentation 16
+
+===== page 6 =====
+Presentation 16
+6
+Collaboration Diagrams
+• Hold the same information as sequence diagrams
+• Show links between objects that participate in the 
+collaboration
+• No time dimension, sequence is captured with sequence 
+numbers
+• Sequence numbers are written in a nested style (for 
+example, 3.1 and 3.1.1) to indicate the nesting of control 
+within the interaction that is being modelled
+
+===== page 7 =====
+Presentation 16
+Register: Collaboration Diagram
+RegisterUI
+Register
+Student
+Student
+Registration 
+Info
+Result
+Course
+AuthorizeRegistrationUI
+Adviser
+3. login()
+8. selectCourse()
+12. finalize() 
+15. authorize()
+10. getResult()
+2. showLogin()
+7. showCourseList()
+11. showPRError()
+14b. showTCError()
+18. showConfirmation() 
+4. verifyLogin()
+9. verifyPreReq()
+13. finalize()
+14a. showRegInfo()
+16. authorize()
+18. updateRegInfo()
+
+===== page 8 =====
+Presentation 16
+8
+Model Consistency
+• The allocation of operations to objects must be 
+consistent with the class diagram and the 
+message signature must match that of the 
+operation
+• Every sending object must have the object 
+reference for the destination object
+– Either an association exists between the classes or another object passes 
+the reference to the sender
+– Message pathways should be carefully analysed

@@ -1,0 +1,96 @@
+\renewcommand{\teacherTag}{QUESTION 7 \textbullet\ 35 MARKS}
+\chapter{Fourier Series: Properties, Impulse Trains and Derivatives}
+
+%------------------------------------------------------------------ 7(a)
+\begin{qcard}{Q7(a)}{Coefficients of $x(6-t)+y(t+2)$}{10}
+Suppose the periodic signals $x(t)$ and $y(t)$ have the same fundamental frequency $\omega_0$, with complex exponential Fourier series coefficients $x(t)\leftrightarrow a_k$, $y(t)\leftrightarrow b_k$. Find the complex exponential Fourier series coefficients of $x(6-t)+y(t+2)$ in terms of $a_k$ and $b_k$.
+\end{qcard}
+\begin{solution}
+\step{Properties used} (all with the same $\omega_0$):
+\[\text{time shift: }x(t-t_0)\leftrightarrow a_ke^{-jk\omega_0t_0},\qquad\text{time reversal: }x(-t)\leftrightarrow a_{-k},\qquad\text{linearity}.\]
+\step{Step 1 --- $x(6-t)$.} Write $x(6-t)=x\big(-(t-6)\big)$: first reverse, then delay by 6.
+\[x(-t)\leftrightarrow a_{-k}\quad\Longrightarrow\quad x\big(-(t-6)\big)\leftrightarrow a_{-k}\,e^{-jk\omega_0\cdot6}.\]
+\emph{Direct check:} $\frac1T\int x(6-t)e^{-jk\omega_0t}\dd t$ with $\tau=6-t$ gives $e^{-jk\omega_06}\frac1T\int x(\tau)e^{jk\omega_0\tau}\dd\tau=e^{-j6k\omega_0}a_{-k}$ \checkmark.
+
+\step{Step 2 --- $y(t+2)$.} An advance by 2 ($t_0=-2$): $y(t+2)\leftrightarrow b_k\,e^{jk\omega_0\cdot2}$.
+
+\step{Step 3 --- Add (linearity).}
+\[\boxed{c_k=a_{-k}\,e^{-j6k\omega_0}+b_k\,e^{j2k\omega_0}}\]
+\ans{$x(6-t)+y(t+2)\leftrightarrow c_k=a_{-k}e^{-j6k\omega_0}+b_ke^{j2k\omega_0}$.}
+\end{solution}
+
+%------------------------------------------------------------------ 7(b)
+\begin{qcard}{Q7(b)}{Fourier series of the impulse train}{10}
+Consider the periodic impulse train $p(t)=\sum_{m=-\infty}^{\infty}\delta(t-mT)$. Using the sifting property of the impulse, show that its complex exponential Fourier series coefficients are $c_k=\frac1T$, $k=0,\pm1,\pm2,\dots$ Finally, sketch $p(t)$ against $t$ and its spectrum $c_k$ against $\omega=k\omega_0$ (where $\omega_0=2\pi/T$), and thereby show that an impulse train in the time domain remains an impulse train in the frequency domain.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Choose a convenient period.} Integrate over $-\frac T2<t<\frac T2$. Only the impulse at $m=0$ lies inside this window, so $p(t)=\delta(t)$ there.
+
+\step{Step 2 --- Sifting.} $\int f(t)\delta(t)\dd t=f(0)$:
+\[c_k=\frac1T\int_{-T/2}^{T/2}\delta(t)\,e^{-jk\omega_0t}\dd t=\frac1T\,e^{-jk\omega_0\cdot0}=\frac1T\qquad\text{for every }k.\]
+So $p(t)=\dfrac1T\displaystyle\sum_{k=-\infty}^{\infty}e^{jk\omega_0t}$: every harmonic is present with the same weight.
+
+\step{Step 3 --- Sketches.}
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=7.4cm,height=4cm,axis lines=middle,xlabel={$t$},title={$p(t)$: impulses of area 1, spacing $T$},axis y line=none,xmin=-3.6,xmax=3.8,ymin=0,ymax=1.35,xtick={-3,-2,-1,0,1,2,3},xticklabels={$-3T$,$-2T$,$-T$,$0$,$T$,$2T$,$3T$},ytick={1},ticklabel style={font=\scriptsize},label style={font=\scriptsize},title style={font=\scriptsize}]
+\foreach \m in {-3,...,3}{\edef\tmp{\noexpand\draw[-{Stealth[length=2mm]},very thick,navy](axis cs:\m,0)--(axis cs:\m,1);}\tmp}
+\node[font=\scriptsize,anchor=west]at(axis cs:0.05,1.05){$(1)$};
+\end{axis}\end{tikzpicture}\hspace{2mm}
+\begin{tikzpicture}\begin{axis}[width=7.4cm,height=4cm,axis lines=middle,xlabel={$\omega$},title={$c_k$ against $\omega=k\omega_0$},xmin=-3.6,xmax=3.8,ymin=0,ymax=1.35,xtick={-3,-2,-1,0,1,2,3},xticklabels={$-3\omega_0$,$-2\omega_0$,$-\omega_0$,$0$,$\omega_0$,$2\omega_0$,$3\omega_0$},ytick={1},yticklabels={$\frac1T$},ticklabel style={font=\scriptsize},label style={font=\scriptsize},title style={font=\scriptsize}]
+\addplot+[ycomb,crimson,very thick,mark=*,mark size=1.8pt]coordinates{(-3,1)(-2,1)(-1,1)(0,1)(1,1)(2,1)(3,1)};
+\end{axis}\end{tikzpicture}
+\end{center}
+\step{Step 4 --- Impulse train $\to$ impulse train.} The coefficients form a uniform comb: equal heights $\frac1T$ at equally spaced frequencies $k\omega_0$. As a Fourier transform each $e^{jk\omega_0t}\pair2\pi\delta(\omega-k\omega_0)$, so
+\[P(j\omega)=\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\delta\!\Big(\omega-k\frac{2\pi}T\Big):\]
+an impulse train in time (spacing $T$) is an impulse train in frequency (spacing $2\pi/T$). Closer impulses in time $\Rightarrow$ wider spacing in frequency.
+\ans{$c_k=\frac1T\int_{-T/2}^{T/2}\delta(t)e^{-jk\omega_0t}\dd t=\frac1T$ for all $k$; the spectrum is a comb of equal lines at $k\omega_0$, i.e.\ $P(j\omega)=\frac{2\pi}T\sum_k\delta(\omega-k\omega_0)$.}
+\end{solution}
+
+%------------------------------------------------------------------ 7(c)
+\begin{qcard}{Q7(c)}{The d.c.\ coefficient}{8}
+Consider the periodic signal $x(t)$ with period $T=2$, defined over one period as $x(t)=t^2$ for $0\le t<1$ and $x(t)=0$ for $1\le t<2$. Let $a_k$ be its Fourier series coefficients. Find $a_0$.
+\end{qcard}
+\begin{solution}
+$a_0$ is the average value over one period:
+\[a_0=\frac1T\int_0^Tx(t)\dd t=\frac12\Big[\int_0^1t^2\dd t+\int_1^20\dd t\Big]=\frac12\cdot\frac13=\frac16 .\]
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=10cm,height=3.8cm,axis lines=middle,xlabel={$t$},xmin=-2.3,xmax=4.4,ymin=0,ymax=1.25,xtick={-2,-1,0,1,2,3,4},ytick={0.1667,1},yticklabels={$a_0=\frac16$,$1$},ticklabel style={font=\scriptsize},label style={font=\scriptsize}]
+\foreach \s in {-2,0,2}{\pgfmathtruncatemacro\a{\s+1}\pgfmathtruncatemacro\b{\s+2}\pgfmathtruncatemacro\c{\s+3}\edef\tmp{\noexpand\addplot[very thick,navy,domain=\s:\a,samples=40]{(x-\s)^2};\noexpand\addplot[very thick,navy]coordinates{(\a,1)(\a,0)(\b,0)};}\tmp}
+\addplot[dashed,crimson,domain=-2.3:4.4]{1/6};
+\end{axis}\end{tikzpicture}
+\end{center}
+\ans{$a_0=\dfrac16$.}
+\end{solution}
+
+%------------------------------------------------------------------ 7(d)
+\begin{qcard}{Q7(d)}{Sketch of $\frac{\dd x}{\dd t}$}{7}
+Consider another periodic signal $x(t)$ with period $T=3$, defined over one period as $x(t)=\frac t2$ for $0\le t<2$ and $x(t)=2-t$ for $2\le t<3$. Sketch $\frac{\dd x(t)}{\dd t}$, labelling the important values on both axes.
+\end{qcard}
+\begin{solution}
+\step{Step 1 --- Understand $x(t)$.} On $[0,2)$ it rises from $0$ to (just below) $1$ with slope $\frac12$. At $t=2$ it restarts at $2-2=0$ and falls with slope $-1$ to (just above) $-1$ at $t\to3$. The next period restarts at $x(3)=0$. So there are two jumps per period:
+\begin{align*}
+\text{at }t=2:&\quad x(2^-)=1\ \to\ x(2^+)=0 &&(\text{jump }-1),\\
+\text{at }t=3\ (\equiv0):&\quad x(3^-)=-1\ \to\ x(3^+)=0 &&(\text{jump }+1).
+\end{align*}
+\step{Step 2 --- Differentiate.} Smooth pieces give the slopes; each jump of size $J$ gives an impulse $J\,\delta(t-t_0)$:
+\[\frac{\dd x}{\dd t}=\begin{cases}\phantom{-}\tfrac12,&0<t<2\\-1,&2<t<3\end{cases}\quad-\ \delta(t-2)\ +\ \delta(t-3),\qquad\text{repeated every }3.\]
+Over the whole axis: $\frac{\dd x}{\dd t}=\sum_m\big[\delta(t-3m)-\delta(t-2-3m)\big]+$ the piecewise-constant slope.
+
+\begin{center}
+\begin{tikzpicture}\begin{axis}[width=13cm,height=4.2cm,axis lines=middle,xlabel={$t$},ylabel={$x(t)$},xmin=-3.4,xmax=6.6,ymin=-1.35,ymax=1.35,xtick={-3,-1,0,2,3,5,6},ytick={-1,1},ticklabel style={font=\scriptsize},label style={font=\scriptsize},grid=major,grid style={gray!15}]
+\foreach \s in {-3,0,3}{\pgfmathtruncatemacro\a{\s+1}\pgfmathtruncatemacro\b{\s+2}\pgfmathtruncatemacro\c{\s+3}\edef\tmp{\noexpand\addplot[very thick,navy]coordinates{(\s,0)(\b,1)};\noexpand\addplot[very thick,navy]coordinates{(\b,0)(\c,-1)};\noexpand\addplot[dashed,navy!50]coordinates{(\b,1)(\b,0)};\noexpand\addplot[dashed,navy!50]coordinates{(\c,-1)(\c,0)};}\tmp}
+\end{axis}\end{tikzpicture}
+
+\begin{tikzpicture}\begin{axis}[width=13cm,height=5.2cm,axis lines=middle,xlabel={$t$},ylabel={$\dfrac{\dd x}{\dd t}$},xmin=-3.4,xmax=6.6,ymin=-1.75,ymax=1.75,xtick={-3,-1,0,2,3,5,6},ytick={-1,0.5},yticklabels={$-1$,$\frac12$},ticklabel style={font=\scriptsize},label style={font=\scriptsize},grid=major,grid style={gray!15},clip=false]
+\foreach \s in {-3,0,3}{\pgfmathtruncatemacro\a{\s+1}\pgfmathtruncatemacro\b{\s+2}\pgfmathtruncatemacro\c{\s+3}\edef\tmp{\noexpand\addplot[very thick,teal]coordinates{(\s,0.5)(\b,0.5)};\noexpand\addplot[very thick,teal]coordinates{(\b,-1)(\c,-1)};}\tmp}
+\foreach \t in {-3,0,3,6}{\edef\tmp{\noexpand\draw[-{Stealth[length=2.2mm]},very thick,crimson](axis cs:\t,0)--(axis cs:\t,1.35);}\tmp}
+\foreach \t in {-1,2,5}{\edef\tmp{\noexpand\draw[-{Stealth[length=2.2mm]},very thick,crimson](axis cs:\t,0)--(axis cs:\t,-1.55);}\tmp}
+\node[font=\scriptsize,crimson,anchor=west]at(axis cs:3.05,1.35){$(+1)$};\node[font=\scriptsize,crimson,anchor=west]at(axis cs:2.05,-1.6){$(-1)$};
+\node[font=\scriptsize,teal,anchor=south]at(axis cs:1,0.52){slope $\frac12$};\node[font=\scriptsize,teal,anchor=north]at(axis cs:2.5,-1.02){$-1$};
+\end{axis}\end{tikzpicture}
+\end{center}
+{\small Red arrows: impulses of area $+1$ at $t=0,\pm3,6,\dots$ and area $-1$ at $t=2,5,-1,\dots$ (arrow length shows the area, not a height).}
+
+\step{Check.} The derivative of a periodic signal has zero average: per period $\frac12(2)+(-1)(1)+1-1=0$ \checkmark. (Equivalently, its Fourier coefficients are $jk\omega_0a_k$, which vanish at $k=0$.)
+\ans{$\frac{\dd x}{\dd t}=\frac12$ on $(0,2)$, $-1$ on $(2,3)$, plus impulses $-\delta(t-2)$ and $+\delta(t-3)$, repeated with period 3.}
+\end{solution}

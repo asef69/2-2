@@ -1,0 +1,453 @@
+
+===== page 1 =====
+The Fast Fourier Transform
+Signals and Linear Systems
+Ashrafur Rahman
+Lecturer, CSE, BUET
+ashrafur@cse.buet.ac.bd
+
+===== page 2 =====
+Outline
+• Recap of Last Class
+• The Need for Speed: Naive DFT complexity
+• Fast Fourier Transform (FFT):
+• Radix-2 Decimation-in-Time (DIT)
+• Radix-2 Decimation-in-Frequency (DIF)
+• Conclusion: FFT Complexity Analysis
+1
+
+===== page 3 =====
+Recap of Last Class
+• In the last class we derived and looked at the DFT from 2 different perspectives.
+• Periodic:
+• DFT can be viewed as the evaluation of the Fourier series coefficients of a sampled periodic signal.
+• It can also be viewed as the N unique values of the fourier series of a discrete-time periodic signal.
+• Aperiodic:
+• DFT can be viewed as samples of the continuous-time Fourier transform of a sampled aperiodic signal.
+• It can also be viewed as samples of the discrete-time fourier transform of a finite-length sequence.
+• As we will see later, if the original conginuous signal is bandlimited, we can recover the original signal from the DFT.
+2
+
+===== page 4 =====
+Naive Evaluation of the DFT
+Now let’s go into the computational complexity of evaluating the DFT.
+• Let’s examine the computational complexity of evaluating the DFT directly from its definition:
+X[k] =
+N−1
+X
+n=0
+x[n]W kn
+N ,
+where WN = e−j 2π
+N
+• For each of the N values of k, we must compute:
+• N complex multiplications
+• N −1 complex additions
+• Therefore, calculating all N values of X[k] explicitly requires O(N2) operations.
+• Why is this a problem?
+• Consider 1 second of audio sampled at 44.1 kHz. Here, N = 44, 100.
+• The naive DFT requires roughly N2 ≈2 × 109 operations! This would make spectral analysis impossibly slow.
+3
+
+===== page 5 =====
+A Brief History of the FFT
+• 1805: Carl Friedrich Gauss
+• Developed the radix-2 algorithm to interpolate asteroid orbits.
+• Predates Joseph Fourier’s work on harmonic analysis by over a
+decade!
+• Left it as a note, unpublished.
+• 1965: James Cooley & John Tukey
+• Independently rediscovered the algorithm at IBM and Princeton.
+• Their landmark paper launched the modern field of Digital
+Signal Processing (DSP).
+• Many other variants of the FFT have been developed since
+then. But we are going to study the Cooley-Tukey FFT first.
+Carl Friedrich Gauss
+James W. Cooley
+John W. Tukey
+4
+
+===== page 6 =====
+Cooley-Tukey FFT Algorithm
+• The Cooley-Tukey FFT Algorithm is an elegant O(N log N) algorithm to compute the DFT by exploiting the
+symmetry and periodicity of WN. Recall the DFT definition:
+X[k] =
+N−1
+X
+n=0
+x[n]W kn
+N
+where WN = e−j 2π
+N
+• We are first going to study the radix-2 FFT algorithm which–
+• Successively splits an N-point DFT into two N/2-point DFTs.
+• Assumes N is a power of 2 (if not, use zero-padding).
+• There are two variants of the Cooley-Tukey FFT algorithm:
+• Decimation-in-Time (DIT)
+• Decimation-in-Frequency (DIF)
+5
+
+===== page 7 =====
+Decimation-in-Time (DIT) FFT
+• Decimation-in-Time splits the time-domain sequence x[n] into its even and odd indexed samples:
+X[k] =
+N−1
+X
+n=0
+x[n]W kn
+N
+=
+N/2−1
+X
+r=0
+x[2r]W 2rk
+N
++
+N/2−1
+X
+r=0
+x[2r + 1]W (2r+1)k
+N
+• Since W 2rk
+N
+= e−j 2π
+N 2rk = e−j 2π
+N/2 rk = W rk
+N/2, we get:
+X[k] =
+N/2−1
+X
+r=0
+x[2r]W rk
+N/2
+|
+{z
+}
+N/2-point DFT of evens
++W k
+N
+N/2−1
+X
+r=0
+x[2r + 1]W rk
+N/2
+|
+{z
+}
+N/2-point DFT of odds
+• So, we can compute the N-point DFT X[k] by computing two N/2-point DFTs!
+• But we need some way to convert the N/2-point DFTs to N-points.
+6
+
+===== page 8 =====
+Decimation-in-Time (DIT) FFT (cont.)
+• Define new functions:
+G[k] =
+N/2−1
+X
+r=0
+x[2r]W rk
+N/2 = DFT{x[2r] with N/2 points}
+H[k] =
+N/2−1
+X
+r=0
+x[2r + 1]W rk
+N/2 = DFT{x[2r + 1] with N/2 points}
+• G[k] and H[k] is clearly defined for 0 ≤k < N/2.
+• But also since N/2-point DFT is periodic with period N/2, we have:
+G[k + N/2] = G[k]
+H[k + N/2] = H[k]
+• So if we copy the first half of G[k] and H[k] to the second half (periodic extension), we can write:
+X[k] = G[k] + W k
+NH[k]
+• However, we can do better.
+7
+
+===== page 9 =====
+Decimation-in-Time (DIT) FFT (cont.)
+• For the second half, N/2 ≤k < N, we can use the property W k+N/2
+N
+= W k
+Ne−jπ = −W k
+N:
+X[k + N/2] = G[k + N/2] + W k+N/2
+N
+H[k + N/2]
+= G[k] −W k
+NH[k]
+for N/2 ≤k < N
+• So, together we can write:
+Radix-2 Decimation-in-Time FFT
+For 0 ≤k < N/2:
+X[k] = G[k] + W k
+NH[k]
+X[k + N/2] = G[k] −W k
+NH[k]
+• This means we only need to compute the N/2-point DFTs of the even and odd parts once, and then
+combine them using simple additions/subtractions and a single complex multiplication (the "twiddle
+factor") for each output.
+8
+
+===== page 10 =====
+DIT Butterfly Structure (N = 2)
+Now let us see the computational structure of the FFT by walking through for small values of N.
+• The fundamental operation is the 2-point DFT
+(butterfly).
+• Note that W 0
+2 = 1.
+X[0] = x[0] + x[1]W 0
+2 = x[0] + x[1]
+X[1] = x[0] −x[1]W 0
+2 = x[0] −x[1]
+x[0]
+x[1]
+X[0]
+X[1]
+−1
+9
+
+===== page 11 =====
+DIT Butterfly Structure (N = 4)
+• A 4-point DFT is built from two 2-point DFTs.
+• G[k] and H[k] (outputs of Stage 1) are
+combined using twiddle factors W k
+4 .
+Explicit Formula:
+X[0] = G[0] + W 0
+4 H[0]
+X[1] = G[1] + W 1
+4 H[1]
+X[2] = G[0] −W 0
+4 H[0]
+X[3] = G[1] −W 1
+4 H[1]
+x[0]
+x[2]
+x[1]
+x[3]
+X[0]
+X[1]
+X[2]
+X[3]
+W 0
+2
+W 0
+2
+−1
+−1
+G[0]
+G[1]
+H[0] W 0
+4
+−1
+H[1] W 1
+4
+−1
+10
+
+===== page 12 =====
+DIT 8-Point FFT: First Iteration
+• For N = 8, the sequence is split into N/2 = 4-point DFTs of even and odd indices.
+• The outputs G(k) (evens) and H(k) (odds) are combined using the relation:
+• X[k] = G(k) + W k
+8 H(k) and X(k + 4) = G(k) −W k
+8 H(k) for k = 0, . . . , 3.
+11
+
+===== page 13 =====
+DIT 8-Point FFT: Full Algorithm
+• Expanding all 4-point and 2-point DFTs yields the complete 8-point DIT structure.
+• Notice the inputs are in bit-reversed order, while outputs are in natural order.
+12
+
+===== page 14 =====
+Understanding Bit-Reversed Order
+• In Radix-2 DIT FFT, the inputs appear in bit-reversed order.
+• Why? The sequence is successively divided into even and odd indexed halves.
+• For N = 8, the physical movements happen in three stages:
+1. Stage 1: Even (0,2,4,6), Odd (1,3,5,7)
+2. Stage 2: Even-Even (0,4), Odd-Even (2,6), Even-Odd (1,5), Odd-Odd (3,7)
+3. Stage 3: Single elements: x[0], x[4], x[2], x[6], x[1], x[5], x[3], x[7]
+Original Index
+Binary
+Bit-Reversed Binary
+New Position
+0
+000
+000
+0
+1
+001
+100
+4
+2
+010
+010
+2
+3
+011
+110
+6
+4
+100
+001
+1
+5
+101
+101
+5
+6
+110
+011
+3
+7
+111
+111
+7
+• Putting even before odd corresponds to sorting by the rightmost bit.
+• Putting even-even before odd-even corresponds to sorting by the second rightmost bit, and so on.
+• This is equivalent to sorting the input sequence by the bit-reversed order of their indices.
+13
+
+===== page 15 =====
+Radix-2 DIT FFT: Pseudocode & Complexity
+Iterative Radix-2 DIT FFT
+Bit-reverse array x of length N (N = 2v)
+for s = 1 to log2 N:
+// For each stage
+M = 2s
+// 2, 4, 8, ..., N
+WM = e−j2π/M
+for l = 0 to N −M step M:
+// M-point DFT blocks in same stage
+W = 1
+// Twiddle factors
+for k = 0 to M/2 −1:
+// Butterfly operation
+g = x[l + k]
+// G[k]
+h = W · x[l + k + m/2]
+// W k
+M H[k]
+x[l + k] = g + h
+// X[k]
+x[l + k + m/2] = g −h
+// X[k + m/2]
+W = W · Wm
+Complexity Analysis:
+• Bit-Reversal: Takes O(N) operations.
+• Swap x[k] with x[k′] where k′ is the bit-reversal of k.
+• Outer Loop: Runs log2 N times (stages).
+• Inner Loops: Combined, they iterate over all N elements, performing N/2 butterflies per stage.
+• Total Complexity: O(N log2 N) complex multiplications and additions.
+14
+
+===== page 16 =====
+Decimation-in-Frequency (DIF) FFT: Derivation
+We now study the second variant.
+• Instead of separating even/odd time indices, Decimation-in-Frequency splits the summation
+n = 0 . . . N −1 into the first half and second half of time indices:
+X[k] =
+N/2−1
+X
+n=0
+x[n]W kn
+N
++
+N−1
+X
+n=N/2
+x[n]W kn
+N
+=
+N/2−1
+X
+n=0
+x[n]W kn
+N
++
+N/2−1
+X
+n=0
+x[n + N/2]W k(n+N/2)
+N
+• Since W kN/2
+N
+= e−j 2π
+N k N
+2 = e−jπk = (−1)k, we have:
+X[k] =
+N/2−1
+X
+n=0
+
+x[n] + (−1)kx[n + N/2]
+
+W kn
+N
+• Now, we decimate in the frequency domain by evaluating even and odd k.
+• Even k = 2m: (−1)2m = 1, and W 2mn
+N
+= W mn
+N/2
+X[2m] =
+N/2−1
+X
+n=0
+(x[n] + x[n + N/2])
+|
+{z
+}
+a(n)
+W mn
+N/2 = DFTN/2{a(n)}
+15
+
+===== page 17 =====
+DIF FFT Derivation (Cont.)
+• Odd k = 2m + 1: (−1)2m+1 = −1, and W (2m+1)n
+N
+= W n
+NW 2mn
+N
+= W n
+NW mn
+N/2
+X[2m + 1] =
+N/2−1
+X
+n=0
+(x[n] −x[n + N/2]) W n
+N
+|
+{z
+}
+b(n)
+W mn
+N/2 = DFTN/2{b(n)}
+• The fundamental butterfly sequence performs additions before the multiplication by the twiddle factor
+W n
+N:
+16
+
+===== page 18 =====
+DIF 8-Point FFT: Full Algorithm
+• Expanding the layers gives the full 8-point DIF structure.
+• Here inputs are in natural order, while outputs emerge in bit-reversed order.
+17
+
+===== page 19 =====
+Why Zero-Pad? The Practical Necessity
+The Radix-2 Requirement
+Radix-2 FFT algorithms require the sequence length N to be exactly a power of 2 (N = 2m).
+The Problem:
+• Real-world data often consists of M samples, where M is not a power of 2.
+• If we restrict ourselves to M samples, we are stuck with the slow O(M2) naive DFT!
+The Solution: Zero-Padding
+• We simply append zeros until we reach the next power of 2: N = 2⌈log2 M⌉.
+• Bonus: Zero-padding interpolates the spectrum, giving a smoother visualization without altering the true
+frequency content X(ejω).
+• However, if used for periodic x[n], zero-padding changes the period and shape of the periodic signal.
+• Can we do FFT without zero-padding?
+18

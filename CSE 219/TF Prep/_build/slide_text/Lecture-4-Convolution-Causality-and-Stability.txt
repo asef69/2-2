@@ -1,0 +1,1297 @@
+
+===== page 1 =====
+Lecture 4: Convolution, Causality, and Stability
+CSE 219: Signals and Linear Systems
+Anik Saha
+Adjunct Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+Recall: Keep the first signal just as is, flip the second, slide
+rightward, find overlaps, then multiply-and-add!
+
+===== page 3 =====
+Recall: discrete-time convolution is sliding multiply-and-add
+For two discrete-time signals x[n] and h[n], their convolution is
+y[n] = (x ∗h)[n] =
+∞
+X
+k=−∞
+x[k] h[n −k].
+What the formula is saying
+x[k]
+h[n −k]
+y[n]
+multiply
+add over k
+For each fixed n, the sum produces one output sample y[n].
+
+===== page 4 =====
+Convolution gives a whole output signal, one value at a time
+Sweep over the input index k
+k
+x[k]
+· · ·
+· · ·
+−4
+0
+4
+sweep over all k
+Fix one output index
+n
+y[n]
+0
+3
+fixed n = 3
+y[3]
+· · ·
+· · ·
+y[3]
+=
+P∞
+k=−∞x[k] h[3 −k]
+
+===== page 5 =====
+For fixed n, h[n −k] is made by reflect-then-right-shift
+h[k]
+k
+0
+3
+h[−k]
+k
+0
+−3
+h[2 −k]
+k
+0
+2
+h[0] now sits at k = 2
+
+===== page 6 =====
+The continuous-time version replaces the sum by an integral
+For continuous-time signals, the idea is the same:
+reflect, shift, multiply, and add continuously.
+Continuous-time convolution
+y(t) = (x ∗h)(t) =
+Z ∞
+−∞x(τ) h(t −τ) dτ
+
+===== page 7 =====
+For a fixed t, sweep along τ and integrate along the overlap
+Fix t, then slide h(t −τ) along the τ-axis
+τ
+0
+x(τ)
+h(t −τ)
+overlap
+slide as t changes
+a
+b
+t −d
+t −c
+For this one fixed t,
+y(t) =
+Z ∞
+−∞x(τ) h(t −τ) dτ
+
+===== page 8 =====
+Discrete and continuous convolution follow the same recipe
+1
+Choose the output location.
+For discrete time, choose n. For continuous time, choose t.
+2
+Reflect and shift the second signal.
+Discrete: h[k] →h[−k] →h[n −k]. Continuous:
+h(τ) →h(−τ) →h(t −τ).
+3
+Multiply where they overlap, then add.
+Discrete: sum over k. Continuous: integrate over τ.
+
+===== page 9 =====
+Please try this demo on computing convolutions!
+
+===== page 10 =====
+Practice Problems on
+Convolution
+
+===== page 11 =====
+Practice (Example 2.2)
+For the two signals below, compute
+y[n] = x[n] ∗h[n] =
+∞
+X
+k=−∞
+x[k]h[n −k].
+Input x[k]
+k
+−3
+−2
+−1
+0
+1
+2
+3
+0.5
+2
+x[k]
+Impulse response h[k]
+k
+−3
+−2
+−1
+0
+1
+2
+3
+1
+h[k]
+
+===== page 12 =====
+Answer setup: h[n −k] is the reflected signal shifted by n
+For each fixed n, draw h[n −k] as a function of k.
+h[k]
+k
+−2
+−1
+0
+1
+2
+3
+h[−k]
+k
+−2
+−1
+0
+1
+2
+3
+shift by n
+h[n −k]
+k
+n −2 n −1
+n
+
+===== page 13 =====
+Answer: start sliding h[n −k] past x[k]
+n
+<
+0: no overlap
+k
+x[k]
+0.5
+2
+k
+h[n −k]
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+y[n] = 0
+For n < 0, the two signals do not share any nonzero overlap of k
+
+===== page 14 =====
+Answer: start sliding h[n −k] past x[k]
+n
+=
+0: one overlap
+k
+x[k]
+0.5
+2
+k
+h[0 −k]
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+overlap
+y[0] = 0.5 × 1 = 0.5
+
+===== page 15 =====
+Answer: when the signals overlap more, the sum grows
+n
+=
+1: two overlaps
+k
+x[k]
+0.5
+2
+k
+h[1 −k]
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+y[1] = 0.5 + 2 = 2.5
+
+===== page 16 =====
+Answer: when the signals overlap more, the sum grows
+n
+=
+2: still two overlaps
+k
+x[k]
+0.5
+2
+k
+h[2 −k]
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+y[2] = 0.5 + 2 = 2.5
+
+===== page 17 =====
+Answer: after the last overlap, the output returns to zero
+n
+=
+3: one overlap
+k
+x[k]
+0.5
+2
+k
+h[3 −k]
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+y[3] = 2
+
+===== page 18 =====
+Answer: after the last overlap, the output returns to zero
+n
+>
+3: no overlap again
+k
+x[k]
+0.5
+2
+k
+h[n −k]
+−4 −3 −2 −1
+0
+1
+2
+3
+4
+5
+y[n] = 0
+After n = 3, the sliding signal has passed the support of x[k]
+
+===== page 19 =====
+Answer: final convolution output
+y[n]
+=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0.5,
+n = 0,
+2.5,
+n = 1,
+2.5,
+n = 2,
+2,
+n = 3,
+0,
+otherwise.
+n
+y[n]
+−2
+−1
+0
+1
+2
+3
+4
+0.5
+2.5
+2.5
+2
+1
+2
+
+===== page 20 =====
+Practice (Example 2.3)
+Let 0
+<
+α
+<
+1. Compute
+y[n] = x[n] ∗h[n],
+x[n] = αnu[n],
+h[n] = u[n].
+Input x[n] = αnu[n]
+n
+· · ·
+· · ·
+0
+5
+10
+1
+x[n]
+Impulse response h[n] = u[n]
+· · ·
+· ·
+0
+5
+10
+1
+h[n]
+
+===== page 21 =====
+First understand how h[n −k] looks like
+Reflect h[k], then shift it by n
+h[k]
+k
+· · ·
+· · ·
+0
+h[−k]
+k
+· · ·
+· · ·
+0
+h[n −k]
+k
+· · ·
+· · ·
+n
+edge at k = n
+
+===== page 22 =====
+For n < 0, there is no overlap
+No common nonzero k
+k
+x[k]
+· · ·
+· · ·
+1
+k
+h[n −k]
+· · ·
+−5
+0
+5
+10
+14
+n < 0
+y[n] = 0
+
+===== page 23 =====
+For n ≥0, the overlap is from k = 0 to k = n
+k
+x[k]
+· · ·
+· · ·
+1
+k
+h[n −k]
+· · ·
+−4
+0
+5
+8
+10
+14
+0 ≤k ≤n
+k = n
+Overlap
+⇒
+x[k]h[n −k] = αk,
+0 ≤k
+≤n.
+
+===== page 24 =====
+Therefore the product is just the overlapping part of x[k]
+Product sequence for n
+≥
+0
+k
+· · ·
+· · ·
+0
+5
+n
+n
+x[k]h[n −k]
+x[k]h[n −k] =
+
+
+
+αk,
+0 ≤k ≤n,
+0,
+otherwise.
+
+===== page 25 =====
+Now sum the product over all k
+Only the overlap region contributes to the convolution sum.
+For n
+≥
+0
+y[n] =
+∞
+X
+k=−∞
+x[k]h[n −k]
+=
+n
+X
+k=0
+αk
+= 1 + α + α2 + · · · + αn.
+
+===== page 26 =====
+The finite geometric sum gives the final answer
+For 0 < α < 1, 1 + α + α2 + · · · + αn =
+1−αn+1
+1−α .
+Final convolution output
+y[n] =
+
+
+
+
+
+
+
+
+
+1 −αn+1
+1 −α ,
+n ≥0,
+0,
+n < 0.
+
+===== page 27 =====
+The output rises and approaches a limiting value
+Shape of y[n]
+n
+y[n]
+· · ·
+· · ·
+1
+1−α
+0
+5
+10
+15
+20
+y[n] = 1 −αn+1
+1 −α
+u[n]
+
+===== page 28 =====
+Practice (Example 2.5)
+Compute
+y[n] = x[n] ∗h[n],
+x[n] = 2nu[−n],
+h[n] = u[n].
+Input x[n] = 2nu[−n]
+n
+· · ·
+· · ·
+−4
+0
+4
+1
+x[n]
+Impulse response h[n] = u[n]
+· · ·
+·
+−4
+0
+4
+1
+h[n]
+
+===== page 29 =====
+First understand how h[n −k] looks
+Reflect h[k], then shift it by n
+h[k]
+k
+· · ·
+· · ·
+0
+h[−k]
+k
+· · ·
+· · ·
+0
+h[n −k]
+k
+· · ·
+· · ·
+n
+edge
+
+===== page 30 =====
+For n < 0, the overlap stops at k = n
+k
+x[k]
+· · ·
+· · ·
+1
+k
+h[n −k]
+· · ·
+−8
+−4
+0
+4
+8
+overlap: k ≤n
+k = n
+For n
+<
+0,
+x[k]h[n −k]
+=
+2k
+for k
+≤
+n.
+
+===== page 31 =====
+For n ≥0, all nonzero samples of x[k] overlap
+k
+x[k]
+· · ·
+· · ·
+1
+k
+h[n −k]
+· · ·
+−8
+−4
+0
+4
+8
+overlap: k ≤0
+k = n
+For n
+≥
+0,
+x[k]h[n −k]
+=
+2k
+for k
+≤
+0.
+
+===== page 32 =====
+For n < 0, the sum stops at k = n
+Case 1: n
+<
+0
+y[n] =
+∞
+X
+k=−∞
+x[k]h[n −k]
+=
+n
+X
+k=−∞
+2k.
+n
+X
+k=−∞
+2k = 2n + 2n−1 + 2n−2 + · · · = 2n+1.
+
+===== page 33 =====
+For n ≥0, the sum includes all left-sided samples
+Case 1: n
+≥
+0
+y[n] =
+∞
+X
+k=−∞
+x[k]h[n −k]
+=
+0
+X
+k=−∞
+2k.
+0
+X
+k=−∞
+2k = · · · + 1
+8 + 1
+4 + 1
+2 + 1 = 2.
+
+===== page 34 =====
+The output is left-sided exponential, then a constant
+Final answer
+y[n] =
+
+
+
+2n+1,
+n < 0,
+2,
+n ≥0.
+n
+y[n]
+· · ·
+· · ·
+2
+−8
+−4
+0
+4
+8
+1
+y[n]
+
+===== page 35 =====
+Practice (Example 2.6)
+Let a
+>
+0. Compute
+y(t) = x(t) ∗h(t),
+x(t) = e−atu(t),
+h(t) = u(t).
+Input x(t) = e−atu(t)
+t
+· · ·
+· · ·
+0
+1
+e−atu(t)
+Impulse response h(t) = u(t)
+t
+· · ·
+· · ·
+0
+1
+u(t)
+
+===== page 36 =====
+First understand how h(t −τ) moves
+Reflect h(τ), then shift by t
+h(τ)
+τ
+· · ·
+· · ·
+0
+h(−τ)
+τ
+· · ·
+· · ·
+0
+h(t −τ)
+τ
+· · ·
+· · ·
+0
+t
+edge
+
+===== page 37 =====
+For t < 0, there is no overlap
+No common nonzero τ
+τ
+x(τ)
+· · ·
+· · ·
+0
+1
+τ
+h(t −τ)
+· · ·
+t < 0
+0
+y(t) = 0
+No overlap
+⇒
+y(t)
+=
+0.
+
+===== page 38 =====
+For t > 0, the overlap is 0 ≤τ ≤t
+τ
+x(τ)
+· · ·
+· · ·
+0
+1
+τ
+h(t −τ)
+· · ·
+0
+t
+0 ≤τ ≤t
+Overlap
+⇒
+x(τ)h(t −τ) = e−aτ,
+0 ≤τ
+≤t.
+
+===== page 39 =====
+Now integrate only over the overlap
+For t > 0, y(t) =
+Z ∞
+−∞
+x(τ)h(t −τ) dτ
+=
+Z t
+0
+e−aτ dτ
+=
+
+−1
+ae−aτ
+t
+0
+= 1
+a
+ 1 −e−at .
+For t < 0, there is no overlap, so y(t) = 0.
+
+===== page 40 =====
+The output gradually rises to 1/a
+y(t) = 1
+a
+ 1 −e−at u(t).
+t
+y(t)
+1
+a
+0
+· · ·
+· · ·
+y(t) = 1
+a(1 −e−at)u(t)
+As t increases, the overlap grows, so the integral rises toward 1
+a.
+
+===== page 41 =====
+Property: Convolution distributes over addition
+If one signal is a sum of two simpler signals,
+we may convolve the two parts separately.
+x[n] ∗
+
+h1[n] + h2[n]
+
+= x[n] ∗h1[n] + x[n] ∗h2[n].
+
+x1[n] + x2[n]
+
+∗h[n] = x1[n] ∗h[n] + x2[n] ∗h[n].
+
+===== page 42 =====
+Practice (Example 2.10)
+Compute
+y[n] = x[n] ∗h[n],
+x[n] =
+1
+2
+n
+u[n] + 2nu[−n],
+h[n] = u[n].
+Input x[n]
+n
+· · ·
+· · ·
+−6
+−3
+0
+3
+6
+1
+2
+2nu[−n]
+
+1
+2
+n u[n]
+h[n] = u[n]
+n
+· · ·
+· · ·
+0
+1
+
+===== page 43 =====
+Oops, different input expressions on the left and right side!
+k
+· · ·
+· · ·
+formula changes
+2k
+
+1
+2
+k
+0
+x[k]
+=
+2ku[−k]
+|
+{z
+}
+left-sided part
++
+1
+2
+k
+u[k]
+|
+{z
+}
+right-sided part
+.
+So, we split it first.
+
+===== page 44 =====
+Split the problem into two easier ones!
+Split x[n], then convolve separately
+x[n] = x1[n] + x2[n],
+x1[n] =
+1
+2
+n
+u[n],
+x2[n] = 2nu[−n].
+y[n] = x[n] ∗h[n]
+= x1[n] ∗h[n] + x2[n] ∗h[n]
+= y1[n] + y2[n].
+Each part is one we already know how to do.
+
+===== page 45 =====
+The two smaller convolutions have simple answers
+Left-sided part
+x2[n] = 2nu[−n],
+h[n] = u[n].
+y2[n] = x2[n] ∗h[n].
+y2[n] =
+
+
+
+2n+1,
+n < 0,
+2,
+n ≥0.
+Right-sided part
+x1[n] =
+1
+2
+n
+u[n],
+h[n] = u[n].
+y1[n] = x1[n] ∗h[n].
+y1[n] =
+ 2 −2−n u[n].
+
+===== page 46 =====
+Now add the two outputs
+Final expression
+y[n] = y1[n] + y2[n].
+y[n] =
+
+
+
+2n+1,
+n < 0,
+4 −2−n,
+n ≥0.
+The left side rises toward 1, then the right side rises toward 4.
+
+===== page 47 =====
+The output approaches 4 on the right
+Sketch of y[n]
+n
+y[n]
+· · ·
+· · ·
+4
+−6
+−3
+0
+3
+6
+1
+2
+3
+4 −2−n
+2n+1
+y[n] =
+
+
+
+2n+1,
+n < 0,
+4 −2−n,
+n ≥0.
+
+===== page 48 =====
+Practice: convolve two one-sided exponentials
+Find y(t)
+=
+x(t) ∗h(t), where
+x(t) = etu(−t),
+h(t) = e−tu(t).
+x(t) = etu(−t)
+t
+0
+1
+· · ·
+et
+h(t) = e−tu(t)
+t
+0
+1
+· · ·
+e−t
+
+===== page 49 =====
+Answer: here the second signal is not just a step
+First find the overlap
+x(τ) = eτu(−τ)
+=⇒
+x(τ)̸ = 0 only for τ ≤0.
+h(t −τ) = e−(t−τ)u(t −τ)
+=⇒
+h(t −τ)̸ = 0 only for τ ≤t.
+Therefore the overlap is τ ≤min(0, t). On the overlap,
+x(τ)h(t −τ) = eτe−(t−τ) = e−te2τ.
+
+===== page 50 =====
+Case 1: for t < 0, the overlap ends at τ = t
+Overlap: −∞
+<
+τ
+≤
+t
+τ
+x(τ)
+0
+1
+· · ·
+τ
+h(t −τ)
+t
+0
+1
+· · ·
+overlap
+y(t) =
+Z t
+−∞
+eτe−(t−τ) dτ = e−t
+Z t
+−∞
+e2τ dτ = 1
+2et,
+t < 0.
+
+===== page 51 =====
+Case 2: for t ≥0, the overlap ends at τ = 0
+Overlap: −∞
+<
+τ
+≤
+0
+τ
+x(τ)
+0
+1
+· · ·
+τ
+h(t −τ)
+0
+t
+1
+· · ·
+overlap
+y(t) =
+Z 0
+−∞
+eτe−(t−τ) dτ = e−t
+Z 0
+−∞
+e2τ dτ = 1
+2e−t,
+t ≥0.
+
+===== page 52 =====
+Final answer: a two-sided decaying exponential
+y(t) =
+
+
+
+
+
+
+
+1
+2et,
+t < 0,
+1
+2e−t,
+t ≥0.
+t
+y(t)
+0
+1
+2
+· · ·
+· · ·
+1
+2e−t
+1
+2et
+
+===== page 53 =====
+Causality and Stability
+
+===== page 54 =====
+Causality: No Time Travel Please!!!
+
+===== page 55 =====
+For an LTI system, causality is visible from h(t)
+The impulse response h(t) shows what the sys-
+tem does after we poke it with δ(t) at t
+=
+0.
+Causal
+t
+0
+h(t)
+nothing before
+h(t) = 0
+for t < 0.
+Noncausal
+t
+0
+h(t)
+effect before cause
+h(t)̸ = 0
+for some t < 0.
+
+===== page 56 =====
+Testing causality: the impulse response must be zero before 0
+For continuous-time LTI systems
+causal
+⇐⇒
+h(t) = 0 for all t < 0
+Discrete-time version
+causal
+⇐⇒
+h[n] = 0 for all n < 0
+
+===== page 57 =====
+Stability means bounded input gives bounded output
+A stable system does not turn a bounded input (value ≤B
+always) into an output that shoots up to infinity and beyond.
+Stable behavior
+t
+bounded output
+B
+−B
+Unstable behavior
+t
+keeps growing
+
+===== page 58 =====
+Stability depends on the size of the impulse response!
+Intuition in continuous case
+y(t) =
+Z ∞
+−∞h(τ)x(t −τ) dτ,
+yes, we shuffled it!
+If the input is bounded, say
+|x(t)| ≤B
+for all t, then, |x(t −τ)| ≤B.
+|y(t)| ≤B
+Z ∞
+−∞|h(τ)| dτ.
+
+===== page 59 =====
+Stable LTI system: The total area under |h(t)| must be finite
+Continuous-time LTI stability test
+stable
+⇐⇒
+Z ∞
+−∞|h(t)| dt < ∞
+Discrete-time version
+stable
+⇐⇒
+∞
+X
+n=−∞
+|h[n]| < ∞
+
+===== page 60 =====
+Two simple little problems
+Assume an LTI system with impulse response h(t).
+1. If the system is causal, is it possible for h(t) to be periodic?
+2. If the system is stable, is it possible for h(t) to be periodic?
+
+===== page 61 =====
+Answer 1: Causality vs Periodicity
+If h(t) is periodic and nonzero somewhere for t > 0, then the same nonzero value
+repeats backward:
+h(t0) = h(t0 −T) = h(t0 −2T) = · · ·
+Eventually, t0 −kT < 0, which contradicts causality.
+t
+h(t)
+0
+nonzero
+forced into t < 0
+Therefore, only the trivial impulse response h(t) = 0 can be both causal and periodic.
+
+===== page 62 =====
+Answer 2: Stability vs Periodicity
+A nonzero periodic impulse response repeats forever. So if one period has positive area
+A under one period, then over infinitely many periods,
+Z ∞
+−∞
+|h(t)| dt = A + A + A + · · · = ∞.
+t
+|h(t)|
+A
+A
+A
+A
+0
+Therefore, only the trivial impulse response h(t) = 0 can be both stable and periodic.
+
+===== page 63 =====
+Practice: decide causality and stability
+For each impulse response, decide whether
+the LTI system is causal and stable.
+System 1
+h1(t) = e2tu(−2 −t)
+System 2
+h2(t) = te−tu(t)
+
+===== page 64 =====
+Answer 1: h1(t) = e2tu(−2 −t) is not causal
+Support of h1(t)
+u(−2 −t) = 1
+⇐⇒
+−2 −t ≥0
+⇐⇒
+t ≤−2.
+t
+· · ·
+· · ·
+−2
+0
+impulse time
+t ≤−2
+vertical scale enlarged
+h1(t) is nonzero before t = 0. So the system is not causal.
+
+===== page 65 =====
+Answer 1: h1(t) = e2tu(−2 −t) is stable
+Stability test
+Z ∞
+−∞
+|h1(t)| dt =
+Z −2
+−∞
+e2t dt.
+Z −2
+−∞
+e2t dt =
+1
+2e2t
+−2
+−∞
+= 1
+2e−4 < ∞.
+Therefore, the system is stable.
+
+===== page 66 =====
+Answer 2: h2(t) = te−tu(t) is causal
+Support of h2(t)
+u(t) = 0
+for t < 0.
+t
+· · ·
+· · ·
+0
+te−tu(t)
+impulse time
+h2(t) is zero before t = 0. So the system is causal.
+
+===== page 67 =====
+Answer 2: h2(t) = te−tu(t) is stable
+Stability test
+Z ∞
+−∞
+|h2(t)| dt =
+Z ∞
+0
+te−t dt.
+Z ∞
+0
+te−t dt = 1 < ∞.
+Therefore, the system is stable.
+
+===== page 68 =====
+Problem: how much delay makes it causal?
+Let x(t)
+=
+e−2tu(t + 2), and y(t)
+=
+x(t −a).
+Find the minimum value of a so that y(t) is causal.
+t
+−2
+0
+2
+x(t) = e−2tu(t + 2)
+starts at t = −2
+nonzero before 0
+How far must we shift this signal to the right?
+
+===== page 69 =====
+Answer: shift it right by at least 2
+t
+−2
+0
+x(t)
+starts here
+right shift by a
+t
+0
+y(t) = x(t −a)
+causal start
+For causality, −2 + a
+≥
+0, so a ≥2.
+
+===== page 70 =====
+Thank you!

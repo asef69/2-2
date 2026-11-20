@@ -1,0 +1,890 @@
+
+===== page 1 =====
+Lecture 5: Fourier Series - Let’s Look Inside!
+CSE 219: Signals and Linear Systems
+Anik Saha
+Adjunct Lecturer, Department of CSE, BUET
+
+===== page 2 =====
+Fourier Series
+Breaking complicated periodic signals into simple waves.
+
+===== page 3 =====
+Can we break down a periodic signal into simple sine and
+cosine waves? Yes, we always can!
+t
+x(t)
+T
+T
+complicated periodic signal
+split into
+tsin(ω0t)
+tsin(2ω0t)
+tcos(3ω0t)
+complicated periodic signal = sum of simple periodic waves.
+
+===== page 4 =====
+Why this idea is useful
+1
+Some problems are easy for simple waves.
+A sine-shaped vibration or temperature pattern.
+2
+Real initial shapes are usually not simple.
+A string can be plucked into a strange shape. A metal rod
+can have an arbitrary initial heat pattern.
+3
+Fourier series gives the bridge.
+Break the random shape into simple waves, solve each simple
+wave, then add the answers.
+
+===== page 5 =====
+Example: how will a plucked string move?
+initial shape f (x)
+released from rest
+predict
+future shape u(x, t)
+We want the whole function u(x, t): shape
+of the string at every position and time.
+
+===== page 6 =====
+Please try this visualization on vibrating strings!
+
+===== page 7 =====
+Another example: how does heat smooth out?
+hot
+cold
+initial temperature f (x)
+wait
+smoother
+temperature u(x, t)
+A simple sinusoidal heat pattern is easy to predict. A random
+heat pattern becomes manageable after breaking it into sinusoids.
+
+===== page 8 =====
+Please try this visualization on heat diffusion!
+
+===== page 9 =====
+The repeated strategy: solve the easy waves, then add
+1
+Break the initial shape into simple waves.
+f (x) = wave1 + wave2 + wave3 + · · ·
+2
+Let each simple wave evolve by itself.
+3
+Add the evolved waves back together.
+The complicated future behavior comes from adding many
+simple future behaviors.
+
+===== page 10 =====
+Bell, bell, bell! Who’s there?
+A bell analogy
+Bell A
+rings every 2 min
+Bell B
+rings every 3 min
+Bell C
+rings every 5 min
+time
+0
+6
+12
+18
+24
+30
+I
+I
+I
+I
+I
+I
+the combined pattern repeats after 30 minutes
+The combined period is a common multiple of the individual periods.
+lcm(2, 3, 5) = 30.
+
+===== page 11 =====
+The same story, but viewed through frequency
+Periods
+2,
+3,
+5
+minutes
+Tcombined = 30 minutes
+=⇒
+Frequencies
+30,
+20,
+12
+times/hour
+f0 = 2
+times/hour
+The individual frequencies are multiples of the combined frequency:
+30 = 15f0,
+20 = 10f0,
+12 = 6f0.
+
+===== page 12 =====
+For a signal with period T, the fundamental frequency is ω0
+t
+x(t)
+T
+T
+ω0 = 2π
+T
+
+===== page 13 =====
+Therefore, the allowed building blocks are kω0
+frequency
+−4ω0
+−3ω0
+−2ω0
+−1ω0
+0ω0
+1ω0
+2ω0
+3ω0
+4ω0
+negative harmonics
+rotate backward
+positive harmonics
+rotate forward
+k = 0
+constant part
+For a period-T signal, we use frequencies
+. . . , −2ω0, −ω0, 0, ω0, 2ω0, . . .
+or simply kω0, where k
+∈
+Z.
+
+===== page 14 =====
+Instead of sines and cosines, we use complex exponentials
+Complex exponentials package sine and cosine together
+ejω0t = cos(ω0t) + j sin(ω0t)
+ejω0t
+cos(ω0t)
+j sin(ω0t)
+one object carries both parts
+
+===== page 15 =====
+So the Fourier series will look like this
+Complex exponential Fourier series
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+ejkω0t
+the k-th simple wave
+×
+ak
+how much of that wave
+
+===== page 16 =====
+Now the question is: what are the coefficients?
+Each coefficient tells us how much of one frequency is present
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+frequency
+−4ω0
+−3ω0
+−2ω0
+−1ω0
+0ω0
+1ω0
+2ω0
+3ω0
+4ω0
+ak = 0: frequency absent
+ak̸ = 0: frequency present
+
+===== page 17 =====
+Example: a cosine already contains two complex waves
+Using Euler’s formula
+cos(ω0t) = 1
+2ejω0t + 1
+2e−jω0t
+frequency
+−3ω0
+−2ω0
+−1ω0
+0ω0
+1ω0
+2ω0
+3ω0
+1
+2
+1
+2
+only the −ω0 and +ω0 components are present
+
+===== page 18 =====
+A small detour: averaging a rotating exponential
+rotates
+average cancels to 0
+does not rotate
+average remains 1
+1
+T
+R
+T ejkω0t dt
+=
+
+
+
+1,
+k = 0,
+0,
+k̸ = 0.
+
+===== page 19 =====
+Finding a0 is easy, just take the average of x(t)!
+x(t) = · · · + a−1e−jω0t + a0 + a1ejω0t + a2ej2ω0t + · · ·
+a−1e−jω0t
+a0
+a1ejω0t
+a2ej2ω0t
+average 0
+average 0
+average 0
+survives
+So a0 is just the average over a period:
+a0 = 1
+T
+Z
+T x(t) dt.
+
+===== page 20 =====
+How can we find a1? Make the a1 term stop rotating!
+x(t) = · · · + a−1e−jω0t + a0 + a1ejω0t + a2ej2ω0t + · · ·
+Multiply by e−jω0t
+x(t)e−jω0t = · · · + a−1e−j2ω0t + a0e−jω0t + a1 + a2ejω0t + · · ·
+Now a1 is non-rotating. So averaging over one period extracts a1.
+a1 = 1
+T
+Z
+T x(t)e−jω0t dt.
+
+===== page 21 =====
+General idea: move the desired coefficient to zero frequency
+frequency
+−3ω0
+−2ω0
+−1ω0
+0ω0
+1ω0
+2ω0
+3ω0
+ak
+before
+multiply by e−jkω0t
+frequency
+−3ω0
+−2ω0
+−1ω0
+0ω0
+1ω0
+2ω0
+3ω0
+ak
+after
+Shift ak to zero frequency, take average. Everything else rotates away.
+
+===== page 22 =====
+The coefficient formula
+Fourier series coefficient
+ak = 1
+T
+Z
+T x(t)e−jkω0t dt
+The integral can be taken over any one full period.
+ω0 = 2π
+T ,
+k = 0, ±1, ±2, . . .
+
+===== page 23 =====
+Please try building Fourier Series as you wish!
+
+===== page 24 =====
+Practice Problems on Finding
+the Fourier Series
+
+===== page 25 =====
+Example: can we find the Fourier series without integrating?
+x(t) = 1 + sin(ω0t) + 2 cos(ω0t) + cos
+
+2ω0t + π
+4
+
+,
+T0 = 2π
+ω0
+.
+t
+x(t)
+−2T0
+−T0
+0
+T0
+2T0
+Do we really need to compute ak =
+1
+T0
+R t0+T0
+t0
+x(t)e−jkω0t dt?
+
+===== page 26 =====
+Answer: Yes! The Fourier components are already visible
+sin θ = ejθ −e−jθ
+2j
+,
+cos θ = ejθ + e−jθ
+2
+.
+Components at frequencies +ω0 and −ω0
+sin(ω0t) + 2 cos(ω0t) = 1
+2j
+
+ejω0t −e−jω0t
++ ejω0t + e−jω0t
+=
+
+1 + 1
+2j
+
+ejω0t +
+
+1 −1
+2j
+
+e−jω0t.
+
+===== page 27 =====
+The phase-shifted cosine gives the second harmonic
+Components at frequencies +2ω0 and −2ω0
+cos
+
+2ω0t + π
+4
+
+= 1
+2ej(2ω0t+ π
+4 ) + 1
+2e−j(2ω0t+ π
+4 )
+=
+1
+2ejπ/4
+
+ej2ω0t +
+1
+2e−jπ/4
+
+e−j2ω0t.
+Do not forget the constant term
+1 = 1 · ej0ω0t
+=⇒
+a0 = 1.
+
+===== page 28 =====
+Collect terms with the same rotating frequency
+Complex exponential Fourier series
+x(t) =
+√
+2
+4 (1 −j)e−j2ω0t +
+
+1 + j
+2
+
+e−jω0t + 1
++
+
+1 −j
+2
+
+ejω0t +
+√
+2
+4 (1 + j)ej2ω0t.
+k
+−2
+−1
+0
+1
+2
+ak
+√
+2
+4 (1 −j)
+1 + j
+2
+1
+1 −j
+2
+√
+2
+4 (1 + j)
+
+===== page 29 =====
+Magnitude spectrum: |ak|
+k
+|ak|
+−3
+−2
+−1
+0
+1
+2
+3
+1
+2
+√
+5
+2
+1
+√
+5
+2
+1
+2
+Phase spectrum: ∠ak
+k
+∠ak
+−3
+−2
+−1
+0
+1
+2
+3
+−π
+4
+tan−1 1
+2
+−tan−1 1
+2
+π
+4
+
+===== page 30 =====
+Practice: Fourier series of a periodic square wave
+x(t) =
+
+
+
+1,
+|t| < T1,
+0,
+T1 < |t| < T/2,
+x(t + T) = x(t),
+ω0 = 2π
+T .
+t
+x(t)
+· · ·
+· · ·
+−2T
+−T
+0
+T
+2T
+−T1
+T1
+1
+Find the complex exponential Fourier series coefficients ak.
+
+===== page 31 =====
+Only the nonzero part contributes to the integral
+Choose one convenient period: −T/2 < t < T/2
+t
+x(t)
+−T/2
+T/2
+−T1
+T1
+1
+ak = 1
+T
+Z T/2
+−T/2 x(t)e−jkω0t dt = 1
+T
+Z T1
+−T1
+e−jkω0t dt.
+Outside −T1
+<
+t
+<
+T1, the signal is zero.
+
+===== page 32 =====
+For k̸ = 0, evaluate the short integral
+Coefficient for k̸
+=
+0
+ak = 1
+T
+Z T1
+−T1
+e−jkω0t dt
+= 1
+T
+"e−jkω0t
+−jkω0
+#T1
+−T1
+= 2 sin(kω0T1)
+T kω0
+= sin(kω0T1)
+kπ
+.
+
+===== page 33 =====
+For k = 0, the coefficient is just the average value
+The constant coefficient
+a0 = 1
+T
+Z T1
+−T1
+1 dt = 2T1
+T .
+The average value is just:
+time spent at height 1
+total period
+= 2T1
+T .
+
+===== page 34 =====
+Frequency-domain picture of the square wave, when T1 = T/4
+a0 = 1
+2,
+ak = sin(kπ/2)
+kπ
+,
+k̸ = 0.
+ak
+−7
+−5
+−3
+−1
+1
+3
+5
+7
+0
+1
+2
+1
+π
+−1
+3π
+1
+π
+−1
+3π
+· · ·
+· ·
+
+===== page 35 =====
+Problem: Fourier series of a repeated triangular ramp
+x(t) =
+
+
+
+
+
+t,
+0 ≤t < 1,
+3 −t
+2
+,
+1 ≤t < 3,
+x(t + 3) = x(t).
+t
+x(t)
+· · ·
+· · ·
+−3
+0
+1
+3
+4
+6
+1
+T = 3
+Find the complex exponential Fourier series coefficients ak.
+
+===== page 36 =====
+Let’s first find a0: the average height over a period
+a0 = 1
+3
+Z 3
+0
+x(t) dt
+a0 = 1
+3
+Z 1
+0
+t dt +
+Z 3
+1
+3 −t
+2
+dt
+
+= 1
+3
+1
+2 + 1
+
+= 1
+2 .
+So the average height over one period is 1
+2.
+
+===== page 37 =====
+Same a0, seen geometrically
+t
+x(t)
+0
+1
+3
+1
+triangle
+area over one period = 1
+2 · 3 · 1 = 3
+2.
+a0 = area over a period
+period
+=
+3
+2
+3 = 1
+2 .
+
+===== page 38 =====
+For k̸ = 0, split the coefficient integral
+ak = 1
+3
+Z 3
+0
+x(t)e−jkω0t dt,
+ω0 = 2π
+3 .
+ak = 1
+3
+Z 1
+0 te−jkω0t dt +
+Z 3
+1
+3 −t
+2
+e−jkω0t dt
+
+.
+
+===== page 39 =====
+Evaluate the two pieces
+For k̸
+=
+0,
+Z 1
+0
+te−jkω0t dt = −e−jkω0
+jkω0
++ 1 −e−jkω0
+(jkω0)2 .
+Z 3
+1
+3 −t
+2
+e−jkω0t dt = e−jkω0
+jkω0
++ e−jkω0 −e−j3kω0
+2(jkω0)2
+.
+Since ω0
+=
+2π
+3 ,
+e−j3kω0
+=
+e−j2πk
+=
+1.
+
+===== page 40 =====
+The final simplification
+The
+1
+jkω0
+terms cancel:
+ak = 1
+3
+"
+1 −e−jkω0
+(jkω0)2
++ e−jkω0 −1
+2(jkω0)2
+#
+= 1
+3 · 1 −e−jkω0
+2(jkω0)2 .
+Since (jkω0)2
+=
+−k2ω2
+0,
+ak = e−jkω0 −1
+6k2ω2
+0
+.
+
+===== page 41 =====
+Final answer
+Fourier series coefficients
+a0 = 1
+2
+ak = e−jkω0 −1
+6k2ω2
+0
+,
+k̸ = 0,
+ω0 = 2π
+3 .
+
+===== page 42 =====
+Please try this visualization on Fourier Series!
+
+===== page 43 =====
+Please also try drawing any 2D closed curve!
+
+===== page 44 =====
+*A beautiful intuition!
+
+===== page 45 =====
+*A coordinate system turns a point into numbers
+x
+y
+point (3, 2)
+3 steps along x
+2 steps along y
+How much of each direction do we need?
+
+===== page 46 =====
+*Functions can also be presented with coordinates
+Example: all functions of the form f (t) = a + bt
+f (t) = a · 1 + b · t
+basis functions
+1,
+t
+coordinates
+(a, b)
+3 + 2t
+⇐⇒
+(3, 2)
+
+===== page 47 =====
+*More axes let us describe more complicated functions
+f (t) = a0 + a1t + a2t2 + a3t3 + · · ·
+Now the axes are
+1,
+t,
+t2,
+t3,
+. . .
+The coordinates of f (t) are
+(a0, a1, a2, a3, . . .).
+
+===== page 48 =====
+*Even et has coordinates in this system
+et = 1 + t + t2
+2! + t3
+3! + t4
+4! + · · ·
+So in the coordinate system
+1, t, t2, t3, . . .
+we may think of et as having coordinates
+
+1, 1, 1
+2!, 1
+3!, . . .
+
+.
+
+===== page 49 =====
+*Fourier series simply chooses a different coordinate system
+Polynomial axes
+1,
+t,
+t2,
+t3, . . .
+f (t) = a0 + a1t + a2t2 + · · ·
+Fourier axes
+. . . , e−jω0t, 1, ejω0t, ej2ω0t, . . .
+x(t) =
+∞
+X
+k=−∞
+akejkω0t
+
+===== page 50 =====
+*Example: where is cos(ω0t) in Fourier coordinates?
+cos(ω0t) = 1
+2ejω0t + 1
+2e−jω0t
+k
+−3
+−2
+−1
+0
+1
+2
+3
+1
+2
+1
+2
+· · ·
+· · ·
+Only k
+=
+−1 and k
+=
+1 are present.
+All other Fourier coordinates are zero.
+
+===== page 51 =====
+*import projection from linear_algebra
+Vectors
+coordinate along u = v · u
+u
+v
+Signals
+coordinate along ejkω0t =
+D
+x(t), ejkω0tE
+projection
+=⇒
+Fourier coefficient ak
+Same idea: find how much of one axis is present.
+
+===== page 52 =====
+*For signals, dot product becomes an average over one period
+⟨x(t), z(t)⟩= 1
+T
+Z
+T x(t)z∗(t) dt
+For the k-th Fourier axis,
+z(t) = ejkω0t
+⇒
+z∗(t) = e−jkω0t.
+ak = 1
+T
+Z
+T x(t)e−jkω0t dt
+
+===== page 53 =====
+Thank you!

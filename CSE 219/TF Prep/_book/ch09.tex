@@ -1,0 +1,187 @@
+\renewcommand{\teacherTag}{ANIK SIR \textbullet\ LECTURES 11--14}
+\chapter{Fourier Transform: Systems, Energy and Bandwidth}
+
+\noindent{\sffamily\small\color{slate}$H(\omega)=\mathcal F\{h\}$, \ $Y=XH$, \ Parseval $E=\int|x|^2\dd t=\frac1{2\pi}\int|X(\omega)|^2\dd\omega$, \ $e^{-at}u(t)\leftrightarrow\frac1{a+j\omega}$, \ $\frac{\sin Wt}{\pi t}\leftrightarrow\operatorname{rect}\frac{\omega}{2W}$.}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q1(c)}{CSE 219 \textbullet\ 22 batch p.2}{15}
+Find the Fourier transform of $\operatorname{rect}(t)$, and then of $\operatorname{rect}\!\big(\frac{t-\tau}{T}\big)\cos2\pi f_0t$.
+\end{qcard}
+\begin{solution}
+$\operatorname{rect}(t)=1$ for $|t|<\frac12$: $\displaystyle\int_{-1/2}^{1/2}e^{-j2\pi ft}\dd t=\frac{\sin\pi f}{\pi f}=\operatorname{sinc}(f)$.
+
+Scaling and shifting: $\operatorname{rect}\big(\frac{t-\tau}T\big)\leftrightarrow G(f)=T\operatorname{sinc}(fT)\,e^{-j2\pi f\tau}$. Multiplying by $\cos2\pi f_0t$ shifts the spectrum to $\pm f_0$ with half amplitude:
+\[
+\mathcal F\Big\{\operatorname{rect}\Big(\frac{t-\tau}T\Big)\cos2\pi f_0t\Big\}=\frac T2\Big[\operatorname{sinc}\big((f-f_0)T\big)e^{-j2\pi(f-f_0)\tau}+\operatorname{sinc}\big((f+f_0)T\big)e^{-j2\pi(f+f_0)\tau}\Big].
+\]
+\ans{$\operatorname{sinc}(f)$; and $\dfrac T2\big[\operatorname{sinc}((f-f_0)T)e^{-j2\pi(f-f_0)\tau}+\operatorname{sinc}((f+f_0)T)e^{-j2\pi(f+f_0)\tau}\big]$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q2(b)}{CSE 219 \textbullet\ 22 batch p.2}{20}
+Using Parseval's theorem, evaluate $I(a)=\displaystyle\int_{-\infty}^{\infty}\frac{f^2}{\big(a^2+(2\pi f)^2\big)^2}\dd f$, $a>0$.
+\end{qcard}
+\begin{solution}
+Take $y(t)=te^{-at}u(t)\leftrightarrow Y(f)=\dfrac1{(a+j2\pi f)^2}$, so $|Y|^2=\dfrac1{(a^2+4\pi^2f^2)^2}$. The derivative property gives $y'\leftrightarrow j2\pi fY$, hence
+\[|j2\pi fY|^2=4\pi^2f^2|Y|^2\ \Rightarrow\ I(a)=\frac1{4\pi^2}\int|j2\pi fY(f)|^2\dd f=\frac1{4\pi^2}\int_{-\infty}^\infty|y'(t)|^2\dd t .\]
+With $y'=(1-at)e^{-at}u(t)$:
+\[\int_0^\infty(1-at)^2e^{-2at}\dd t=\frac1{2a}-\frac{2a}{4a^2}+\frac{2a^2}{8a^3}=\frac1{4a}.\]
+\ans{$I(a)=\dfrac1{4\pi^2}\cdot\dfrac1{4a}=\dfrac1{16\pi^2a}$. (Check with $a=1$: substitute $u=2\pi f$, $\frac1{8\pi^3}\int\frac{u^2}{(1+u^2)^2}\dd u=\frac1{8\pi^3}\cdot\frac\pi2$.)}
+\end{solution}
+
+%------------------------------------------------------------------
+\repeated{2}
+\begin{qcard}{2020--2021 \textbullet\ Q2(c)}{EEE 211 \textbullet\ EEE p.17}{20}
+A causal LTI system is described by $y''+6y'+8y=2x$. Find $H(\omega)$ and the response to $x(t)=te^{-2t}u(t)$.
+\end{qcard}
+\begin{qcard}{2018--2019 \textbullet\ Q4(a)}{EEE 211 \textbullet\ EEE p.29}{17}
+For the causal system $y''+6y'+8y=2x$, use the Fourier transform to find $h(t)$ and the output for $x(t)=te^{-2t}u(t)$.
+\end{qcard}
+\begin{solution}
+With $s=j\omega$: $H=\dfrac{2}{s^2+6s+8}=\dfrac2{(s+2)(s+4)}=\dfrac1{s+2}-\dfrac1{s+4}$, so
+\[h(t)=\big(e^{-2t}-e^{-4t}\big)u(t)\qquad(\text{causal, stable}).\]
+For $x=te^{-2t}u$: $X=\dfrac1{(s+2)^2}$ and $Y=\dfrac{2}{(s+2)^3(s+4)}$. Partial fractions (residues at $s=-2$ with $g(s)=\frac2{s+4}$: $g(-2)=1$, $g'(-2)=-\frac12$, $\frac12g''(-2)=\frac14$; at $s=-4$: $\frac2{(-2)^3}=-\frac14$):
+\[Y=\frac{1/4}{s+2}-\frac{1/2}{(s+2)^2}+\frac1{(s+2)^3}-\frac{1/4}{s+4}.\]
+Invert with $\frac1{(s+a)^n}\leftrightarrow\frac{t^{n-1}}{(n-1)!}e^{-at}u(t)$:
+\[y(t)=\Big[\tfrac14e^{-2t}-\tfrac12te^{-2t}+\tfrac12t^2e^{-2t}-\tfrac14e^{-4t}\Big]u(t).\]
+Check: $y(0)=\frac14-\frac14=0$ (the output is zero at $t=0$, as for a second-order system).
+\ans{$H=\dfrac{2}{(j\omega+2)(j\omega+4)}$, $h=(e^{-2t}-e^{-4t})u$; $\;y=\big[\frac14e^{-2t}-\frac12te^{-2t}+\frac12t^2e^{-2t}-\frac14e^{-4t}\big]u(t)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q2(b)}{EEE 211 \textbullet\ EEE p.27--28}{10}
+The signal $x(t)=e^{-\alpha t}u(t)$ is applied to an ideal low-pass system $h(t)=\dfrac{\sin2t}{\pi t}$. Find $Y(\omega)$. For what value of $\alpha$ does the output contain half the input energy?
+\end{qcard}
+\begin{solution}
+$H(\omega)=1$ for $|\omega|<2$ and $0$ elsewhere, $X=\dfrac1{\alpha+j\omega}$, so $Y(\omega)=\dfrac1{\alpha+j\omega}$ for $|\omega|<2$ and $0$ otherwise.
+
+Input energy: $E_x=\int_0^\infty e^{-2\alpha t}\dd t=\dfrac1{2\alpha}$. Output energy:
+\[E_y=\frac1{2\pi}\int_{-2}^{2}\frac{\dd\omega}{\alpha^2+\omega^2}=\frac1{\pi\alpha}\tan^{-1}\frac2\alpha .\]
+Setting $E_y=\frac12E_x$: $\dfrac1{\pi\alpha}\tan^{-1}\dfrac2\alpha=\dfrac1{4\alpha}\Rightarrow\tan^{-1}\dfrac2\alpha=\dfrac\pi4\Rightarrow\alpha=2$.
+\ans{$Y=\frac1{\alpha+j\omega}$ for $|\omega|<2$ (else 0); $\alpha=2$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q2(a)}{EEE 211 \textbullet\ EEE p.27}{10}
+Prove that $E=\displaystyle\int|x(t)|^2\dd t=\frac1{2\pi}\int|X(\omega)|^2\dd\omega$. Find the energy of $\operatorname{sinc}(t/2)$ (with $\operatorname{sinc}x=\frac{\sin x}{x}$).
+\end{qcard}
+\begin{solution}
+\[\int|x|^2\dd t=\int x(t)\,x^*(t)\dd t=\int x(t)\Big[\frac1{2\pi}\int X^*(\omega)e^{-j\omega t}\dd\omega\Big]\dd t=\frac1{2\pi}\int X^*(\omega)\Big[\int x(t)e^{-j\omega t}\dd t\Big]\dd\omega=\frac1{2\pi}\int|X|^2\dd\omega .\ \blacksquare\]
+$\operatorname{sinc}(t/2)=\dfrac{\sin(t/2)}{t/2}=2\pi\cdot\dfrac{\sin(t/2)}{\pi t}\leftrightarrow2\pi\operatorname{rect}\dfrac{\omega}{1}$ (height $2\pi$ for $|\omega|<\frac12$). Hence
+\[E=\frac1{2\pi}(2\pi)^2(1)=2\pi .\]
+(If the convention $\operatorname{sinc}x=\frac{\sin\pi x}{\pi x}$ is used instead, $E=2$.)
+\ans{Parseval proved; $E=2\pi$ for $\sin(t/2)/(t/2)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2023--2024 \textbullet\ Q6(b)}{EEE 211 \textbullet\ EEE p.4}{10}
+Find the Fourier transform of $\dfrac{\sin(at)}{\pi t}$ and, by Parseval's relation, the energy of the signal.
+\end{qcard}
+\begin{solution}
+$\dfrac{\sin at}{\pi t}\leftrightarrow\operatorname{rect}\dfrac{\omega}{2a}$ ($1$ for $|\omega|<a$, otherwise $0$).
+\[E=\frac1{2\pi}\int_{-a}^{a}1\dd\omega=\frac{a}{\pi}.\]
+\ans{$X=1$ for $|\omega|<a$; $E=a/\pi$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q2(b)}{EEE 211 \textbullet\ EEE p.17}{7}
+Find the 3-dB bandwidth of $x(t)=e^{-3t}u(t)$.
+\end{qcard}
+\begin{solution}
+$X=\dfrac1{3+j\omega}$, $|X|^2=\dfrac1{9+\omega^2}$. The 3-dB point is where $|X|^2$ is half its peak value $\frac19$: $9+\omega^2=18\Rightarrow\omega=3$.
+\ans{$B=3$ rad/s $\;(=\frac{3}{2\pi}\approx0.477$ Hz).}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2019--2020 \textbullet\ Q6(a)}{EEE 211 \textbullet\ EEE p.25}{15}
+Find the $1/e$ duration of $x_1(t)=Ae^{-t/T}u(t)$ and of $x_1(3t)$ and $x_1(t/2)$.
+\end{qcard}
+\begin{solution}
+The $1/e$ duration is the time at which the signal falls to $1/e$ of its peak: $Ae^{-t/T}=A/e\Rightarrow t=T$.
+\begin{center}\small\begin{tabular}{@{}lcc@{}}\toprule signal&expression&$1/e$ duration\\\midrule$x_1(t)$&$Ae^{-t/T}$&$T$\\$x_1(3t)$&$Ae^{-3t/T}$&$T/3$\\$x_1(t/2)$&$Ae^{-t/(2T)}$&$2T$\\\bottomrule\end{tabular}\end{center}
+Compressing in time by 3 divides the duration by 3 (and widens the bandwidth by 3).
+\ans{$T$, $\;T/3$, $\;2T$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q6(b)}{EEE 211 \textbullet\ EEE p.15}{15}
+For $h(t)=e^{2t}u(-t)$, find the 3-dB bandwidth, the $1/e$ duration, and their product.
+\end{qcard}
+\begin{solution}
+$H(\omega)=\displaystyle\int_{-\infty}^0e^{(2-j\omega)t}\dd t=\frac1{2-j\omega}$, so $|H|^2=\dfrac1{4+\omega^2}$; half of the peak $\frac14$ at $\omega=2$.
+
+The signal $e^{2t}$ ($t<0$) equals $1/e$ of its peak at $t=-\frac12$, so the duration is $\frac12$ s.
+\ans{$B_{3dB}=2$ rad/s; duration $\frac12$ s; product $=1$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2020--2021 \textbullet\ Q2(a)}{EEE 211 \textbullet\ EEE p.17}{8}
+Find the power spectral density of the impulse train $x(t)=\sum_n\delta(t-nT)$.
+\end{qcard}
+\begin{solution}
+$x$ is periodic with $a_k=1/T$ for all $k$ ($\omega_0=2\pi/T$). The power spectral density of a periodic signal is a line spectrum, $S(\omega)=2\pi\sum_k|a_k|^2\delta(\omega-k\omega_0)$:
+\[S_x(\omega)=\frac{2\pi}{T^2}\sum_{k=-\infty}^{\infty}\delta\Big(\omega-\frac{2\pi k}T\Big).\]
+Each line carries power $1/T^2$ (the area $\frac1{2\pi}\int$ of one impulse); the total is infinite, consistent with an impulse train having infinite power.
+\ans{$S_x(\omega)=\dfrac{2\pi}{T^2}\sum_k\delta(\omega-k\omega_0)$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2022--2023 \textbullet\ Q4(a)}{EEE 211 \textbullet\ EEE p.9}{15}
+An AM signal $s(t)=m(t)\cos\omega_ct$ is received by a synchronous demodulator whose local oscillator has a phase error $\theta$: $\cos(\omega_ct+\theta)$, followed by a low-pass filter with gain 2. Find the output.
+\end{qcard}
+\begin{solution}
+\[s(t)\cos(\omega_ct+\theta)=m(t)\cos\omega_ct\cos(\omega_ct+\theta)=\tfrac12m(t)\big[\cos\theta+\cos(2\omega_ct+\theta)\big].\]
+The low-pass filter removes the $2\omega_c$ term and doubles the rest: $y(t)=m(t)\cos\theta$.
+\ans{$y(t)=m(t)\cos\theta$. Full output for $\theta=0$; zero for $\theta=90^\circ$ (phase error attenuates, or kills, the signal).}
+\end{solution}
+
+%------------------------------------------------------------------
+\repeated{4}
+\begin{qcard}{2022--2023 \textbullet\ Q2(b) --- CSE 311}{CSE 311 \textbullet\ TF p.6}{15}
+Distinguish a distortionless system from an all-pass system; how can you test for distortionless transmission?
+\end{qcard}
+\begin{qcard}{2021--2022 \textbullet\ Q2(a) --- CSE 311}{CSE 311 \textbullet\ TF p.8}{20}
+All-pass versus distortionless systems; frequency response; why are ideal filters unrealizable?
+\end{qcard}
+\begin{qcard}{2020--2021 \textbullet\ Q4(a) --- CSE 311}{CSE 311 \textbullet\ TF p.12}{20}
+Characteristics of a distortionless system and their physical meaning.
+\end{qcard}
+\begin{qcard}{2018--2019 \textbullet\ Q1(b) --- CSE 311}{CSE 311 \textbullet\ TF p.18}{14}
+Distortionless transmission; is an all-pass system distortionless?
+\end{qcard}
+\begin{solution}
+\step{Distortionless:} the output is a scaled, delayed copy of the input, $y(t)=Kx(t-t_d)$. Then
+\[H(\omega)=Ke^{-j\omega t_d}:\qquad |H(\omega)|=K\ (\text{constant gain}),\qquad \angle H=-\omega t_d\ (\text{linear phase}).\]
+Physical meaning: every frequency is amplified equally (no amplitude distortion) and delayed by the same $t_d$ (group delay $-\frac{\dd\angle H}{\dd\omega}=t_d$ constant; no phase/dispersion distortion).
+
+\step{All-pass:} $|H(\omega)|=1$ for all $\omega$ but the phase is arbitrary. It passes all frequencies with equal gain, yet if the phase is not linear the components are delayed unequally and the waveform changes. So an all-pass system is distortionless \emph{only if} its phase is linear ($H=e^{-j\omega t_d}$); in general, no.
+
+\step{Test:} measure $|H|$ and $\angle H$ (or the group delay) over the signal band; both must be flat/linear. Equivalently, send a pulse and check that only its size and position change.
+
+\step{Ideal filters:} an ideal low-pass has $h(t)=\dfrac{\sin Wt}{\pi t}$, which is nonzero for $t<0$: non-causal, so it cannot be built (it would need the input before it arrives). Practical filters approximate the brick-wall shape with a transition band and a delay.
+\ans{Distortionless: $H=Ke^{-j\omega t_d}$ (flat magnitude, linear phase). All-pass: $|H|=1$ only; distortionless iff phase is linear. Ideal filters have non-causal $h$.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2021--2022 \textbullet\ Q5(a)}{EEE 211 \textbullet\ EEE p.14}{18}
+Derive the Fourier transform as the limiting case of the Fourier series as the period $T\to\infty$.
+\end{qcard}
+\begin{solution}
+Let $x(t)$ be a finite-duration signal and $x_T(t)$ its periodic repetition with period $T$ ($\omega_0=2\pi/T$). The Fourier-series coefficients are
+\[a_k=\frac1T\int_{-T/2}^{T/2}x_T(t)e^{-jk\omega_0t}\dd t=\frac1T\int_{-\infty}^{\infty}x(t)e^{-jk\omega_0t}\dd t=\frac1TX(k\omega_0),\]
+so $x_T(t)=\displaystyle\sum_k\frac{X(k\omega_0)}{T}e^{jk\omega_0t}=\frac1{2\pi}\sum_kX(k\omega_0)e^{jk\omega_0t}\,\omega_0$.
+As $T\to\infty$: $\omega_0\to\dd\omega$, $k\omega_0\to\omega$ and the sum becomes an integral,
+\[x(t)=\frac1{2\pi}\int_{-\infty}^\infty X(\omega)e^{j\omega t}\dd\omega,\qquad X(\omega)=\int_{-\infty}^\infty x(t)e^{-j\omega t}\dd t.\]
+\ans{$a_k=\frac1TX(k\omega_0)$; as $T\to\infty$ the harmonic spacing $\omega_0\to\dd\omega$ and the series becomes the inverse Fourier transform.}
+\end{solution}
+
+%------------------------------------------------------------------
+\begin{qcard}{2018--2019 \textbullet\ Q4(a) --- CSE 311}{CSE 311 \textbullet\ TF p.18}{18}
+State the frequency-shifting property. How is it used in frequency-division multiplexing (FDM)?
+\end{qcard}
+\begin{solution}
+If $x(t)\leftrightarrow X(\omega)$ then $x(t)e^{j\omega_0t}\leftrightarrow X(\omega-\omega_0)$, so
+\[x(t)\cos\omega_0t\ \leftrightarrow\ \tfrac12\big[X(\omega-\omega_0)+X(\omega+\omega_0)\big].\]
+Multiplying by a carrier moves the baseband spectrum up to $\pm\omega_0$. In FDM each message $m_i(t)$ is multiplied by a different carrier $\omega_i$, spaced by more than the message bandwidth so the shifted spectra do not overlap, then all are added and sent on one channel. The receiver picks one band with a band-pass filter and multiplies by the same carrier ($\cos^2$ gives back the baseband) followed by a low-pass filter.
+\ans{$x(t)e^{j\omega_0t}\leftrightarrow X(\omega-\omega_0)$; FDM stacks messages on non-overlapping carriers.}
+\end{solution}
