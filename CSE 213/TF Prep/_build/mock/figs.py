@@ -33,7 +33,7 @@ class Node:
         dx, dy = tx - cx, ty - cy
         if dx == 0 and dy == 0:
             return cx, cy
-        if self.kind in ("ellipse", "circle", "diamond"):
+        if self.kind in ("ellipse", "circle", "diamond", "bstart", "bend"):
             a, b = self.w / 2, self.h / 2
             if self.kind == "diamond":
                 t = 1.0 / (abs(dx) / a + abs(dy) / b)
@@ -96,6 +96,28 @@ class Fig(Flowable):
         self.nodes[name] = n
         self.ops.append(("node", n))
         return n
+
+    # ---- BPMN shapes
+    def task(self, name, x, y, w, h, text, size=6.4, fill=colors.white):
+        n = Node(name, "task", x, y, w, h, text=text, size=size, fill=fill)
+        self.nodes[name] = n
+        self.ops.append(("node", n))
+        return n
+
+    def bstart(self, name, x, y, d=14):
+        n = Node(name, "bstart", x, y, d, d)
+        self.nodes[name] = n
+        self.ops.append(("node", n))
+        return n
+
+    def bend(self, name, x, y, d=14):
+        n = Node(name, "bend", x, y, d, d)
+        self.nodes[name] = n
+        self.ops.append(("node", n))
+        return n
+
+    def xor(self, name, x, y, d=26):
+        return self.diamond(name, x, y, d, d, text="×", size=9, fill=colors.white)
 
     def start(self, name, x, y):
         n = Node(name, "start", x, y, 10, 10)
@@ -233,6 +255,27 @@ class Fig(Flowable):
                 c.drawCentredString(cx, n.y + n.h + 3, n.name)
             else:
                 c.drawCentredString(cx, n.y - 8 + 0, n.name)
+        elif k == "task":
+            c.setFillColor(n.kw["fill"])
+            c.roundRect(n.x, n.y, n.w, n.h, 5, stroke=1, fill=1)
+            c.setFillColor(INK)
+            size = n.kw["size"]
+            c.setFont(FONT, size)
+            lines = str(n.kw["text"]).split(chr(10))
+            for i, ln in enumerate(lines):
+                yy = n.y + n.h / 2 + (len(lines) - 1) * (size + 1) / 2 - i * (size + 1) - size / 3
+                c.drawCentredString(n.x + n.w / 2, yy, ln)
+        elif k == "bstart":
+            c.setFillColor(colors.white)
+            c.circle(n.x + n.w / 2, n.y + n.h / 2, n.w / 2, stroke=1, fill=1)
+            c.setFillColor(INK)
+        elif k == "bend":
+            c.setFillColor(colors.white)
+            c.saveState()
+            c.setLineWidth(2.4)
+            c.circle(n.x + n.w / 2, n.y + n.h / 2, n.w / 2, stroke=1, fill=1)
+            c.restoreState()
+            c.setFillColor(INK)
         elif k == "start":
             c.setFillColor(INK)
             c.circle(n.x + 5, n.y + 5, 5, stroke=0, fill=1)
